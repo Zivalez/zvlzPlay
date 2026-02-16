@@ -129,8 +129,8 @@ class Winbu : MainAPI() {
         val document = app.get(data).document
 
         // Download links in div#downloadb — identical structure to Samehadaku
-        document.select("div#downloadb li").apmap { el ->
-            el.select("a").apmap {
+        document.select("div#downloadb li").forEach { el ->
+            el.select("a").forEach {
                 loadExtractor(
                     fixUrl(it.attr("href")),
                     "$mainUrl/",
