@@ -1,5 +1,25 @@
 [
     {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=kuramanime.com&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 23035,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "version": 39,
+        "internalName": "Kuramanime",
+        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Kuramanime.cs3",
+        "name": "Kuramanime"
+    },
+    {
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 13065,
@@ -17,7 +37,7 @@
         ],
         "version": 1,
         "internalName": "Winbu",
-        "description": "Nonton Serial Film Sub Indo",
+        "description": "Nonton Anime, Film, Donghua, Serial Sub Indo",
         "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Winbu.cs3",
         "name": "Winbu",
         "iconUrl": "https://winbu.net/wp-content/uploads/2025/04/cropped-file_0000000037c46230a9c1a589764f43b9_conversation_id67f9f665-ff7c-8011-9ba4-67640cd9f0c1message_id2c55da44-d7fb-4013-9a92-a8ebc0ce57a9-e1744435281978-270x270.png"

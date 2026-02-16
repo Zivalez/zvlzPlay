@@ -4,6 +4,6 @@
     "iconUrl": "https://public-assets.zvlz.my.id/cloudstream/zvlz.png",
     "manifestVersion": 1,
     "pluginLists": [
-        "https://public-assets.zvlz.my.id/cloudstream/plugins.json"
+        "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/plugins.json"
     ]
 }
