@@ -1,6 +1,6 @@
 # zvlzPlay
 
-**zvlzPlay** adalah kumpulan ekstensi CloudStream untuk menonton anime dan serial dengan subtitle Indonesia 🇮🇩
+**zvlzPlay** adalah kumpulan ekstensi CloudStream untuk menonton anime, serial, dll dengan subtitle Indonesia 🇮🇩
 
 ---
 
