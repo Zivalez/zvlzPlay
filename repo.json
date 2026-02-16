@@ -1,0 +1,8 @@
+{
+    "name": "zvlzPlay",
+    "description": "\ud83c\uddee\ud83c\udde9 Indonesian Movie & Series Repository for CloudStream",
+    "manifestVersion": 1,
+    "pluginLists": [
+        "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/plugins.json"
+    ]
+}
