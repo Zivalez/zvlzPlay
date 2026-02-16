@@ -57,6 +57,10 @@ jobs:
           name: build-log
           path: ${{ github.workspace }}/build_log.txt
 
+      - name: Generate repo.json
+        run: |
+          echo '{"name":"zvlzPlay","description":"🇮🇩 Indonesian Movie & Series Repository for CloudStream","manifestVersion":1,"pluginLists":["https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/plugins.json"]}' | python3 -m json.tool > $GITHUB_WORKSPACE/builds/repo.json
+
       - name: Push builds
         run: |
           cd $GITHUB_WORKSPACE/builds
