@@ -59,7 +59,34 @@ jobs:
 
       - name: Generate repo.json
         run: |
-          echo '{"name":"zvlzPlay","description":"🇮🇩 Indonesian Movie & Series Repository for CloudStream","manifestVersion":1,"pluginLists":["https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/plugins.json"]}' | python3 -m json.tool > $GITHUB_WORKSPACE/builds/repo.json
+          echo '{"name":"zvlzPlay","description":"🇮🇩 Indonesian Movie & Series Repository for CloudStream","iconUrl":"https://winbu.net/wp-content/uploads/2025/04/cropped-file_0000000037c46230a9c1a589764f43b9_conversation_id67f9f665-ff7c-8011-9ba4-67640cd9f0c1message_id2c55da44-d7fb-4013-9a92-a8ebc0ce57a9-e1744435281978-270x270.png","manifestVersion":1,"pluginLists":["https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/plugins.json"]}' | python3 -m json.tool > $GITHUB_WORKSPACE/builds/repo.json
+
+      - name: Process plugins.json
+        run: |
+          cat <<EOF > process_plugins.py
+          import json
+          import os
+          
+          path = os.environ["GITHUB_WORKSPACE"] + "/builds/plugins.json"
+          try:
+              with open(path, "r") as f:
+                  plugins = json.load(f)
+              
+              for plugin in plugins:
+                  if plugin.get("internalName") == "Winbu":
+                      plugin["iconUrl"] = "https://winbu.net/wp-content/uploads/2025/04/cropped-file_0000000037c46230a9c1a589764f43b9_conversation_id67f9f665-ff7c-8011-9ba4-67640cd9f0c1message_id2c55da44-d7fb-4013-9a92-a8ebc0ce57a9-e1744435281978-270x270.png"
+                      plugin["description"] = "🇮🇩 Nonton Serial Film Sub Indo"
+                  
+                  # Remove jar fields if they exist
+                  plugin.pop("jarUrl", None)
+                  plugin.pop("jarFileSize", None)
+              
+              with open(path, "w") as f:
+                  json.dump(plugins, f, indent=4)
+          except Exception as e:
+              print(f"Error processing plugins.json: {e}")
+          EOF
+          python3 process_plugins.py
 
       - name: Push builds
         run: |
