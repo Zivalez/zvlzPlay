@@ -2,7 +2,7 @@ version = 1
 
 cloudstream {
     language = "id"
-    description = "Winbu — Nonton Serial Film Sub Indo"
+    description = "Winbu — Nonton Anime, Film, Donghua, Serial Sub Indo"
     authors = listOf("Zivalez")
     isCrossPlatform = true
     status = 1
@@ -10,5 +10,7 @@ cloudstream {
         "AnimeMovie",
         "OVA",
         "Anime",
+        "Movie",
+        "Donghua",
     )
 }
