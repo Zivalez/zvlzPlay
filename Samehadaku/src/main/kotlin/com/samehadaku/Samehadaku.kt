@@ -4,7 +4,9 @@ import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addAniListId
 import com.lagradost.cloudstream3.LoadResponse.Companion.addMalId
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
+import com.lagradost.cloudstream3.LoadResponse.Companion.addScore
 import com.lagradost.cloudstream3.utils.*
+import com.lagradost.cloudstream3.amap
 import kotlinx.coroutines.runBlocking
 import org.jsoup.nodes.Element
 
@@ -101,7 +103,7 @@ class Samehadaku : MainAPI() {
         }
         val status = getStatus(document.selectFirst("div.spe > span:contains(Status)")?.ownText() ?: return null)
         val type = getType(document.selectFirst("div.spe > span:contains(Type)")?.ownText()?.trim()?.lowercase() ?: "tv")
-        val rating = document.selectFirst("span.ratingValue")?.text()?.trim()?.toRatingInt()
+        val rating = document.selectFirst("span.ratingValue")?.text()?.trim()?.toDoubleOrNull()
         val description = document.select("div.desc p").text().trim()
         val trailer = document.selectFirst("div.trailer-anime iframe")?.attr("src")
 
@@ -123,7 +125,7 @@ class Samehadaku : MainAPI() {
             this.year = year
             addEpisodes(DubStatus.Subbed, episodes)
             showStatus = status
-            this.rating = rating
+            if (rating != null) addScore(rating.toString())
             plot = description
             addTrailer(trailer)
             this.tags = tags
@@ -141,8 +143,8 @@ class Samehadaku : MainAPI() {
     ): Boolean {
         val document = app.get(data).document
 
-        document.select("div#downloadb li").apmap { el ->
-            el.select("a").apmap {
+        document.select("div#downloadb li").amap { el ->
+            el.select("a").amap {
                 loadFixedExtractor(
                     fixUrl(it.attr("href")),
                     el.select("strong").text(),
