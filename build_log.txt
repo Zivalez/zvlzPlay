@@ -17,23 +17,111 @@ Starting a Gradle Daemon (subsequent builds will be faster)
 > Configure project :Kuramanime
 Fetching JAR
 
-> Configure project :LayarKaca
-w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/build.gradle.kts:12:9: 'compileSdkVersion(Int): Unit' is deprecated. Replaced by compileSdk
-w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/build.gradle.kts:13:9: 'targetSdk: Int?' is deprecated. Will be removed from library DSL in v9.0. Use testOptions.targetSdk or/and lint.targetSdk instead
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/build.gradle.kts:22:9: Using 'jvmTarget: String' is an error. Please migrate to the compilerOptions DSL. More details are here: https://kotl.in/u1r8ln
+> Task :Kuramanime:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :Kuramanime:preBuild UP-TO-DATE
+> Task :Kuramanime:preDebugBuild UP-TO-DATE
+> Task :Kuramanime:generateDebugResValues
+> Task :Kuramanime:generateDebugResources
+> Task :Kuramanime:packageDebugResources
+> Task :LayarKaca:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :LayarKaca:preBuild UP-TO-DATE
+> Task :LayarKaca:preDebugBuild UP-TO-DATE
+> Task :LayarKaca:generateDebugResValues
+> Task :LayarKaca:generateDebugResources
+> Task :LayarKaca:packageDebugResources
+> Task :Winbu:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :Winbu:preBuild UP-TO-DATE
+> Task :Winbu:preDebugBuild UP-TO-DATE
+> Task :Winbu:generateDebugResValues
+> Task :Winbu:generateDebugResources
+> Task :Winbu:packageDebugResources
+> Task :LayarKaca:parseDebugLocalResources
+> Task :Kuramanime:parseDebugLocalResources
+> Task :Winbu:parseDebugLocalResources
+> Task :Winbu:javaPreCompileDebug
+> Task :Kuramanime:generateDebugRFile
+> Task :Winbu:generateDebugRFile
+> Task :LayarKaca:generateDebugRFile
+> Task :Kuramanime:compileDebugKotlin
+
+> Task :LayarKaca:compileDebugKotlin FAILED
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:40:53 Unresolved reference 'documentLarge'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:42:13 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:49:32 Unresolved reference 'documentLarge'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:116:40 Unresolved reference 'documentLarge'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:120:63 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:132:27 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:133:35 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:133:57 Unresolved reference 'attr'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:134:39 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:145:28 None of the following candidates is applicable:
+
+constructor(p0: (MutableMap<Any?, Any?>..Map<*, *>?)): JSONObject:
+  Argument type mismatch: actual type is 'Any', but '(MutableMap<Any?, Any?>..Map<*, *>?)' was expected.
+
+constructor(p0: JSONTokener!): JSONObject:
+  Argument type mismatch: actual type is 'Any', but 'JSONTokener!' was expected.
+
+constructor(p0: String!): JSONObject:
+  Argument type mismatch: actual type is 'Any', but 'String!' was expected.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:146:22 Unresolved reference 'keys'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:146:39 Cannot infer type for value parameter 'seasonKey'. Specify it explicitly.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:147:42 Unresolved reference 'getJSONArray'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:193:38 Unresolved reference 'documentLarge'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:195:24 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:197:22 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:197:25 Suspension functions can only be called within coroutine body.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:198:36 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:200:13 Suspension functions can only be called within coroutine body.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:200:27 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:200:30 Suspension functions can only be called within coroutine body.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/src/main/kotlin/com/layarkaca/LayarKacaProvider.kt:206:55 Unresolved reference 'documentLarge'.
+
+> Task :Kuramanime:compileDebugKotlin
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Extractors.kt:64:13 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Extractors.kt:65:13 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Extractors.kt:69:13 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Extractors.kt:74:13 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Extractors.kt:75:13 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Extractors.kt:79:13 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Extractors.kt:132:13 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+
+> Task :Winbu:compileDebugKotlin
 
 FAILURE: Build failed with an exception.
 
-* Where:
-Build file '/home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/build.gradle.kts' line: 22
-
 * What went wrong:
-Script compilation error:
-
-  Line 22:         jvmTarget = "1.8"
-                   ^ Using 'jvmTarget: String' is an error. Please migrate to the compilerOptions DSL. More details are here: https://kotl.in/u1r8ln
-
-1 error
+Execution failed for task ':LayarKaca:compileDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
 
 * Try:
 > Run with --stacktrace option to get the stack trace.
@@ -41,4 +129,5 @@ Script compilation error:
 > Run with --scan to get full insights.
 > Get more help at https://help.gradle.org.
 
-BUILD FAILED in 51s
+BUILD FAILED in 2m 45s
+19 actionable tasks: 19 executed
