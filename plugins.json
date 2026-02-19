@@ -3,12 +3,13 @@
         "iconUrl": "https://tv12.idlixku.com/wp-content/uploads/2020/06/idlix.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 31032,
+        "fileSize": 25715,
         "status": 3,
         "language": "id",
         "authors": [
             "Hexated",
-            "TeKuma25",
+            "Phisher98",
+            "Asm0d3usX",
             "Zivalez"
         ],
         "tvTypes": [
@@ -19,7 +20,7 @@
         ],
         "version": -1,
         "internalName": "Idlix",
-        "description": "Nonton Film Streaming Movie Idlix Subtitle Indonesia Gratis Online",
+        "description": "Nonton Film Streaming Movie Idlix Subtitle Indonesia",
         "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Idlix.cs3",
         "name": "Idlix"
     },
