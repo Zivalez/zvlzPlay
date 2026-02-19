@@ -18,7 +18,7 @@
             "AsianDrama",
             "Anime"
         ],
-        "version": -1,
+        "version": 1,
         "internalName": "Idlix",
         "description": "Nonton Film Streaming Movie Idlix Subtitle Indonesia",
         "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Idlix.cs3",
@@ -69,6 +69,26 @@
         "description": "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online",
         "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/LayarKaca.cs3",
         "name": "LayarKaca"
+    },
+    {
+        "iconUrl": "https://tv3.nontondrama.my/wp-content/uploads/2023/11/apple-touch-icon-152x152-1.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 20416,
+        "status": 3,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "AsianDrama"
+        ],
+        "version": -1,
+        "internalName": "NontonDrama",
+        "description": "Nonton Drama Series Subtitle Indonesia Gratis",
+        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/NontonDrama.cs3",
+        "name": "NontonDrama"
     },
     {
         "apiVersion": 1,
