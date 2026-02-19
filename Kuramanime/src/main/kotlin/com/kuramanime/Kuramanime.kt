@@ -182,6 +182,32 @@ class Kuramanime : MainAPI() {
             subtitleCallback: (SubtitleFile) -> Unit,
             callback: (ExtractorLink) -> Unit
     ): Boolean {
+        val document = app.get(data).document
+
+        // Strategy 1: Find all iframes
+        document.select("iframe").forEach { iframe ->
+            val src = iframe.attr("src").ifEmpty { iframe.attr("data-src") }
+            if (src.isNotBlank()) {
+                val fixedUrl = fixUrl(src)
+                loadExtractor(fixedUrl, data, subtitleCallback, callback)
+            }
+        }
+
+        // Strategy 2: Look for specific server buttons/lists (common in these sites)
+        // Adjust selector based on typical Kuramanime structure if known, otherwise generic fallback
+        document.select("select#server-list option, ul#server-list li a, .server-item").forEach { element ->
+           val url = element.attr("value").ifEmpty { element.attr("data-src") }.ifEmpty { element.attr("href") }
+           if (url.isNotBlank() && url.startsWith("http")) {
+               loadExtractor(fixUrl(url), data, subtitleCallback, callback)
+           }
+        }
+
+        // Strategy 3: Regex Fallback (for scripts or hidden elements)
+        // Looks for known domains usually associated with this provider
+        val regex = Regex("""https?://(www\.)?(kuramadrive|nyomo|streamhide|lbx|linkbox)\.[a-z]+/[a-zA-Z0-9/_?=&-]+""")
+        regex.findAll(document.html()).forEach { match ->
+            loadExtractor(fixUrl(match.value), data, subtitleCallback, callback)
+        }
 
         return true
     }

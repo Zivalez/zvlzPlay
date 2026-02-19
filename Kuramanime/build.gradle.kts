@@ -16,15 +16,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 }
 // use an integer for version numbers
-version = 39
+version = 1
 
 
 cloudstream {
     language = "id"
-    // All of these properties are optional, you can safely remove them
-
-    // description = "Lorem Ipsum"
-     authors = listOf("Zivalez")
+    description = "Kuramanime - Nonton Anime, Donghua, Movie Sub Indo Terlengkap & Terbaru"
+    authors = listOf("Zivalez")
 
     /**
      * Status int as the following:
@@ -37,6 +35,7 @@ cloudstream {
     tvTypes = listOf(
         "AnimeMovie",
         "Anime",
+        "Donghua",
         "OVA",
     )
 
