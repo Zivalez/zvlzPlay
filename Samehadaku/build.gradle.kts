@@ -15,7 +15,6 @@ android {
 }
 
 dependencies {
-    implementation("com.lagradost:cloudstream3:pre-release")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
