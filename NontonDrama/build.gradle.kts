@@ -31,13 +31,14 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("org.json:json:20240303")
 }
+version = 1
 
 cloudstream {
     // metadata
     language = "id"
-    description = "Nonton Drama Series Subtitle Indonesia Gratis"
+    description = "Nonton Drama Series Subtitle Indonesia"
     authors = listOf("Zivalez")
     status = 3 
     tvTypes = listOf("TvSeries", "AsianDrama")
-    iconUrl = "https://tv3.nontondrama.my/wp-content/uploads/2023/11/apple-touch-icon-152x152-1.png"
+    iconUrl = "https://assets.lk21.party/favicons/favicon-32x32.png"
 }

@@ -56,7 +56,7 @@ class NontonDrama : MainAPI() {
     }
 
     private fun Element.toSearchResult(): SearchResponse? {
-        val title = this.selectFirst("h1.grid-title > a")?.ownText()?.trim() ?: return null
+        val title = this.selectFirst("h1.grid-title > a, h2.grid-title > a, h3 > a, .title > a")?.ownText()?.trim() ?: return null
         val href = fixUrl(this.selectFirst("a")!!.attr("href"))
         val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
         
@@ -134,17 +134,19 @@ class NontonDrama : MainAPI() {
 
         // Logic for Series (Based on LayarKaca.kt, but assuming all are series here)
         val episodes =
-                document.select("div.episode-list > a:matches(\\d+)")
+                document.select("div.episode-list > a, ul.episodios > li > a, .episodes > a")
+                        .filter { it.attr("href").contains("episode") || it.text().matches(Regex(".*\\d+.*")) }
                         .map {
                             val href = fixUrl(it.attr("href"))
-                            val episode = it.text().toIntOrNull()
+                            val titleText = it.text()
+                            val episode = Regex("Episode\\s*(\\d+)").find(titleText)?.groupValues?.get(1)?.toIntOrNull() 
+                                          ?: titleText.filter { c -> c.isDigit() }.toIntOrNull()
                             val season =
-                                    it.attr("href")
-                                            .substringAfter("season-")
+                                    href.substringAfter("season-")
                                             .substringBefore("-")
                                             .toIntOrNull()
                             newEpisode(href){
-                                this.name = "Episode $episode"
+                                this.name = if(episode != null) "Episode $episode" else titleText
                                 this.season = season
                                 this.episode = episode
                             }
