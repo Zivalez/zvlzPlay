@@ -1,0 +1,59 @@
+Downloading https://services.gradle.org/distributions/gradle-8.12-bin.zip
+..................................................................................................................................
+Unzipping /home/runner/.gradle/wrapper/dists/gradle-8.12-bin/cetblhg4pflnnks72fxwobvgv/gradle-8.12-bin.zip to /home/runner/.gradle/wrapper/dists/gradle-8.12-bin/cetblhg4pflnnks72fxwobvgv
+Set executable permissions for: /home/runner/.gradle/wrapper/dists/gradle-8.12-bin/cetblhg4pflnnks72fxwobvgv/gradle-8.12/bin/gradle
+
+Welcome to Gradle 8.12!
+
+Here are the highlights of this release:
+ - Enhanced error and warning reporting with the Problems API
+ - File-system watching support on Alpine Linux
+ - Build and test Swift 6 libraries and apps
+
+For more details see https://docs.gradle.org/8.12/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+
+> Configure project :Kuramanime
+Fetching JAR
+
+> Task :Kuramanime:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :Kuramanime:preBuild UP-TO-DATE
+> Task :Kuramanime:preDebugBuild UP-TO-DATE
+> Task :Kuramanime:generateDebugResValues
+> Task :Kuramanime:generateDebugResources
+> Task :Kuramanime:packageDebugResources
+> Task :Winbu:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :Winbu:preBuild UP-TO-DATE
+> Task :Winbu:preDebugBuild UP-TO-DATE
+> Task :Winbu:generateDebugResValues
+> Task :Winbu:generateDebugResources
+> Task :Winbu:packageDebugResources
+> Task :Winbu:javaPreCompileDebug
+> Task :Kuramanime:parseDebugLocalResources
+> Task :Winbu:parseDebugLocalResources
+> Task :Winbu:generateDebugRFile
+> Task :Kuramanime:generateDebugRFile
+
+> Task :Kuramanime:compileDebugKotlin FAILED
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Kuramanime.kt:192:17 Unresolved reference 'loadExtractor'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Kuramanime.kt:201:16 Unresolved reference 'loadExtractor'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Kuramanime.kt:209:13 Unresolved reference 'loadExtractor'.
+
+> Task :Winbu:compileDebugKotlin
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':Kuramanime:compileDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1m 16s
+13 actionable tasks: 13 executed

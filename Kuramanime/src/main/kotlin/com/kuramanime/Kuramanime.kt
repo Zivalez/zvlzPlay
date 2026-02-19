@@ -211,4 +211,13 @@ class Kuramanime : MainAPI() {
 
         return true
     }
+
+    private suspend fun loadExtractor(
+            url: String,
+            referer: String? = null,
+            subtitleCallback: (SubtitleFile) -> Unit,
+            callback: (ExtractorLink) -> Unit
+    ) {
+        loadExtractor(url, referer, subtitleCallback, callback)
+    }
 }
