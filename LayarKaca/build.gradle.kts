@@ -1,5 +1,30 @@
+plugins {
+    id("com.android.library")
+    id("kotlin-android")
+    id("com.lagradost.cloudstream3.gradle")
+}
+
+android {
+    namespace = "com.layarkaca"
+    
+     defaultConfig {
+        minSdk = 21
+        compileSdkVersion(35)
+        targetSdk = 35
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
 dependencies {
-//    implementation(kotlin("stdlib"))
+    implementation(kotlin("stdlib"))
     implementation("com.github.Blatzar:NiceHttp:0.4.11")
     implementation("org.jsoup:jsoup:1.18.3")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.1")
@@ -10,34 +35,17 @@ dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation("app.cash.quickjs:quickjs-android:0.9.2")
-    implementation("org.jsoup:jsoup:1.18.3")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("androidx.core:core-ktx:1.16.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 }
-// use an integer for version numbers
-version = 1
-
 
 cloudstream {
+    // metadata
     language = "id"
-    description = "Nonton Anime, Donghua, Movie Sub Indo Terlengkap & Terbaru"
+    description = "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online Download"
     authors = listOf("Zivalez")
-
-    /**
-     * Status int as the following:
-     * 0: Down
-     * 1: Ok
-     * 2: Slow
-     * 3: Beta only
-     * */
-    status = 1 // will be 3 if unspecified
-    tvTypes = listOf(
-        "AnimeMovie",
-        "Anime",
-        "Donghua",
-        "OVA",
-    )
-
-    iconUrl = "https://www.google.com/s2/favicons?domain=kuramanime.com&sz=%size%"
+    status = 3 
+    tvTypes = listOf("Movie", "TvSeries", "AsianDrama")
+    iconUrl = "https://lk21.de/wp-content/themes/muvipro/assets/img/icon/apple-touch-icon-152x152.png"
 }
