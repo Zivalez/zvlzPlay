@@ -16,13 +16,14 @@ dependencies {
     implementation("org.json:json:20240303")
 
 }
+version = 1
 
 cloudstream {
     // metadata
     language = "id"
-    description = "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online Download"
-    authors = listOf("Zivalez")
-    status = 3 
-    tvTypes = listOf("Movie", "TvSeries", "AsianDrama")
-    iconUrl = "https://lk21.de/wp-content/themes/muvipro/assets/img/icon/apple-touch-icon-152x152.png"
+    description = "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online"
+    authors = listOf("Hexated", "Zivalez")
+    status = 1
+    tvTypes = listOf("Movie", "TvSeries", "AsianDrama", "AnimeMovie")
+    iconUrl = "https://assets.lk21.party/favicons/favicon-32x32.png"
 }
