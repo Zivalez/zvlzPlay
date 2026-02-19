@@ -1,28 +1,3 @@
-plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("com.lagradost.cloudstream3.gradle")
-}
-
-android {
-    namespace = "com.layarkaca"
-    
-     defaultConfig {
-        minSdk = 21
-        compileSdkVersion(35)
-        targetSdk = 35
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-}
-
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("com.github.Blatzar:NiceHttp:0.4.11")

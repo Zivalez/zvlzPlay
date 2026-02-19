@@ -17,37 +17,23 @@ Starting a Gradle Daemon (subsequent builds will be faster)
 > Configure project :Kuramanime
 Fetching JAR
 
-> Task :Kuramanime:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :Kuramanime:preBuild UP-TO-DATE
-> Task :Kuramanime:preDebugBuild UP-TO-DATE
-> Task :Kuramanime:generateDebugResValues
-> Task :Kuramanime:generateDebugResources
-> Task :Kuramanime:packageDebugResources
-> Task :Winbu:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :Winbu:preBuild UP-TO-DATE
-> Task :Winbu:preDebugBuild UP-TO-DATE
-> Task :Winbu:generateDebugResValues
-> Task :Winbu:generateDebugResources
-> Task :Winbu:packageDebugResources
-> Task :Winbu:javaPreCompileDebug
-> Task :Kuramanime:parseDebugLocalResources
-> Task :Winbu:parseDebugLocalResources
-> Task :Winbu:generateDebugRFile
-> Task :Kuramanime:generateDebugRFile
-
-> Task :Kuramanime:compileDebugKotlin FAILED
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Kuramanime.kt:192:17 Unresolved reference 'loadExtractor'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Kuramanime.kt:201:16 Unresolved reference 'loadExtractor'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuramanime/src/main/kotlin/com/kuramanime/Kuramanime.kt:209:13 Unresolved reference 'loadExtractor'.
-
-> Task :Winbu:compileDebugKotlin
+> Configure project :LayarKaca
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/build.gradle.kts:12:9: 'compileSdkVersion(Int): Unit' is deprecated. Replaced by compileSdk
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/build.gradle.kts:13:9: 'targetSdk: Int?' is deprecated. Will be removed from library DSL in v9.0. Use testOptions.targetSdk or/and lint.targetSdk instead
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/build.gradle.kts:22:9: Using 'jvmTarget: String' is an error. Please migrate to the compilerOptions DSL. More details are here: https://kotl.in/u1r8ln
 
 FAILURE: Build failed with an exception.
 
+* Where:
+Build file '/home/runner/work/zvlzPlay/zvlzPlay/src/LayarKaca/build.gradle.kts' line: 22
+
 * What went wrong:
-Execution failed for task ':Kuramanime:compileDebugKotlin'.
-> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-   > Compilation error. See log for more details
+Script compilation error:
+
+  Line 22:         jvmTarget = "1.8"
+                   ^ Using 'jvmTarget: String' is an error. Please migrate to the compilerOptions DSL. More details are here: https://kotl.in/u1r8ln
+
+1 error
 
 * Try:
 > Run with --stacktrace option to get the stack trace.
@@ -55,5 +41,4 @@ Execution failed for task ':Kuramanime:compileDebugKotlin'.
 > Run with --scan to get full insights.
 > Get more help at https://help.gradle.org.
 
-BUILD FAILED in 1m 16s
-13 actionable tasks: 13 executed
+BUILD FAILED in 51s
