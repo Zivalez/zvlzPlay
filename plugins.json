@@ -1,12 +1,37 @@
 [
     {
+        "iconUrl": "https://tv12.idlixku.com/wp-content/uploads/2020/06/idlix.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 31032,
+        "status": 3,
+        "language": "id",
+        "authors": [
+            "Hexated",
+            "TeKuma25",
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "AsianDrama",
+            "Anime"
+        ],
+        "version": -1,
+        "internalName": "Idlix",
+        "description": "Nonton Film Streaming Movie Idlix Subtitle Indonesia Gratis Online",
+        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Idlix.cs3",
+        "name": "Idlix"
+    },
+    {
         "iconUrl": "https://www.google.com/s2/favicons?domain=kuramanime.com&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 23032,
-        "status": 1,
+        "status": 3,
         "language": "id",
         "authors": [
+            "TeKuma25",
             "Zivalez"
         ],
         "tvTypes": [
@@ -15,30 +40,32 @@
             "Donghua",
             "OVA"
         ],
-        "version": 1,
+        "version": 2,
         "internalName": "Kuramanime",
         "description": "Nonton Anime, Donghua, Movie Sub Indo Terlengkap & Terbaru",
         "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Kuramanime.cs3",
         "name": "Kuramanime"
     },
     {
-        "iconUrl": "https://lk21.de/wp-content/themes/muvipro/assets/img/icon/apple-touch-icon-152x152.png",
+        "iconUrl": "https://assets.lk21.party/favicons/favicon-32x32.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 20628,
-        "status": 3,
+        "fileSize": 20626,
+        "status": 1,
         "language": "id",
         "authors": [
+            "Hexated",
             "Zivalez"
         ],
         "tvTypes": [
             "Movie",
             "TvSeries",
-            "AsianDrama"
+            "AsianDrama",
+            "AnimeMovie"
         ],
-        "version": -1,
+        "version": 1,
         "internalName": "LayarKaca",
-        "description": "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online Download",
+        "description": "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online",
         "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/LayarKaca.cs3",
         "name": "LayarKaca"
     },
@@ -46,7 +73,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 13065,
-        "status": 1,
+        "status": 3,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -58,7 +85,7 @@
             "Movie",
             "Donghua"
         ],
-        "version": 2,
+        "version": 3,
         "internalName": "Winbu",
         "description": "Nonton Anime, Film, Donghua, Serial Sub Indo",
         "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Winbu.cs3",
