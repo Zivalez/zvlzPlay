@@ -4,7 +4,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 25715,
-        "status": 3,
+        "status": 1,
         "language": "id",
         "authors": [
             "Hexated",
@@ -71,10 +71,10 @@
         "name": "LayarKaca"
     },
     {
-        "iconUrl": "https://tv3.nontondrama.my/wp-content/uploads/2023/11/apple-touch-icon-152x152-1.png",
+        "iconUrl": "https://assets.lk21.party/favicons/favicon-32x32.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 20416,
+        "fileSize": 21192,
         "status": 3,
         "language": "id",
         "authors": [
@@ -84,9 +84,9 @@
             "TvSeries",
             "AsianDrama"
         ],
-        "version": -1,
+        "version": 1,
         "internalName": "NontonDrama",
-        "description": "Nonton Drama Series Subtitle Indonesia Gratis",
+        "description": "Nonton Drama Series Subtitle Indonesia",
         "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/NontonDrama.cs3",
         "name": "NontonDrama"
     },
