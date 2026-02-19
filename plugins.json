@@ -3,7 +3,7 @@
         "iconUrl": "https://www.google.com/s2/favicons?domain=kuramanime.com&sz=%size%",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 25777,
+        "fileSize": 23032,
         "status": 1,
         "language": "id",
         "authors": [
@@ -17,9 +17,30 @@
         ],
         "version": 1,
         "internalName": "Kuramanime",
-        "description": "Kuramanime - Nonton Anime, Donghua, Movie Sub Indo Terlengkap & Terbaru",
+        "description": "Nonton Anime, Donghua, Movie Sub Indo Terlengkap & Terbaru",
         "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Kuramanime.cs3",
         "name": "Kuramanime"
+    },
+    {
+        "iconUrl": "https://lk21.de/wp-content/themes/muvipro/assets/img/icon/apple-touch-icon-152x152.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 20628,
+        "status": 3,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "AsianDrama"
+        ],
+        "version": -1,
+        "internalName": "LayarKaca",
+        "description": "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online Download",
+        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/LayarKaca.cs3",
+        "name": "LayarKaca"
     },
     {
         "apiVersion": 1,
