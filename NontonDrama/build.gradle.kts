@@ -38,7 +38,7 @@ cloudstream {
     language = "id"
     description = "Nonton Drama Series Subtitle Indonesia"
     authors = listOf("Zivalez")
-    status = 3 
+    status = 1
     tvTypes = listOf("TvSeries", "AsianDrama")
     iconUrl = "https://assets.lk21.party/favicons/favicon-32x32.png"
 }
