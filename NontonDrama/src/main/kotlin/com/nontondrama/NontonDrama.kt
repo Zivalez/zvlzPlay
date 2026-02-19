@@ -51,12 +51,15 @@ class NontonDrama : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data + page).document
-        val home = document.select("article.mega-item").mapNotNull { it.toSearchResult() }
+        val home = document.select("article.mega-item, article.item, article.post, div.item, div.movie, div.result-item, div.col-md-2").mapNotNull { it.toSearchResult() }
         return newHomePageResponse(request.name, home)
     }
 
     private fun Element.toSearchResult(): SearchResponse? {
-        val title = this.selectFirst("h1.grid-title > a, h2.grid-title > a, h3 > a, .title > a")?.ownText()?.trim() ?: return null
+        val title = this.selectFirst("h1.grid-title > a, h2.grid-title > a, h3 > a, .title > a")?.ownText()?.trim()
+                ?: this.selectFirst("h1, h2, h3, .title")?.text()?.trim()
+                ?: this.selectFirst("a")?.attr("title")
+                ?: return null
         val href = fixUrl(this.selectFirst("a")!!.attr("href"))
         val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
         
