@@ -1,3 +1,19 @@
+plugins {
+    id("com.android.library")
+    id("kotlin-android")
+    id("com.lagradost.cloudstream3.gradle")
+}
+
+android {
+    namespace = "com.idlix"
+    
+     defaultConfig {
+        minSdk = 21
+        compileSdkVersion(35)
+        targetSdkVersion(35)
+    }
+}
+
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("com.github.Blatzar:NiceHttp:0.4.11")
@@ -19,8 +35,8 @@ dependencies {
 cloudstream {
     // metadata
     language = "id"
-    description = "Nonton Film Streaming Movie Idlix Subtitle Indonesia Gratis Online"
-    authors = listOf("Hexated", "TeKuma25", "Zivalez")
+    description = "Nonton Film Streaming Movie Idlix Subtitle Indonesia"
+    authors = listOf("Hexated", "Phisher98", "Asm0d3usX", "Zivalez")
     status = 3 
     tvTypes = listOf("Movie", "TvSeries", "AsianDrama", "Anime")
     iconUrl = "https://tv12.idlixku.com/wp-content/uploads/2020/06/idlix.png"
