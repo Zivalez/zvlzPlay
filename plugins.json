@@ -91,6 +91,28 @@
         "name": "NontonDrama"
     },
     {
+        "iconUrl": "https://v1.samehadaku.how/wp-content/uploads/2020/04/cropped-download-1-32x32.jpg",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 17830,
+        "status": 3,
+        "language": "id",
+        "authors": [
+            "Zivalez",
+            "Asm0d3usX"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "OVA",
+            "Anime"
+        ],
+        "version": 1,
+        "internalName": "Samehadaku",
+        "description": "Anime Sub Indo",
+        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Samehadaku.cs3",
+        "name": "Samehadaku"
+    },
+    {
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 13065,
