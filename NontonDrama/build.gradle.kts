@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.idlix"
+    namespace = "com.nontondrama"
     
      defaultConfig {
         minSdk = 21
@@ -31,14 +31,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("org.json:json:20240303")
 }
-version = 1
 
 cloudstream {
     // metadata
     language = "id"
-    description = "Nonton Film Streaming Movie Idlix Subtitle Indonesia"
-    authors = listOf("Hexated", "Phisher98", "Asm0d3usX", "Zivalez")
+    description = "Nonton Drama Series Subtitle Indonesia Gratis"
+    authors = listOf("Zivalez")
     status = 3 
-    tvTypes = listOf("Movie", "TvSeries", "AsianDrama", "Anime")
-    iconUrl = "https://tv12.idlixku.com/wp-content/uploads/2020/06/idlix.png"
+    tvTypes = listOf("TvSeries", "AsianDrama")
+    iconUrl = "https://tv3.nontondrama.my/wp-content/uploads/2023/11/apple-touch-icon-152x152-1.png"
 }
