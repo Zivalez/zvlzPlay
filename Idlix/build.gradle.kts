@@ -40,5 +40,5 @@ cloudstream {
     authors = listOf("Hexated", "Phisher98", "Asm0d3usX", "Zivalez")
     status = 1
     tvTypes = listOf("Movie", "TvSeries", "AsianDrama", "Anime")
-    iconUrl = "https://tv12.idlixku.com/wp-content/uploads/2020/06/idlix.png"
+    iconUrl = "https://tv12.idlixku.com/wp-content/uploads/2022/11/2_logoIDLIX_CNY.webp"
 }
