@@ -11,7 +11,7 @@ import kotlinx.coroutines.runBlocking
 import org.jsoup.nodes.Element
 
 class Samehadaku : MainAPI() {
-    override var mainUrl = "https://samehadaku.email"
+    override var mainUrl = "https://v1.samehadaku.how"
     override var name = "Samehadaku"
     override val hasMainPage = true
     override var lang = "id"
