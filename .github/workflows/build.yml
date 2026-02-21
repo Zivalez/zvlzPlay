@@ -73,10 +73,6 @@ jobs:
                   plugins = json.load(f)
               
               for plugin in plugins:
-                  if plugin.get("internalName") == "Winbu":
-                      plugin["iconUrl"] = "https://public-assets.zvlz.my.id/cloudstream/zvlz_icon.avif"
-                      plugin["description"] = "Nonton Anime, Film, Donghua, Serial Sub Indo"
-                  
                   # Remove jar fields if they exist
                   plugin.pop("jarUrl", None)
                   plugin.pop("jarFileSize", None)
