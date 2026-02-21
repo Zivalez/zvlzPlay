@@ -20,13 +20,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("org.json:json:20240303")
 }
-version = 1
+version = 3
 
 cloudstream {
     language = "id"
     description = "Anime Sub Indo"
     authors = listOf("Zivalez", "Asm0d3usX")
-    status = 3
+    status = 1
     tvTypes = listOf(
         "AnimeMovie",
         "OVA",
