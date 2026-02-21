@@ -84,15 +84,16 @@ class LayarKacaProvider : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        val res = app.get("$searchurl/search.php?s=$query&page=1", headers = mapOf(
-            "Referer" to "https://tv8.lk21official.cc/",
-            "Origin" to "https://tv8.lk21official.cc",
-            "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
-            "Accept" to "*/*"
+        val domain = fetchURL(mainUrl)
+        val resText = app.get("$searchurl/search.php?s=$query&page=1", headers = mapOf(
+            "Referer" to "$domain/",
+            "Origin" to domain,
+            "X-Requested-With" to "XMLHttpRequest"
         )).text
+        
         val results = mutableListOf<SearchResponse>()
-
-        val root = JSONObject(res)
+        try {
+            val root = JSONObject(resText)
         val arr = root.getJSONArray("data")
 
         for (i in 0 until arr.length()) {
@@ -113,6 +114,9 @@ class LayarKacaProvider : MainAPI() {
                     }
                 )
             }
+        }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
         return results
