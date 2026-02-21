@@ -71,6 +71,27 @@
         "name": "LayarKaca"
     },
     {
+        "iconUrl": "https://otakudesu.best/wp-content/uploads/2019/08/otakudesu.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 24689,
+        "status": 3,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "version": 3,
+        "internalName": "Otakudesu",
+        "description": "Streaming Anime Sub Indo",
+        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Otakudesu.cs3",
+        "name": "Otakudesu"
+    },
+    {
         "iconUrl": "https://v1.samehadaku.how/wp-content/uploads/2020/04/cropped-download-1-32x32.jpg",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
