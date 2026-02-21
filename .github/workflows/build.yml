@@ -59,7 +59,7 @@ jobs:
 
       - name: Generate repo.json
         run: |
-          echo '{"name":"zvlzPlay","description":"🇮🇩 Indonesian Movie & Series Repository for CloudStream","iconUrl":"https://public-assets.zvlz.my.id/cloudstream/zvlz_icon.avif","manifestVersion":1,"pluginLists":["https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/plugins.json"]}' | python3 -m json.tool > $GITHUB_WORKSPACE/builds/repo.json
+          echo '{"name":"zvlzPlay","description":"🇮🇩 Indonesian Movie & Series Repository for CloudStream","iconUrl":"https://public-assets.zvlz.my.id/cloudstream/zvlz_icon.avif","manifestVersion":1,"pluginLists":["https://cloudstream.zvlz.my.id/builds/plugins.json"]}' | python3 -m json.tool > $GITHUB_WORKSPACE/builds/repo.json
 
       - name: Process plugins.json
         run: |
@@ -76,6 +76,13 @@ jobs:
                   # Remove jar fields if they exist
                   plugin.pop("jarUrl", None)
                   plugin.pop("jarFileSize", None)
+                  
+                  # Update URL to use Cloudflare R2 custom domain
+                  if "url" in plugin:
+                      plugin["url"] = plugin["url"].replace(
+                          "https://raw.githubusercontent.com/Zivalez/zvlzPlay/",
+                          "https://cloudstream.zvlz.my.id/"
+                      )
               
               with open(path, "w") as f:
                   json.dump(plugins, f, indent=4)
@@ -83,6 +90,15 @@ jobs:
               print(f"Error processing plugins.json: {e}")
           EOF
           python3 process_plugins.py
+
+      - name: Upload to Cloudflare R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          aws s3 sync $GITHUB_WORKSPACE/builds/ s3://${{ secrets.R2_BUCKET_NAME }}/builds/ \
+            --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
 
       - name: Push builds
         run: |
