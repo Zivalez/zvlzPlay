@@ -134,7 +134,7 @@ class NontonDrama : MainAPI() {
 
         // Logic for Series (Based on LayarKaca.kt, but assuming all are series here)
         val episodes =
-                document.select("div.episode-list > a, ul.episodios > li > a, .episodes > a")
+                document.select("div.episode-list > a, ul.episodios > li > a, .episodes > a, ul.episode-list > li > a")
                         .filter { it.attr("href").contains("episode") || it.text().matches(Regex(".*\\d+.*")) }
                         .map {
                             val href = fixUrl(it.attr("href"))
@@ -173,7 +173,7 @@ class NontonDrama : MainAPI() {
     ): Boolean {
 
         val document = app.get(data).document
-        document.select("ul#loadProviders > li").map { fixUrl(it.select("a").attr("href")) }.forEach {
+        document.select("ul#loadProviders > li, ul#player-list > li").map { fixUrl(it.select("a").attr("href")) }.forEach {
             loadExtractor(it.getIframe(), "https://nganunganu.sbs", subtitleCallback, callback)
         }
 
@@ -183,7 +183,7 @@ class NontonDrama : MainAPI() {
     private suspend fun String.getIframe(): String {
         return app.get(this, referer = "$mainUrl/")
                 .document
-                .select("div.embed iframe")
+                .select("div.embed iframe, div.embed-container iframe")
                 .attr("src")
     }
 }
