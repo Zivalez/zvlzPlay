@@ -21,7 +21,7 @@
         "version": 1,
         "internalName": "Idlix",
         "description": "Nonton Film Streaming Movie Idlix Subtitle Indonesia",
-        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Idlix.cs3",
+        "url": "https://cloudstream.zvlz.my.id/builds/Idlix.cs3",
         "name": "Idlix"
     },
     {
@@ -44,7 +44,7 @@
         "version": 2,
         "internalName": "Kuramanime",
         "description": "Nonton Anime, Donghua, Movie Sub Indo Terlengkap & Terbaru",
-        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Kuramanime.cs3",
+        "url": "https://cloudstream.zvlz.my.id/builds/Kuramanime.cs3",
         "name": "Kuramanime"
     },
     {
@@ -67,7 +67,7 @@
         "version": 5,
         "internalName": "LayarKaca",
         "description": "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online",
-        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/LayarKaca.cs3",
+        "url": "https://cloudstream.zvlz.my.id/builds/LayarKaca.cs3",
         "name": "LayarKaca"
     },
     {
@@ -88,7 +88,7 @@
         "version": 3,
         "internalName": "Otakudesu",
         "description": "Streaming Anime Sub Indo",
-        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Otakudesu.cs3",
+        "url": "https://cloudstream.zvlz.my.id/builds/Otakudesu.cs3",
         "name": "Otakudesu"
     },
     {
@@ -110,7 +110,7 @@
         "version": 3,
         "internalName": "Samehadaku",
         "description": "Anime Sub Indo",
-        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Samehadaku.cs3",
+        "url": "https://cloudstream.zvlz.my.id/builds/Samehadaku.cs3",
         "name": "Samehadaku"
     },
     {
@@ -133,7 +133,7 @@
         "version": 3,
         "internalName": "Winbu",
         "description": "Nonton Anime, Film, Donghua, Serial Sub Indo",
-        "url": "https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/Winbu.cs3",
+        "url": "https://cloudstream.zvlz.my.id/builds/Winbu.cs3",
         "name": "Winbu"
     }
 ]
