@@ -12,7 +12,7 @@ class LayarKacaProvider : MainAPI() {
 
     override var mainUrl = "https://lk21.de"
     private var seriesUrl = "https://series.lk21.de"
-    private var searchurl= "https://search.lk21.party"
+    private var searchurl= "https://gudangvape.com"
 
     override var name = "LayarKaca"
     override val hasMainPage = true
@@ -84,7 +84,7 @@ class LayarKacaProvider : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        val res = app.get("$searchurl/search.php?s=$query").text
+        val res = app.get("$searchurl/search.php?s=$query&page=1").text
         val results = mutableListOf<SearchResponse>()
 
         val root = JSONObject(res)
