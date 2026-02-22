@@ -39,5 +39,5 @@ cloudstream {
         "OVA",
     )
 
-    iconUrl = "https://v15.kuramanime.tel/assets/img/logo-text.png"
+    iconUrl = "https://cloudstream.zvlz.my.id/icon/kuramanime.avif"
 }
