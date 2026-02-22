@@ -32,5 +32,5 @@ cloudstream {
         "OVA",
         "Anime",
     )
-    iconUrl = "https://cloudstream.zvlz.my.id/icon/samehadaku.avif"
+    iconUrl = "https://cloudstream.zvlz.my.id/icon/samehadaku.png"
 }

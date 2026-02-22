@@ -25,5 +25,5 @@ cloudstream {
     authors = listOf("Hexated", "Zivalez")
     status = 1
     tvTypes = listOf("Movie", "TvSeries", "AsianDrama", "AnimeMovie")
-    iconUrl = "https://cloudstream.zvlz.my.id/icon/layarkaca.avif"
+    iconUrl = "https://cloudstream.zvlz.my.id/icon/layarkaca.png"
 }

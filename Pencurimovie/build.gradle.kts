@@ -6,6 +6,6 @@ cloudstream {
     authors = listOf("Phisher98", "Zivalez")
     status = 1
     tvTypes = listOf("Movie")
-    iconUrl = "https://cloudstream.zvlz.my.id/icon/pencurimovie.avif"
+    iconUrl = "https://cloudstream.zvlz.my.id/icon/pencurimovie.png"
     isCrossPlatform = true
 }

@@ -6,6 +6,6 @@ cloudstream {
     authors = listOf("Phisher98", "Zivalez")
     status = 1
     tvTypes = listOf("Movie", "TvSeries", "AsianDrama")
-    iconUrl = "https://cloudstream.zvlz.my.id/icon/funmovieslix.avif"
+    iconUrl = "https://cloudstream.zvlz.my.id/icon/funmovieslix.png"
     isCrossPlatform = true
 }

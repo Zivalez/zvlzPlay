@@ -39,5 +39,5 @@ cloudstream {
         "OVA",
     )
 
-    iconUrl = "https://cloudstream.zvlz.my.id/icon/kuramanime.avif"
+    iconUrl = "https://cloudstream.zvlz.my.id/icon/kuramanime.png"
 }

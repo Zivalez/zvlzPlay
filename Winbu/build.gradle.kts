@@ -13,5 +13,5 @@ cloudstream {
         "Movie",
         "Donghua",
     )
-    iconUrl = "https://cloudstream.zvlz.my.id/icon/winbu.avif"
+    iconUrl = "https://cloudstream.zvlz.my.id/icon/winbu.png"
 }
