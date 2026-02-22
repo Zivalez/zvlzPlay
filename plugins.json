@@ -134,7 +134,7 @@
         "name": "Pencurimovie"
     },
     {
-        "iconUrl": "https://v1.samehadaku.how/wp-content/uploads/2020/04/cropped-download-1-32x32.jpg",
+        "iconUrl": "https://v1.samehadaku.how/wp-content/uploads/2024/07/logo-samehadaku-2.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 19233,
@@ -149,9 +149,9 @@
             "OVA",
             "Anime"
         ],
-        "version": 3,
+        "version": 4,
         "internalName": "Samehadaku",
-        "description": "Anime Sub Indo",
+        "description": "Nonton & Download Anime Streaming Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Samehadaku.cs3",
         "name": "Samehadaku"
     },
