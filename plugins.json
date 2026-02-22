@@ -125,12 +125,11 @@
             "Zivalez"
         ],
         "tvTypes": [
-            "Movie",
-            "TvSeries"
+            "Movie"
         ],
-        "version": 1,
+        "version": 3,
         "internalName": "Pencurimovie",
-        "description": "Pencurimovie",
+        "description": "Nonton Film & Serial Streaming Online",
         "url": "https://cloudstream.zvlz.my.id/builds/Pencurimovie.cs3",
         "name": "Pencurimovie"
     },
