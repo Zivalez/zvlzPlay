@@ -1,0 +1,133 @@
+Downloading https://services.gradle.org/distributions/gradle-8.12-bin.zip
+..................................................................................................................................
+Unzipping /home/runner/.gradle/wrapper/dists/gradle-8.12-bin/cetblhg4pflnnks72fxwobvgv/gradle-8.12-bin.zip to /home/runner/.gradle/wrapper/dists/gradle-8.12-bin/cetblhg4pflnnks72fxwobvgv
+Set executable permissions for: /home/runner/.gradle/wrapper/dists/gradle-8.12-bin/cetblhg4pflnnks72fxwobvgv/gradle-8.12/bin/gradle
+
+Welcome to Gradle 8.12!
+
+Here are the highlights of this release:
+ - Enhanced error and warning reporting with the Problems API
+ - File-system watching support on Alpine Linux
+ - Build and test Swift 6 libraries and apps
+
+For more details see https://docs.gradle.org/8.12/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+
+> Configure project :Funmovieslix
+Fetching JAR
+
+> Configure project :Idlix
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/build.gradle.kts:12:9: 'compileSdkVersion(Int): Unit' is deprecated. Replaced by compileSdk
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/build.gradle.kts:13:9: 'targetSdkVersion(Int): Unit' is deprecated. Replaced by targetSdk property
+
+> Configure project :Samehadaku
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Samehadaku/build.gradle.kts:12:9: 'compileSdkVersion(Int): Unit' is deprecated. Replaced by compileSdk
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Samehadaku/build.gradle.kts:13:9: 'targetSdk: Int?' is deprecated. Will be removed from library DSL in v9.0. Use testOptions.targetSdk or/and lint.targetSdk instead
+
+> Task :Funmovieslix:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :Funmovieslix:preBuild UP-TO-DATE
+> Task :Funmovieslix:preDebugBuild UP-TO-DATE
+> Task :Funmovieslix:generateDebugResValues
+> Task :Funmovieslix:generateDebugResources
+> Task :Funmovieslix:packageDebugResources
+> Task :Funmovieslix:javaPreCompileDebug
+> Task :Idlix:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :Idlix:preBuild UP-TO-DATE
+> Task :Idlix:preDebugBuild UP-TO-DATE
+> Task :Idlix:generateDebugResValues
+> Task :Idlix:generateDebugResources
+> Task :Idlix:packageDebugResources
+> Task :Funmovieslix:parseDebugLocalResources
+> Task :Idlix:parseDebugLocalResources
+> Task :Funmovieslix:generateDebugRFile
+> Task :Idlix:generateDebugRFile
+
+> Task :Funmovieslix:compileDebugKotlin
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:49:71 Unresolved reference 'documentLarge'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:50:82 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:87:59 Unresolved reference 'documentLarge'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:88:88 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:93:37 Unresolved reference 'documentLarge'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:97:61 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:100:93 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:103:27 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:104:27 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:105:23 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:123:63 Cannot infer type for value parameter 'info'. Specify it explicitly.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:124:30 Unresolved reference 'text'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:124:82 Return type mismatch: expected 'ERROR CLASS: Cannot infer type variable TypeVariable(_L)', actual 'Unit'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:125:35 Unresolved reference 'text'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:129:37 Unresolved reference 'attr'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:132:25 Argument type mismatch: actual type is 'Function0<Unit>', but 'Boolean' was expected.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:133:34 Unresolved reference 'episode'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:135:34 Unresolved reference 'season'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:168:38 Unresolved reference 'documentLarge'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:172:20 Unresolved reference 'it'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Funmovieslix/src/main/kotlin/com/Funmovieslix/Funmovieslix.kt:173:28 Unresolved reference 'it'.
+
+> Task :Funmovieslix:compileDebugKotlin FAILED
+
+> Task :Idlix:compileDebugKotlin
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idlix/Extractors.kt:50:25 'constructor(lang: String, url: String): SubtitleFile' is deprecated. Use newSubtitleFile method.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idlix/Idlix.kt:283:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idlix/Idlix.kt:284:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idlix/Idlix.kt:285:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idlix/Idlix.kt:289:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idlix/Idlix.kt:290:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idlix/Idlix.kt:291:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idlix/Idlix.kt:295:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idlix/Idlix.kt:296:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idlix/Idlix.kt:300:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
+- To opt in to applying to both value parameter and field, add '-Xannotation-default-target=param-property' to your compiler arguments.
+- To keep applying to the value parameter only, use the '@param:' annotation target.
+
+See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':Funmovieslix:compileDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 2m 24s
+13 actionable tasks: 13 executed
