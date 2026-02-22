@@ -1,7 +1,7 @@
 version = 1
 
 cloudstream {
-    description = "Indonesia Source"
+    description = "Nonton Streaming Film & Drakor Gratis Sub Indo"
     language = "id"
     authors = listOf("Phisher98", "Zivalez")
     status = 1
