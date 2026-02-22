@@ -143,16 +143,19 @@ class Samehadaku : MainAPI() {
     ): Boolean {
         val document = app.get(data).document
 
-        document.select("div#downloadb li").amap { el ->
-            el.select("a").amap {
-                loadFixedExtractor(
-                    fixUrl(it.attr("href")),
-                    el.select("strong").text(),
-                    "$mainUrl/",
-                    subtitleCallback,
-                    callback
-                )
-            }
+        val allItems = document.select("div#downloadb li").flatMap { el ->
+            val quality = el.select("strong").text()
+            el.select("a").map { a -> Triple(fixUrl(a.attr("href")), quality, a.attr("href")) }
+        }
+
+        val (krakenLinks, otherLinks) = allItems.partition { it.first.contains("krakenfiles", true) }
+
+        krakenLinks.forEach { (url, quality, _) ->
+            loadFixedExtractor(url, quality, "$mainUrl/", subtitleCallback, callback)
+        }
+
+        otherLinks.amap { (url, quality, _) ->
+            loadFixedExtractor(url, quality, "$mainUrl/", subtitleCallback, callback)
         }
         return true
     }
