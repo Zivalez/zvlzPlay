@@ -20,11 +20,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("org.json:json:20240303")
 }
-version = 3
+version = 4
 
 cloudstream {
     language = "id"
-    description = "Anime Sub Indo"
+    description = "Nonton & Download Anime Streaming Sub Indo"
     authors = listOf("Zivalez", "Asm0d3usX")
     status = 1
     tvTypes = listOf(
@@ -32,5 +32,5 @@ cloudstream {
         "OVA",
         "Anime",
     )
-    iconUrl = "https://v1.samehadaku.how/wp-content/uploads/2020/04/cropped-download-1-32x32.jpg"
+    iconUrl = "https://v1.samehadaku.how/wp-content/uploads/2024/07/logo-samehadaku-2.png"
 }
