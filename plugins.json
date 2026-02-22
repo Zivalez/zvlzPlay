@@ -1,6 +1,6 @@
 [
     {
-        "iconUrl": "https://cloudstream.zvlz.my.id/icon/funmovieslix.avif",
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/funmovieslix.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 21089,
@@ -22,7 +22,7 @@
         "name": "Funmovieslix"
     },
     {
-        "iconUrl": "https://cloudstream.zvlz.my.id/icon/idlix.avif",
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/idlix.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 25715,
@@ -47,7 +47,7 @@
         "name": "Idlix"
     },
     {
-        "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuramanime.avif",
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuramanime.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 23044,
@@ -70,7 +70,7 @@
         "name": "Kuramanime"
     },
     {
-        "iconUrl": "https://cloudstream.zvlz.my.id/icon/layarkaca.avif",
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/layarkaca.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 20921,
@@ -93,7 +93,7 @@
         "name": "LayarKaca"
     },
     {
-        "iconUrl": "https://cloudstream.zvlz.my.id/icon/otakudesu.avif",
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/otakudesu.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 24689,
@@ -114,7 +114,7 @@
         "name": "Otakudesu"
     },
     {
-        "iconUrl": "https://cloudstream.zvlz.my.id/icon/pencurimovie.avif",
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/pencurimovie.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 13551,
@@ -134,7 +134,7 @@
         "name": "Pencurimovie"
     },
     {
-        "iconUrl": "https://cloudstream.zvlz.my.id/icon/samehadaku.avif",
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/samehadaku.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 19233,
@@ -156,7 +156,7 @@
         "name": "Samehadaku"
     },
     {
-        "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.avif",
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 13072,
