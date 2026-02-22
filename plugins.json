@@ -1,5 +1,27 @@
 [
     {
+        "iconUrl": "https://raw.githubusercontent.com/phisher98/TVVVV/refs/heads/main/Icons/Funmovieslix.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 21089,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "Phisher98",
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "AsianDrama"
+        ],
+        "version": 1,
+        "internalName": "Funmovieslix",
+        "description": "Indonesia Source",
+        "url": "https://cloudstream.zvlz.my.id/builds/Funmovieslix.cs3",
+        "name": "Funmovieslix"
+    },
+    {
         "iconUrl": "https://tv12.idlixku.com/wp-content/uploads/2022/11/2_logoIDLIX_CNY.webp",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
@@ -75,7 +97,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 24689,
-        "status": 3,
+        "status": 1,
         "language": "id",
         "authors": [
             "Zivalez"
