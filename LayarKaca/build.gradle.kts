@@ -25,5 +25,5 @@ cloudstream {
     authors = listOf("Hexated", "Zivalez")
     status = 1
     tvTypes = listOf("Movie", "TvSeries", "AsianDrama", "AnimeMovie")
-    iconUrl = "https://assets.lk21.party/favicons/favicon-32x32.png"
+    iconUrl = "https://assets.lk21.party/images/logo-layarkaca21.svg"
 }

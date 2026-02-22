@@ -39,5 +39,5 @@ cloudstream {
         "OVA",
     )
 
-    iconUrl = "https://www.google.com/s2/favicons?domain=kuramanime.com&sz=%size%"
+    iconUrl = "https://v15.kuramanime.tel/assets/img/logo-text.png"
 }
