@@ -213,7 +213,9 @@ class Kuramanime : MainAPI() {
                 }
                 "a" -> {
                     val url = element.attr("href")
-                    loadFixedExtractor(url, currentQuality, mainUrl, subtitleCallback, callback)
+                    if (url.isNotBlank()) {
+                        loadFixedExtractor(url, currentQuality, mainUrl, subtitleCallback, callback)
+                    }
                 }
             }
         }

@@ -82,7 +82,7 @@ open class Lbx : ExtractorApi() {
 
 open class Kuramadrive : ExtractorApi() {
     override val name = "DriveKurama"
-    override val mainUrl = "https://kuramadrive.com"
+    override val mainUrl = "https://v1.kuramadrive.com"
     override val requiresReferer = true
 
     override suspend fun getUrl(
