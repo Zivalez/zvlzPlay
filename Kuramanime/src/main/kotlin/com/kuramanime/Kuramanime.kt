@@ -190,7 +190,7 @@ class Kuramanime : MainAPI() {
         val directLink = document.select("video#player").attr("src")
         if (directLink.contains("r2.cloudflarestorage.com")) {
             callback.invoke(
-                ExtractorLink(
+                newExtractorLink(
                     name,
                     "Kuramadrive Direct",
                     directLink,
@@ -220,7 +220,7 @@ class Kuramanime : MainAPI() {
         return true
     }
 
-    private fun loadFixedExtractor(
+    private suspend fun loadFixedExtractor(
         url: String,
         name: String,
         referer: String? = null,
@@ -228,11 +228,8 @@ class Kuramanime : MainAPI() {
         callback: (ExtractorLink) -> Unit
     ) {
         loadExtractor(url, referer, subtitleCallback) { link ->
-            // Use runBlocking carefully or launch scope if needed, but callback is sync-ish here usually
-            // However, loadExtractor callback is strictly synchronous in some contexts, but usually allows valid ExtractorLink
-            // We just pass it through but fix the quality
             callback.invoke(
-                ExtractorLink(
+                newExtractorLink(
                     link.name,
                     link.name,
                     link.url,
