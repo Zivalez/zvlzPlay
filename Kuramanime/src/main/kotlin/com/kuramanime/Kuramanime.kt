@@ -18,6 +18,23 @@ class Kuramanime : MainAPI() {
     override val hasDownloadSupport = true
     override val supportedTypes = setOf(TvType.Anime, TvType.AnimeMovie, TvType.OVA)
 
+    // Add User-Agent to bypass potential bot checks
+    private val userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    private val commonHeaders = mapOf(
+        "User-Agent" to userAgent,
+        "Referer" to mainUrl,
+        "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language" to "en-US,en;q=0.5",
+        "Sec-Ch-Ua" to "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\", \"Google Chrome\";v=\"120\"",
+        "Sec-Ch-Ua-Mobile" to "?0",
+        "Sec-Ch-Ua-Platform" to "\"Windows\"",
+        "Sec-Fetch-Dest" to "document",
+        "Sec-Fetch-Mode" to "navigate",
+        "Sec-Fetch-Site" to "same-origin",
+        "Sec-Fetch-User" to "?1",
+        "Upgrade-Insecure-Requests" to "1"
+    )
+
     companion object {
         fun getType(t: String, s: Int): TvType {
             return if (t.contains("OVA", true) || t.contains("Special")) TvType.OVA
@@ -43,7 +60,7 @@ class Kuramanime : MainAPI() {
             )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
-        val document = app.get(request.data + page).document
+        val document = app.get(request.data + page, headers = commonHeaders).document
 
         val home =
                 document.select("div.col-lg-4.col-md-6.col-sm-6").mapNotNull { it.toSearchResult() }
@@ -76,13 +93,13 @@ class Kuramanime : MainAPI() {
 
     override suspend fun search(query: String): List<SearchResponse> {
         val link = "$mainUrl/anime?search=$query&order_by=latest"
-        val document = app.get(link).document
+        val document = app.get(link, headers = commonHeaders).document
 
         return document.select("div#animeList div.product__item").mapNotNull { it.toSearchResult() }
     }
 
     override suspend fun load(url: String): LoadResponse {
-        val document = app.get(url).document
+        val document = app.get(url, headers = commonHeaders).document
 
         val title = document.selectFirst(".anime__details__title > h3")!!.text().trim()
         val poster = document.selectFirst(".anime__details__pic")?.attr("data-setbg")
@@ -121,7 +138,7 @@ class Kuramanime : MainAPI() {
         val episodes = mutableListOf<Episode>()
 
         for (i in 1..10) {
-            val doc = app.get("$url?page=$i").document
+            val doc = app.get("$url?page=$i", headers = commonHeaders).document
             val eps =
                     Jsoup.parse(doc.select("#episodeLists").attr("data-content"))
                             .select("a.btn.btn-sm.btn-danger")
@@ -184,7 +201,7 @@ class Kuramanime : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        val document = app.get(data).document
+        val document = app.get(data, headers = commonHeaders).document
 
         // 1. Direct Stream (Kuramadrive S1 / R2)
         val directLink = document.select("video#player").attr("src")
