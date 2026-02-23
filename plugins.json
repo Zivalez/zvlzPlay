@@ -50,7 +50,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuramanime.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 28018,
+        "fileSize": 29722,
         "status": 3,
         "language": "id",
         "authors": [
@@ -63,7 +63,7 @@
             "Donghua",
             "OVA"
         ],
-        "version": 7,
+        "version": 8,
         "internalName": "Kuramanime",
         "description": "Nonton Anime, Donghua, Movie Sub Indo Terlengkap & Terbaru",
         "url": "https://cloudstream.zvlz.my.id/builds/Kuramanime.cs3",
