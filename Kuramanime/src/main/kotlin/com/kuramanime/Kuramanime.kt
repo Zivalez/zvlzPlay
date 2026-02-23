@@ -5,6 +5,7 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addAniListId
 import com.lagradost.cloudstream3.LoadResponse.Companion.addMalId
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.*
+import com.lagradost.cloudstream3.network.WebViewResolver
 import kotlinx.coroutines.runBlocking
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -16,6 +17,7 @@ class Kuramanime : MainAPI() {
     override val hasMainPage = true
     override var lang = "id"
     override val hasDownloadSupport = true
+    override val usesWebView = true
     override val supportedTypes = setOf(TvType.Anime, TvType.AnimeMovie, TvType.OVA)
 
     // Add User-Agent to bypass potential bot checks
@@ -201,7 +203,16 @@ class Kuramanime : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        val document = app.get(data, headers = commonHeaders).document
+        var document = app.get(data, headers = commonHeaders).document
+
+        // Check for protection error and try WebView fallback
+        if (document.select("#animeDownloadLink .reload-error").isNotEmpty()) {
+            val resolver = WebViewResolver(Regex("""episode/\d+\?.*"""))
+            val webViewResponse = app.get(data, headers = commonHeaders, interceptor = resolver)
+            if (webViewResponse.code == 200) {
+                document = webViewResponse.document
+            }
+        }
 
         // 1. Direct Stream (Kuramadrive S1 / R2)
         val directLink = document.select("video#player").attr("src")
