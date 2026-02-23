@@ -194,10 +194,11 @@ class Kuramanime : MainAPI() {
                     name,
                     "Kuramadrive Direct",
                     directLink,
-                    referer = mainUrl,
-                    quality = Qualities.Unknown.value,
-                    type = INFER_TYPE
-                )
+                    ExtractorLinkType.VIDEO
+                ) {
+                    this.referer = mainUrl
+                    this.quality = Qualities.Unknown.value
+                }
             )
         }
 
@@ -228,18 +229,16 @@ class Kuramanime : MainAPI() {
         callback: (ExtractorLink) -> Unit
     ) {
         loadExtractor(url, referer, subtitleCallback) { link ->
-            callback.invoke(
-                newExtractorLink(
-                    link.name,
-                    link.name,
-                    link.url,
-                    link.referer,
-                    name.fixQuality(),
-                    link.type,
-                    link.headers,
-                    link.extractorData
+            runBlocking {
+                callback.invoke(
+                    newExtractorLink(link.name, link.name, link.url, link.type) {
+                        this.referer = link.referer
+                        this.quality = name.fixQuality()
+                        this.headers = link.headers
+                        this.extractorData = link.extractorData
+                    }
                 )
-            )
+            }
         }
     }
 

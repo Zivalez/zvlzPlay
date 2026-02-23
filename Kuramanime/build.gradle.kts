@@ -16,7 +16,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 }
 // use an integer for version numbers
-version = 2
+version = 3
 
 
 cloudstream {
