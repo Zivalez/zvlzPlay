@@ -4,12 +4,14 @@ import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addAniListId
 import com.lagradost.cloudstream3.LoadResponse.Companion.addMalId
 import com.lagradost.cloudstream3.utils.ExtractorLink
+import com.lagradost.cloudstream3.utils.*
+import kotlinx.coroutines.runBlocking
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
 class Kuramanime : MainAPI() {
     override var mainUrl = "https://v15.kuramanime.tel"
-    override var name = "Kuramanime (Maintenance)"
+    override var name = "Kuramanime"
     override val hasQuickSearch = false
     override val hasMainPage = true
     override var lang = "id"
@@ -177,12 +179,81 @@ class Kuramanime : MainAPI() {
     }
 
     override suspend fun loadLinks(
-            data: String,
-            isCasting: Boolean,
-            subtitleCallback: (SubtitleFile) -> Unit,
-            callback: (ExtractorLink) -> Unit
+        data: String,
+        isCasting: Boolean,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
     ): Boolean {
+        val document = app.get(data).document
+
+        // 1. Direct Stream (Kuramadrive S1 / R2)
+        val directLink = document.select("video#player").attr("src")
+        if (directLink.contains("r2.cloudflarestorage.com")) {
+            callback.invoke(
+                ExtractorLink(
+                    name,
+                    "Kuramadrive Direct",
+                    directLink,
+                    referer = mainUrl,
+                    quality = Qualities.Unknown.value,
+                    type = INFER_TYPE
+                )
+            )
+        }
+
+        // 2. Download Links (Iterate children statefully)
+        val downloadSection = document.selectFirst("div#animeDownloadLink")
+        var currentQuality = "Unknown"
+
+        downloadSection?.children()?.forEach { element ->
+            when (element.tagName()) {
+                "h6" -> {
+                    currentQuality = element.text().trim()
+                }
+                "a" -> {
+                    val url = element.attr("href")
+                    loadFixedExtractor(url, currentQuality, mainUrl, subtitleCallback, callback)
+                }
+            }
+        }
 
         return true
+    }
+
+    private fun loadFixedExtractor(
+        url: String,
+        name: String,
+        referer: String? = null,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ) {
+        loadExtractor(url, referer, subtitleCallback) { link ->
+            // Use runBlocking carefully or launch scope if needed, but callback is sync-ish here usually
+            // However, loadExtractor callback is strictly synchronous in some contexts, but usually allows valid ExtractorLink
+            // We just pass it through but fix the quality
+            callback.invoke(
+                ExtractorLink(
+                    link.name,
+                    link.name,
+                    link.url,
+                    link.referer,
+                    name.fixQuality(),
+                    link.type,
+                    link.headers,
+                    link.extractorData
+                )
+            )
+        }
+    }
+
+    private fun String.fixQuality(): Int {
+        return when {
+            this.contains("4K", true) -> Qualities.P2160.value
+            this.contains("1080", true) -> Qualities.P1080.value
+            this.contains("720", true) -> Qualities.P720.value
+            this.contains("480", true) -> Qualities.P480.value
+            this.contains("360", true) -> Qualities.P360.value
+            else -> Qualities.Unknown.value
+        }
     }
 }

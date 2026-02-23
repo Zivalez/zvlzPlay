@@ -5,7 +5,7 @@ cloudstream {
     description = "Nonton Anime, Film, Donghua, Serial Sub Indo"
     authors = listOf("Zivalez")
     isCrossPlatform = true
-    status = 3
+    status = 0
     tvTypes = listOf(
         "AnimeMovie",
         "OVA",

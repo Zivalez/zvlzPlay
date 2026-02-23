@@ -96,7 +96,8 @@ open class Kuramadrive : ExtractorApi() {
 
         val title = doc.select("title").text()
         val token = doc.select("meta[name=csrf-token]").attr("content")
-        val routeCheckAvl = doc.select("input#routeCheckAvl").attr("value")
+        val routeCheckAvl =
+                doc.selectFirst("input#routeCheckAvl, input#checkEp")?.attr("value") ?: return
 
         val json =
                 app.get(
