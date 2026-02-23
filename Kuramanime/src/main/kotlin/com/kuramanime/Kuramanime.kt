@@ -205,12 +205,38 @@ class Kuramanime : MainAPI() {
     ): Boolean {
         var document = app.get(data, headers = commonHeaders).document
 
-        // Check for protection error and try WebView fallback
+        // Check for protection error
         if (document.select("#animeDownloadLink .reload-error").isNotEmpty()) {
-            val resolver = WebViewResolver(Regex("""episode/\d+\?.*"""))
-            val webViewResponse = app.get(data, headers = commonHeaders, interceptor = resolver)
-            if (webViewResponse.code == 200) {
-                document = webViewResponse.document
+            var bypassed = false
+            
+            // Fast Path: Try known token file logic
+            try {
+                val tokenUrl = "$mainUrl/assets/Ks6sqSgloPTlHMl.txt"
+                val token = app.get(tokenUrl, headers = commonHeaders).text.trim()
+                // Validate token looks like a short string (e.g. CIaaYfKYwc)
+                if (token.isNotEmpty() && token.length < 50) {
+                    val postUrl = "$data?Ub3BzhijicHXZdv=$token&C2XAPerzX1BM7V9=kuramadrive&page=1"
+                    val postHeaders = commonHeaders + mapOf("X-Requested-With" to "XMLHttpRequest")
+                    val postResponse = app.post(postUrl, headers = postHeaders)
+                    if (postResponse.code == 200 && !postResponse.text.contains("Terjadi kesalahan")) {
+                        document = postResponse.document
+                        bypassed = true
+                    }
+                }
+            } catch (e: Exception) {
+                // Ignore, proceed to WebView fallback
+            }
+
+            // Slow Path: WebView fallback
+            if (!bypassed) {
+                val resolver = WebViewResolver(
+                    Regex("""episode/\d+\?.*"""),
+                    userAgent = userAgent
+                )
+                val webViewResponse = app.get(data, headers = commonHeaders, interceptor = resolver)
+                if (webViewResponse.code == 200) {
+                    document = webViewResponse.document
+                }
             }
         }
 
