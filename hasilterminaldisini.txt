@@ -1,0 +1,499 @@
+PS E:\coding\cloudstream\zvlzPlay> node extract_kurama.js
+🚀 Membuka halaman target...
+================================================
+[XHR] URL: https://v15.kuramanime.tel/banner/get?is_home=
+--- Request Headers ---
+{
+  'sec-ch-ua-platform': '"Windows"',
+  'x-csrf-token': 'GTl7lAGx7ZQ4CwejzBTBUvJjCPQmdJOCo8ySzDce',
+  referer: 'https://v15.kuramanime.tel/anime/4507/majutsushi-kunon-wa-mieteiru/episode/9',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+  'sec-ch-ua-mobile': '?0',
+  'x-requested-with': 'XMLHttpRequest',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  accept: 'text/html, */*; q=0.01',
+  ':authority': 'v15.kuramanime.tel',
+  ':method': 'GET',
+  ':path': '/banner/get?is_home=',
+  ':scheme': 'https',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  cookie: 'XSRF-TOKEN=eyJpdiI6InBxdWlxKzZLWUJWU0pSVlFPRUg5WVE9PSIsInZhbHVlIjoiNXNPc1hueWd4VGlHOUxtUDFqYVdGNENzemVNUWhKbEMwWk9zS1ZaTU8ra0dTZGJTSS84ZWpXU1UwSFVTOE5jWXREa1RQUDhTMDdLMUVESTRBZ1ZhNk95M045ZnFmOTE2azJEZ3k0bVhpblFvb2d4V3RTQk04bUI1dS9MZTY1ZisiLCJtYWMiOiJmYTU3ZTRkODc1MDYyYWQ5NjdhZmIyYzg3ZmUzM2IwOWI0NzBhOWQ0N2I4MDYxMDNmYjczYmEyZDgzNGFlNGM4IiwidGFnIjoiIn0%3D; kuramanime_session=eyJpdiI6IkIyMG9Mcm1ZQ3g0VzJmMlkyajRaY2c9PSIsInZhbHVlIjoiV3ZPVG1EaktCQlR1S2JocnZJaXp5TkczbVVhdUxwU1JKQ2F2R0dkczFFT3ZpckREZ3FPZkNKYitvV2ZNbHlFM2xveWlFYmxhazlqdkIxNmpjNlE3VFZGV29Wc0srRTQ2Y1JqSHhFVjhOV0pKUzRXWHM5UDh6WTBkbjBuL0ordkIiLCJtYWMiOiI1M2U4OGY0MjQ4YjliYWYxZTFmYzg4ZjVkOWU4YTAwYmI4MmU5YTQ3MWQxNjg5MzgwMjI0YjUwNmQzNGYyY2NkIiwidGFnIjoiIn0%3D; __cflb=0H28vBjLhYLtjEgp3q2qHyrFyDcCbRhgP1B7rAAsWJB; _ga=GA1.1.900360595.1771816854; _ga_D00EX1436J=GS2.1.s1771816853$o1$g0$t1771816854$j59$l0$h0',
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin'
+}
+--- Response Preview (First 100 chars) ---
+{"headerAdView":"<section class=\"mt-4\">\n        <div class=\"container\">\n            <div class
+================================================
+
+================================================
+[XHR] URL: https://v15.kuramanime.tel/misc/token/keep-alive
+--- Request Headers ---
+{
+  'sec-ch-ua-platform': '"Windows"',
+  'x-csrf-token': 'GTl7lAGx7ZQ4CwejzBTBUvJjCPQmdJOCo8ySzDce',
+  referer: 'https://v15.kuramanime.tel/anime/4507/majutsushi-kunon-wa-mieteiru/episode/9',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+  'sec-ch-ua-mobile': '?0',
+  'x-requested-with': 'XMLHttpRequest',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  accept: '*/*',
+  ':authority': 'v15.kuramanime.tel',
+  ':method': 'POST',
+  ':path': '/misc/token/keep-alive',
+  ':scheme': 'https',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'content-length': '0',
+  cookie: 'XSRF-TOKEN=eyJpdiI6InBxdWlxKzZLWUJWU0pSVlFPRUg5WVE9PSIsInZhbHVlIjoiNXNPc1hueWd4VGlHOUxtUDFqYVdGNENzemVNUWhKbEMwWk9zS1ZaTU8ra0dTZGJTSS84ZWpXU1UwSFVTOE5jWXREa1RQUDhTMDdLMUVESTRBZ1ZhNk95M045ZnFmOTE2azJEZ3k0bVhpblFvb2d4V3RTQk04bUI1dS9MZTY1ZisiLCJtYWMiOiJmYTU3ZTRkODc1MDYyYWQ5NjdhZmIyYzg3ZmUzM2IwOWI0NzBhOWQ0N2I4MDYxMDNmYjczYmEyZDgzNGFlNGM4IiwidGFnIjoiIn0%3D; kuramanime_session=eyJpdiI6IkIyMG9Mcm1ZQ3g0VzJmMlkyajRaY2c9PSIsInZhbHVlIjoiV3ZPVG1EaktCQlR1S2JocnZJaXp5TkczbVVhdUxwU1JKQ2F2R0dkczFFT3ZpckREZ3FPZkNKYitvV2ZNbHlFM2xveWlFYmxhazlqdkIxNmpjNlE3VFZGV29Wc0srRTQ2Y1JqSHhFVjhOV0pKUzRXWHM5UDh6WTBkbjBuL0ordkIiLCJtYWMiOiI1M2U4OGY0MjQ4YjliYWYxZTFmYzg4ZjVkOWU4YTAwYmI4MmU5YTQ3MWQxNjg5MzgwMjI0YjUwNmQzNGYyY2NkIiwidGFnIjoiIn0%3D; __cflb=0H28vBjLhYLtjEgp3q2qHyrFyDcCbRhgP1B7rAAsWJB; _ga=GA1.1.900360595.1771816854; _ga_D00EX1436J=GS2.1.s1771816853$o1$g0$t1771816854$j59$l0$h0; should_do_galak=show',   
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin'
+}
+--- Response Preview (First 100 chars) ---
+Token must have been valid, and the session expiration has been extended.
+================================================
+
+================================================
+[XHR] URL: https://v15.kuramanime.tel/anime/4507/episode/9/check-episode
+--- Request Headers ---
+{
+  'sec-ch-ua-platform': '"Windows"',
+  'x-csrf-token': 'GTl7lAGx7ZQ4CwejzBTBUvJjCPQmdJOCo8ySzDce',
+  referer: 'https://v15.kuramanime.tel/anime/4507/majutsushi-kunon-wa-mieteiru/episode/9',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+  'sec-ch-ua-mobile': '?0',
+  'x-requested-with': 'XMLHttpRequest',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  accept: 'application/json, text/javascript, */*; q=0.01',
+  ':authority': 'v15.kuramanime.tel',
+  ':method': 'GET',
+  ':path': '/anime/4507/episode/9/check-episode',
+  ':scheme': 'https',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  cookie: 'XSRF-TOKEN=eyJpdiI6InBxdWlxKzZLWUJWU0pSVlFPRUg5WVE9PSIsInZhbHVlIjoiNXNPc1hueWd4VGlHOUxtUDFqYVdGNENzemVNUWhKbEMwWk9zS1ZaTU8ra0dTZGJTSS84ZWpXU1UwSFVTOE5jWXREa1RQUDhTMDdLMUVESTRBZ1ZhNk95M045ZnFmOTE2azJEZ3k0bVhpblFvb2d4V3RTQk04bUI1dS9MZTY1ZisiLCJtYWMiOiJmYTU3ZTRkODc1MDYyYWQ5NjdhZmIyYzg3ZmUzM2IwOWI0NzBhOWQ0N2I4MDYxMDNmYjczYmEyZDgzNGFlNGM4IiwidGFnIjoiIn0%3D; kuramanime_session=eyJpdiI6IkIyMG9Mcm1ZQ3g0VzJmMlkyajRaY2c9PSIsInZhbHVlIjoiV3ZPVG1EaktCQlR1S2JocnZJaXp5TkczbVVhdUxwU1JKQ2F2R0dkczFFT3ZpckREZ3FPZkNKYitvV2ZNbHlFM2xveWlFYmxhazlqdkIxNmpjNlE3VFZGV29Wc0srRTQ2Y1JqSHhFVjhOV0pKUzRXWHM5UDh6WTBkbjBuL0ordkIiLCJtYWMiOiI1M2U4OGY0MjQ4YjliYWYxZTFmYzg4ZjVkOWU4YTAwYmI4MmU5YTQ3MWQxNjg5MzgwMjI0YjUwNmQzNGYyY2NkIiwidGFnIjoiIn0%3D; __cflb=0H28vBjLhYLtjEgp3q2qHyrFyDcCbRhgP1B7rAAsWJB; _ga=GA1.1.900360595.1771816854; _ga_D00EX1436J=GS2.1.s1771816853$o1$g0$t1771816854$j59$l0$h0; should_do_galak=show',   
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin'
+}
+--- Response Preview (First 100 chars) ---
+"1"
+================================================
+
+================================================
+[XHR] URL: https://kuramachat.com/process/token/keep-alive
+--- Request Headers ---
+{
+  'sec-ch-ua-platform': '"Windows"',
+  'x-xsrf-token': 'eyJpdiI6IjViY0tDeDJVaWpsRERUbVl5VlpyZVE9PSIsInZhbHVlIjoidXpBWno2Z0pXTEF2eDQ4TTVEV3pXR3pKY3lzY2lnYSsrMFA5MVJONlNtb1U4L1ZVeUpsTzZXUTFiZXp4bDNoUW9Mc2R3RmlYdEVkeWxoL3RMcE1FbExNVWljMEJzQytLUEhZeVBwNlhONjNLNlU1ckxtamRmN0ozQU42NUNmbHkiLCJtYWMiOiI1NjYxNDE4NDVmNzZlZjkyYWIwMGYyM2YyMjYzYzQ3YWIwNTJhNmMxMjg3YjRlY2Y1NjlhODJlNTNkNmNkNmI0IiwidGFnIjoiIn0=',
+  referer: 'https://kuramachat.com/chat/hoxG5D',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '"Chromium";v="145", "Not:A-Brand";v="99"',
+  'sec-ch-ua-mobile': '?0',
+  'x-requested-with': 'XMLHttpRequest',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  accept: 'application/json, text/plain, */*',
+  ':authority': 'kuramachat.com',
+  ':method': 'POST',
+  ':path': '/process/token/keep-alive',
+  ':scheme': 'https',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'content-length': '0',
+  cookie: 'XSRF-TOKEN=eyJpdiI6IjViY0tDeDJVaWpsRERUbVl5VlpyZVE9PSIsInZhbHVlIjoidXpBWno2Z0pXTEF2eDQ4TTVEV3pXR3pKY3lzY2lnYSsrMFA5MVJONlNtb1U4L1ZVeUpsTzZXUTFiZXp4bDNoUW9Mc2R3RmlYdEVkeWxoL3RMcE1FbExNVWljMEJzQytLUEhZeVBwNlhONjNLNlU1ckxtamRmN0ozQU42NUNmbHkiLCJtYWMiOiI1NjYxNDE4NDVmNzZlZjkyYWIwMGYyM2YyMjYzYzQ3YWIwNTJhNmMxMjg3YjRlY2Y1NjlhODJlNTNkNmNkNmI0IiwidGFnIjoiIn0%3D; kuramachat_by_kuramanime_session=eyJpdiI6IjVDT085ZHdFcWtuZUZSbTR2Z29Gcmc9PSIsInZhbHVlIjoiczBxMEw1L2V0dW9WdVg1bnhxK1lIVU9ZaXZoUFpCVHNjRDNBUmdnZ2tOTVgrQ3ovdkZNZENpY2ZxM1B6RUkxa0hDcUI5SHQ0eGVCUjZtNGNacHgyQmlXYnpRRWdBTllxdGxLSXNDcVMyVkY5WnBkelppSkVXSjhUNk95L2E3K0MiLCJtYWMiOiJkMzg2MjdjYmJiYWQ4NjY1MjQxODA2NWJhNWI0MzA1MTFiMmYyMDEyMzc5YzE3MzQ1NmUyZTc1NzM4MWZlN2Y0IiwidGFnIjoiIn0%3D',
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin'
+}
+--- Response Preview (First 100 chars) ---
+Token must have been valid, and the session expiration has been extended.
+================================================
+
+================================================
+[XHR] URL: https://kuramachat.com/chat/hoxG5D/member-count
+--- Request Headers ---
+{
+  'sec-ch-ua-platform': '"Windows"',
+  'x-xsrf-token': 'eyJpdiI6IjViY0tDeDJVaWpsRERUbVl5VlpyZVE9PSIsInZhbHVlIjoidXpBWno2Z0pXTEF2eDQ4TTVEV3pXR3pKY3lzY2lnYSsrMFA5MVJONlNtb1U4L1ZVeUpsTzZXUTFiZXp4bDNoUW9Mc2R3RmlYdEVkeWxoL3RMcE1FbExNVWljMEJzQytLUEhZeVBwNlhONjNLNlU1ckxtamRmN0ozQU42NUNmbHkiLCJtYWMiOiI1NjYxNDE4NDVmNzZlZjkyYWIwMGYyM2YyMjYzYzQ3YWIwNTJhNmMxMjg3YjRlY2Y1NjlhODJlNTNkNmNkNmI0IiwidGFnIjoiIn0=',
+  referer: 'https://kuramachat.com/chat/hoxG5D',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '"Chromium";v="145", "Not:A-Brand";v="99"',
+  'sec-ch-ua-mobile': '?0',
+  'x-requested-with': 'XMLHttpRequest',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  accept: 'application/json, text/plain, */*',
+  ':authority': 'kuramachat.com',
+  ':method': 'GET',
+  ':path': '/chat/hoxG5D/member-count',
+  ':scheme': 'https',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  cookie: 'XSRF-TOKEN=eyJpdiI6IjViY0tDeDJVaWpsRERUbVl5VlpyZVE9PSIsInZhbHVlIjoidXpBWno2Z0pXTEF2eDQ4TTVEV3pXR3pKY3lzY2lnYSsrMFA5MVJONlNtb1U4L1ZVeUpsTzZXUTFiZXp4bDNoUW9Mc2R3RmlYdEVkeWxoL3RMcE1FbExNVWljMEJzQytLUEhZeVBwNlhONjNLNlU1ckxtamRmN0ozQU42NUNmbHkiLCJtYWMiOiI1NjYxNDE4NDVmNzZlZjkyYWIwMGYyM2YyMjYzYzQ3YWIwNTJhNmMxMjg3YjRlY2Y1NjlhODJlNTNkNmNkNmI0IiwidGFnIjoiIn0%3D; kuramachat_by_kuramanime_session=eyJpdiI6IjVDT085ZHdFcWtuZUZSbTR2Z29Gcmc9PSIsInZhbHVlIjoiczBxMEw1L2V0dW9WdVg1bnhxK1lIVU9ZaXZoUFpCVHNjRDNBUmdnZ2tOTVgrQ3ovdkZNZENpY2ZxM1B6RUkxa0hDcUI5SHQ0eGVCUjZtNGNacHgyQmlXYnpRRWdBTllxdGxLSXNDcVMyVkY5WnBkelppSkVXSjhUNk95L2E3K0MiLCJtYWMiOiJkMzg2MjdjYmJiYWQ4NjY1MjQxODA2NWJhNWI0MzA1MTFiMmYyMDEyMzc5YzE3MzQ1NmUyZTc1NzM4MWZlN2Y0IiwidGFnIjoiIn0%3D; kuramachat_timezone=Asia/Jakarta',
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin'
+}
+--- Response Preview (First 100 chars) ---
+{"status":"success","message":null,"code":200,"data":{"telegram":"1301","discord":"3192"}}
+================================================
+
+================================================
+[XHR] URL: https://v15.kuramanime.tel/assets/Ks6sqSgloPTlHMl.txt
+--- Request Headers ---
+{
+  'x-fuck-id': 'rFj8fp1nxMuNfKq:ijjAwj6Jze0kscx',
+  'x-csrf-token': 'GTl7lAGx7ZQ4CwejzBTBUvJjCPQmdJOCo8ySzDce',
+  'x-request-id': 'ZP7B8E',
+  referer: 'https://v15.kuramanime.tel/anime/4507/majutsushi-kunon-wa-mieteiru/episode/9',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+  'sec-ch-ua-mobile': '?0',
+  'x-request-index': '0',
+  'sec-ch-ua-platform': '"Windows"',
+  'x-requested-with': 'XMLHttpRequest',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  accept: 'text/plain, */*; q=0.01',
+  ':authority': 'v15.kuramanime.tel',
+  ':method': 'GET',
+  ':path': '/assets/Ks6sqSgloPTlHMl.txt',
+  ':scheme': 'https',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  cookie: '__cflb=0H28vBjLhYLtjEgp3q2qHyrFyDcCbRhgP1B7rAAsWJB; _ga=GA1.1.900360595.1771816854; _ga_D00EX1436J=GS2.1.s1771816853$o1$g0$t1771816854$j59$l0$h0; should_do_galak=show; sel_timezone_v2=Asia/Jakarta; auto_timezone_v2=yes; full_timezone_v2=Waktu Indonesia Barat; short_timezone_v2=WIB; XSRF-TOKEN=eyJpdiI6IjhzSytDZlBmNGhKdUU5OWozZS9MM2c9PSIsInZhbHVlIjoiczNlV1RmVVFaTk5MMUo0clUyQUFlcEpnYm9MU1VsdnphbUdKdGVvYjBKM0pHK0pCbm5HR2JDKzkwVHZPcmI1RHFIaFRVMmZzU1BvNDFNVjE4d25CbWhneThOZWhxN2pwdWJDWkVQdlJlQ0FWMXh4ZWZlWVRkbytpRzZlZ2dxUEIiLCJtYWMiOiIwZmI3MDBlMGIwMmMwYTZlMjIzYjRhOTg5M2M0MzM2OGIzOTVhMzJjNDk4YmFiZmIzM2M3ZTlmMDFkNzBmNTkwIiwidGFnIjoiIn0%3D; kuramanime_session=eyJpdiI6InF2RXE5ZFRtSXdzWjRVUG84eHVPSlE9PSIsInZhbHVlIjoibU9ZYUlWdjlQUXBwTjVNMEE0VDEyK2dZbEFKSFNHZndBRmdSTFlEaWs3SHpOUDZEZEZGSHhoSEtiMDV4QkhNNVBZcjAxNDRBay9IZUU2a0drRFgvcmNrY0xDQUxWTVRIVXJUOVFkYUFLeHZLWDQrcklQaVZTQzBhQkhCNWY3UXYiLCJtYWMiOiI5NTIwZGJjZmFjOTgyNDhmMzQ2Y2FlZmQwYjZlZTdiZTY5NWYxNGM2NzA3NTc0ODE0YTg5YWRmOGVjYmFiNWU1IiwidGFnIjoiIn0%3D',
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin'
+}
+--- Response Preview (First 100 chars) ---
+CIaaYfKYwc
+================================================
+
+================================================
+[FETCH] URL: https://cdn.jsdelivr.net/npm/emojibase-data@latest/en/messages.json
+--- Request Headers ---
+{
+  'sec-ch-ua-platform': '"Windows"',
+  referer: 'https://kuramachat.com/',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '"Chromium";v="145", "Not:A-Brand";v="99"',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  'sec-ch-ua-mobile': '?0',
+  ':authority': 'cdn.jsdelivr.net',
+  ':method': 'GET',
+  ':path': '/npm/emojibase-data@latest/en/messages.json',
+  ':scheme': 'https',
+  accept: '*/*',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'cross-site'
+}
+--- Response Preview (First 100 chars) ---
+{"groups":[{"key":"smileys-emotion","message":"smileys & emotion","order":0},{"key":"people-body","m
+================================================
+
+================================================
+[FETCH] URL: https://cdn.jsdelivr.net/npm/emojibase-data@latest/en/data.json
+--- Request Headers ---
+{
+  'sec-ch-ua-platform': '"Windows"',
+  referer: 'https://kuramachat.com/',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '"Chromium";v="145", "Not:A-Brand";v="99"',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  'sec-ch-ua-mobile': '?0',
+  ':authority': 'cdn.jsdelivr.net',
+  ':method': 'GET',
+  ':path': '/npm/emojibase-data@latest/en/data.json',
+  ':scheme': 'https',
+  accept: '*/*',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'cross-site'
+}
+--- Response Preview (First 100 chars) ---
+[{"label":"regional indicator A","hexcode":"1F1E6","emoji":"🇦","text":"","type":1,"version":0},{"la
+================================================
+
+================================================
+[XHR] URL: https://v15.kuramanime.tel/anime/4507/majutsushi-kunon-wa-mieteiru/episode/9?Ub3BzhijicHXZdv=CIaaYfKYwc&C2XAPerzX1BM7V9=kuramadrive&page=1
+--- Request Headers ---
+{
+  'sec-ch-ua-platform': '"Windows"',
+  'x-csrf-token': 'GTl7lAGx7ZQ4CwejzBTBUvJjCPQmdJOCo8ySzDce',
+  referer: 'https://v15.kuramanime.tel/anime/4507/majutsushi-kunon-wa-mieteiru/episode/9',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+  'sec-ch-ua-mobile': '?0',
+  'x-requested-with': 'XMLHttpRequest',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  accept: 'text/html, */*; q=0.01',
+  'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  ':authority': 'v15.kuramanime.tel',
+  ':method': 'POST',
+  ':path': '/anime/4507/majutsushi-kunon-wa-mieteiru/episode/9?Ub3BzhijicHXZdv=CIaaYfKYwc&C2XAPerzX1BM7V9=kuramadrive&page=1',
+  ':scheme': 'https',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'content-length': '46',
+  cookie: '__cflb=0H28vBjLhYLtjEgp3q2qHyrFyDcCbRhgP1B7rAAsWJB; _ga=GA1.1.900360595.1771816854; _ga_D00EX1436J=GS2.1.s1771816853$o1$g0$t1771816854$j59$l0$h0; should_do_galak=show; sel_timezone_v2=Asia/Jakarta; auto_timezone_v2=yes; full_timezone_v2=Waktu Indonesia Barat; short_timezone_v2=WIB; XSRF-TOKEN=eyJpdiI6IkN5ckF3MU1vek1jUVpvVU1Da1QxZWc9PSIsInZhbHVlIjoiRTBqMzVDaGtHazZDNmh1blNIdFMzWENpVldjM0JBY1VNSXo0dEp3dUxFNGFGRXNJUmQwN0ROdGUzQVQxOWVpa1hDNTgxdGlXNElUb210blRpeWl0ekptWVhJeThVY3lRcmdMRkpmZXRodlhrVStYMnBYV0VwWTVUZ1lzMGJQdzgiLCJtYWMiOiI0MmY1YmQzY2NiMjRiZWFlYTA0ZTAzZmU1NGJjMTc4ZThiZDYxNzBkNzAyY2M1ZGFkMTEwNDAzZjRjZGJlYTRjIiwidGFnIjoiIn0%3D; kuramanime_session=eyJpdiI6IjM3elU0enpZR0hnTVlWUjJBR1lMR2c9PSIsInZhbHVlIjoiaEYvckhCalZ1ZHczYTFCWGpuVU85TVhRNUVtc3RpUW9jUDJEWDlkbWZuVjRzM1ltRzhnN1BCdVRRdW5tVjBZSG14anhMWFJRWU1VV2hOUnozSUtLbkNzNU0zamtJN3NhRGtERFRoVFdHQkttQXU2VVI3VHBFUGM3Ti9FTGVQQi8iLCJtYWMiOiIwOTE0MTlhMmI4MDM5OTVmOGI5MTk2Mjg5MzhkMTVlYzY2OGI4ODdhMjU4MmRhYmZiYWVjMWY3MDM0ODA5MmZkIiwidGFnIjoiIn0%3D; preferred_stserver=kuramadrive',
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin'
+}
+--- Response Preview (First 100 chars) ---
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async="async"
+================================================
+
+⏳ Menunggu elemen download render... (Silakan selesaikan Captcha jika muncul)
+✅ DOM Terdeteksi! Link sudah di-render oleh Browser/JS.
+
+📦 HASIL EKSTRAKSI AKHIR:
+[
+  {
+    "quality": "MKV 480p (Softsub) — (96.28 MB)",
+    "text": "Extra 1",
+    "url": "https://pixeldrain.com/d/1sFqKgEk",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 480p (Softsub) — (96.28 MB)",
+    "text": "Extra 2",
+    "url": "https://mypikpak.com/s/VOm5LkEaytcsE4Gsxasqod8-o2",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 480p (Softsub) — (96.28 MB)",
+    "text": "Extra 3",
+    "url": "https://www.dropbox.com/scl/fi/zyesncqw0tnwgqz3oojn7/Kuramanime-MSKUNON-09-480p.mkv?rlkey=08px1sxikd3ycdc7sk95e5uqi&dl=0",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 480p (Softsub) — (96.28 MB)",
+    "text": "kDrive",
+    "url": "https://v1.kuramadrive.com/kdrive/KTWvE00AsD8Cek",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 480p (Softsub) — (96.28 MB)",
+    "text": "kTurbo",
+    "url": "https://v1.kuramadrive.com/kturbo/KTWvE00AsD8Cek",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 480p (Softsub) — (96.28 MB)",
+    "text": "MEGA",
+    "url": "https://mega.co.nz/#!wnZwxBCR!35PSH884yhFoBIYgN-hzwPW0ETKqcLfBZiZcD8w6UZM",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 720p (Softsub) — (182.02 MB)",
+    "text": "Extra 1",
+    "url": "https://pixeldrain.com/d/Qd7QVHeK",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 720p (Softsub) — (182.02 MB)",
+    "text": "Extra 2",
+    "url": "https://mypikpak.com/s/VOm5LmxZvMqcutUSlOJngD4Jo2",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 720p (Softsub) — (182.02 MB)",
+    "text": "Extra 3",
+    "url": "https://www.dropbox.com/scl/fi/6n4xumsninskvb92qfmgs/Kuramanime-MSKUNON-09-720p.mkv?rlkey=1rt8kmb71anmq4keeonioh525&dl=0",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 720p (Softsub) — (182.02 MB)",
+    "text": "kDrive",
+    "url": "https://v1.kuramadrive.com/kdrive/XO4EZIAnijpl",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 720p (Softsub) — (182.02 MB)",
+    "text": "kTurbo",
+    "url": "https://v1.kuramadrive.com/kturbo/XO4EZIAnijpl",
+    "isDisabled": false
+  },
+  {
+    "quality": "MKV 720p (Softsub) — (182.02 MB)",
+    "text": "MEGA",
+    "url": "https://mega.co.nz/#!F2gRCRhI!9pkGNkoVKHJs75V_nbmKgjHUZKUbl2VF1TJA_ZjA78w",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 360p (Hardsub) — (79.52 MB)",
+    "text": "Extra 1",
+    "url": "https://pixeldrain.com/d/74BDm4B5",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 360p (Hardsub) — (79.52 MB)",
+    "text": "Extra 2",
+    "url": "https://mypikpak.com/s/VOm5LpGorrmUthIY49hQ2yRmo2",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 360p (Hardsub) — (79.52 MB)",
+    "text": "Extra 3",
+    "url": "https://www.dropbox.com/scl/fi/xeow1z191sg5zfnr2x3pu/Kuramanime-MSKUNON-09-360p.mp4?rlkey=9opkqp2n95zb9jcnqdrt7ipn1&dl=0",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 360p (Hardsub) — (79.52 MB)",
+    "text": "kDrive",
+    "url": "https://v1.kuramadrive.com/kdrive/K8nob7oUgZbpQZN",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 360p (Hardsub) — (79.52 MB)",
+    "text": "kTurbo",
+    "url": "https://v1.kuramadrive.com/kturbo/K8nob7oUgZbpQZN",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 360p (Hardsub) — (79.52 MB)",
+    "text": "MEGA",
+    "url": "https://mega.co.nz/#!lioFib7J!AJyg4bryrdkTnrXrG3bGN0UwRBewhH5khyHsk2G_Hj0",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 480p (Hardsub) — (103.67 MB)",
+    "text": "Extra 1",
+    "url": "https://pixeldrain.com/d/11NBb48h",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 480p (Hardsub) — (103.67 MB)",
+    "text": "Extra 2",
+    "url": "https://mypikpak.com/s/VOm5LriKyqGQVJu7bebfE248o2",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 480p (Hardsub) — (103.67 MB)",
+    "text": "Extra 3",
+    "url": "https://www.dropbox.com/scl/fi/f1qb10wyi7mrpwsi2g1oi/Kuramanime-MSKUNON-09-480p.mp4?rlkey=scaad4r4bwny69uui0ug16yju&dl=0",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 480p (Hardsub) — (103.67 MB)",
+    "text": "kDrive",
+    "url": "https://v1.kuramadrive.com/kdrive/kTEFQExDx0lHrM",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 480p (Hardsub) — (103.67 MB)",
+    "text": "kTurbo",
+    "url": "https://v1.kuramadrive.com/kturbo/kTEFQExDx0lHrM",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 480p (Hardsub) — (103.67 MB)",
+    "text": "MEGA",
+    "url": "https://mega.co.nz/#!QzxTWIqR!sqTN_fB1M-3xj_jhFpy8P4_rsJ5pzfu8IdAYPoiy9ZE",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 720p (Hardsub) — (192.93 MB)",
+    "text": "Extra 1",
+    "url": "https://pixeldrain.com/d/mcTZEzVd",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 720p (Hardsub) — (192.93 MB)",
+    "text": "Extra 2",
+    "url": "https://mypikpak.com/s/VOm5Luy0rrmUthIY49hQ2zZAo2",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 720p (Hardsub) — (192.93 MB)",
+    "text": "Extra 3",
+    "url": "https://www.dropbox.com/scl/fi/zi4gi65zefx62sitda1r6/Kuramanime-MSKUNON-09-720p.mp4?rlkey=1zjrjhlqjxj432nxdjd7ktjyr&dl=0",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 720p (Hardsub) — (192.93 MB)",
+    "text": "kDrive",
+    "url": "https://v1.kuramadrive.com/kdrive/kd3j2G9h3MM4f43",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 720p (Hardsub) — (192.93 MB)",
+    "text": "kTurbo",
+    "url": "https://v1.kuramadrive.com/kturbo/kd3j2G9h3MM4f43",
+    "isDisabled": false
+  },
+  {
+    "quality": "MP4 720p (Hardsub) — (192.93 MB)",
+    "text": "MEGA",
+    "url": "https://mega.co.nz/#!8uYCiTwC!Oe-nKNjSzcFh5KVLWkNUUeiwrJidtPWz8XggXfwPYkQ",
+    "isDisabled": false
+  }
+]
+================================================
+[XHR] URL: https://v15.kuramanime.tel/misc/post/count-views
+--- Request Headers ---
+{
+  'sec-ch-ua-platform': '"Windows"',
+  'x-csrf-token': 'GTl7lAGx7ZQ4CwejzBTBUvJjCPQmdJOCo8ySzDce',
+  referer: 'https://v15.kuramanime.tel/anime/4507/majutsushi-kunon-wa-mieteiru/episode/9',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+  'sec-ch-ua-mobile': '?0',
+  'x-requested-with': 'XMLHttpRequest',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  accept: 'application/json, text/javascript, */*; q=0.01',
+  'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  ':authority': 'v15.kuramanime.tel',
+  ':method': 'PUT',
+  ':path': '/misc/post/count-views',
+  ':scheme': 'https',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  'content-length': '27',
+  cookie: '__cflb=0H28vBjLhYLtjEgp3q2qHyrFyDcCbRhgP1B7rAAsWJB; _ga=GA1.1.900360595.1771816854; _ga_D00EX1436J=GS2.1.s1771816853$o1$g0$t1771816854$j59$l0$h0; should_do_galak=show; sel_timezone_v2=Asia/Jakarta; auto_timezone_v2=yes; full_timezone_v2=Waktu Indonesia Barat; short_timezone_v2=WIB; preferred_stserver=kuramadrive; XSRF-TOKEN=eyJpdiI6ImRXdXVPM3lBWjA0cmlqQzhPUVpiY0E9PSIsInZhbHVlIjoiUTh4eXUyQW9RRmF0VnkwK0tUVlZYT2F3L0FSVXJMc01mRm9ubUhrUnR2NHBsbVRkckFEMTJCOVlNSlpSRTlCWTRlYVEvVmRGREhwVnVBNHdoYjhTOURId2I4Lys0N2tmRHhwWlNOY2VFMGdIMVhwSVk0b1g3NDhqUDc0YUI3aGwiLCJtYWMiOiIxMzU0ZDA2YzhmYTZmOWU0NGY1Yzk5OTAwYTY2ZjJiMmI4ODdmM2Q2OTVjODI0NzdlNTg3M2ExZDVkNzJlMDc0IiwidGFnIjoiIn0%3D; kuramanime_session=eyJpdiI6IlRwai95bU5JSjJGa2kwTDZKVjlOcEE9PSIsInZhbHVlIjoiWDdad3R0NVMrT3o5MlhlTWVWclphVlBWL0JUS3B3V082cjlucGphTzFkcGpPeXFmRjcxMWw2VS80WU1ZcFFoS3AyZHRCaWhpeVIrYStkTUJRekRhcmkyWnVWdTh3ZHREWUljdjBYK2h6U2tSVXhMUDczWlZ6VE9qVm45R1R1cTMiLCJtYWMiOiIxMDY1YjM0ZGYwMjRhMDhiMjEwZmUwNDEyZGQ3ZWY3OWVjMWVhNjVlYjdiZjA4ODg4MTY2MDNkMzFjN2E2MjE3IiwidGFnIjoiIn0%3D',
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin'
+}
+--- Response Preview (First 100 chars) ---
+{"post":56,"anime":"202005"}
+================================================
+
+================================================
+[XHR] URL: https://cdn.plyr.io/3.7.3/plyr.svg
+--- Request Headers ---
+{
+  'sec-ch-ua-platform': '"Windows"',
+  referer: 'https://v15.kuramanime.tel/',
+  'accept-language': 'en-US,en;q=0.9',
+  'sec-ch-ua': '" Not;A Brand";v="99", "Google Chrome";v="145", "Chromium";v="145"',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36',
+  'sec-ch-ua-mobile': '?0',
+  ':authority': 'cdn.plyr.io',
+  ':method': 'GET',
+  ':path': '/3.7.3/plyr.svg',
+  ':scheme': 'https',
+  accept: '*/*',
+  'accept-encoding': 'gzip, deflate, br, zstd',
+  priority: 'u=1, i',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'cross-site'
+}
+--- Response Preview (First 100 chars) ---
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.
+================================================
