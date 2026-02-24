@@ -3,7 +3,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/alqanime.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 18816,
+        "fileSize": 18824,
         "status": 1,
         "language": "id",
         "authors": [
@@ -19,27 +19,6 @@
         "description": "Nonton & Download Anime Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Alqanime.cs3",
         "name": "Alqanime"
-    },
-    {
-        "iconUrl": "https://cloudstream.zvlz.my.id/icon/anoboy.png",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 18208,
-        "status": 1,
-        "language": "id",
-        "authors": [
-            "Zivalez"
-        ],
-        "tvTypes": [
-            "AnimeMovie",
-            "Anime",
-            "OVA"
-        ],
-        "version": 1,
-        "internalName": "Anoboy",
-        "description": "Anoboy - Streaming Anime Sub Indo",
-        "url": "https://cloudstream.zvlz.my.id/builds/Anoboy.cs3",
-        "name": "Anoboy"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/funmovieslix.png",
