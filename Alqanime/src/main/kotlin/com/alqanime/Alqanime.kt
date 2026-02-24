@@ -152,30 +152,11 @@ class Alqanime : MainAPI() {
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         val links = parseJson<List<EpisodeLink>>(data)
-        links.amap { (rawUrl, quality) ->
+        links.amap { (rawUrl, _) ->
             val resolvedUrl = resolveUrl(rawUrl)
-            loadFixedExtractor(resolvedUrl, quality, "$mainUrl/", subtitleCallback, callback)
+            loadExtractor(resolvedUrl, "$mainUrl/", subtitleCallback, callback)
         }
         return true
-    }
-
-    private suspend fun loadFixedExtractor(
-        url: String,
-        quality: String,
-        referer: String,
-        subtitleCallback: (SubtitleFile) -> Unit,
-        callback: (ExtractorLink) -> Unit
-    ) {
-        loadExtractor(url, referer, subtitleCallback) { link ->
-            callback.invoke(
-                newExtractorLink(link.name, link.name, link.url, link.type) {
-                    this.referer = link.referer
-                    this.quality = quality.fixQuality()
-                    this.headers = link.headers
-                    this.extractorData = link.extractorData
-                }
-            )
-        }
     }
 
     // Resolve shortener/converter URLs to actual playable/extractable URLs
