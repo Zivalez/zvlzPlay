@@ -35,6 +35,13 @@ class Alqanime : MainAPI() {
         }
     }
 
+    private val commonHeaders = mapOf(
+        "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language" to "en-US,en;q=0.5",
+        "Referer" to mainUrl,
+    )
+
     // Genre pages use /tag/ not /genre/
     override val mainPage = mainPageOf(
         "$mainUrl/page/%d/" to "Lagi Hangat Saat ini",
@@ -51,7 +58,7 @@ class Alqanime : MainAPI() {
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
-        val document = app.get(request.data.format(page)).document
+        val document = app.get(request.data.format(page), headers = commonHeaders).document
         // "Lagi Hangat" cards live in div.listupd.popularslider (non-paginated slider on homepage)
         val selector = if (request.name == "Lagi Hangat Saat ini")
             "div.listupd.popularslider article.bs"
@@ -72,12 +79,12 @@ class Alqanime : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        val document = app.get("$mainUrl/?s=$query").document
+        val document = app.get("$mainUrl/?s=$query", headers = commonHeaders).document
         return document.select("article.bs").mapNotNull { it.toSearchResult() }
     }
 
     override suspend fun load(url: String): LoadResponse? {
-        val document = app.get(url).document
+        val document = app.get(url, headers = commonHeaders).document
 
         val rawTitle = document.selectFirst("h1.entry-title")?.text()?.trim() ?: return null
         // Remove "Episode (XX) Sub Indo ..." suffix from title

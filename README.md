@@ -66,13 +66,12 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Samehadaku | ✅ aktif |
 | Otakudesu | ✅ aktif |
 | Alqanime | ✅ aktif |
-| Kuramanime | ❌ nonaktif (maintenance) |
-| Winbu | ❌ nonaktif (maintenance) |
+| Kuramanime | ⚠️ maintenance (video tidak bisa diputar) |
+| Winbu | 🚧 eksperimen (belum selesai) |
 
 ## Provider yang akan ditambahkan nantinya
 
 -   **Oploverz**
--   **Alqanime**
 -   **Nontonanimeid**
 
 ## FAQ (Pertanyaan yang sering ditanyain)
@@ -98,10 +97,10 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 - Rencana nanti nonton Donghua dari **Winbu** sama **Kuramanime**
 
 ### Kenapa video Kuramanime gak bisa diputar?
-- Karena masih maintenance
+- Karena scraping URL video-nya lagi bermasalah (maintenance). Homepage, search, dan info anime masih jalan normal.
 
-### Kenapa Winbu nonaktif?
-- Masih tahap testing scraping.
+### Kenapa Winbu belum aktif?
+- Masih tahap eksperimen, belum ada implementasi yang selesai.
 
 ### Kok search gak nemu?
 - Pastiin provider sudah di install
