@@ -65,6 +65,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Funmovieslix | ✅ aktif |
 | Samehadaku | ✅ aktif |
 | Otakudesu | ✅ aktif |
+| Alqanime | ✅ aktif |
 | Kuramanime | ❌ nonaktif (maintenance) |
 | Winbu | ❌ nonaktif (maintenance) |
 

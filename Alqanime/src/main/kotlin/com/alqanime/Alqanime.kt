@@ -1,0 +1,208 @@
+package com.alqanime
+
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.lagradost.cloudstream3.*
+import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
+import com.lagradost.cloudstream3.utils.*
+import com.lagradost.cloudstream3.utils.AppUtils.parseJson
+import com.lagradost.cloudstream3.utils.AppUtils.toJson
+import org.jsoup.nodes.Element
+import java.net.URLDecoder
+
+class Alqanime : MainAPI() {
+    override var mainUrl = "https://alqanime.net"
+    override var name = "Alqanime"
+    override val hasMainPage = true
+    override var lang = "id"
+    override val hasDownloadSupport = true
+    override val supportedTypes = setOf(
+        TvType.Anime,
+        TvType.AnimeMovie,
+        TvType.OVA
+    )
+
+    companion object {
+        fun getType(t: String): TvType = when {
+            t.contains("Movie", true) -> TvType.AnimeMovie
+            t.contains("OVA", true) || t.contains("Special", true) -> TvType.OVA
+            else -> TvType.Anime
+        }
+
+        fun getStatus(t: String): ShowStatus = when {
+            t.contains("Completed", true) || t.contains("Tamat", true) -> ShowStatus.Completed
+            t.contains("Ongoing", true) -> ShowStatus.Ongoing
+            else -> ShowStatus.Completed
+        }
+    }
+
+    // Genre pages use /tag/ not /genre/
+    override val mainPage = mainPageOf(
+        "$mainUrl/page/%d/" to "Lagi Hangat Saat ini",
+        "$mainUrl/page/%d/" to "Rilisan Terbaru",
+        "$mainUrl/advanced-search/page/%d/?status=completed&order=update" to "Selesai Tayang",
+        "$mainUrl/advanced-search/page/%d/?type[]=movie&order=update" to "Film Layar Lebar",
+        "$mainUrl/tag/action/page/%d/" to "Action",
+        "$mainUrl/tag/romance/page/%d/" to "Romance",
+        "$mainUrl/tag/fantasy/page/%d/" to "Fantasy",
+        "$mainUrl/tag/comedy/page/%d/" to "Comedy",
+        "$mainUrl/tag/school/page/%d/" to "School",
+        "$mainUrl/tag/isekai/page/%d/" to "Isekai",
+        "$mainUrl/tag/shounen/page/%d/" to "Shounen",
+    )
+
+    override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
+        val document = app.get(request.data.format(page)).document
+        // "Lagi Hangat" cards live in div.listupd.popularslider (non-paginated slider on homepage)
+        val selector = if (request.name == "Lagi Hangat Saat ini")
+            "div.listupd.popularslider article.bs"
+        else
+            "article.bs"
+        val home = document.select(selector).mapNotNull { it.toSearchResult() }
+        return newHomePageResponse(request.name, home)
+    }
+
+    private fun Element.toSearchResult(): AnimeSearchResponse? {
+        val href = fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null
+        val title = this.selectFirst(".ntitle")?.text()?.trim() ?: return null
+        val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
+        val typeText = this.selectFirst(".typez")?.text()?.trim() ?: ""
+        return newAnimeSearchResponse(title, href, getType(typeText)) {
+            this.posterUrl = posterUrl
+        }
+    }
+
+    override suspend fun search(query: String): List<SearchResponse> {
+        val document = app.get("$mainUrl/?s=$query").document
+        return document.select("article.bs").mapNotNull { it.toSearchResult() }
+    }
+
+    override suspend fun load(url: String): LoadResponse? {
+        val document = app.get(url).document
+
+        val rawTitle = document.selectFirst("h1.entry-title")?.text()?.trim() ?: return null
+        // Remove "Episode (XX) Sub Indo ..." suffix from title
+        val title = rawTitle.replace(Regex("\\s*Episode\\s*\\(\\d+\\).*", RegexOption.IGNORE_CASE), "").trim()
+
+        val poster = document.selectFirst("div.thumb img")?.attr("src")
+        val coverBg = document.selectFirst("div.ime img")?.attr("src")
+        val trailer = document.selectFirst("a.trailerbutton")?.attr("href")
+        val description = document.select("div.entry-content > p")
+            .firstOrNull { it.text().length > 30 }?.text()?.trim()
+        val genres = document.select("span.mgen a").map { it.text() }
+
+        // Parse structured metadata from div.spe > span (each has a <b> label)
+        val speMap = document.select("div.spe > span").associate { span ->
+            val label = span.selectFirst("b")?.text()?.trim() ?: ""
+            val value = span.text().replace(label, "").trim()
+            label to value
+        }
+
+        val status = getStatus(speMap.entries.find { it.key.contains("Status", true) }?.value ?: "")
+        val typeText = speMap.entries.find { it.key.contains("Tipe", true) }?.value ?: ""
+        val type = getType(typeText)
+        val year = Regex("(\\d{4})").find(
+            speMap.entries.find { it.key.contains("Dirilis", true) }?.value ?: ""
+        )?.groupValues?.getOrNull(1)?.toIntOrNull()
+
+        // All episodes + their download links are already on this page (no separate episode pages)
+        val episodes = mutableListOf<Episode>()
+        document.select("div.sorattl.collapsible").forEach { col ->
+            val epTitle = col.selectFirst("h3")?.text()?.trim() ?: return@forEach
+            val epNum = Regex("Episode\\s*(\\d+)", RegexOption.IGNORE_CASE)
+                .find(epTitle)?.groupValues?.getOrNull(1)?.toIntOrNull()
+
+            // Content div is the immediate next sibling
+            val contentDiv = col.nextElementSibling()
+                ?.takeIf { it.hasClass("content") } ?: return@forEach
+
+            val linkList = mutableListOf<EpisodeLink>()
+            contentDiv.select("tr").forEach { tr ->
+                val quality = tr.selectFirst("div.res")?.text()?.trim() ?: return@forEach
+                tr.select("div.slink a").forEach { a ->
+                    linkList.add(EpisodeLink(a.attr("href"), quality))
+                }
+            }
+
+            if (linkList.isNotEmpty()) {
+                episodes.add(newEpisode(linkList.toJson()) {
+                    this.name = epTitle
+                    this.episode = epNum
+                })
+            }
+        }
+
+        return newAnimeLoadResponse(title, url, type) {
+            engName = title
+            posterUrl = poster
+            backgroundPosterUrl = coverBg
+            this.year = year
+            // Episodes from page are newest-first, reverse to oldest-first
+            addEpisodes(DubStatus.Subbed, episodes.reversed())
+            showStatus = status
+            plot = description
+            addTrailer(trailer)
+            this.tags = genres
+        }
+    }
+
+    override suspend fun loadLinks(
+        data: String,
+        isCasting: Boolean,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ): Boolean {
+        val links = parseJson<List<EpisodeLink>>(data)
+        links.amap { (rawUrl, quality) ->
+            val resolvedUrl = resolveUrl(rawUrl)
+            loadFixedExtractor(resolvedUrl, quality, "$mainUrl/", subtitleCallback, callback)
+        }
+        return true
+    }
+
+    private suspend fun loadFixedExtractor(
+        url: String,
+        quality: String,
+        referer: String,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ) {
+        loadExtractor(url, referer, subtitleCallback) { link ->
+            callback.invoke(
+                newExtractorLink(link.name, link.name, link.url, link.type) {
+                    this.referer = link.referer
+                    this.quality = quality.fixQuality()
+                    this.headers = link.headers
+                    this.extractorData = link.extractorData
+                }
+            )
+        }
+    }
+
+    // Resolve shortener/converter URLs to actual playable/extractable URLs
+    private fun resolveUrl(url: String): String {
+        // ouo.io shortener: real URL is in the "s" query param (URL-encoded)
+        if (url.contains("ouo.io")) {
+            val sParam = Regex("[?&]s=([^&]+)").find(url)?.groupValues?.getOrNull(1)
+            if (sParam != null) return URLDecoder.decode(sParam, "UTF-8")
+        }
+        // acefile.co/f/{id}/... → acefile.co/player/{id} (required for Filesim extractor)
+        if (url.contains("acefile.co/f/")) {
+            val id = Regex("/f/(\\w+)").find(url)?.groupValues?.getOrNull(1)
+            if (id != null) return "https://acefile.co/player/$id"
+        }
+        return url
+    }
+
+    private fun String.fixQuality(): Int = when {
+        this.contains("1080", true) -> Qualities.P1080.value
+        this.contains("720", true) -> Qualities.P720.value
+        this.contains("480", true) -> Qualities.P480.value
+        this.contains("360", true) -> Qualities.P360.value
+        else -> Qualities.Unknown.value
+    }
+
+    data class EpisodeLink(
+        @JsonProperty("url") val url: String,
+        @JsonProperty("quality") val quality: String
+    )
+}
