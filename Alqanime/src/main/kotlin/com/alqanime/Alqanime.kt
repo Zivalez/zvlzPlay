@@ -72,8 +72,11 @@ class Alqanime : MainAPI() {
         val title = this.selectFirst(".ntitle")?.text()?.trim() ?: return null
         val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
         val typeText = this.selectFirst(".typez")?.text()?.trim() ?: ""
+        val epNum = this.selectFirst("a")?.attr("title")
+            ?.let { Regex("Episode\\s*\\((\\d+)\\)", RegexOption.IGNORE_CASE).find(it)?.groupValues?.getOrNull(1)?.toIntOrNull() }
         return newAnimeSearchResponse(title, href, getType(typeText)) {
             this.posterUrl = posterUrl
+            addSub(epNum)
         }
     }
 
@@ -93,8 +96,10 @@ class Alqanime : MainAPI() {
         val coverBg = document.selectFirst("div.ime img")?.attr("src")
         val trailer = document.selectFirst("a.trailerbutton")?.attr("href")
         val description = document.select("div.entry-content > p")
-            .firstOrNull { it.text().length > 30 }?.text()?.trim()
-        val genres = document.select("span.mgen a").map { it.text() }
+            .filter { it.text().length > 10 }
+            .joinToString("\n\n") { it.text().trim() }
+            .ifBlank { null }
+        val genres = document.select("div.genxed a").map { it.text() }
 
         // Parse structured metadata from div.spe > span (each has a <b> label)
         val speMap = document.select("div.spe > span").associate { span ->
