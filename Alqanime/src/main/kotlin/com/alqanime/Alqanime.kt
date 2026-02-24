@@ -76,7 +76,7 @@ class Alqanime : MainAPI() {
             ?.let { Regex("Episode\\s*\\((\\d+)\\)", RegexOption.IGNORE_CASE).find(it)?.groupValues?.getOrNull(1)?.toIntOrNull() }
         return newAnimeSearchResponse(title, href, getType(typeText)) {
             this.posterUrl = posterUrl
-            addSub(epNum)
+            addDubStatus("Sub Indo", epNum)
         }
     }
 
