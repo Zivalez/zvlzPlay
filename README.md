@@ -66,8 +66,6 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Samehadaku | ✅ aktif |
 | Otakudesu | ✅ aktif |
 | Alqanime | ✅ aktif |
-| Kuramanime | ⚠️ maintenance (video tidak bisa diputar) |
-| Winbu | 🚧 eksperimen (belum selesai) |
 
 ## Provider yang akan ditambahkan nantinya
 
