@@ -160,8 +160,16 @@ class Alqanime : MainAPI() {
         val links = parseJson<List<EpisodeLink>>(data)
         links.amap { (rawUrl, quality) ->
             val resolvedUrl = resolveUrl(rawUrl)
-            loadExtractor(resolvedUrl, "$mainUrl/", subtitleCallback) { link ->
-                callback(link.copy(quality = quality.fixQuality()))
+            val qualityInt = quality.fixQuality()
+            val collected = mutableListOf<ExtractorLink>()
+            loadExtractor(resolvedUrl, "$mainUrl/", subtitleCallback) { collected.add(it) }
+            collected.forEach { link ->
+                callback(newExtractorLink(link.source, link.name, link.url, link.type) {
+                    this.referer = link.referer
+                    this.quality = qualityInt
+                    this.headers = link.headers
+                    this.extractorData = link.extractorData
+                })
             }
         }
         return true
