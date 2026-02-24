@@ -107,12 +107,34 @@ class Samehadaku : MainAPI() {
         val description = document.select("div.desc p").text().trim()
         val trailer = document.selectFirst("div.trailer-anime iframe")?.attr("src")
 
-        val episodes = document.select("div.lstepsiode.listeps ul li").mapNotNull {
+        val episodeLinks = document.select("div.lstepsiode.listeps ul li").mapNotNull {
             val header = it.selectFirst("span.lchx > a") ?: return@mapNotNull null
             val episode = Regex("Episode\\s?(\\d+)").find(header.text())?.groupValues?.getOrNull(1)?.toIntOrNull()
             val link = fixUrl(header.attr("href"))
-            newEpisode(link) { this.episode = episode }
+            Pair(link, episode)
         }.reversed()
+
+        // Fetch episode thumbnails from the first episode page
+        // (anime page has no thumbnails, but episode pages do in their episode list sidebar)
+        val thumbMap: Map<String, String> = if (episodeLinks.isNotEmpty()) {
+            try {
+                app.get(episodeLinks.first().first).document
+                    .select("div.lstepsiode.listeps ul li")
+                    .mapNotNull { li ->
+                        val img = li.selectFirst("div.thumbnailrighteps img") ?: return@mapNotNull null
+                        val href = li.selectFirst("span.lchx > a")?.attr("href")
+                            ?.let { fixUrl(it) } ?: return@mapNotNull null
+                        href to img.attr("src")
+                    }.toMap()
+            } catch (_: Exception) { emptyMap() }
+        } else emptyMap()
+
+        val episodes = episodeLinks.map { (link, epNum) ->
+            newEpisode(link) {
+                this.episode = epNum
+                this.posterUrl = thumbMap[link]
+            }
+        }
 
         val recommendations = document.select("aside#sidebar ul li").mapNotNull { it.toSearchResult() }
 
