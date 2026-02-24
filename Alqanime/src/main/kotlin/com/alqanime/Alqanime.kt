@@ -181,14 +181,6 @@ class Alqanime : MainAPI() {
         return url
     }
 
-    private fun String.fixQuality(): Int = when {
-        this.contains("1080", true) -> Qualities.P1080.value
-        this.contains("720", true) -> Qualities.P720.value
-        this.contains("480", true) -> Qualities.P480.value
-        this.contains("360", true) -> Qualities.P360.value
-        else -> Qualities.Unknown.value
-    }
-
     data class EpisodeLink(
         @JsonProperty("url") val url: String,
         @JsonProperty("quality") val quality: String
