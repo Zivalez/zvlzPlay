@@ -1,5 +1,26 @@
 [
     {
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/alqanime.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 16377,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "OVA",
+            "Anime"
+        ],
+        "version": 1,
+        "internalName": "Alqanime",
+        "description": "Nonton & Download Anime Subtitle Indonesia",
+        "url": "https://cloudstream.zvlz.my.id/builds/Alqanime.cs3",
+        "name": "Alqanime"
+    },
+    {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/funmovieslix.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
