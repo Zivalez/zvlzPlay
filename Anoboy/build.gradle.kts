@@ -10,5 +10,5 @@ cloudstream {
         "Anime",
         "OVA"
     )
-    conUrl = "https://cloudstream.zvlz.my.id/icon/anoboy.png"
+    iconUrl = "https://cloudstream.zvlz.my.id/icon/anoboy.png"
 }
