@@ -44,7 +44,6 @@ class Alqanime : MainAPI() {
 
     // Genre pages use /tag/ not /genre/
     override val mainPage = mainPageOf(
-        "$mainUrl/page/%d/" to "Lagi Hangat Saat ini",
         "$mainUrl/page/%d/" to "Rilisan Terbaru",
         "$mainUrl/advanced-search/page/%d/?status=completed&order=update" to "Selesai Tayang",
         "$mainUrl/advanced-search/page/%d/?type[]=movie&order=update" to "Film Layar Lebar",
@@ -159,9 +158,11 @@ class Alqanime : MainAPI() {
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         val links = parseJson<List<EpisodeLink>>(data)
-        links.amap { (rawUrl, _) ->
+        links.amap { (rawUrl, quality) ->
             val resolvedUrl = resolveUrl(rawUrl)
-            loadExtractor(resolvedUrl, "$mainUrl/", subtitleCallback, callback)
+            loadExtractor(resolvedUrl, "$mainUrl/", subtitleCallback) { link ->
+                callback(link.copy(quality = quality.fixQuality()))
+            }
         }
         return true
     }
@@ -179,6 +180,14 @@ class Alqanime : MainAPI() {
             if (id != null) return "https://acefile.co/player/$id"
         }
         return url
+    }
+
+    private fun String.fixQuality(): Int = when {
+        this.contains("1080", true) -> Qualities.P1080.value
+        this.contains("720", true) -> Qualities.P720.value
+        this.contains("480", true) -> Qualities.P480.value
+        this.contains("360", true) -> Qualities.P360.value
+        else -> Qualities.Unknown.value
     }
 
     data class EpisodeLink(
