@@ -6,9 +6,9 @@ import com.lagradost.cloudstream3.extractors.*
 import android.content.Context
 
 @CloudstreamPlugin
-class KuronimeProviderPlugin : Plugin() {
+class KuronimePlugin : Plugin() {
     override fun load(context: Context) {
-        registerMainAPI(KuronimeProvider())
+        registerMainAPI(Kuronime())
         registerExtractorAPI(PixelDrain())
         registerExtractorAPI(Gofile())
         registerExtractorAPI(Krakenfiles())

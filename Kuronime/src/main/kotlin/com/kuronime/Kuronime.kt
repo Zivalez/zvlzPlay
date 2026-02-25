@@ -17,7 +17,7 @@ import java.net.URI
 import java.util.ArrayList
 import com.lagradost.cloudstream3.extractors.helper.AesHelper
 
-class KuronimeProvider : MainAPI() {
+class Kuronime : MainAPI() {
     override var mainUrl = "https://kuronime.moe"
     private var animekuUrl = "https://animeku.org"
     override var name = "Kuronime"

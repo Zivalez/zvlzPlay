@@ -29,7 +29,7 @@ class Winbu : MainAPI() {
     )
 
     override val mainPage = mainPageOf(
-        "animedonghua/page/%d/"          to "Anime Donghua",
+        "animedonghua/page/%d/"          to "Anime Donghua Terbaru",
         "film/page/%d/"                  to "Film",
         "anime-terbaru-animasu/page/%d/" to "Series Terbaru",
         "others/page/%d/"                to "Jepang Korea China Barat",
