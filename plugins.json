@@ -201,8 +201,8 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 13065,
-        "status": 0,
+        "fileSize": 14320,
+        "status": 1,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -214,7 +214,7 @@
             "Movie",
             "Donghua"
         ],
-        "version": 3,
+        "version": 4,
         "internalName": "Winbu",
         "description": "Nonton Anime, Film, Donghua, Serial Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Winbu.cs3",
