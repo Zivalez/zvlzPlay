@@ -1,6 +1,7 @@
 package com.nontonanimeid
 
 import com.lagradost.cloudstream3.*
+import com.lagradost.cloudstream3.amap
 import com.lagradost.cloudstream3.utils.*
 import org.jsoup.nodes.Element
 
@@ -114,15 +115,26 @@ class Nontonanimeid : MainAPI() {
             ?.text()
             ?.let { Regex("(\\d{4})").find(it)?.groupValues?.get(1)?.toIntOrNull() }
 
-        val episodes = document.select("div.episode-list-items a.episode-item").map { ep ->
-            val epHref = ep.absUrl("href")
-            val epTitle = ep.selectFirst("span.ep-title")?.text()?.trim()
-            val epNum = epTitle?.replace(Regex("[^0-9]"), "")?.toIntOrNull()
+        val episodeLinks = document.select("div.episode-list-items a.episode-item").map { ep ->
+            Triple(
+                ep.absUrl("href"),
+                ep.selectFirst("span.ep-title")?.text()?.trim(),
+                ep.selectFirst("span.ep-title")?.text()?.trim()
+                    ?.replace(Regex("[^0-9]"), "")?.toIntOrNull()
+            )
+        }.reversed()
+
+        // Fetch thumbnails in parallel — adds 2-3s but gives full episode art
+        val episodes = episodeLinks.amap { (epHref, epTitle, epNum) ->
+            val thumb = try {
+                app.get(epHref).document.selectFirst("div.featuredimgs img")?.attr("src")
+            } catch (_: Exception) { null }
             newEpisode(epHref) {
                 name = epTitle
                 episode = epNum
+                posterUrl = thumb
             }
-        }.reversed()
+        }
 
         return newAnimeLoadResponse(title, url, tvType) {
             this.posterUrl = poster
