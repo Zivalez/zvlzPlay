@@ -201,22 +201,20 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 14320,
+        "fileSize": 14518,
         "status": 1,
         "language": "id",
         "authors": [
             "Zivalez"
         ],
         "tvTypes": [
-            "AnimeMovie",
-            "OVA",
             "Anime",
-            "Movie",
-            "Donghua"
+            "AnimeMovie",
+            "OVA"
         ],
         "version": 4,
         "internalName": "Winbu",
-        "description": "Nonton Anime, Film, Donghua, Serial Sub Indo",
+        "description": "Nonton Anime, Donghua, Film, dan TV Show Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Winbu.cs3",
         "name": "Winbu"
     }
