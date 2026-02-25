@@ -18,6 +18,13 @@ class Winbu : MainAPI() {
         TvType.OVA,
     )
 
+    private val commonHeaders = mapOf(
+        "User-Agent"      to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept"          to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language" to "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
+        "Referer"         to "$mainUrl/",
+    )
+
     override val mainPage = mainPageOf(
         "anime-terbaru-animasu/page/%d/" to "Series Terbaru",
         "animedonghua/page/%d/"          to "Anime Donghua",
@@ -27,7 +34,7 @@ class Winbu : MainAPI() {
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
-        val document = app.get("$mainUrl/${request.data.format(page)}").document
+        val document = app.get("$mainUrl/${request.data.format(page)}", headers = commonHeaders).document
         val homeList = document.select("div.ml-item").mapNotNull { it.toSearchResult() }
         return newHomePageResponse(request.name, homeList)
     }
@@ -48,14 +55,12 @@ class Winbu : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        val document = app.get("$mainUrl/?s=$query").document
+        val document = app.get("$mainUrl/?s=$query", headers = commonHeaders).document
         return document.select("div.ml-item").mapNotNull { it.toSearchResult() }
     }
 
     override suspend fun load(url: String): LoadResponse? {
-        val document = app.get(url).document
-
-        // Title is in the first .judul inside .mli-info on the detail card
+        val document = app.get(url, headers = commonHeaders).document
         val title = document.selectFirst(".mli-info .judul")?.text()?.trim()
             ?: return null
 
@@ -98,7 +103,7 @@ class Winbu : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        val document = app.get(data).document
+        val document = app.get(data, headers = commonHeaders).document
 
         // Iterate each quality dropdown (360p, 480p, 720p, 1080p) and fetch each player via AJAX
         document.select(".dropdown").forEach { dropdown ->
@@ -115,7 +120,7 @@ class Winbu : MainAPI() {
                         "nume"   to nume,
                         "type"   to type,
                     ),
-                    referer = data,
+                    headers = commonHeaders + mapOf("Referer" to data),
                 ).text
 
                 val iframeSrc = Jsoup.parse(response).selectFirst("iframe")?.attr("src")
