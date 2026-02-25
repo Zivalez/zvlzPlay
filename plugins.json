@@ -94,7 +94,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuronime.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 25649,
+        "fileSize": 25617,
         "status": 1,
         "language": "id",
         "authors": [
@@ -105,11 +105,11 @@
             "Anime",
             "OVA"
         ],
-        "version": 3,
-        "internalName": "KuronimeProvider",
-        "description": "Kuronime \u2014 Anime Subtitle Indonesia",
-        "url": "https://cloudstream.zvlz.my.id/builds/KuronimeProvider.cs3",
-        "name": "KuronimeProvider"
+        "version": 4,
+        "internalName": "Kuronime",
+        "description": "Anime Subtitle Indonesia",
+        "url": "https://cloudstream.zvlz.my.id/builds/Kuronime.cs3",
+        "name": "Kuronime"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/layarkaca.png",
@@ -222,7 +222,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 21814,
+        "fileSize": 21813,
         "status": 1,
         "language": "id",
         "authors": [
