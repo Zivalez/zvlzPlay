@@ -2,7 +2,7 @@ android {
     namespace = "com.nontonanimeid"
 }
 
-version = 1
+version = 2
 
 cloudstream {
     language = "id"
@@ -14,5 +14,5 @@ cloudstream {
         "AnimeMovie",
         "OVA",
     )
-    iconUrl = "https://s11.nontonanimeid.boats/wp-content/uploads/2021/01/Logo-NontonAnimeID.png"
+    iconUrl = "https://cloudstream.zvlz.my.id/icon/nontonanimeid.png"
 }

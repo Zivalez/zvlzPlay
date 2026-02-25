@@ -124,22 +124,13 @@ class Nontonanimeid : MainAPI() {
             }
         }.reversed()
 
-        return if (tvType == TvType.AnimeMovie) {
-            newMovieLoadResponse(title, url, TvType.AnimeMovie, episodes.firstOrNull()?.data ?: url) {
-                this.posterUrl = poster
-                this.year = year
-                this.plot = synopsis
-                this.tags = tags
-                this.showStatus = status
-            }
-        } else {
-            newTvSeriesLoadResponse(title, url, tvType, episodes) {
-                this.posterUrl = poster
-                this.year = year
-                this.plot = synopsis
-                this.tags = tags
-                this.showStatus = status
-            }
+        return newAnimeLoadResponse(title, url, tvType) {
+            this.posterUrl = poster
+            this.year = year
+            this.plot = synopsis
+            this.tags = tags
+            showStatus = status
+            addEpisodes(DubStatus.Subbed, episodes)
         }
     }
 
@@ -179,7 +170,7 @@ class Nontonanimeid : MainAPI() {
             val src = script.attr("src")
             if (!src.startsWith("data:text/javascript;base64,")) return@mapNotNull null
             val decoded = try {
-                String(base64Decode(src.removePrefix("data:text/javascript;base64,")))
+                base64Decode(src.removePrefix("data:text/javascript;base64,"))
             } catch (_: Exception) { return@mapNotNull null }
             if (!decoded.contains("kotakajax")) return@mapNotNull null
             Regex(""""nonce"\s*:\s*"([^"]+)"""").find(decoded)?.groupValues?.get(1)
@@ -224,13 +215,14 @@ class Nontonanimeid : MainAPI() {
 
             callback(
                 newExtractorLink(
-                    source = this.name,
-                    name = "$name [$serverLabel]",
-                    url = fileUrl,
-                    referer = iframeSrc,
-                    quality = Qualities.Unknown.value,
-                    isM3u8 = isM3u8
-                )
+                    this.name,
+                    "$name [$serverLabel]",
+                    fileUrl,
+                    if (isM3u8) ExtractorLinkType.M3U8 else ExtractorLinkType.VIDEO
+                ) {
+                    this.referer = iframeSrc
+                    this.quality = Qualities.Unknown.value
+                }
             )
         }
 
