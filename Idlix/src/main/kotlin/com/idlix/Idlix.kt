@@ -29,15 +29,16 @@ class Idlix : MainAPI() {
 
     override val mainPage = mainPageOf(
         "$mainUrl/" to "Featured",
-        "$mainUrl/trending/page/?get=movies" to "Trending Movies",
-        "$mainUrl/trending/page/?get=tv" to "Trending TV Series",
+        "$mainUrl/genre/drama-korea/page/" to "Drama Korea",
         "$mainUrl/movie/page/" to "Movie Terbaru",
+        "$mainUrl/trending/page/?get=movies" to "Trending Movies",
         "$mainUrl/tvseries/page/" to "TV Series Terbaru",
+        "$mainUrl/trending/page/?get=tv" to "Trending TV Series",
+        "$mainUrl/network/netflix/page/" to "Netflix Series",
+        "$mainUrl/network/disney/page/" to "Disney+ Series",
         "$mainUrl/network/amazon/page/" to "Amazon Prime",
         "$mainUrl/network/apple-tv/page/" to "Apple TV+ Series",
-        "$mainUrl/network/disney/page/" to "Disney+ Series",
         "$mainUrl/network/HBO/page/" to "HBO Series",
-        "$mainUrl/network/netflix/page/" to "Netflix Series",
     )
 
     private fun getBaseUrl(url: String): String {

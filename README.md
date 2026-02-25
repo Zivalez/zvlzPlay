@@ -92,7 +92,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ### Donghua ada?
 - Buat sekarang blm ada
-- Rencana nanti nonton Donghua dari **Winbu** sama **Kuramanime**
+- Rencana nanti nonton Donghua dari **Winbu**
 
 ### Kenapa video Kuramanime gak bisa diputar?
 - Karena scraping URL video-nya lagi bermasalah (maintenance). Homepage, search, dan info anime masih jalan normal.
