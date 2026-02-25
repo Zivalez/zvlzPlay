@@ -3,7 +3,7 @@ package com.winbu
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.utils.*
-import kotlinx.serialization.json.*
+import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
@@ -72,17 +72,17 @@ class Winbu : MainAPI() {
         if (!responseText.trimStart().startsWith("{")) return emptyList()
 
         return try {
-            val jsonObj = Json.parseToJsonElement(responseText).jsonObject
-            if (jsonObj.containsKey("error")) return emptyList()
-            jsonObj.values.mapNotNull { el ->
-                val item = el.jsonObject
-                val title = item["title"]?.jsonPrimitive?.content ?: return@mapNotNull null
-                val url   = item["url"]?.jsonPrimitive?.content ?: return@mapNotNull null
-                val img   = item["img"]?.jsonPrimitive?.content
-                newAnimeSearchResponse(title, url, TvType.Anime) {
+            val jsonObj = JSONObject(responseText)
+            if (jsonObj.has("error")) return emptyList()
+            jsonObj.keys().asSequence().mapNotNull { key ->
+                val item = runCatching { jsonObj.getJSONObject(key) }.getOrNull() ?: return@mapNotNull null
+                val title = item.optString("title").takeIf { it.isNotEmpty() } ?: return@mapNotNull null
+                val itemUrl = item.optString("url").takeIf { it.isNotEmpty() } ?: return@mapNotNull null
+                val img = item.optString("img").takeIf { it.isNotEmpty() }
+                newAnimeSearchResponse(title, itemUrl, TvType.Anime) {
                     posterUrl = img
                 }
-            }
+            }.toList()
         } catch (_: Exception) {
             emptyList()
         }
