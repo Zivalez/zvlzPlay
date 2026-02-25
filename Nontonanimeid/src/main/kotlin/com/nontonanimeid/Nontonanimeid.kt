@@ -136,7 +136,7 @@ class Nontonanimeid : MainAPI() {
 
     // Decode Dean Edwards JS packer (eval(function(p,a,c,k,e,d){...}))
     private fun unpackJs(packed: String): String? {
-        val match = Regex("""\}\s*\(\s*'([\s\S]+?)',\s*(\d+),\s*(\d+),\s*'([\s\S]+?)'\.split\(""")
+        val match = Regex("""\}\s*\(\s*'((?:[^'\\]|\\.)*)',\s*(\d+),\s*(\d+),\s*'((?:[^'\\]|\\.)*)'\.split\(""")
             .find(packed) ?: return null
         var p = match.groupValues[1].replace("\\'", "'")
         val a = match.groupValues[2].toIntOrNull() ?: return null
@@ -193,7 +193,8 @@ class Nontonanimeid : MainAPI() {
                     "nume" to nume,
                     "post" to post
                 ),
-                referer = data
+                referer = data,
+                headers = mapOf("Origin" to mainUrl)
             ).text
 
             val iframeSrc = Regex("""src=["']([^"']*kotakanimeid\.link[^"']*)["']""")
@@ -202,7 +203,7 @@ class Nontonanimeid : MainAPI() {
             val iframePage = app.get(iframeSrc, referer = data).text
 
             val evalScript = iframePage.lines()
-                .firstOrNull { it.trimStart().startsWith("eval(function(p,a,c,k") }
+                .firstOrNull { it.contains("eval(function(p,a,c,k") }
                 ?: return@amap
 
             val unpacked = unpackJs(evalScript) ?: return@amap
