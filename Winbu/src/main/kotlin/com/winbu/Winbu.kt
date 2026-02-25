@@ -155,36 +155,70 @@ class Winbu : MainAPI() {
     ): Boolean {
         val document = app.get(data, headers = commonHeaders).document
 
-        // Iterate each quality dropdown (360p, 480p, 720p, 1080p) and fetch each player via AJAX
-        document.select(".dropdown").forEach { dropdown ->
-            dropdown.select(".east_player_option").forEach { player ->
-                val post = player.attr("data-post").takeIf { it.isNotEmpty() } ?: return@forEach
-                val nume = player.attr("data-nume").takeIf { it.isNotEmpty() } ?: return@forEach
-                val type = player.attr("data-type").ifEmpty { "schtml" }
+        // Resolve filedon.co/embed/ → direct video URL via #app data-page JSON
+        suspend fun resolveFiledon(url: String, label: String) {
+            val page = app.get(url, headers = commonHeaders + mapOf("Referer" to data)).document
+            val dataPage = page.selectFirst("#app")?.attr("data-page") ?: return
+            try {
+                val props = JSONObject(dataPage).optJSONObject("props") ?: return
+                val directUrl = props.optString("url").takeIf { it.isNotEmpty() } ?: return
+                callback(
+                    ExtractorLink(
+                        source = name,
+                        name = label,
+                        url = directUrl,
+                        referer = url,
+                        quality = Qualities.Unknown.value,
+                        isM3u8 = false,
+                    )
+                )
+            } catch (_: Exception) {}
+        }
 
-                val response = app.post(
-                    "$mainUrl/wp-admin/admin-ajax.php",
-                    data = mapOf(
-                        "action" to "player_ajax",
-                        "post"   to post,
-                        "nume"   to nume,
-                        "type"   to type,
-                    ),
-                    headers = commonHeaders + mapOf("Referer" to data),
-                ).text
-
-                val iframeSrc = Jsoup.parse(response).selectFirst("iframe")?.attr("src")
-                    ?.takeIf { it.startsWith("http") } ?: return@forEach
-
-                loadExtractor(iframeSrc, data, subtitleCallback, callback)
+        suspend fun handleUrl(src: String, label: String) {
+            when {
+                src.contains("filedon.co/embed/", ignoreCase = true) ->
+                    resolveFiledon(src, label)
+                src.contains("mega.nz/embed/", ignoreCase = true) ->
+                    loadExtractor(src.replace("/embed/", "/file/"), data, subtitleCallback, callback)
+                src.contains("short.icu/", ignoreCase = true) ||
+                src.contains("strp2p.com", ignoreCase = true) -> { /* not extractable */ }
+                else -> loadExtractor(src, data, subtitleCallback, callback)
             }
         }
 
-        // Also extract download links — CloudStream will handle supported hosts (e.g. Mp4Upload)
+        // AJAX: iterate all player options
+        document.select(".east_player_option").forEach { player ->
+            val post = player.attr("data-post").takeIf { it.isNotEmpty() } ?: return@forEach
+            val nume = player.attr("data-nume").takeIf { it.isNotEmpty() } ?: return@forEach
+            val type = player.attr("data-type").ifEmpty { "schtml" }
+            val label = player.selectFirst("span")?.text()?.trim()
+                ?: player.text().trim().ifEmpty { "Server $nume" }
+
+            val response = app.post(
+                "$mainUrl/wp-admin/admin-ajax.php",
+                data = mapOf(
+                    "action" to "player_ajax",
+                    "post"   to post,
+                    "nume"   to nume,
+                    "type"   to type,
+                ),
+                headers = commonHeaders + mapOf("Referer" to data),
+            ).text
+
+            val iframeSrc = Jsoup.parse(response).selectFirst("iframe")?.attr("src")
+                ?.takeIf { it.startsWith("http") } ?: return@forEach
+
+            handleUrl(iframeSrc, label)
+        }
+
+        // Download links (Gofile, MEGA, Filedon, BuzzHeavier, etc.)
         document.select("#downloadb li").forEach { li ->
-            li.select("a").forEach { a ->
+            val quality = li.selectFirst("strong")?.text()?.trim() ?: ""
+            li.select("a[href]").forEach { a ->
                 val href = fixUrlNull(a.attr("href")) ?: return@forEach
-                loadExtractor(href, data, subtitleCallback, callback)
+                val label = "${a.text().trim()} $quality".trim()
+                handleUrl(href, label)
             }
         }
 
