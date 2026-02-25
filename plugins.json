@@ -117,7 +117,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/nontonanimeid.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 17444,
+        "fileSize": 18939,
         "status": 1,
         "language": "id",
         "authors": [
@@ -128,7 +128,7 @@
             "AnimeMovie",
             "OVA"
         ],
-        "version": 2,
+        "version": 3,
         "internalName": "Nontonanimeid",
         "description": "Nonton Streaming Anime Sub Indo - NontonAnimeID",
         "url": "https://cloudstream.zvlz.my.id/builds/Nontonanimeid.cs3",
