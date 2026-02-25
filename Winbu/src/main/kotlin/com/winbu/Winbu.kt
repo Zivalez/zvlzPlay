@@ -3,6 +3,7 @@ package com.winbu
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.utils.*
+import kotlinx.serialization.json.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
@@ -26,9 +27,9 @@ class Winbu : MainAPI() {
     )
 
     override val mainPage = mainPageOf(
-        "anime-terbaru-animasu/page/%d/" to "Series Terbaru",
         "animedonghua/page/%d/"          to "Anime Donghua",
         "film/page/%d/"                  to "Film",
+        "anime-terbaru-animasu/page/%d/" to "Series Terbaru",
         "others/page/%d/"                to "Jepang Korea China Barat",
         "tvshow/page/%d/"                to "TV Show",
     )
@@ -45,9 +46,10 @@ class Winbu : MainAPI() {
             selectFirst(".judul")?.text()?.trim()
         } ?: return null
         val href = fixUrlNull(a.attr("href")) ?: return null
+        val img = selectFirst("img.mli-thumb")
         val posterUrl = fixUrlNull(
-            selectFirst("img")?.attr("data-original")
-                ?: selectFirst("img")?.attr("src")
+            img?.attr("data-original")?.takeIf { it.isNotEmpty() }
+                ?: img?.attr("src")
         )
         return newAnimeSearchResponse(title, href, TvType.Anime) {
             this.posterUrl = posterUrl
@@ -55,8 +57,35 @@ class Winbu : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        val document = app.get("$mainUrl/?s=$query", headers = commonHeaders).document
-        return document.select("div.ml-item").mapNotNull { it.toSearchResult() }
+        // Extract nonce from homepage inline script
+        val homeDoc = app.get(mainUrl, headers = commonHeaders).document
+        val ajaxScript = homeDoc.select("script:not([src])").firstOrNull { it.data().contains("ajaxSearch") }
+        val nonce = Regex(""""nonce"\s*:\s*"([^"]+)"""").find(ajaxScript?.data() ?: "")
+            ?.groupValues?.getOrNull(1) ?: ""
+
+        val responseText = app.get(
+            "$mainUrl/wp-json/eastheme/search/",
+            params = mapOf("keyword" to query, "nonce" to nonce),
+            headers = commonHeaders,
+        ).text
+
+        if (!responseText.trimStart().startsWith("{")) return emptyList()
+
+        return try {
+            val jsonObj = Json.parseToJsonElement(responseText).jsonObject
+            if (jsonObj.containsKey("error")) return emptyList()
+            jsonObj.values.mapNotNull { el ->
+                val item = el.jsonObject
+                val title = item["title"]?.jsonPrimitive?.content ?: return@mapNotNull null
+                val url   = item["url"]?.jsonPrimitive?.content ?: return@mapNotNull null
+                val img   = item["img"]?.jsonPrimitive?.content
+                newAnimeSearchResponse(title, url, TvType.Anime) {
+                    posterUrl = img
+                }
+            }
+        } catch (_: Exception) {
+            emptyList()
+        }
     }
 
     override suspend fun load(url: String): LoadResponse? {
