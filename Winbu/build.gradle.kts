@@ -2,7 +2,7 @@ android {
     namespace = "com.winbu"
 }
 
-version = 7
+version = 8
 
 cloudstream {
     language = "id"

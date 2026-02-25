@@ -17,6 +17,7 @@ class Winbu : MainAPI() {
         TvType.Anime,
         TvType.AnimeMovie,
         TvType.OVA,
+        TvType.Movie,
     )
 
     private val commonHeaders = mapOf(
@@ -40,7 +41,7 @@ class Winbu : MainAPI() {
         return newHomePageResponse(request.name, homeList)
     }
 
-    private fun Element.toSearchResult(): AnimeSearchResponse? {
+    private fun Element.toSearchResult(): SearchResponse? {
         val a = selectFirst("a.ml-mask") ?: return null
         val title = a.attr("title").trim().ifEmpty {
             selectFirst(".judul")?.text()?.trim()
@@ -51,8 +52,14 @@ class Winbu : MainAPI() {
             img?.attr("data-original")?.takeIf { it.isNotEmpty() }
                 ?: img?.attr("src")
         )
-        return newAnimeSearchResponse(title, href, TvType.Anime) {
-            this.posterUrl = posterUrl
+        return if (href.contains("/film/")) {
+            newMovieSearchResponse(title, href, TvType.Movie) {
+                this.posterUrl = posterUrl
+            }
+        } else {
+            newAnimeSearchResponse(title, href, TvType.Anime) {
+                this.posterUrl = posterUrl
+            }
         }
     }
 
@@ -79,8 +86,10 @@ class Winbu : MainAPI() {
                 val title = item.optString("title").takeIf { it.isNotEmpty() } ?: return@mapNotNull null
                 val itemUrl = item.optString("url").takeIf { it.isNotEmpty() } ?: return@mapNotNull null
                 val img = item.optString("img").takeIf { it.isNotEmpty() }
-                newAnimeSearchResponse(title, itemUrl, TvType.Anime) {
-                    posterUrl = img
+                if (itemUrl.contains("/film/")) {
+                    newMovieSearchResponse(title, itemUrl, TvType.Movie) { posterUrl = img }
+                } else {
+                    newAnimeSearchResponse(title, itemUrl, TvType.Anime) { posterUrl = img }
                 }
             }.toList()
         } catch (_: Exception) {
@@ -103,6 +112,18 @@ class Winbu : MainAPI() {
         // Trailer iframe src — only add if it has an actual video ID
         val trailerSrc = document.selectFirst("#pop-trailer iframe")?.attr("src")
             ?.takeIf { it.contains("youtube.com/embed/") && it.length > "https://www.youtube.com/embed/".length }
+
+        val isMovie = url.contains("/film/")
+
+        if (isMovie) {
+            return newMovieLoadResponse(title, url, TvType.Movie, url) {
+                posterUrl = poster
+                this.year = year
+                plot = description
+                if (trailerSrc != null) addTrailer(trailerSrc)
+                this.tags = tags
+            }
+        }
 
         val episodes = document.select("div.tvseason div.les-content a").mapNotNull { el ->
             val epTitle = el.text().trim()
