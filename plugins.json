@@ -114,6 +114,27 @@
         "name": "LayarKaca"
     },
     {
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/nontonanimeid.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 17458,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "Anime",
+            "AnimeMovie",
+            "OVA"
+        ],
+        "version": 2,
+        "internalName": "Nontonanimeid",
+        "description": "Nonton Streaming Anime Sub Indo - NontonAnimeID",
+        "url": "https://cloudstream.zvlz.my.id/builds/Nontonanimeid.cs3",
+        "name": "Nontonanimeid"
+    },
+    {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/otakudesu.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
