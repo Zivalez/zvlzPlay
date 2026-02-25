@@ -3,6 +3,7 @@ package com.winbu
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.utils.*
+import com.lagradost.cloudstream3.utils.newExtractorLink
 import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -163,14 +164,10 @@ class Winbu : MainAPI() {
                 val props = JSONObject(dataPage).optJSONObject("props") ?: return
                 val directUrl = props.optString("url").takeIf { it.isNotEmpty() } ?: return
                 callback(
-                    ExtractorLink(
-                        source = name,
-                        name = label,
-                        url = directUrl,
-                        referer = url,
-                        quality = Qualities.Unknown.value,
-                        isM3u8 = false,
-                    )
+                    newExtractorLink(name, label, directUrl) {
+                        this.referer = url
+                        this.quality = Qualities.Unknown.value
+                    }
                 )
             } catch (_: Exception) {}
         }
