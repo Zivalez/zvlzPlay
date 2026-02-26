@@ -95,11 +95,11 @@ class Idlix : MainAPI() {
         val href = getProperLink(this.selectFirst("h3 > a")!!.attr("href"))
         val posterUrl = this.select("div.poster > img").attr("src")
         val quality = getQualityFromString(this.select("span.quality").text())
-        val rating = this.selectFirst("div.poster > div.rating")?.text()?.trim()?.toDoubleOrNull()
+        val rating = this.selectFirst("div.poster > div.rating")?.text()?.trim()
         return newMovieSearchResponse(title, href, TvType.Movie) {
             this.posterUrl = posterUrl
             this.quality = quality
-            if (rating != null) addScore(rating.toString())
+            this.score = Score.from10(rating)
         }
 
     }
