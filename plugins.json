@@ -135,6 +135,28 @@
         "name": "LayarKaca"
     },
     {
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/moviebox.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 30443,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "TvSeries",
+            "Movie",
+            "Anime",
+            "AsianDrama"
+        ],
+        "version": 1,
+        "internalName": "Moviebox",
+        "description": "Movie Subtitle Indonesia",
+        "url": "https://cloudstream.zvlz.my.id/builds/Moviebox.cs3",
+        "name": "Moviebox"
+    },
+    {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/nontonanimeid.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
