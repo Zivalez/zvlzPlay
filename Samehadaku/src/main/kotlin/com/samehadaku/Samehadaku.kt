@@ -38,6 +38,7 @@ class Samehadaku : MainAPI() {
     override val mainPage = mainPageOf(
         "anime-terbaru/page/%d" to "Terbaru",
         "genre/action/page/%d/" to "Action",
+        "anime-movie/page/%d/" to "Movie",
         "genre/sci-fi/page/%d/" to "SCI-FI",
         "genre/school/page/%d/" to "School",
         "genre/fantasy/page/%d/" to "Fantasy",
