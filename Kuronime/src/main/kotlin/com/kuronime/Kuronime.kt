@@ -61,19 +61,10 @@ class Kuronime : MainAPI() {
         val req = app.get(request.data + page)
         mainUrl = getBaseUrl(req.url)
         val document = req.document
-        val home = document.select("article").map {
+        val home = document.select("article").mapNotNull {
             it.toSearchResult()
         }
-        
-        val isLandscape = request.name == "New Episodes"
-        
-        return newHomePageResponse(
-            HomePageList(
-                name = request.name,
-                list = home,
-                isHorizontalImages = isLandscape
-            )
-        )
+        return newHomePageResponse(request.name, home)
     }
 
 
@@ -98,16 +89,12 @@ class Kuronime : MainAPI() {
         }
     }
 
-    private fun Element.toSearchResult(): AnimeSearchResponse {
-        val href = getProperAnimeLink(fixUrlNull(this.selectFirst("a")?.attr("href")).toString())
-        
-        val title = this.select(".bsuxtt, .tt > h4, .entry-title, h2, h3").text().trim()
-        
+    private fun Element.toSearchResult(): AnimeSearchResponse? {
+        val href = getProperAnimeLink(fixUrlNull(this.selectFirst("a")?.attr("href")) ?: return null)
+        val title = this.select(".bsuxtt, .tt > h4, .entry-title, h2, h3").text().trim().takeIf { it.isNotEmpty() } ?: return null
         val posterUrl = fixUrlNull(this.selectFirst("img[itemprop=image]")?.attr("src"))
-        
         val epNum = this.select(".ep").text().replace(Regex("\\D"), "").trim().toIntOrNull()
         val tvType = getType(this.selectFirst(".bt > span")?.text().toString())
-        
         return newAnimeSearchResponse(title, href, tvType) {
             this.posterUrl = posterUrl
             addSub(epNum)
