@@ -222,7 +222,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/samehadaku.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 22911,
+        "fileSize": 21762,
         "status": 1,
         "language": "id",
         "authors": [
@@ -234,7 +234,7 @@
             "OVA",
             "Anime"
         ],
-        "version": 7,
+        "version": 8,
         "internalName": "Samehadaku",
         "description": "Nonton & Download Anime Streaming Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Samehadaku.cs3",
