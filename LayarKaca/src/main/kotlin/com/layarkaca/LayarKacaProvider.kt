@@ -26,12 +26,22 @@ class LayarKacaProvider : MainAPI() {
 
 
     override val mainPage = mainPageOf(
+        "$mainUrl/latest/page/" to "Film Terbaru",
         "$mainUrl/populer/page/" to "Film Terplopuler",
+        "$seriesUrl/latest-series/page/" to "Series Terbaru",
+        "$seriesUrl/series/ongoing/page/" to "Series Ongoing",
+        "$seriesUrl/series/completed/page/" to "Series Completed",
+        "$seriesUrl/series/asian/page/" to "Series Asian",
+        "$seriesUrl/series/west/page/" to "Series West",
         "$mainUrl/rating/page/" to "Film Berdasarkan IMDb Rating",
         "$mainUrl/most-commented/page/" to "Film Dengan Komentar Terbanyak",
-        "$seriesUrl/latest-series/page/" to "Series Terbaru",
-        "$seriesUrl/series/asian/page/" to "Film Asian Terbaru",
-        "$mainUrl/latest/page/" to "Film Upload Terbaru",
+        "$mainUrl/genre/action/page/" to "Film Action",
+        "$mainUrl/genre/animation/page/" to "Film Animation",
+        "$mainUrl/genre/horror/page/" to "Film Horror",
+        "$seriesUrl/country/china/page/" to "Film China",
+        "$seriesUrl/country/south-korea/page/" to "Film Korea",
+        "$seriesUrl/country/japan/page/" to "Film Japan",
+        "$seriesUrl/country/thailand/page/" to "Film Thailand",
     )
 
     override suspend fun getMainPage(
