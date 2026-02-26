@@ -2,7 +2,7 @@ android {
     namespace = "com.nontonanimeid"
 }
 
-version = 3
+version = 4
 
 cloudstream {
     language = "id"

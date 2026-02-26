@@ -17,6 +17,10 @@ class Nontonanimeid : MainAPI() {
         TvType.OVA
     )
 
+    private var loadmoreNonce: String? = null
+    private val ajaxUrl get() = "$mainUrl/wp-admin/admin-ajax.php"
+    private val pageSize = 20
+
     companion object {
         fun getType(t: String): TvType = when {
             t.contains("Movie", true) -> TvType.AnimeMovie
@@ -38,11 +42,49 @@ class Nontonanimeid : MainAPI() {
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
-        val url = request.data.replace("%d", "$page")
-        val isSinglePage = request.name in listOf("Episode Terbaru", "Sedang Tayang", "Popular Series")
+        val isEpisodeTerbaru = request.name == "Episode Terbaru"
+        val isSinglePage = request.name in listOf("Sedang Tayang", "Popular Series")
 
         if (isSinglePage && page > 1) return newHomePageResponse(request.name, emptyList(), hasNext = false)
 
+        // Episode Terbaru: page 1 = homepage, page 2+ = AJAX load more
+        if (isEpisodeTerbaru) {
+            val homePage = app.get(mainUrl).document
+
+            if (loadmoreNonce == null) {
+                // Extract nonce from inline script: var misha_loadmore_params = {...}
+                loadmoreNonce = homePage.select("script:not([src])").mapNotNull { script ->
+                    Regex(""""nonce"\s*:\s*"([^"]+)"""").find(script.data())?.groupValues?.get(1)
+                }.firstOrNull()
+            }
+
+            if (page == 1) {
+                val home = homePage.select("article.animeseries").mapNotNull { it.toSearchResult() }
+                return newHomePageResponse(request.name, home, hasNext = loadmoreNonce != null)
+            }
+
+            // page 2+ → AJAX
+            val nonce = loadmoreNonce ?: return newHomePageResponse(request.name, emptyList(), hasNext = false)
+            val offset = (page - 1) * pageSize
+            val ajaxHtml = app.post(
+                ajaxUrl,
+                data = mapOf(
+                    "action" to "loadmore",
+                    "nonce" to nonce,
+                    "offset" to offset.toString()
+                )
+            ).text
+
+            if (ajaxHtml.isBlank() || ajaxHtml == "0") {
+                return newHomePageResponse(request.name, emptyList(), hasNext = false)
+            }
+
+            val parsed = org.jsoup.Jsoup.parseBodyFragment(ajaxHtml)
+            val home = parsed.select("article.animeseries").mapNotNull { it.toSearchResult() }
+            return newHomePageResponse(request.name, home, hasNext = home.size >= pageSize)
+        }
+
+        val url = request.data.replace("%d", "$page")
         val document = app.get(url).document
         val home = when {
             request.data.contains("/anime/") -> document.select("a.as-anime-card")
