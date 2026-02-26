@@ -115,7 +115,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/layarkaca.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 22433,
+        "fileSize": 22771,
         "status": 1,
         "language": "id",
         "authors": [
@@ -128,7 +128,7 @@
             "AsianDrama",
             "AnimeMovie"
         ],
-        "version": 5,
+        "version": 6,
         "internalName": "LayarKaca",
         "description": "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online",
         "url": "https://cloudstream.zvlz.my.id/builds/LayarKaca.cs3",
