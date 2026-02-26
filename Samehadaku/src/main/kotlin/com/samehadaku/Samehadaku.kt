@@ -108,7 +108,7 @@ class Samehadaku : MainAPI() {
         val trailer = document.selectFirst("div.trailer-anime iframe")?.attr("src")
 
         val japName = document.selectFirst("div.spe > span:contains(Japanese)")?.ownText()?.trim()
-        val engName = document.selectFirst("div.spe > span:contains(English)")?.ownText()?.trim()
+        val engTitle = document.selectFirst("div.spe > span:contains(English)")?.ownText()?.trim()
         val duration = document.selectFirst("div.spe > span:contains(Duration)")?.ownText()
             ?.filter { it.isDigit() }?.toIntOrNull()
         val studio = document.selectFirst("div.spe > span:contains(Studio) a")?.text()?.trim()
@@ -148,7 +148,7 @@ class Samehadaku : MainAPI() {
 
         return newAnimeLoadResponse(title, url, type) {
             this.japName = japName
-            engName = engName ?: title
+            engName = engTitle ?: title
             posterUrl = tracker?.image ?: poster
             backgroundPosterUrl = tracker?.cover
             this.year = year
