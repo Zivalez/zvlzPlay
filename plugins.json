@@ -46,7 +46,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/idlix.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 25760,
+        "fileSize": 25914,
         "status": 1,
         "language": "id",
         "authors": [
@@ -61,7 +61,7 @@
             "AsianDrama",
             "Anime"
         ],
-        "version": 2,
+        "version": 3,
         "internalName": "Idlix",
         "description": "Nonton Film Streaming Movie Idlix Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Idlix.cs3",
@@ -94,7 +94,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuronime.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 25617,
+        "fileSize": 25689,
         "status": 1,
         "language": "id",
         "authors": [
@@ -200,7 +200,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/samehadaku.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 22888,
+        "fileSize": 22911,
         "status": 1,
         "language": "id",
         "authors": [
@@ -212,7 +212,7 @@
             "OVA",
             "Anime"
         ],
-        "version": 6,
+        "version": 7,
         "internalName": "Samehadaku",
         "description": "Nonton & Download Anime Streaming Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Samehadaku.cs3",
