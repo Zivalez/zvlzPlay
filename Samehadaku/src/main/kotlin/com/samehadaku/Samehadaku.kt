@@ -107,6 +107,12 @@ class Samehadaku : MainAPI() {
         val description = document.select("div.desc p").text().trim()
         val trailer = document.selectFirst("div.trailer-anime iframe")?.attr("src")
 
+        val japName = document.selectFirst("div.spe > span:contains(Japanese)")?.ownText()?.trim()
+        val engName = document.selectFirst("div.spe > span:contains(English)")?.ownText()?.trim()
+        val duration = document.selectFirst("div.spe > span:contains(Duration)")?.ownText()
+            ?.filter { it.isDigit() }?.toIntOrNull()
+        val studio = document.selectFirst("div.spe > span:contains(Studio) a")?.text()?.trim()
+
         val episodeLinks = document.select("div.lstepsiode.listeps ul li").mapNotNull {
             val header = it.selectFirst("span.lchx > a") ?: return@mapNotNull null
             val episode = Regex("Episode\\s?(\\d+)").find(header.text())?.groupValues?.getOrNull(1)?.toIntOrNull()
@@ -141,16 +147,18 @@ class Samehadaku : MainAPI() {
         val tracker = APIHolder.getTracker(listOf(title), TrackerType.getTypes(type), year, true)
 
         return newAnimeLoadResponse(title, url, type) {
-            engName = title
+            this.japName = japName
+            engName = engName ?: title
             posterUrl = tracker?.image ?: poster
             backgroundPosterUrl = tracker?.cover
             this.year = year
+            this.duration = duration
             addEpisodes(DubStatus.Subbed, episodes)
             showStatus = status
             if (rating != null) addScore(rating.toString())
             plot = description
             addTrailer(trailer)
-            this.tags = tags
+            this.tags = if (studio != null) tags + studio else tags
             this.recommendations = recommendations
             addMalId(tracker?.malId)
             addAniListId(tracker?.aniId?.toIntOrNull())
