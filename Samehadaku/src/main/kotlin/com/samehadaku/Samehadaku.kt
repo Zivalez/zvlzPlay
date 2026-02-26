@@ -60,7 +60,7 @@ class Samehadaku : MainAPI() {
 
     private fun Element.toSearchResult(): AnimeSearchResponse? {
         val a = this.selectFirst("div.animepost a") ?: return null
-        val title = a.selectFirst("div.title h2")?.text()?.trim() ?: a.attr("title") ?: return null
+        val title = a.selectFirst("div.title h2")?.text()?.removeBloat() ?: a.attr("title")?.removeBloat() ?: return null
         val href = fixUrlNull(a.attr("href")) ?: return null
         val posterUrl = fixUrlNull(this.selectFirst("div.content-thumb img")?.attr("src"))
         val statusText = a.selectFirst("div.data > div.type")?.text()?.trim() ?: ""
@@ -73,7 +73,7 @@ class Samehadaku : MainAPI() {
 
     private fun Element.toLatestAnimeResult(): AnimeSearchResponse? {
         val a = this.selectFirst("div.thumb a") ?: return null
-        val title = this.selectFirst("h2.entry-title a")?.text()?.trim() ?: a.attr("title") ?: return null
+        val title = this.selectFirst("h2.entry-title a")?.text()?.removeBloat() ?: a.attr("title")?.removeBloat() ?: return null
         val href = fixUrlNull(a.attr("href")) ?: return null
         val posterUrl = fixUrlNull(a.selectFirst("img")?.attr("src"))
         val epNum = this.selectFirst("div.dtla author")?.text()?.toIntOrNull()
@@ -211,5 +211,5 @@ class Samehadaku : MainAPI() {
     }
 
     private fun String.removeBloat(): String =
-        this.replace(Regex("(Nonton)|(Anime)|(Subtitle\\sIndonesia)"), "").trim()
+        this.replace(Regex("(Nonton)|(Anime)|(Subtitle\\sIndonesia)|(Sub\\sIndo)", RegexOption.IGNORE_CASE), "").trim()
 }
