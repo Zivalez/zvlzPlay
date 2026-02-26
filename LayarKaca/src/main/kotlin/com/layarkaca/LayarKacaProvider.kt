@@ -2,6 +2,7 @@ package com.layarkaca
 
 import com.lagradost.api.Log
 import com.lagradost.cloudstream3.*
+import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.utils.*
 import org.json.JSONObject
@@ -127,18 +128,32 @@ class LayarKacaProvider : MainAPI() {
         val document = app.get(fixUrl).document
 
         val baseurl=fetchURL(fixUrl)
-        val title = document.selectFirst("div.movie-info h1")?.text()?.trim().toString()
+        val title = document.selectFirst("div.movie-info h1")?.text()
+            ?.replace(Regex("^Nonton\\s+", RegexOption.IGNORE_CASE), "")
+            ?.replace(Regex("\\s+Sub Indo.*$", RegexOption.IGNORE_CASE), "")
+            ?.trim() ?: ""
         val poster = document.select("meta[property=og:image]").attr("content")
-        val tags = document.select("div.tag-list span").map { it.text() }
+        val tags = document.select("div.tag-list span.tag a[href*='/genre/']").map { it.text() }
         val posterheaders= mapOf("Referer" to getBaseUrl(poster))
 
-        val year = Regex("\\d, (\\d+)").find(
-            document.select("div.movie-info h1").text().trim()
-        )?.groupValues?.get(1).toString().toIntOrNull()
+        val year = Regex("\\((\\d{4})\\)").find(
+            document.select("div.movie-info h1").text()
+        )?.groupValues?.get(1)?.toIntOrNull()
         val tvType = if (document.selectFirst("#season-data") != null) TvType.TvSeries else TvType.Movie
-        val description = document.selectFirst("div.meta-info")?.text()?.trim()
+        val description = document.selectFirst("div.synopsis")?.attr("data-full")?.trim()
+            ?.takeIf { it.isNotEmpty() }
+            ?: document.selectFirst("div.synopsis")?.text()?.trim()
         val trailer = document.selectFirst("ul.action-left > li:nth-child(3) > a")?.attr("href")
         val rating = document.selectFirst("div.info-tag strong")?.text()
+
+        val durationText = document.select("div.info-tag span").map { it.text().trim() }
+            .firstOrNull { it.contains(Regex("\\d+h|\\d+m")) }
+        val duration = durationText?.let {
+            val hours = Regex("(\\d+)h").find(it)?.groupValues?.get(1)?.toIntOrNull() ?: 0
+            val mins = Regex("(\\d+)m").find(it)?.groupValues?.get(1)?.toIntOrNull() ?: 0
+            if (hours + mins > 0) hours * 60 + mins else null
+        }
+        val actors = document.select("div.detail p:contains(Bintang Film) a").map { it.text() }
 
         val recommendations = document.select("li.slider article").map {
             val recName = it.selectFirst("h3")?.text()?.trim().toString()
@@ -176,10 +191,12 @@ class LayarKacaProvider : MainAPI() {
                 this.posterUrl = poster
                 this.posterHeaders = posterheaders
                 this.year = year
+                this.duration = duration
                 this.plot = description
                 this.tags = tags
                 this.score = Score.from10(rating)
                 this.recommendations = recommendations
+                if (actors.isNotEmpty()) addActors(actors)
                 addTrailer(trailer)
             }
         } else {
@@ -187,10 +204,12 @@ class LayarKacaProvider : MainAPI() {
                 this.posterUrl = poster
                 this.posterHeaders = posterheaders
                 this.year = year
+                this.duration = duration
                 this.plot = description
                 this.tags = tags
                 this.score = Score.from10(rating)
                 this.recommendations = recommendations
+                if (actors.isNotEmpty()) addActors(actors)
                 addTrailer(trailer)
             }
         }
