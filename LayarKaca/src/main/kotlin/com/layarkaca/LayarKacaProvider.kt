@@ -30,7 +30,7 @@ class LayarKacaProvider : MainAPI() {
         "$mainUrl/populer/page/" to "Film Terplopuler",
         "$seriesUrl/latest-series/page/" to "Series Terbaru",
         "$seriesUrl/series/ongoing/page/" to "Series Ongoing",
-        "$seriesUrl/series/completed/page/" to "Series Completed",
+        "$seriesUrl/series/complete/page/" to "Series Complete",
         "$seriesUrl/series/asian/page/" to "Series Asian",
         "$seriesUrl/series/west/page/" to "Series West",
         "$mainUrl/rating/page/" to "Film Berdasarkan IMDb Rating",
