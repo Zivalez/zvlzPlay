@@ -3,5 +3,10 @@
     "puppeteer": "^24.37.5",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2"
-  }
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.3.1"
+  },
+  "scripts": {}
 }
