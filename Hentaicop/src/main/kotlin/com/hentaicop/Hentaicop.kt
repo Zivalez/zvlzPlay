@@ -11,7 +11,6 @@ class Hentaicop : MainAPI() {
     override val supportedTypes = setOf(TvType.NSFW)
     override var lang = "id"
     override val hasMainPage = true
-    override val hasSearch = true
 
     override val mainPage = mainPageOf(
         "$mainUrl/" to "Terbaru",
@@ -74,7 +73,10 @@ class Hentaicop : MainAPI() {
         val episodes = doc.select(".eplister li a").reversed().mapIndexed { idx, a ->
             val epNum = a.selectFirst(".epl-num")?.text()?.toIntOrNull() ?: (idx + 1)
             val epTitle = a.selectFirst(".epl-title")?.text() ?: "Episode $epNum"
-            Episode(data = a.attr("href"), name = epTitle, episode = epNum)
+            newEpisode(a.attr("href")) {
+                this.name = epTitle
+                this.episode = epNum
+            }
         }
 
         return newAnimeLoadResponse(rawTitle, url, TvType.NSFW) {
