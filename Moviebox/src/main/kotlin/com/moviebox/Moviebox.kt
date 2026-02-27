@@ -27,36 +27,36 @@ class Moviebox : MainAPI() {
     )
 
     override val mainPage: List<MainPageData> = mainPageOf(
-        // --- Indonesian ---
-        "6528093688173053896" to "Trending Indonesian Movies",
-        "5283462032510044280" to "Trending Indonesian Drama",
-        "5848753831881965888" to "Indonesian Horror Stories",
-        // --- Drama by Region ---
+        // Indonesia
+        "6528093688173053896" to "Trending Film Indonesia",
+        "5283462032510044280" to "Trending Drama Indonesia",
+        "5848753831881965888" to "Film Horor Indonesia",
+        // Drama
         "4380734070238626200" to "K-Drama",
         "8624142774394406504" to "C-Drama",
         "1164329479448281992" to "Thai Drama",
-        "7736026911486755336" to "Western TV",
-        // --- Anime & Animation ---
-        "5404290953194750296" to "Trending Anime",
-        "7132534597631837112" to "Animated Film",
-        // --- General ---
-        "872031290915189720"  to "Trending Now",
-        "997144265920760504"  to "Popular Movie",
-        // --- Filter: Movie ---
-        "1,ForYou"   to "Movie For You",
-        "1,Hottest"  to "Movie Hottest",
-        "1,Latest"   to "Movie Latest",
-        "1,Rating"   to "Movie Top Rated",
-        // --- Filter: TV Show ---
-        "2,ForYou"   to "TV Show For You",
-        "2,Hottest"  to "TV Show Hottest",
-        "2,Latest"   to "TV Show Latest",
-        "2,Rating"   to "TV Show Top Rated",
-        // --- Filter: Animation ---
-        "1006,ForYou"  to "Animation For You",
-        "1006,Hottest" to "Animation Hottest",
-        "1006,Latest"  to "Animation Latest",
-        "1006,Rating"  to "Animation Top Rated",
+        "7736026911486755336" to "Drama Barat",
+        // Anime & Animasi
+        "5404290953194750296" to "Anime Trending",
+        "7132534597631837112" to "Film Animasi",
+        // Umum 
+        "872031290915189720"  to "Trending Sekarang",
+        "997144265920760504"  to "Film Populer",
+        // Film 
+        "1,ForYou"   to "Film Untuk Kamu",
+        "1,Hottest"  to "Film Terpanas",
+        "1,Latest"   to "Film Terbaru",
+        "1,Rating"   to "Film Terbaik",
+        // Serial 
+        "2,ForYou"   to "Serial Untuk Kamu",
+        "2,Hottest"  to "Serial Terpanas",
+        "2,Latest"   to "Serial Terbaru",
+        "2,Rating"   to "Serial Terbaik",
+        // Animasi
+        "1006,ForYou"  to "Animasi Untuk Kamu",
+        "1006,Hottest" to "Animasi Terpanas",
+        "1006,Latest"  to "Animasi Terbaru",
+        "1006,Rating"  to "Animasi Terbaik",
     )
 
     override suspend fun getMainPage(
