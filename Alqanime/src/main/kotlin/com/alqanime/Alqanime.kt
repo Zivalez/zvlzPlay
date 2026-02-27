@@ -3,7 +3,6 @@ package com.alqanime
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
-import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
@@ -129,7 +128,7 @@ class Alqanime : MainAPI() {
             speMap.entries.find { it.key.contains("Durasi", true) }?.value ?: ""
         )?.groupValues?.getOrNull(1)?.toIntOrNull()
         val actors = document.select("div.spe span:contains(Casts) a.casts")
-            .map { ActorData(Actor(it.text())) }
+            .map { Actor(it.text()) }
         val scoreText = document.selectFirst("strong:contains(Score)")?.text()
             ?.replace("Score", "")?.trim()
 
@@ -173,7 +172,7 @@ class Alqanime : MainAPI() {
             addTrailer(trailer, addRaw = true)
             this.tags = listOfNotNull(*genres.toTypedArray(), studio, season)
             addActors(actors)
-            this.rating = scoreText?.toFloatOrNull()?.let { (it * 1000).toInt() }
+            this.score = Score.from10(scoreText?.toFloatOrNull())
         }
     }
 
