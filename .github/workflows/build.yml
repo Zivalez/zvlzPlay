@@ -59,7 +59,7 @@ jobs:
 
       - name: Generate repo.json
         run: |
-          echo '{"name":"zvlzPlay","description":"🇮🇩 Indonesian Movie & Series Repository for CloudStream","iconUrl":"https://public-assets.zvlz.my.id/cloudstream/zvlz_icon.avif","manifestVersion":1,"pluginLists":["https://cloudstream.zvlz.my.id/builds/plugins.json"]}' | python3 -m json.tool > $GITHUB_WORKSPACE/builds/repo.json
+          echo '{"name":"zvlzPlay","description":"🇮🇩 Indonesian Movie & Series Repository for CloudStream","iconUrl":"https://raw.githubusercontent.com/Zivalez/Zivalez/refs/heads/main/neko.png","manifestVersion":1,"pluginLists":["https://cloudstream.zvlz.my.id/builds/plugins.json"]}' | python3 -m json.tool > $GITHUB_WORKSPACE/builds/repo.json
 
       - name: Process plugins.json
         run: |
