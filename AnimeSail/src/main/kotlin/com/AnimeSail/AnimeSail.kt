@@ -11,8 +11,6 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import com.lagradost.cloudstream3.SubtitleFile
-import com.lagradost.cloudstream3.app
 
 class AnimeSail : MainAPI() {
     override var mainUrl = "https://154.26.137.28"
@@ -192,14 +190,12 @@ class AnimeSail : MainAPI() {
                                         else -> this@AnimeSail.name
                                     }
                                     callback.invoke(
-                                        ExtractorLink(
+                                        newExtractorLink(
                                             source = source,
                                             name = source,
                                             url = link,
                                             referer = mainUrl,
-                                            quality = getIndexQuality(element.text()),
-                                            type = ExtractorLinkType.VIDEO
-                                        )
+                                        ) { this.quality = getIndexQuality(element.text()) }
                                     )
                                 }
 
