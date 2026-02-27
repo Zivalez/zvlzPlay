@@ -21,6 +21,28 @@
         "name": "Alqanime"
     },
     {
+        "iconUrl": "https://aghanim.xyz/wp-content/themes/animesail/assets/images/ico.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 17742,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "Asm0d3usX",
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "version": 1,
+        "internalName": "AnimeSail",
+        "description": "Streaming Anime Subtitle Indonesia dari AnimeSail",
+        "url": "https://cloudstream.zvlz.my.id/builds/AnimeSail.cs3",
+        "name": "AnimeSail"
+    },
+    {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/funmovieslix.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
