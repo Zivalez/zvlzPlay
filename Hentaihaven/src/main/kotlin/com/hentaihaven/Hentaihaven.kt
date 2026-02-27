@@ -2,6 +2,7 @@ package com.hentaihaven
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.lagradost.cloudstream3.*
+import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.utils.AppUtils.tryParseJson
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.M3u8Helper
@@ -64,6 +65,7 @@ class Hentaihaven : MainAPI() {
             .map { it.text().trim() }
             .filter { it.isNotBlank() }
             .distinct()
+        val studios = document.select("a[href*='/studio/']").map { it.text().trim() }.filter { it.isNotBlank() }
 
         val episodes = document.select("li.hentai__chapter a[href*='/episode-']").mapNotNull { a ->
             val epUrl = fixUrlNull(a.attr("href")) ?: return@mapNotNull null
@@ -80,6 +82,7 @@ class Hentaihaven : MainAPI() {
         return newAnimeLoadResponse(title, url, TvType.NSFW) {
             posterUrl = poster
             plot = synopsis
+            addActors(studios.map { Actor(it) })
             this.tags = genres
             addEpisodes(DubStatus.Subbed, episodes)
         }
