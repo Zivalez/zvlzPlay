@@ -59,22 +59,20 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Provider yang Aktif Saat Ini
 
-| Provider | Status |
-| ------ | ------ |
-| Idlix | ✅ aktif |
-| LayarKaca | ✅ aktif |
-| Pencurimovie | ✅ aktif |
-| Funmovieslix | ✅ aktif |
-| Samehadaku | ✅ aktif |
-| Otakudesu | ✅ aktif |
-| Alqanime | ✅ aktif |
-| Kuramanime | ❌ nonaktif |
-| Winbu | ❌ nonaktif |
-
-## Provider yang akan ditambahkan nantinya
-
--   **Oploverz**
--   **Nontonanimeid**
+| Provider | Konten | Status |
+| ------ | ------ | ------ |
+| Idlix | Movie, TV Series, Drama, Anime | ✅ aktif |
+| LayarKaca | Movie, TV Series, Drama, Anime | ✅ aktif |
+| Pencurimovie | Movie | ✅ aktif |
+| Funmovieslix | Movie, TV Series, Drama | ✅ aktif |
+| Moviebox | Movie, TV Series, Anime, Drama | ✅ aktif |
+| Samehadaku | Anime | ✅ aktif |
+| Otakudesu | Anime | ✅ aktif |
+| Alqanime | Anime | ✅ aktif |
+| Nontonanimeid | Anime | ✅ aktif |
+| Kuronime | Anime | ✅ aktif |
+| Kuramanime | Anime, Donghua | ❌ nonaktif |
+| Winbu | Anime, Donghua | ✅ aktif |
 
 ## FAQ (Pertanyaan yang sering ditanyain)
 
@@ -83,29 +81,15 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 - Karena CloudStream butuh extension (repository) dulu.
 
 ### Provider mana yang paling bagus buat nonton Anime?
-- **Samehadaku** (streaming tercepat)
+- **Samehadaku** (paling lengkap & streaming tercepat)
+- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime** (alternatif)
 
-### Provider mana buat nonton Drama?
-- **Idlix**
-- **LayarKaca**
-- **Funmovieslix**
-- **Pencurimovie**
-
-### Provider mana buat nonton Movie?
-- **Idlix**
-- **LayarKaca**
-- **Funmovieslix**
-- **Pencurimovie**
+### Provider mana buat nonton Drama & Movie?
+- **Idlix** (paling lengkap)
+- **LayarKaca**, **Funmovieslix**, **Pencurimovie**, **Moviebox**
 
 ### Donghua ada?
-- Buat sekarang blm ada
-- Rencana nanti nonton Donghua dari **Winbu**
-
-### Kenapa video Kuramanime gak bisa diputar?
-- Karena scraping URL video-nya lagi bermasalah (maintenance). Homepage, search, dan info anime masih jalan normal.
-
-### Kenapa Winbu belum aktif?
-- Masih tahap eksperimen, belum ada implementasi yang selesai.
+- Ada, bisa lewat **Winbu** (kategori Donghua)
 
 ### Kok search gak nemu?
 - Pastiin provider sudah di install

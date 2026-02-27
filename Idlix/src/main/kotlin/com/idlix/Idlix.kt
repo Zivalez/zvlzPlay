@@ -150,7 +150,11 @@ class Idlix : MainAPI() {
             ?.selectFirst("a")
             ?.attr("href")
             ?: document.select("div.poster > img").attr("src")
-        val tags = document.select("div.sgeneros > a").map { it.text() }
+        val genreTags = document.select("div.sgeneros > a").map { it.text() }
+        val serverSuffixes = document.select("ul#playeroptionsul > li span.title")
+            .mapNotNull { Regex("\\([^)]+\\)$").find(it.text().trim())?.value }
+            .distinct()
+        val tags = serverSuffixes + genreTags
         val year = Regex(",\\s?(\\d+)").find(
             document.select("span.date").text().trim()
         )?.groupValues?.get(1).toString().toIntOrNull()
@@ -243,12 +247,14 @@ class Idlix : MainAPI() {
         val idlixTime = match?.groups?.get(2)?.value ?: ""
 
         document.select("ul#playeroptionsul > li").map {
-                Triple(
-                    it.attr("data-post"),
-                    it.attr("data-nume"),
-                    it.attr("data-type")
+                val label = it.selectFirst("span.title")?.text()?.trim() ?: ""
+                val suffix = Regex("\\([^)]+\\)$").find(label)?.value ?: ""
+                Pair(
+                    Triple(it.attr("data-post"), it.attr("data-nume"), it.attr("data-type")),
+                    suffix
                 )
-            }.amap { (id, nume, type) ->
+            }.amap { (ids, suffix) ->
+            val (id, nume, type) = ids
             val json = app.post(
                 url = "$directUrl/wp-admin/admin-ajax.php",
                 data = mapOf(
@@ -265,8 +271,12 @@ class Idlix : MainAPI() {
             Log.d("Phisher",decrypted.toJson())
 
             when {
-                !decrypted.contains("youtube") ->
-                    loadExtractor(decrypted,directUrl,subtitleCallback,callback)
+                !decrypted.contains("youtube") -> {
+                    val labelledCallback: (ExtractorLink) -> Unit = { link ->
+                        callback(if (suffix.isNotEmpty()) link.copy(name = "${link.name} $suffix") else link)
+                    }
+                    loadExtractor(decrypted, directUrl, subtitleCallback, labelledCallback)
+                }
                 else -> return@amap
             }
 
