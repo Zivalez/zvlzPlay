@@ -14,23 +14,25 @@ Dia cuma jadi “player + mesin pencari”.
 Supaya bisa nonton, perlu pasang yang namanya Ekstensi (plugin).\
 Ekstensi ini yang tugasnya ngambil (scraping) data video dari berbagai situs streaming di internet, trus nampilin di dalam CloudStream.
 
-**zvlzPlay** itu proyek khusus yang isinya kumpulan provider buat situs streaming Indonesia.\
+**zvlzPlay** itu proyek khusus yang isinya kumpulan provider buat situs streaming Indonesia/internasional.\
 Jadi gampangnya:
 
 CloudStream = aplikasinya (wadahnya)\
 zvlzPlay = isi/ekstensi buat dapetin konten streaming
 
 
-## Fitur Utama CloudStream
+## Fitur
 
--    Ga ada iklan
+-    AdFree, No ads whatsoever
+-    No tracking/analytics
+-    Bookmarks
+-    Phone and TV support
+-    Chromecast
 -    Bisa skip opening
 -    Ga perlu login
--    Full gratis
 -    Bisa pilih/ganti provider, sesuai kebutuhan
 -    Resolusi tergantung provider (kebanyakan 1080p ke atas)
 -    Universal search (kalo masang banyak provider lebih bagus, karna lebih lengkap dan beragam hasilnya)
--    Yg jelas fitur lengkap dah :v
 
 
 ## Download Aplikasi
@@ -66,6 +68,8 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Samehadaku | ✅ aktif |
 | Otakudesu | ✅ aktif |
 | Alqanime | ✅ aktif |
+| Kuramanime | ❌ nonaktif |
+| Winbu | ❌ nonaktif |
 
 ## Provider yang akan ditambahkan nantinya
 
@@ -79,16 +83,19 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 - Karena CloudStream butuh extension (repository) dulu.
 
 ### Provider mana yang paling bagus buat nonton Anime?
-- **Samehadaku** (streaming tercepat, terutama dari krakenfiles)
-- **Otakudesu** (resolusi streaming mentok 720p + server video streamnya agak lemot)
-- **Kuramanime** (update anime tercepat, sayangnya masih maintenance)
+- **Samehadaku** (streaming tercepat)
 
 ### Provider mana buat nonton Drama?
+- **Idlix**
 - **LayarKaca**
+- **Funmovieslix**
+- **Pencurimovie**
 
 ### Provider mana buat nonton Movie?
 - **Idlix**
 - **LayarKaca**
+- **Funmovieslix**
+- **Pencurimovie**
 
 ### Donghua ada?
 - Buat sekarang blm ada
@@ -108,5 +115,5 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Laporan
 
-Kalo ada server/provider yang mati, dm ke wa gw aja. \
+Kalo ada server/provider yang mati, pc ke wa gw aja. \
 [chat atmint fast respon (slow respon berarti turu)](https://wa.me/6281281465721?text=oi%20min)

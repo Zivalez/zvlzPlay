@@ -211,7 +211,7 @@ class Idlix : MainAPI() {
                 if (rating != null) addScore(rating.toString(), 10)
                 addActors(actors)
                 this.recommendations = recommendations
-                addTrailer(trailer, addRaw = true)
+                addTrailer(trailer)
             }
         } else {
             newMovieLoadResponse(title, url, TvType.Movie, url) {
@@ -223,7 +223,7 @@ class Idlix : MainAPI() {
                 if (rating != null) addScore(rating.toString(), 10)
                 addActors(actors)
                 this.recommendations = recommendations
-                addTrailer(trailer, addRaw = true)
+                addTrailer(trailer)
             }
         }
     }
