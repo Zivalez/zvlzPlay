@@ -98,10 +98,10 @@ class Idlix : MainAPI() {
     private fun getQuality(qualityStr: String): SearchQuality? {
         val q = qualityStr.trim().replace("-", "").replace(" ", "").lowercase()
         return when {
-            q.contains("webdl") -> SearchQuality.WebDL
-            q.contains("webrip") -> SearchQuality.WEBRip
+            q.contains("webdl") -> SearchQuality.WebRip
+            q.contains("webrip") -> SearchQuality.WebRip
             q.contains("bluray") -> SearchQuality.BlueRay
-            q.contains("web") -> SearchQuality.WEB
+            q.contains("web") -> SearchQuality.WebRip
             else -> getQualityFromString(qualityStr)
         }
     }
