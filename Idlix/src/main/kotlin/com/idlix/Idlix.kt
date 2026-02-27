@@ -291,7 +291,18 @@ class Idlix : MainAPI() {
             when {
                 !decrypted.contains("youtube") -> {
                     val labelledCallback: (ExtractorLink) -> Unit = { link ->
-                        callback(if (suffix.isNotEmpty()) link.copy(name = "${link.name} $suffix") else link)
+                        if (suffix.isNotEmpty()) {
+                            callback(ExtractorLink(
+                                source = link.source,
+                                name = "${link.name} $suffix",
+                                url = link.url,
+                                referer = link.referer,
+                                quality = link.quality,
+                                type = link.type,
+                                headers = link.headers,
+                                extractorData = link.extractorData
+                            ))
+                        } else callback(link)
                     }
                     loadExtractor(decrypted, directUrl, subtitleCallback, labelledCallback)
                 }
