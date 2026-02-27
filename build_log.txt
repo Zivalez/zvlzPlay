@@ -33,8 +33,8 @@ w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Samehadaku/build.gradle.kts:13
 > Task :AnimeSail:preDebugBuild UP-TO-DATE
 > Task :Alqanime:generateDebugResValues
 > Task :AnimeSail:generateDebugResValues
-> Task :AnimeSail:generateDebugResources
 > Task :Alqanime:generateDebugResources
+> Task :AnimeSail:generateDebugResources
 > Task :Funmovieslix:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :Funmovieslix:preBuild UP-TO-DATE
 > Task :Funmovieslix:preDebugBuild UP-TO-DATE
@@ -44,26 +44,19 @@ w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Samehadaku/build.gradle.kts:13
 > Task :Hentaicop:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :Hentaicop:preBuild UP-TO-DATE
 > Task :Hentaicop:preDebugBuild UP-TO-DATE
-> Task :AnimeSail:packageDebugResources
 > Task :Hentaicop:generateDebugResValues FROM-CACHE
+> Task :AnimeSail:packageDebugResources
+> Task :Hentaicop:generateDebugResources FROM-CACHE
 > Task :Alqanime:packageDebugResources
-> Task :AnimeSail:parseDebugLocalResources
 > Task :Alqanime:parseDebugLocalResources
+> Task :AnimeSail:parseDebugLocalResources
 > Task :AnimeSail:generateDebugRFile
 > Task :Alqanime:generateDebugRFile
 > Task :AnimeSail:compileDebugKotlin
 > Task :Alqanime:compileDebugKotlin
 
 > Task :AnimeSail:compileDebugKotlin FAILED
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/src/main/kotlin/com/AnimeSail/AnimeSail.kt:9:8 Unresolved reference 'kotlinx'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/src/main/kotlin/com/AnimeSail/AnimeSail.kt:10:8 Unresolved reference 'kotlinx'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/src/main/kotlin/com/AnimeSail/AnimeSail.kt:11:8 Unresolved reference 'kotlinx'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/src/main/kotlin/com/AnimeSail/AnimeSail.kt:175:9 Unresolved reference 'coroutineScope'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/src/main/kotlin/com/AnimeSail/AnimeSail.kt:176:70 Cannot infer type for type parameter 'R'. Specify it explicitly.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/src/main/kotlin/com/AnimeSail/AnimeSail.kt:177:17 Unresolved reference 'async'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/src/main/kotlin/com/AnimeSail/AnimeSail.kt:178:21 Suspension functions can only be called within coroutine body.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/src/main/kotlin/com/AnimeSail/AnimeSail.kt:195:41 This API is only available on prerelease builds. Using it will cause CloudStream stable to crash.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/src/main/kotlin/com/AnimeSail/AnimeSail.kt:228:18 Unresolved reference 'awaitAll'.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/src/main/kotlin/com/AnimeSail/AnimeSail.kt:197:45 No parameter with name 'referer' found.
 
 > Task :Alqanime:compileDebugKotlin
 w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/src/main/kotlin/com/alqanime/Alqanime.kt:145:26 Type annotation class 'Nullable' of the inferred type is inaccessible. Check the module classpath for missing or conflicting dependencies. This will become an error in language version 2.4. See https://youtrack.jetbrains.com/issue/KT-80247.
@@ -122,6 +115,35 @@ org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':AnimeSa
 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:111)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:138)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:123)
+	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
+	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$10(DefaultBuildLifecycleController.java:313)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$8(StateTransitionController.java:177)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:46)
+	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:177)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:304)
+	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:220)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:263)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:127)
+	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:181)
+	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:50)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:198)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:198)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
 Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionException: A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
@@ -252,6 +274,35 @@ Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionExcept
 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:111)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:138)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:123)
+	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
+	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$10(DefaultBuildLifecycleController.java:313)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$8(StateTransitionController.java:177)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:46)
+	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:177)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:304)
+	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:220)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:263)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:127)
+	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:181)
+	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:50)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:198)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:198)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
 Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilation error. See log for more details
@@ -287,5 +338,5 @@ Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilat
 	... 2 more
 
 
-BUILD FAILED in 3m 15s
-16 actionable tasks: 13 executed, 3 from cache
+BUILD FAILED in 3m 6s
+17 actionable tasks: 13 executed, 4 from cache

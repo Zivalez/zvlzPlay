@@ -191,11 +191,13 @@ class AnimeSail : MainAPI() {
                                     }
                                     callback.invoke(
                                         newExtractorLink(
-                                            source = source,
-                                            name = source,
-                                            url = link,
-                                            referer = mainUrl,
-                                        ) { this.quality = getIndexQuality(element.text()) }
+                                            source,
+                                            source,
+                                            link,
+                                        ) {
+                                            this.referer = mainUrl
+                                            this.quality = getIndexQuality(element.text())
+                                        }
                                     )
                                 }
 
