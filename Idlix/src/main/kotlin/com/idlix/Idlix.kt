@@ -265,14 +265,12 @@ class Idlix : MainAPI() {
         val idlixTime = match?.groups?.get(2)?.value ?: ""
 
         document.select("ul#playeroptionsul > li").map {
-                val label = it.selectFirst("span.title")?.text()?.trim() ?: ""
-                val suffix = Regex("\\([^)]+\\)$").find(label)?.value ?: ""
-                Pair(
-                    Triple(it.attr("data-post"), it.attr("data-nume"), it.attr("data-type")),
-                    suffix
+                Triple(
+                    it.attr("data-post"),
+                    it.attr("data-nume"),
+                    it.attr("data-type")
                 )
-            }.amap { (ids, suffix) ->
-            val (id, nume, type) = ids
+            }.amap { (id, nume, type) ->
             val json = app.post(
                 url = "$directUrl/wp-admin/admin-ajax.php",
                 data = mapOf(
@@ -289,23 +287,8 @@ class Idlix : MainAPI() {
             Log.d("Phisher",decrypted.toJson())
 
             when {
-                !decrypted.contains("youtube") -> {
-                    val labelledCallback: (ExtractorLink) -> Unit = { link ->
-                        if (suffix.isNotEmpty()) {
-                            callback(ExtractorLink(
-                                source = link.source,
-                                name = "${link.name} $suffix",
-                                url = link.url,
-                                referer = link.referer,
-                                quality = link.quality,
-                                type = link.type,
-                                headers = link.headers,
-                                extractorData = link.extractorData
-                            ))
-                        } else callback(link)
-                    }
-                    loadExtractor(decrypted, directUrl, subtitleCallback, labelledCallback)
-                }
+                !decrypted.contains("youtube") ->
+                    loadExtractor(decrypted, directUrl, subtitleCallback, callback)
                 else -> return@amap
             }
 
