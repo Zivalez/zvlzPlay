@@ -29,10 +29,15 @@ class Idlix : MainAPI() {
 
     override val mainPage = mainPageOf(
         "$mainUrl/" to "Featured",
+        "$mainUrl/movie/page/" to "Film Terbaru",
+        "$mainUrl/genre/action/page/" to "Film Action",
         "$mainUrl/genre/drama-korea/page/" to "Drama Korea",
-        "$mainUrl/movie/page/" to "Movie Terbaru",
+        "$mainUrl/genre/anime/page/" to "Anime",
+        "$mainUrl/tag/imax/page/" to "IMAX",
+        "$mainUrl/tvseries/page/" to "Serial TV",
+        "$mainUrl/season/page/" to "Season Terbaru",
+        "$mainUrl/episode/page/" to "Episode Terbaru",
         "$mainUrl/trending/page/?get=movies" to "Trending Movies",
-        "$mainUrl/tvseries/page/" to "TV Series Terbaru",
         "$mainUrl/trending/page/?get=tv" to "Trending TV Series",
         "$mainUrl/network/netflix/page/" to "Netflix Series",
         "$mainUrl/network/disney/page/" to "Disney+ Series",
@@ -90,11 +95,22 @@ class Idlix : MainAPI() {
         }
     }
 
+    private fun getQuality(qualityStr: String): SearchQuality? {
+        val q = qualityStr.trim().replace("-", "").replace(" ", "").lowercase()
+        return when {
+            q.contains("webdl") -> SearchQuality.WebDl
+            q.contains("webrip") -> SearchQuality.WebRip
+            q.contains("bluray") -> SearchQuality.BluRay
+            q.contains("web") -> SearchQuality.Web
+            else -> getQualityFromString(qualityStr)
+        }
+    }
+
     private fun Element.toSearchResult(): SearchResponse {
         val title = this.selectFirst("h3 > a")!!.text().replace(Regex("\\(\\d{4}\\)"), "").trim()
         val href = getProperLink(this.selectFirst("h3 > a")!!.attr("href"))
         val posterUrl = this.select("div.poster > img").attr("src")
-        val quality = getQualityFromString(this.select("span.quality").text())
+        val quality = getQuality(this.select("span.quality").text())
         val rating = this.selectFirst("div.poster > div.rating")?.text()?.trim()
         return newMovieSearchResponse(title, href, TvType.Movie) {
             this.posterUrl = posterUrl
@@ -143,7 +159,11 @@ class Idlix : MainAPI() {
          val description = if (tvType == TvType.Movie) 
             document.select("div.wp-content > p").text().trim() else 
             document.select("div.content > center > p:nth-child(3)").text().trim()
-        val trailer = document.selectFirst("div.embed iframe")?.attr("src")
+        val trailerSrc = document.selectFirst("#trailer .embed iframe, div.embed iframe")?.attr("src")
+        val trailer = trailerSrc?.let {
+            val ytId = Regex("youtube\\.com/embed/([^?&]+)").find(it)?.groupValues?.get(1)
+            if (ytId != null) "https://www.youtube.com/watch?v=$ytId" else it
+        }
         val rating = document.selectFirst("span.dt_rating_vgs[itemprop=ratingValue]")
         ?.text()
         ?.toDoubleOrNull()
