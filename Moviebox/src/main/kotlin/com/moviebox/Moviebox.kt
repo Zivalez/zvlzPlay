@@ -303,14 +303,8 @@ class Moviebox : MainAPI() {
                     @JsonProperty("se") val se: Int? = null,
                     @JsonProperty("maxEp") val maxEp: Int? = null,
                     @JsonProperty("allEp") val allEp: String? = null,
-                    @JsonProperty("episodes") val episodes: ArrayList<EpisodeItem>? = null,
-                ) {
-                    data class EpisodeItem(
-                        @JsonProperty("ep") val ep: Int? = null,
-                        @JsonProperty("title") val title: String? = null,
-                        @JsonProperty("cover") val cover: Items.Cover? = null,
-                    )
-                }
+                    @JsonProperty("episodes") val episodes: ArrayList<EpisodeList.Data.Item>? = null,
+                )
             }
         }
     }
