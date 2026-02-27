@@ -61,16 +61,16 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 | Provider | Konten | Status |
 | ------ | ------ | ------ |
-| Idlix | Movie, TV Series, Drama, Anime | ✅ aktif |
-| LayarKaca | Movie, TV Series, Drama, Anime | ✅ aktif |
-| Pencurimovie | Movie | ✅ aktif |
+| Idlix | Movie, TV Series, Drama Korea, Anime | ✅ aktif |
+| LayarKaca | Movie, TV Series, Drama Korea | ✅ aktif |
+| Pencurimovie | Movie, TV Series | ✅ aktif |
 | Funmovieslix | Movie, TV Series, Drama | ✅ aktif |
-| Moviebox | Movie, TV Series, Anime, Drama | ✅ aktif |
+| Moviebox | Movie, TV Series, Anime, K-Drama, C-Drama | ✅ aktif |
 | Samehadaku | Anime | ✅ aktif |
 | Otakudesu | Anime | ✅ aktif |
 | Alqanime | Anime | ✅ aktif |
 | Nontonanimeid | Anime | ✅ aktif |
-| Kuronime | Anime | ✅ aktif |
+| Kuronime | Anime, Live Action, Donghua | ✅ aktif |
 | Kuramanime | Anime, Donghua | ❌ nonaktif |
 | Winbu | Anime, Donghua | ✅ aktif |
 
@@ -95,7 +95,6 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 - Pastiin provider sudah di install
 - Di bagian search atur filter provider, diaktifkan semua jenis providernya
 - Lebih bagus install banyak provider biar hasil search lebih lengkap
-
 
 ## Laporan
 

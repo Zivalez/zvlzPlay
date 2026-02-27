@@ -27,29 +27,36 @@ class Moviebox : MainAPI() {
     )
 
     override val mainPage: List<MainPageData> = mainPageOf(
-        "872031290915189720" to "Trending Now",
-        "997144265920760504" to "Popular Movie",
-        "5283462032510044280" to "Latest Indonesian Drama",
+        // --- Indonesian ---
         "6528093688173053896" to "Trending Indonesian Movies",
-        "4380734070238626200" to "K-Drama",
-        "7736026911486755336" to "Western TV",
-        "8624142774394406504" to "Most Popular C-Drama",
-        "5404290953194750296" to "Trending Anime",
+        "5283462032510044280" to "Trending Indonesian Drama",
         "5848753831881965888" to "Indonesian Horror Stories",
-        "1164329479448281992" to "Thai-Drama",
+        // --- Drama by Region ---
+        "4380734070238626200" to "K-Drama",
+        "8624142774394406504" to "C-Drama",
+        "1164329479448281992" to "Thai Drama",
+        "7736026911486755336" to "Western TV",
+        // --- Anime & Animation ---
+        "5404290953194750296" to "Trending Anime",
         "7132534597631837112" to "Animated Film",
-        "1,ForYou" to "Movie ForYou",
-        "1,Hottest" to "Movie Hottest",
-        "1,Latest" to "Movie Latest",
-        "1,Rating" to "Movie Rating",
-        "2,ForYou" to "TVShow ForYou",
-        "2,Hottest" to "TVShow Hottest",
-        "2,Latest" to "TVShow Latest",
-        "2,Rating" to "TVShow Rating",
-        "1006,ForYou" to "Animation ForYou",
+        // --- General ---
+        "872031290915189720"  to "Trending Now",
+        "997144265920760504"  to "Popular Movie",
+        // --- Filter: Movie ---
+        "1,ForYou"   to "Movie For You",
+        "1,Hottest"  to "Movie Hottest",
+        "1,Latest"   to "Movie Latest",
+        "1,Rating"   to "Movie Top Rated",
+        // --- Filter: TV Show ---
+        "2,ForYou"   to "TV Show For You",
+        "2,Hottest"  to "TV Show Hottest",
+        "2,Latest"   to "TV Show Latest",
+        "2,Rating"   to "TV Show Top Rated",
+        // --- Filter: Animation ---
+        "1006,ForYou"  to "Animation For You",
         "1006,Hottest" to "Animation Hottest",
-        "1006,Latest" to "Animation Latest",
-        "1006,Rating" to "Animation Rating",
+        "1006,Latest"  to "Animation Latest",
+        "1006,Rating"  to "Animation Top Rated",
     )
 
     override suspend fun getMainPage(
@@ -109,11 +116,13 @@ class Moviebox : MainAPI() {
         val subject = document?.subject
         val title = subject?.title ?: ""
         val poster = subject?.cover?.url
-        val tags = subject?.genre?.split(",")?.map { it.trim() }
+        val tags = (subject?.genre?.split(",")?.map { it.trim() } ?: emptyList()) +
+            listOfNotNull(subject?.countryName?.takeIf { it.isNotEmpty() })
 
         val year = subject?.releaseDate?.substringBefore("-")?.toIntOrNull()
         val tvType = if (subject?.subjectType == 2) TvType.TvSeries else TvType.Movie
         val description = subject?.description
+        val duration = subject?.duration?.div(60L)?.toInt() ?: 0
         val trailer = subject?.trailer?.videoAddress?.url
         val rating = subject?.imdbRatingValue
         val actors = document?.stars?.mapNotNull { cast ->
@@ -133,27 +142,28 @@ class Moviebox : MainAPI() {
                 }
 
         return if (tvType == TvType.TvSeries) {
-            val episode = document?.resource?.seasons?.map { seasons ->
+            val episode = document?.resource?.seasons?.flatMap { seasons ->
+                val epItems = seasons.episodes?.associateBy { it.ep } ?: run {
+                    app.get("$secondAPIUrl/wefeed-h5-bff/web/subject/episode-list?subjectId=$id&se=${seasons.se}&page=1&perPage=200")
+                        .parsedSafe<EpisodeList>()?.data?.items?.associateBy { it.ep } ?: emptyMap()
+                }
                 (if (seasons.allEp.isNullOrEmpty()) (1..seasons.maxEp!!) else seasons.allEp.split(",")
                     .map { it.toInt() })
-                    .map { episode ->
-                        newEpisode(
-                            LoadData(
-                                id,
-                                seasons.se,
-                                episode,
-                                subject?.detailPath
-                            ).toJson()
-                        ) {
+                    .map { epNum ->
+                        val epData = epItems[epNum]
+                        newEpisode(LoadData(id, seasons.se, epNum, subject?.detailPath).toJson()) {
                             this.season = seasons.se
-                            this.episode = episode
+                            this.episode = epNum
+                            this.name = epData?.title?.takeIf { it.isNotEmpty() }
+                            this.posterUrl = epData?.cover?.url
                         }
                     }
-            }?.flatten() ?: emptyList()
+            } ?: emptyList()
             newTvSeriesLoadResponse(title, url, TvType.TvSeries, episode) {
                 this.posterUrl = poster
                 this.year = year
                 this.plot = description
+                this.duration = duration
                 this.tags = tags
                 this.score = Score.from10(rating)
                 this.actors = actors
@@ -170,6 +180,7 @@ class Moviebox : MainAPI() {
                 this.posterUrl = poster
                 this.year = year
                 this.plot = description
+                this.duration = duration
                 this.tags = tags
                 this.score = Score.from10(rating)
                 this.actors = actors
@@ -233,6 +244,20 @@ class Moviebox : MainAPI() {
         val detailPath: String? = null,
     )
 
+    data class EpisodeList(
+        @JsonProperty("data") val data: Data? = null,
+    ) {
+        data class Data(
+            @JsonProperty("items") val items: ArrayList<Item>? = arrayListOf(),
+        ) {
+            data class Item(
+                @JsonProperty("ep") val ep: Int? = null,
+                @JsonProperty("title") val title: String? = null,
+                @JsonProperty("cover") val cover: Items.Cover? = null,
+            )
+        }
+    }
+
     data class Media(
         @JsonProperty("data") val data: Data? = null,
     ) {
@@ -278,7 +303,14 @@ class Moviebox : MainAPI() {
                     @JsonProperty("se") val se: Int? = null,
                     @JsonProperty("maxEp") val maxEp: Int? = null,
                     @JsonProperty("allEp") val allEp: String? = null,
-                )
+                    @JsonProperty("episodes") val episodes: ArrayList<EpisodeItem>? = null,
+                ) {
+                    data class EpisodeItem(
+                        @JsonProperty("ep") val ep: Int? = null,
+                        @JsonProperty("title") val title: String? = null,
+                        @JsonProperty("cover") val cover: Items.Cover? = null,
+                    )
+                }
             }
         }
     }
