@@ -163,10 +163,28 @@ class Idlix : MainAPI() {
          val description = if (tvType == TvType.Movie) 
             document.select("div.wp-content > p").text().trim() else 
             document.select("div.content > center > p:nth-child(3)").text().trim()
-        val trailerSrc = document.selectFirst("#trailer .embed iframe, div.embed iframe")?.attr("src")
-        val trailer = trailerSrc?.let {
-            val ytId = Regex("youtube\\.com/embed/([^?&]+)").find(it)?.groupValues?.get(1)
-            if (ytId != null) "https://www.youtube.com/watch?v=$ytId" else it
+        val trailerEl = document.selectFirst("ul#playeroptionsul > li[data-nume=trailer]")
+        val scriptRegexLoad = """window\.idlixNonce=['"]([a-f0-9]+)['"].*?window\.idlixTime=(\d+)""".toRegex(RegexOption.DOT_MATCHES_ALL)
+        val scriptContentLoad = document.select("script:containsData(window.idlix)").toString()
+        val scriptMatchLoad = scriptRegexLoad.find(scriptContentLoad)
+        val nonceForTrailer = scriptMatchLoad?.groups?.get(1)?.value ?: ""
+        val timeForTrailer = scriptMatchLoad?.groups?.get(2)?.value ?: ""
+        val trailer = trailerEl?.let { el ->
+            val id = el.attr("data-post")
+            val type = el.attr("data-type")
+            runCatching {
+                val json = app.post(
+                    url = "$directUrl/wp-admin/admin-ajax.php",
+                    data = mapOf("action" to "doo_player_ajax", "post" to id, "nume" to "trailer", "type" to type, "_n" to nonceForTrailer, "_p" to id, "_t" to timeForTrailer),
+                    referer = url,
+                    headers = mapOf("Accept" to "*/*", "X-Requested-With" to "XMLHttpRequest")
+                ).parsedSafe<ResponseHash>() ?: return@runCatching null
+                val metrix = AppUtils.parseJson<AesData>(json.embed_url).m
+                val password = createKey(json.key, metrix)
+                val decrypted = AesHelper.cryptoAESHandler(json.embed_url, password.toByteArray(), false)?.fixBloat() ?: return@runCatching null
+                val ytId = Regex("youtube\\.com/embed/([^?&]+)").find(decrypted)?.groupValues?.get(1)
+                if (ytId != null) "https://www.youtube.com/watch?v=$ytId" else null
+            }.getOrNull()
         }
         val rating = document.selectFirst("span.dt_rating_vgs[itemprop=ratingValue]")
         ?.text()
