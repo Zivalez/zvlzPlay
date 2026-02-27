@@ -6,7 +6,7 @@ version = 4
 
 cloudstream {
     language = "id"
-    description = "Nonton Streaming Anime Sub Indo - NontonAnimeID"
+    description = "Nonton Streaming Anime Sub Indo"
     authors = listOf("Zivalez")
     status = 1
     tvTypes = listOf(

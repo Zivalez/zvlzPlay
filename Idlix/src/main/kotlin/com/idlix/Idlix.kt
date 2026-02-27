@@ -68,7 +68,7 @@ class Idlix : MainAPI() {
         val home = (if (nonPaged) {
             document.select("div.items.featured article")
         } else {
-            document.select("div.items.full article, div#archive-content article")
+            document.select("div.items article, div#archive-content article")
         }).mapNotNull {
             it.toSearchResult()
         }
