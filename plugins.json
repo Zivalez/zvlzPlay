@@ -176,7 +176,7 @@
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/moviebox.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 30443,
+        "fileSize": 34653,
         "status": 1,
         "language": "id",
         "authors": [
@@ -188,7 +188,7 @@
             "Anime",
             "AsianDrama"
         ],
-        "version": 1,
+        "version": 2,
         "internalName": "Moviebox",
         "description": "Movie Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Moviebox.cs3",
