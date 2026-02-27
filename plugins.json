@@ -43,6 +43,25 @@
         "name": "Funmovieslix"
     },
     {
+        "iconUrl": "https://hentaicop.com/wp-content/uploads/2025/05/hencopwhite-2.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 12810,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "zvlz"
+        ],
+        "tvTypes": [
+            "NSFW"
+        ],
+        "version": 1,
+        "internalName": "Hentaicop",
+        "description": "Nonton Hentai Sub Indo",
+        "url": "https://cloudstream.zvlz.my.id/builds/Hentaicop.cs3",
+        "name": "Hentaicop"
+    },
+    {
         "iconUrl": "https://hentaihaven.com/wp-content/uploads/2022/02/cropped-cropped-hentaihavenico-192x1921-1-192x192.png",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
