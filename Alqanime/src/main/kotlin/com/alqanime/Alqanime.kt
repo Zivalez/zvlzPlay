@@ -3,6 +3,7 @@ package com.alqanime
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
+import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
@@ -45,8 +46,10 @@ class Alqanime : MainAPI() {
     // Genre pages use /tag/ not /genre/
     override val mainPage = mainPageOf(
         "$mainUrl/page/%d/" to "Rilisan Terbaru",
+        "$mainUrl/advanced-search/page/%d/?status=ongoing&order=update" to "Sedang Tayang",
         "$mainUrl/advanced-search/page/%d/?status=completed&order=update" to "Selesai Tayang",
         "$mainUrl/advanced-search/page/%d/?type[]=movie&order=update" to "Film Layar Lebar",
+        "$mainUrl/popular/page/%d/" to "Popular",
         "$mainUrl/tag/action/page/%d/" to "Action",
         "$mainUrl/tag/romance/page/%d/" to "Romance",
         "$mainUrl/tag/fantasy/page/%d/" to "Fantasy",
@@ -58,11 +61,7 @@ class Alqanime : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get(request.data.format(page), headers = commonHeaders).document
-        // "Lagi Hangat" cards live in div.listupd.popularslider (non-paginated slider on homepage)
-        val selector = if (request.name == "Lagi Hangat Saat ini")
-            "div.listupd.popularslider article.bs"
-        else
-            "article.bs"
+        val selector = "div.listupd:not(.popularslider) article.bs"
         val home = document.select(selector).mapNotNull { it.toSearchResult() }
         return newHomePageResponse(request.name, home)
     }
@@ -74,9 +73,11 @@ class Alqanime : MainAPI() {
         val typeText = this.selectFirst(".typez")?.text()?.trim() ?: ""
         val epNum = this.selectFirst("a")?.attr("title")
             ?.let { Regex("Episode\\s*\\((\\d+)\\)", RegexOption.IGNORE_CASE).find(it)?.groupValues?.getOrNull(1)?.toIntOrNull() }
+        val rating = this.selectFirst("div.numscore")?.text()?.trim()
         return newAnimeSearchResponse(title, href, getType(typeText)) {
             this.posterUrl = posterUrl
             addDubStatus("Sub Indo", epNum)
+            this.score = Score.from10(rating)
         }
     }
 
@@ -94,7 +95,12 @@ class Alqanime : MainAPI() {
 
         val poster = document.selectFirst("div.thumb img")?.attr("src")
         val coverBg = document.selectFirst("div.ime img")?.attr("src")
-        val trailer = document.selectFirst("a.trailerbutton")?.attr("href")
+        val trailerRaw = document.selectFirst("a.trailerbutton")?.attr("href")
+        // Convert YouTube watch URL to embed URL so addRaw = true can play it
+        val trailer = trailerRaw?.let { url ->
+            val videoId = Regex("[?&]v=([^&]+)").find(url)?.groupValues?.getOrNull(1)
+            if (videoId != null) "https://www.youtube.com/embed/$videoId" else url
+        }
         val description = document.select("div.entry-content > p")
             .filter { it.text().length > 10 }
             .joinToString("\n\n") { it.text().trim() }
@@ -114,6 +120,18 @@ class Alqanime : MainAPI() {
         val year = Regex("(\\d{4})").find(
             speMap.entries.find { it.key.contains("Dirilis", true) }?.value ?: ""
         )?.groupValues?.getOrNull(1)?.toIntOrNull()
+
+        val japName = document.selectFirst("span.alter")?.text()?.trim()
+            ?.split(",")?.firstOrNull()?.trim()?.trimStart('-')?.trimEnd('-')?.trim()
+        val studio = document.selectFirst("div.spe > span:contains(Studio) a")?.text()?.trim()
+        val season = document.selectFirst("div.spe > span:contains(Musim) a")?.text()?.trim()
+        val duration = Regex("(\\d+)\\s*min").find(
+            speMap.entries.find { it.key.contains("Durasi", true) }?.value ?: ""
+        )?.groupValues?.getOrNull(1)?.toIntOrNull()
+        val actors = document.select("div.spe span:contains(Casts) a.casts")
+            .map { ActorData(Actor(it.text())) }
+        val scoreText = document.selectFirst("strong:contains(Score)")?.text()
+            ?.replace("Score", "")?.trim()
 
         // All episodes + their download links are already on this page (no separate episode pages)
         val episodes = mutableListOf<Episode>()
@@ -143,16 +161,19 @@ class Alqanime : MainAPI() {
         }
 
         return newAnimeLoadResponse(title, url, type) {
+            this.japName = japName
             engName = title
             posterUrl = poster
             backgroundPosterUrl = coverBg
             this.year = year
-            // Episodes from page are newest-first, reverse to oldest-first
+            this.duration = duration
             addEpisodes(DubStatus.Subbed, episodes.reversed())
             showStatus = status
             plot = description
-            addTrailer(trailer)
-            this.tags = genres
+            addTrailer(trailer, addRaw = true)
+            this.tags = listOfNotNull(*genres.toTypedArray(), studio, season)
+            addActors(actors)
+            this.rating = scoreText?.toFloatOrNull()?.let { (it * 1000).toInt() }
         }
     }
 
