@@ -157,14 +157,68 @@ class Nontonanimeid : MainAPI() {
             ?.text()
             ?.let { Regex("(\\d{4})").find(it)?.groupValues?.get(1)?.toIntOrNull() }
 
-        val episodeLinks = document.select("div.episode-list-items a.episode-item").map { ep ->
+        // Collect static episodes first
+        val episodeLinksRaw = document.select("div.episode-list-items a.episode-item").map { ep ->
             Triple(
-                ep.absUrl("href"),
+                ep.attr("href"),
                 ep.selectFirst("span.ep-title")?.text()?.trim(),
                 ep.selectFirst("span.ep-title")?.text()?.trim()
                     ?.replace(Regex("[^0-9]"), "")?.toIntOrNull()
             )
-        }.reversed()
+        }.toMutableList()
+
+        // Check if there's a load more button (more episodes via AJAX)
+        if (document.selectFirst("div.misha_loadmore2") != null) {
+            val paramsDecoded = document.select("script[src]").mapNotNull { script ->
+                val src = script.attr("src")
+                if (!src.startsWith("data:text/javascript;base64,")) return@mapNotNull null
+                try { base64Decode(src.removePrefix("data:text/javascript;base64,")) }
+                catch (_: Exception) { null }
+            }.firstOrNull { it.contains("misha_loadmore_params2") }
+
+            if (paramsDecoded != null) {
+                val nonce = Regex(""""nonce"\s*:\s*"([^"]+)"""").find(paramsDecoded)?.groupValues?.get(1)
+                val postsQuery = Regex(""""posts"\s*:\s*"((?:[^"\\]|\\.)*)"""").find(paramsDecoded)
+                    ?.groupValues?.get(1)?.replace("\\\"", "\"")
+                val maxPage = Regex(""""max_page"\s*:\s*"([^"]+)"""").find(paramsDecoded)?.groupValues?.get(1)?.toIntOrNull() ?: 0
+                val totalPosts = Regex(""""total_posts"\s*:\s*"([^"]+)"""").find(paramsDecoded)?.groupValues?.get(1) ?: ""
+                val postsToDisplay = Regex(""""posts_to_display"\s*:\s*"([^"]+)"""").find(paramsDecoded)?.groupValues?.get(1) ?: "20"
+
+                if (nonce != null && postsQuery != null) {
+                    var currentPage = 1
+                    while (currentPage <= maxPage) {
+                        val ajaxHtml = app.post(
+                            ajaxUrl,
+                            data = mapOf(
+                                "action" to "loadmore2",
+                                "nonce" to nonce,
+                                "query" to postsQuery,
+                                "page" to currentPage.toString(),
+                                "type" to "anime",
+                                "posts_to_display" to postsToDisplay,
+                                "is_large_series" to "",
+                                "total_posts" to totalPosts
+                            ),
+                            referer = url
+                        ).text
+                        if (ajaxHtml.isBlank() || ajaxHtml == "0" || ajaxHtml == "false") break
+                        val moreEps = org.jsoup.Jsoup.parseBodyFragment(ajaxHtml).select("a.episode-item").map { ep ->
+                            Triple(
+                                ep.attr("href"),
+                                ep.selectFirst("span.ep-title")?.text()?.trim(),
+                                ep.selectFirst("span.ep-title")?.text()?.trim()
+                                    ?.replace(Regex("[^0-9]"), "")?.toIntOrNull()
+                            )
+                        }
+                        if (moreEps.isEmpty()) break
+                        episodeLinksRaw.addAll(moreEps)
+                        currentPage++
+                    }
+                }
+            }
+        }
+
+        val episodeLinks = episodeLinksRaw.reversed()
 
         // Fetch thumbnails in parallel — adds 2-3s but gives full episode art
         val episodes = episodeLinks.amap { (epHref, epTitle, epNum) ->
