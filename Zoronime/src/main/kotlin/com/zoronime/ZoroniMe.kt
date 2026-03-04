@@ -1,23 +1,23 @@
 package com.zoronime
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
-import com.google.gson.Gson
-import com.google.gson.annotations.SerializedName
+import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import java.net.URLDecoder
 
 data class ZoroniMeDownload(
-    @SerializedName("qualityList") val qualityList: List<ZoroniMeQuality> = emptyList()
+    @JsonProperty("qualityList") val qualityList: List<ZoroniMeQuality> = emptyList()
 )
 
 data class ZoroniMeQuality(
-    @SerializedName("title") val title: String = "",
-    @SerializedName("urlList") val urlList: List<ZoroniMeUrl> = emptyList()
+    @JsonProperty("title") val title: String = "",
+    @JsonProperty("urlList") val urlList: List<ZoroniMeUrl> = emptyList()
 )
 
 data class ZoroniMeUrl(
-    @SerializedName("title") val title: String = "",
-    @SerializedName("url") val url: String = ""
+    @JsonProperty("title") val title: String = "",
+    @JsonProperty("url") val url: String = ""
 )
 
 class ZoroniMe : MainAPI() {
@@ -31,8 +31,6 @@ class ZoroniMe : MainAPI() {
         TvType.AnimeMovie,
         TvType.OVA
     )
-
-    private val gson = Gson()
 
     override val mainPage = mainPageOf(
         "$mainUrl/ongoing?page=%d" to "Sedang Tayang",
@@ -89,15 +87,19 @@ class ZoroniMe : MainAPI() {
             .mapNotNull { it.data().takeIf { d -> d.contains("\"TVSeries\"") } }
             .firstOrNull()
 
-        @Suppress("UNCHECKED_CAST")
-        val tvSeries = tvSeriesJson?.let { gson.fromJson(it, Map::class.java) as? Map<String, Any> }
+        // Extract fields from JSON-LD string via regex (no external JSON library needed)
+        fun String?.jsonStr(key: String) = this?.let {
+            Regex(""""$key"\s*:\s*"((?:[^"\\]|\\.)*)"""").find(it)?.groupValues?.get(1)
+        }
 
-        val title = tvSeries?.get("name") as? String
+        val title = tvSeriesJson.jsonStr("name")
             ?: document.selectFirst("h1")?.text()?.trim() ?: ""
-        val japName = tvSeries?.get("alternateName") as? String
-        val poster = tvSeries?.get("image") as? String
-        val genres = (tvSeries?.get("genre") as? List<*>)?.mapNotNull { it?.toString() } ?: emptyList()
-        val studio = (tvSeries?.get("productionCompany") as? Map<*, *>)?.get("name")?.toString()
+        val japName = tvSeriesJson.jsonStr("alternateName")
+        val poster = tvSeriesJson.jsonStr("image")
+        val genres = tvSeriesJson?.let {
+            Regex(""""genre"\s*:\s*\[(.*?)\]""").find(it)?.groupValues?.get(1)
+                ?.let { arr -> Regex(""""([^"]+)"""").findAll(arr).map { m -> m.groupValues[1] }.toList() }
+        } ?: emptyList()
 
         // Status: ongoing badge has bg-green-500, completed has other colors
         val status = if (document.selectFirst("span[class*='bg-green-500']") != null)
@@ -127,7 +129,6 @@ class ZoroniMe : MainAPI() {
             this.tags = genres
             this.showStatus = status
             japName?.let { this.japName = it }
-            studio?.let { this.studio = it }
             addEpisodes(DubStatus.Subbed, episodes)
         }
     }
@@ -175,14 +176,14 @@ class ZoroniMe : MainAPI() {
 
         val dlJson = unescaped.substring(objStart, objEnd)
         val dlData = try {
-            gson.fromJson(dlJson, ZoroniMeDownload::class.java)
+            parseJson<ZoroniMeDownload>(dlJson)
         } catch (_: Exception) { return false }
 
-        dlData.qualityList.forEach { quality ->
+        for (quality in dlData.qualityList) {
             val qualityInt = Regex("(\\d{3,4})p").find(quality.title)?.groupValues?.get(1)?.toIntOrNull()
                 ?: Qualities.Unknown.value
 
-            quality.urlList.forEach { urlEntry ->
+            for (urlEntry in quality.urlList) {
                 val rawUrl = urlEntry.url
 
                 // Pixeldrain single-file link: /u/{id} → direct stream via /api/file/{id}
