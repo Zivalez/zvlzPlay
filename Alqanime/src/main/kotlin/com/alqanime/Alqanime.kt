@@ -137,6 +137,7 @@ class Alqanime : MainAPI() {
         val episodes = mutableListOf<Episode>()
         for (col in document.select("div.sorattl.collapsible")) {
             val epTitle = col.selectFirst("h3")?.text()?.trim() ?: continue
+            if (epTitle.equals("Batch", ignoreCase = true)) continue
             val epNum = Regex("Episode\\s*(\\d+)", RegexOption.IGNORE_CASE)
                 .find(epTitle)?.groupValues?.getOrNull(1)?.toIntOrNull()
             val contentDiv = col.nextElementSibling()
