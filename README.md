@@ -37,7 +37,7 @@ zvlzPlay = isi/ekstensi buat dapetin konten streaming
 
 ## Download Aplikasi
 
-https://public-assets.zvlz.my.id/cloudstream/app/CloudStream.apk
+https://cloudstream.zvlz.my.id/cloudstream.md
 
 
 ## Cara Install & Pasang Extension zvlzPlay
