@@ -135,28 +135,70 @@ class Alqanime : MainAPI() {
 
         // All episodes + their download links are already on this page (no separate episode pages)
         val episodes = mutableListOf<Episode>()
-        document.select("div.sorattl.collapsible").forEach { col ->
-            val epTitle = col.selectFirst("h3")?.text()?.trim() ?: return@forEach
+        for (col in document.select("div.sorattl.collapsible")) {
+            val epTitle = col.selectFirst("h3")?.text()?.trim() ?: continue
             val epNum = Regex("Episode\\s*(\\d+)", RegexOption.IGNORE_CASE)
                 .find(epTitle)?.groupValues?.getOrNull(1)?.toIntOrNull()
-
-            // Content div is the immediate next sibling
             val contentDiv = col.nextElementSibling()
-                ?.takeIf { it.hasClass("content") } ?: return@forEach
+                ?.takeIf { it.hasClass("content") } ?: continue
 
-            val linkList = mutableListOf<EpisodeLink>()
-            contentDiv.select("tr").forEach { tr ->
-                val quality = tr.selectFirst("div.res")?.text()?.trim() ?: return@forEach
-                tr.select("div.slink a").forEach { a ->
-                    linkList.add(EpisodeLink(a.attr("href"), quality))
+            // Collect all Pixeldrain folder IDs from this collapsible
+            val pixeldrainFolderIds = mutableListOf<String>()
+            for (tr in contentDiv.select("tr")) {
+                for (a in tr.select("div.slink a")) {
+                    val resolved = resolveUrl(a.attr("href"))
+                    val listId = Regex("pixeldrain\\.com/l/([A-Za-z0-9]+)").find(resolved)?.groupValues?.get(1)
+                    if (listId != null) pixeldrainFolderIds.add(listId)
                 }
             }
 
-            if (linkList.isNotEmpty()) {
-                episodes.add(newEpisode(linkList.toJson()) {
-                    this.name = epTitle
-                    this.episode = epNum
-                })
+            if (pixeldrainFolderIds.isNotEmpty()) {
+                // Group by episode number: epNum → [EpisodeLink, ...]
+                val epMap = mutableMapOf<Int, MutableList<EpisodeLink>>()
+                val epThumbs = mutableMapOf<Int, String>()
+                for (listId in pixeldrainFolderIds) {
+                    try {
+                        val apiJson = app.get("https://pixeldrain.com/api/list/$listId")
+                            .parsedSafe<PixeldrainList>()
+                        apiJson?.files
+                            ?.filter { it.mimeType.startsWith("video/") }
+                            ?.sortedBy { it.name }
+                            ?.forEach { file ->
+                                val fileEpNum = Regex("(?:_|-)0*(\\d+)(?:_|-)").find(file.name)
+                                    ?.groupValues?.get(1)?.toIntOrNull() ?: return@forEach
+                                val fileQuality = Regex("(\\d{3,4})p", RegexOption.IGNORE_CASE)
+                                    .find(file.name)?.groupValues?.get(1) ?: ""
+                                val streamUrl = "https://pixeldrain.com/api/file/${file.id}"
+                                epMap.getOrPut(fileEpNum) { mutableListOf() }
+                                    .add(EpisodeLink(streamUrl, fileQuality))
+                                if (!epThumbs.containsKey(fileEpNum) && file.thumbnailHref.isNotBlank())
+                                    epThumbs[fileEpNum] = "https://pixeldrain.com${file.thumbnailHref}"
+                            }
+                    } catch (_: Exception) { }
+                }
+                for ((epNum, links) in epMap.toSortedMap()) {
+                    episodes.add(newEpisode(links.toJson()) {
+                        this.name = "Episode $epNum"
+                        this.episode = epNum
+                        this.posterUrl = epThumbs[epNum]
+                    })
+                }
+            }
+
+            if (pixeldrainFolderIds.isEmpty()) {
+                val linkList = mutableListOf<EpisodeLink>()
+                for (tr in contentDiv.select("tr")) {
+                    val quality = tr.selectFirst("div.res")?.text()?.trim() ?: continue
+                    for (a in tr.select("div.slink a")) {
+                        linkList.add(EpisodeLink(a.attr("href"), quality))
+                    }
+                }
+                if (linkList.isNotEmpty()) {
+                    episodes.add(newEpisode(linkList.toJson()) {
+                        this.name = epTitle
+                        this.episode = epNum
+                    })
+                }
             }
         }
 
@@ -187,6 +229,16 @@ class Alqanime : MainAPI() {
         links.amap { (rawUrl, quality) ->
             val resolvedUrl = resolveUrl(rawUrl)
             val qualityInt = quality.fixQuality()
+
+            // Direct Pixeldrain file stream URL → create ExtractorLink directly
+            if (resolvedUrl.contains("pixeldrain.com/api/file/")) {
+                callback(newExtractorLink("Pixeldrain", "Pixeldrain", resolvedUrl) {
+                    this.referer = "https://pixeldrain.com/"
+                    this.quality = qualityInt
+                })
+                return@amap
+            }
+
             val collected = mutableListOf<ExtractorLink>()
             loadExtractor(resolvedUrl, "$mainUrl/", subtitleCallback) { collected.add(it) }
             collected.forEach { link ->
@@ -227,5 +279,16 @@ class Alqanime : MainAPI() {
     data class EpisodeLink(
         @JsonProperty("url") val url: String,
         @JsonProperty("quality") val quality: String
+    )
+
+    data class PixeldrainList(
+        @JsonProperty("files") val files: List<PixeldrainFile> = emptyList()
+    )
+
+    data class PixeldrainFile(
+        @JsonProperty("id") val id: String,
+        @JsonProperty("name") val name: String,
+        @JsonProperty("mime_type") val mimeType: String = "",
+        @JsonProperty("thumbnail_href") val thumbnailHref: String = ""
     )
 }
