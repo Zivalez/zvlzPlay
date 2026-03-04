@@ -171,8 +171,8 @@ class Alqanime : MainAPI() {
                                 val streamUrl = "https://pixeldrain.com/api/file/${file.id}"
                                 epMap.getOrPut(fileEpNum) { mutableListOf() }
                                     .add(EpisodeLink(streamUrl, fileQuality))
-                                if (!epThumbs.containsKey(fileEpNum) && file.thumbnailHref.isNotBlank())
-                                    epThumbs[fileEpNum] = "https://pixeldrain.com${file.thumbnailHref}"
+                                if (!epThumbs.containsKey(fileEpNum))
+                                    epThumbs[fileEpNum] = "https://pixeldrain.com/api/file/${file.id}/thumbnail"
                             }
                     } catch (_: Exception) { }
                 }
@@ -288,7 +288,6 @@ class Alqanime : MainAPI() {
     data class PixeldrainFile(
         @JsonProperty("id") val id: String,
         @JsonProperty("name") val name: String,
-        @JsonProperty("mime_type") val mimeType: String = "",
-        @JsonProperty("thumbnail_href") val thumbnailHref: String = ""
+        @JsonProperty("mime_type") val mimeType: String = ""
     )
 }
