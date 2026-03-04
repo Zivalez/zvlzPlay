@@ -320,5 +320,26 @@
         "description": "Nonton Anime, Donghua, Film, dan TV Show Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Winbu.cs3",
         "name": "Winbu"
+    },
+    {
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/zoronime.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 19112,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "Anime",
+            "AnimeMovie",
+            "OVA"
+        ],
+        "version": 1,
+        "internalName": "Zoronime",
+        "description": "Streaming anime sub Indo",
+        "url": "https://cloudstream.zvlz.my.id/builds/Zoronime.cs3",
+        "name": "Zoronime"
     }
 ]
