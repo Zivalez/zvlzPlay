@@ -90,8 +90,13 @@ class Alqanime : MainAPI() {
         val document = app.get(url, headers = commonHeaders).document
 
         val rawTitle = document.selectFirst("h1.entry-title")?.text()?.trim() ?: return null
-        // Remove "Episode (XX) Sub Indo ..." suffix from title
-        val title = rawTitle.replace(Regex("\\s*Episode\\s*\\(\\d+\\).*", RegexOption.IGNORE_CASE), "").trim()
+        // Remove "Sub Indo", "BD Batch", "(BD)", "(Episode XX – XX)" and combinations
+        val title = rawTitle
+            .replace(Regex("\\s*\\(Episode[^)]*\\)", RegexOption.IGNORE_CASE), "")
+            .replace(Regex("\\s*Sub Indo\\b.*", RegexOption.IGNORE_CASE), "")
+            .replace(Regex("\\s*\\(BD\\).*", RegexOption.IGNORE_CASE), "")
+            .replace(Regex("\\s*BD Batch.*", RegexOption.IGNORE_CASE), "")
+            .trim()
 
         val poster = document.selectFirst("div.thumb img")?.attr("src")
         val coverBg = document.selectFirst("div.ime img")?.attr("src")
