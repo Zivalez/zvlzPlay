@@ -159,7 +159,8 @@ class Samehadaku : MainAPI() {
             if (rating != null) addScore(rating.toString())
             plot = description
             addTrailer(trailer)
-            this.tags = if (studio != null) tags + studio else tags
+            this.tags = tags
+            this.studio = studio
             this.recommendations = recommendations
             addMalId(tracker?.malId)
             addAniListId(tracker?.aniId?.toIntOrNull())
