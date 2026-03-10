@@ -8,7 +8,8 @@ import android.content.Context
 class OtakudesuPlugin: Plugin() {
     override fun load(context: Context) {
         registerMainAPI(Otakudesu())
-        registerExtractorAPI(Moedesu())
+        registerExtractorAPI(DesuStream())
+        registerExtractorAPI(Filedon())
         registerExtractorAPI(DesuBeta())
         registerExtractorAPI(Desudesuhd())
         registerExtractorAPI(Odvidhide())

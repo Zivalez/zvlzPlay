@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addAniListId
 import com.lagradost.cloudstream3.LoadResponse.Companion.addMalId
+import com.lagradost.cloudstream3.amap
 import com.lagradost.cloudstream3.extractors.Filesim
 import com.lagradost.cloudstream3.extractors.JWPlayer
 import com.lagradost.cloudstream3.utils.AppUtils.tryParseJson
@@ -33,6 +34,7 @@ class Otakudesu : MainAPI() {
             "Mega",
             "MegaUp",
             "Otakufiles",
+            "ODFiles",
         )
 
         fun getType(t: String): TvType {
@@ -140,6 +142,9 @@ class Otakudesu : MainAPI() {
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         val document = app.get(data).document
+
+        // --- Mirror streams ---
+        // Fetch nonce once, then fire all mirror AJAX calls in parallel with amap
         try {
             val scriptData = document.select("script:containsData(action:)").lastOrNull()?.data()
             val token = scriptData?.substringAfter("{action:\"")?.substringBefore("\"}").toString()
@@ -148,35 +153,42 @@ class Otakudesu : MainAPI() {
                 data = mapOf("action" to token)
             ).parsed<ResponseData>().data
             val action = scriptData?.substringAfter(",action:\"")?.substringBefore("\"}").toString()
-            val mirrorData = document.select("div.mirrorstream > ul > li").mapNotNull {
-                base64Decode(it.select("a").attr("data-content"))
-            }.toString()
-            tryParseJson<List<ResponseSources>>(mirrorData)?.forEach { res ->
-                val id = res.id
-                val i = res.i
-                val q = res.q
-                val sources = Jsoup.parse(
+
+            document.select("div.mirrorstream > ul > li").mapNotNull {
+                tryParseJson<ResponseSources>(base64Decode(it.select("a").attr("data-content")))
+            }.amap { res ->
+                val iframeSrc = Jsoup.parse(
                     base64Decode(
                         app.post(
                             "$mainUrl/wp-admin/admin-ajax.php",
-                            data = mapOf("id" to id, "i" to i, "q" to q, "nonce" to nonce, "action" to action)
+                            data = mapOf("id" to res.id, "i" to res.i, "q" to res.q, "nonce" to nonce, "action" to action)
                         ).parsed<ResponseData>().data
                     )
                 ).select("iframe").attr("src")
-                loadCustomExtractor(sources, data, subtitleCallback, callback, getQuality(q))
+                if (iframeSrc.isNotBlank()) {
+                    loadCustomExtractor(iframeSrc, data, subtitleCallback, callback, getQuality(res.q))
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        document.select("div.download li").forEach { ele ->
+
+        // --- Download links ---
+        // Collect all valid links first, then process in parallel with amap.
+        // Filter by link text (it.second) to correctly apply the blacklist.
+        document.select("div.download li").flatMap { ele ->
             val quality = getQuality(ele.select("strong").text())
-            ele.select("a").map { it.attr("href") to it.text() }.filter {
-                !inBlacklist(it.first) && quality != Qualities.P360.value
-            }.forEach {
-                val link = app.get(it.first, referer = "$mainUrl/").url
+            ele.select("a")
+                .map { it.attr("href") to it.text() }
+                .filter { !inBlacklist(it.second) && quality != Qualities.P360.value }
+                .map { Triple(it.first, it.second, quality) }
+        }.amap { (url, _, quality) ->
+            runCatching {
+                val link = app.get(url, referer = "$mainUrl/").url
                 loadCustomExtractor(fixedIframe(link), data, subtitleCallback, callback, quality)
             }
         }
+
         return true
     }
 
@@ -209,7 +221,7 @@ class Otakudesu : MainAPI() {
     private fun fixedIframe(url: String): String {
         return when {
             url.startsWith(acefile) -> {
-                val id = Regex("""(?:/f/|/file/)(\\w+)""").find(url)?.groupValues?.getOrNull(1)
+                val id = Regex("""(?:/f/|/file/)(\w+)""").find(url)?.groupValues?.getOrNull(1)
                 "${acefile}/player/$id"
             }
             else -> fixUrl(url)
