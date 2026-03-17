@@ -234,19 +234,22 @@ class LayarKacaProvider : MainAPI() {
         val document = app.get(data).document
 
         document.select("ul#player-list > li").map {
-                fixUrl(it.select("a").attr("href"))
-            }.amap {
-            val test=it.getIframe()
-            val referer=getBaseUrl(it)
-            Log.d("LayarKaca",test)
-            loadExtractor(it.getIframe(), referer, subtitleCallback, callback)
+            fixUrl(it.select("a").attr("href"))
+        }.amap { playerUrl ->
+            val iframeUrl = playerUrl.getIframe()
+            val referer = getBaseUrl(playerUrl)
+            val candidates = listOf(playerUrl, iframeUrl).filter { it.isNotBlank() }.distinct()
+
+            candidates.forEach { candidate ->
+                Log.d("LayarKaca", candidate)
+                loadExtractor(candidate, referer, subtitleCallback, callback)
+            }
         }
         return true
     }
 
     private suspend fun String.getIframe(): String {
-        return app.get(this, referer = "$seriesUrl/").document.select("div.embed-container iframe")
-
+        return app.get(this, referer = this).document.select("div.embed-container iframe")
             .attr("src")
     }
 
