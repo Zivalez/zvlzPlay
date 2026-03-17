@@ -233,24 +233,77 @@ class LayarKacaProvider : MainAPI() {
     ): Boolean {
         val document = app.get(data).document
 
-        document.select("ul#player-list > li").map {
-            fixUrl(it.select("a").attr("href"))
-        }.amap { playerUrl ->
+        val playerLinks = document.select("ul#player-list li a").mapNotNull { a ->
+            val dataUrl = a.attr("data-url").trim()
+            val href = a.attr("href").trim()
+            val raw = when {
+                dataUrl.isNotBlank() && dataUrl != "#" -> dataUrl
+                href.isNotBlank() && href != "#" -> href
+                else -> null
+            }
+            raw?.let(::fixUrl)
+        }
+        val mainIframe = document.selectFirst("iframe#main-player, div.embed-container iframe")
+            ?.attr("src")
+            ?.trim()
+            ?.takeIf { it.isNotBlank() && it != "#" }
+            ?.let(::fixUrl)
+
+        (playerLinks + listOfNotNull(mainIframe)).distinct().amap { playerUrl ->
             val iframeUrl = playerUrl.getIframe()
-            val referer = getBaseUrl(playerUrl)
             val candidates = listOf(playerUrl, iframeUrl).filter { it.isNotBlank() }.distinct()
 
             candidates.forEach { candidate ->
                 Log.d("LayarKaca", candidate)
-                loadExtractor(candidate, referer, subtitleCallback, callback)
+                val extracted = loadExtractor(candidate, data, subtitleCallback, callback)
+                if (!extracted) {
+                    val resolved = resolvePlayeriframe(candidate, callback)
+                    if (!resolved) {
+                        Log.d("LayarKaca", "No extractor matched: $candidate")
+                    }
+                }
             }
         }
         return true
     }
 
     private suspend fun String.getIframe(): String {
-        return app.get(this, referer = this).document.select("div.embed-container iframe")
+        return app.get(this, referer = this).document.select("div.embed-container iframe, iframe#main-player")
             .attr("src")
+    }
+
+    private suspend fun resolvePlayeriframe(
+        url: String,
+        callback: (ExtractorLink) -> Unit
+    ): Boolean {
+        val id = Regex("playeriframe\\.sbs/iframe/(?:p2p|turbovip|hydrax)/([a-zA-Z0-9]+)")
+            .find(url)
+            ?.groupValues
+            ?.getOrNull(1)
+            ?: return false
+
+        val response = app.post(
+            "https://cloud.hownetwork.xyz/api2.php?id=$id",
+            data = mapOf(
+                "r" to "https://playeriframe.sbs/",
+                "d" to "cloud.hownetwork.xyz"
+            ),
+            headers = mapOf(
+                "X-Requested-With" to "XMLHttpRequest",
+                "Origin" to "https://cloud.hownetwork.xyz",
+                "Referer" to url,
+                "User-Agent" to "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36"
+            ),
+            referer = url
+        ).text
+
+        val json = JSONObject(response)
+        val direct = json.optString("file").ifBlank { json.optString("link") }
+        if (direct.isBlank()) return false
+
+        M3u8Helper.generateM3u8("P2P", direct, "https://cloud.hownetwork.xyz")
+            .forEach(callback)
+        return true
     }
 
     private suspend fun fetchURL(url: String): String {
