@@ -1,6 +1,7 @@
 [
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/alqanime.png",
+        "fileHash": "sha256-59baa4c0d770db90c0f1ebd7d9f69d29a695344981006872ac9bb2b775f2cbb6",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 28462,
@@ -22,6 +23,7 @@
     },
     {
         "iconUrl": "https://aghanim.xyz/wp-content/themes/animesail/assets/images/ico.png",
+        "fileHash": "sha256-778f155e092e39cc22dbf0e1a3581650ce507473efaceda941f59aa1dbee3419",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 17742,
@@ -40,10 +42,12 @@
         "internalName": "AnimeSail",
         "description": "Streaming Anime Subtitle Indonesia dari AnimeSail",
         "url": "https://cloudstream.zvlz.my.id/builds/AnimeSail.cs3",
-        "name": "AnimeSail"
+        "name": "AnimeSail",
+        "jarHash": "sha256-f9fc1360a70d0a351aac5055101e7e6a2f30c8d6ec32c84167a3db06f72e7603"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/funmovieslix.png",
+        "fileHash": "sha256-3f74fc9606219c132cebfbb820c59cd8144a436ace1b321664c5a0ce566c60eb",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 21089,
@@ -62,10 +66,12 @@
         "internalName": "Funmovieslix",
         "description": "Nonton Streaming Film & Drakor Gratis Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Funmovieslix.cs3",
-        "name": "Funmovieslix"
+        "name": "Funmovieslix",
+        "jarHash": "sha256-5a415321975cf9c47168fe47a2efa732eac633676f3a7400f3b3bc95f5b19d8f"
     },
     {
         "iconUrl": "https://hentaicop.com/wp-content/uploads/2025/05/hencopwhite-2.png",
+        "fileHash": "sha256-7e80fc942d25a606ea743e6b3019c9e4edff36481061eb017f9560b677359fec",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 12810,
@@ -85,6 +91,7 @@
     },
     {
         "iconUrl": "https://hentaihaven.com/wp-content/uploads/2022/02/cropped-cropped-hentaihavenico-192x1921-1-192x192.png",
+        "fileHash": "sha256-a93bd62541a073ad3d49ca875e0734e80bb8f565b2edc016c45b6fc999e84f99",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 16969,
@@ -104,9 +111,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/idlix.png",
+        "fileHash": "sha256-164f2d4683bcf75c0d44ff66a1cc239cd73693633dc0283f817027b883b6e6bc",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 29921,
+        "fileSize": 49933,
         "status": 1,
         "language": "id",
         "authors": [
@@ -121,7 +129,7 @@
             "AsianDrama",
             "Anime"
         ],
-        "version": 5,
+        "version": 6,
         "internalName": "Idlix",
         "description": "Nonton Film Streaming Movie Idlix Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Idlix.cs3",
@@ -129,6 +137,7 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuramanime.png",
+        "fileHash": "sha256-144fa5752b09d2108907c3ab88f4a78dc1a05b2a0e0e068104a7107d765c5c95",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 29722,
@@ -152,6 +161,7 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuronime.png",
+        "fileHash": "sha256-2a8644df1725119c89f2aaab75834b81e296534b3bb43a62959a3a788b1d8d52",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 25217,
@@ -173,6 +183,7 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/layarkaca.png",
+        "fileHash": "sha256-9349a67305b59147f2974a494e118f64eac9c83fd617adfa73c463cd39792e3a",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 40964,
@@ -196,6 +207,7 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/moviebox.png",
+        "fileHash": "sha256-f6d7951c2f4e5e4821664f1a0bd054dfc93d885a73eb0fba3d0c06ecb6a08f32",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 34633,
@@ -214,10 +226,12 @@
         "internalName": "Moviebox",
         "description": "Movie Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Moviebox.cs3",
-        "name": "Moviebox"
+        "name": "Moviebox",
+        "jarHash": "sha256-f6361d474c6d0ced180ea89512115f5cba6f6f7fd254738ce5d89e188a99cd2c"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/nontonanimeid.png",
+        "fileHash": "sha256-16507a8ef37606dd441eb2b9e0ae56aaf1f208f1e0ae77432cca5689d1a8bd95",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 23684,
@@ -239,6 +253,7 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/otakudesu.png",
+        "fileHash": "sha256-57e9e69278343e7568a118495ea1ca0e679208a31fd8585840690daf942bf70a",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 31627,
@@ -256,10 +271,12 @@
         "internalName": "Otakudesu",
         "description": "Streaming Anime Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Otakudesu.cs3",
-        "name": "Otakudesu"
+        "name": "Otakudesu",
+        "jarHash": "sha256-8398c47bc4aae2765725a4b508d72b28ba32fa55b20589eb6111657e535892d7"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/pencurimovie.png",
+        "fileHash": "sha256-f6ac9f34cbf0173d4b157541245090cc46321a49657728ed71b4ac895128916a",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 13552,
@@ -276,10 +293,12 @@
         "internalName": "Pencurimovie",
         "description": "Nonton Film & Serial Streaming Online",
         "url": "https://cloudstream.zvlz.my.id/builds/Pencurimovie.cs3",
-        "name": "Pencurimovie"
+        "name": "Pencurimovie",
+        "jarHash": "sha256-f4f123e5b6dfa5f1fd38209f070f05914d8db93a422b8fad6b9e96981ccb117b"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/samehadaku.png",
+        "fileHash": "sha256-967c7de0a070f4c6d78e4186e882808ce317a5813f18dd125bdc55b6250448a3",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 21762,
@@ -302,6 +321,7 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.png",
+        "fileHash": "sha256-ec4bda7694469d11697a53b400d588207e902032e4bc4a51cc5e8c446dee03c0",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 21813,
@@ -323,6 +343,7 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/zoronime.png",
+        "fileHash": "sha256-15e8564bfb97b022d53dc5be07ccae131eeca6529a3b2c6546195554167d4629",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 19112,
