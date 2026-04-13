@@ -150,27 +150,6 @@ data class ChallengeResponse(
     val difficulty: Int
 )
 
-data class LeaderboardResponse(
-    val month: String? = null,
-    val updatedAt: String? = null,
-    val topMovies: List<LeaderboardItem> = emptyList(),
-    val topSeries: List<LeaderboardItem> = emptyList(),
-    val topWatchlisted: List<LeaderboardItem> = emptyList(),
-    val topFavourited: List<LeaderboardItem> = emptyList(),
-)
-
-data class LeaderboardItem(
-    val id: String? = null,
-    val title: String? = null,
-    val slug: String? = null,
-    val posterPath: String? = null,
-    val releaseDate: String? = null,
-    val firstAirDate: String? = null,
-    val voteAverage: Any? = null,
-    val quality: String? = null,
-    val contentType: String? = null,
-)
-
 data class LoadData(
     val id: String,
     val type: String // "movie" or "episode"

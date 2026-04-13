@@ -62,9 +62,6 @@ class Idlix : MainAPI() {
         "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=disney-plus" to "Disney+",
         "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=prime-video" to "Amazon Prime",
         "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=apple-tv-plus" to "Apple TV+",
-        "$mainUrl/api/leaderboard#topMovies" to "Top 5 Watched Movies",
-        "$mainUrl/api/leaderboard#topSeries" to "Top 5 Watched Series",
-        "$mainUrl/api/leaderboard#topFavourited" to "Top 5 Favorites",
         "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=animation&country=JP&language=ja" to "Anime",
         "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=science-fiction" to "Science Fiction",
         "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=action" to "Action",
@@ -83,50 +80,6 @@ class Idlix : MainAPI() {
     ): HomePageResponse {
         val rawData = request.data
         val requestUrl = if (rawData.contains("%d")) rawData.format(page) else rawData
-
-        if (requestUrl.contains("/api/leaderboard")) {
-            // Leaderboard endpoint is fixed-size (Top 5), so prevent infinite paging loop
-            if (page > 1) return newHomePageResponse(request.name, emptyList())
-
-            val section = requestUrl.substringAfter("#", "topMovies")
-            val leaderboard = app.get("$mainUrl/api/leaderboard", timeout = 10000L)
-                .parsedSafe<LeaderboardResponse>() ?: return newHomePageResponse(request.name, emptyList())
-
-            val items = when (section) {
-                "topMovies" -> leaderboard.topMovies
-                "topSeries" -> leaderboard.topSeries
-                "topFavourited" -> leaderboard.topFavourited
-                else -> leaderboard.topMovies
-            }
-
-            val home = items.mapNotNull { item ->
-                val title = item.title ?: return@mapNotNull null
-                val slug = item.slug ?: return@mapNotNull null
-                val poster = item.posterPath?.let { "https://image.tmdb.org/t/p/w342$it" }
-                val contentType = item.contentType ?: "movie"
-                val year = (item.releaseDate ?: item.firstAirDate)?.substringBefore("-")?.toIntOrNull()
-                val quality = getSearchQuality(item.quality)
-                val score = Score.from10(item.voteAverage?.toString())
-
-                if (contentType == "movie") {
-                    newMovieSearchResponse(title, "$mainUrl/api/movies/$slug", TvType.Movie) {
-                        this.posterUrl = poster
-                        this.year = year
-                        this.quality = quality
-                        this.score = score
-                    }
-                } else {
-                    newTvSeriesSearchResponse(title, "$mainUrl/api/series/$slug", TvType.TvSeries) {
-                        this.posterUrl = poster
-                        this.year = year
-                        this.quality = quality
-                        this.score = score
-                    }
-                }
-            }
-
-            return newHomePageResponse(request.name, home)
-        }
 
         val res = app.get(requestUrl, timeout = 10000L).parsedSafe<ApiResponse>()
             ?: return newHomePageResponse(request.name, emptyList())
