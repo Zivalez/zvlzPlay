@@ -85,6 +85,9 @@ class Idlix : MainAPI() {
         val requestUrl = if (rawData.contains("%d")) rawData.format(page) else rawData
 
         if (requestUrl.contains("/api/leaderboard")) {
+            // Leaderboard endpoint is fixed-size (Top 5), so prevent infinite paging loop
+            if (page > 1) return newHomePageResponse(request.name, emptyList())
+
             val section = requestUrl.substringAfter("#", "topMovies")
             val leaderboard = app.get("$mainUrl/api/leaderboard", timeout = 10000L)
                 .parsedSafe<LeaderboardResponse>() ?: return newHomePageResponse(request.name, emptyList())
