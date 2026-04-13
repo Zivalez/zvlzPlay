@@ -1,0 +1,583 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e8]:
+        - button "IDLIX" [ref=e10] [cursor=pointer]:
+          - img "IDLIX" [ref=e12]
+        - navigation [ref=e13]:
+          - link "Home" [ref=e14] [cursor=pointer]:
+            - /url: /
+            - img [ref=e15]
+            - text: Home
+          - link "Movies" [ref=e18] [cursor=pointer]:
+            - /url: /movie
+            - img [ref=e19]
+            - text: Movies
+          - link "TV Series" [ref=e23] [cursor=pointer]:
+            - /url: /series
+            - img [ref=e24]
+            - text: TV Series
+          - link "Leaderboard" [ref=e27] [cursor=pointer]:
+            - /url: /leaderboard
+            - img [ref=e28]
+            - text: Leaderboard
+          - link "Genres" [ref=e33] [cursor=pointer]:
+            - /url: /genre
+            - img [ref=e34]
+            - text: Genres
+          - link "Country" [ref=e38] [cursor=pointer]:
+            - /url: /country
+            - img [ref=e39]
+            - text: Country
+          - link "Year" [ref=e44] [cursor=pointer]:
+            - /url: /year
+            - img [ref=e45]
+            - text: Year
+          - link "Network" [ref=e49] [cursor=pointer]:
+            - /url: /network
+            - img [ref=e50]
+            - text: Network
+        - generic [ref=e54]:
+          - button [ref=e55] [cursor=pointer]:
+            - img [ref=e56]
+          - link "Sign In" [ref=e59] [cursor=pointer]:
+            - /url: /auth/login
+          - link "Sign Up" [ref=e60] [cursor=pointer]:
+            - /url: /auth/register
+    - main [ref=e61]:
+      - generic [ref=e62]:
+        - region "Featured content" [ref=e63]:
+          - generic:
+            - img "Euphoria"
+          - generic [ref=e65]:
+            - generic [ref=e66]: TV SERIES
+            - paragraph [ref=e67]: May God have mercy.
+            - link "Euphoria" [ref=e68] [cursor=pointer]:
+              - /url: /series/euphoria-2019
+              - img "Euphoria" [ref=e69]
+            - generic [ref=e70]:
+              - generic [ref=e71]:
+                - img [ref=e72]
+                - text: "8.3"
+              - generic [ref=e74]:
+                - generic [ref=e75]: "2019"
+                - generic [ref=e76]: 4 Seasons
+                - generic [ref=e78]: 18 Episodes
+                - generic [ref=e80]: Drama
+              - generic [ref=e82]: ONGOING
+            - link "A group of high school students navigate love and friendships in a world of drugs, sex, trauma, and social media." [ref=e83] [cursor=pointer]:
+              - /url: /series/euphoria-2019
+              - paragraph [ref=e84]: A group of high school students navigate love and friendships in a world of drugs, sex, trauma, and social media.
+            - link "Watch Now" [ref=e86] [cursor=pointer]:
+              - /url: /series/euphoria-2019
+              - img [ref=e87]
+              - text: Watch Now
+            - generic [ref=e89]:
+              - button "Go to slide 1" [ref=e90] [cursor=pointer]
+              - button "Go to slide 2" [ref=e93] [cursor=pointer]
+              - button "Go to slide 3" [ref=e95] [cursor=pointer]
+              - button "Go to slide 4" [ref=e97] [cursor=pointer]
+              - button "Go to slide 5" [ref=e99] [cursor=pointer]
+              - button "Go to slide 6" [ref=e101] [cursor=pointer]
+              - button "Go to slide 7" [ref=e103] [cursor=pointer]
+              - button "Go to slide 8" [ref=e105] [cursor=pointer]
+              - button "Go to slide 9" [ref=e107] [cursor=pointer]
+        - generic [ref=e110]:
+          - link "QQ724" [ref=e112] [cursor=pointer]:
+            - /url: https://rebrand.ly/qq724idlxx
+            - img "QQ724" [ref=e113]
+          - link "QQ828" [ref=e115] [cursor=pointer]:
+            - /url: https://rebrand.ly/qq828idlxx
+            - img "QQ828" [ref=e116]
+        - generic [ref=e118]:
+          - generic [ref=e119]:
+            - generic [ref=e120]:
+              - heading "Trending Now" [level=2] [ref=e122]
+              - generic [ref=e123]:
+                - button "Scroll left" [ref=e124] [cursor=pointer]:
+                  - img [ref=e125]
+                - button "Scroll right" [ref=e127] [cursor=pointer]:
+                  - img [ref=e128]
+                - generic [ref=e130]:
+                  - link "Bloodhounds 1 S2 8.3 25 Bloodhounds (2023)" [ref=e131] [cursor=pointer]:
+                    - /url: /series/bloodhounds-2023
+                    - generic [ref=e132]:
+                      - img "Bloodhounds" [ref=e133]
+                      - generic [ref=e134]:
+                        - generic: "1"
+                        - generic [ref=e136]: S2
+                      - generic [ref=e138]:
+                        - generic [ref=e139]:
+                          - img [ref=e140]
+                          - generic [ref=e142]: "8.3"
+                        - generic [ref=e143]:
+                          - img [ref=e144]
+                          - generic [ref=e147]: "25"
+                    - heading "Bloodhounds (2023)" [level=3] [ref=e149]
+                  - link "Perfect Crown 2 S1 8.6 10 Perfect Crown (2026)" [ref=e150] [cursor=pointer]:
+                    - /url: /series/perfect-crown-2026
+                    - generic [ref=e151]:
+                      - img "Perfect Crown" [ref=e152]
+                      - generic [ref=e153]:
+                        - generic: "2"
+                        - generic [ref=e155]: S1
+                      - generic [ref=e157]:
+                        - generic [ref=e158]:
+                          - img [ref=e159]
+                          - generic [ref=e161]: "8.6"
+                        - generic [ref=e162]:
+                          - img [ref=e163]
+                          - generic [ref=e166]: "10"
+                    - heading "Perfect Crown (2026)" [level=3] [ref=e168]
+                  - link "Phantom Lawyer 3 S1 7.5 5 Phantom Lawyer (2026)" [ref=e169] [cursor=pointer]:
+                    - /url: /series/phantom-lawyer-2026
+                    - generic [ref=e170]:
+                      - img "Phantom Lawyer" [ref=e171]
+                      - generic [ref=e172]:
+                        - generic: "3"
+                        - generic [ref=e174]: S1
+                      - generic [ref=e176]:
+                        - generic [ref=e177]:
+                          - img [ref=e178]
+                          - generic [ref=e180]: "7.5"
+                        - generic [ref=e181]:
+                          - img [ref=e182]
+                          - generic [ref=e185]: "5"
+                    - heading "Phantom Lawyer (2026)" [level=3] [ref=e187]
+                  - link "The Boys 4 S5 8.4 28 The Boys (2019)" [ref=e188] [cursor=pointer]:
+                    - /url: /series/the-boys-2019
+                    - generic [ref=e189]:
+                      - img "The Boys" [ref=e190]
+                      - generic [ref=e191]:
+                        - generic: "4"
+                        - generic [ref=e193]: S5
+                      - generic [ref=e195]:
+                        - generic [ref=e196]:
+                          - img [ref=e197]
+                          - generic [ref=e199]: "8.4"
+                        - generic [ref=e200]:
+                          - img [ref=e201]
+                          - generic [ref=e204]: "28"
+                    - heading "The Boys (2019)" [level=3] [ref=e206]
+                  - link "One Piece 5 S23 8.7 5 One Piece (1999)" [ref=e207] [cursor=pointer]:
+                    - /url: /series/one-piece-1999
+                    - generic [ref=e208]:
+                      - img "One Piece" [ref=e209]
+                      - generic [ref=e210]:
+                        - generic: "5"
+                        - generic [ref=e212]: S23
+                      - generic [ref=e214]:
+                        - generic [ref=e215]:
+                          - img [ref=e216]
+                          - generic [ref=e218]: "8.7"
+                        - generic [ref=e219]:
+                          - img [ref=e220]
+                          - generic [ref=e223]: "5"
+                    - heading "One Piece (1999)" [level=3] [ref=e225]
+                  - 'link "Ready or Not: Here I Come 6 CAM 7.1 21 Ready or Not: Here I Come (2026)" [ref=e226] [cursor=pointer]':
+                    - /url: /movie/ready-or-not-here-i-come-2026
+                    - generic [ref=e227]:
+                      - 'img "Ready or Not: Here I Come" [ref=e228]'
+                      - generic [ref=e229]:
+                        - generic: "6"
+                        - generic [ref=e231]: CAM
+                      - generic [ref=e233]:
+                        - generic [ref=e234]:
+                          - img [ref=e235]
+                          - generic [ref=e237]: "7.1"
+                        - generic [ref=e238]:
+                          - img [ref=e239]
+                          - generic [ref=e242]: "21"
+                    - 'heading "Ready or Not: Here I Come (2026)" [level=3] [ref=e244]'
+                  - link "In Your Radiant Season 7 S1 8.4 10 In Your Radiant Season (2026)" [ref=e245] [cursor=pointer]:
+                    - /url: /series/in-your-radiant-season-2026
+                    - generic [ref=e246]:
+                      - img "In Your Radiant Season" [ref=e247]
+                      - generic [ref=e248]:
+                        - generic: "7"
+                        - generic [ref=e250]: S1
+                      - generic [ref=e252]:
+                        - generic [ref=e253]:
+                          - img [ref=e254]
+                          - generic [ref=e256]: "8.4"
+                        - generic [ref=e257]:
+                          - img [ref=e258]
+                          - generic [ref=e261]: "10"
+                    - heading "In Your Radiant Season (2026)" [level=3] [ref=e263]
+                  - link "High Potential 8 S2 8.0 3 High Potential (2024)" [ref=e264] [cursor=pointer]:
+                    - /url: /series/high-potential-2024
+                    - generic [ref=e265]:
+                      - img "High Potential" [ref=e266]
+                      - generic [ref=e267]:
+                        - generic: "8"
+                        - generic [ref=e269]: S2
+                      - generic [ref=e271]:
+                        - generic [ref=e272]:
+                          - img [ref=e273]
+                          - generic [ref=e275]: "8.0"
+                        - generic [ref=e276]:
+                          - img [ref=e277]
+                          - generic [ref=e280]: "3"
+                    - heading "High Potential (2024)" [level=3] [ref=e282]
+                  - link "Project Hail Mary 9 CAM 8.2 17 Project Hail Mary (2026)" [ref=e283] [cursor=pointer]:
+                    - /url: /movie/project-hail-mary-2026
+                    - generic [ref=e284]:
+                      - img "Project Hail Mary" [ref=e285]
+                      - generic [ref=e286]:
+                        - generic: "9"
+                        - generic [ref=e288]: CAM
+                      - generic [ref=e290]:
+                        - generic [ref=e291]:
+                          - img [ref=e292]
+                          - generic [ref=e294]: "8.2"
+                        - generic [ref=e295]:
+                          - img [ref=e296]
+                          - generic [ref=e299]: "17"
+                    - heading "Project Hail Mary (2026)" [level=3] [ref=e301]
+                  - link "Game of Thrones 10 S8 8.5 14 Game of Thrones (2011)" [ref=e302] [cursor=pointer]:
+                    - /url: /series/game-of-thrones-2011
+                    - generic [ref=e303]:
+                      - img "Game of Thrones" [ref=e304]
+                      - generic [ref=e305]:
+                        - generic: "10"
+                        - generic [ref=e307]: S8
+                      - generic [ref=e309]:
+                        - generic [ref=e310]:
+                          - img [ref=e311]
+                          - generic [ref=e313]: "8.5"
+                        - generic [ref=e314]:
+                          - img [ref=e315]
+                          - generic [ref=e318]: "14"
+                    - heading "Game of Thrones (2011)" [level=3] [ref=e320]
+                  - link "Euphoria 11 S4 8.3 13 Euphoria (2019)" [ref=e321] [cursor=pointer]:
+                    - /url: /series/euphoria-2019
+                    - generic [ref=e322]:
+                      - img "Euphoria" [ref=e323]
+                      - generic [ref=e324]:
+                        - generic: "11"
+                        - generic [ref=e326]: S4
+                      - generic [ref=e328]:
+                        - generic [ref=e329]:
+                          - img [ref=e330]
+                          - generic [ref=e332]: "8.3"
+                        - generic [ref=e333]:
+                          - img [ref=e334]
+                          - generic [ref=e337]: "13"
+                    - heading "Euphoria (2019)" [level=3] [ref=e339]
+                  - link "The Super Mario Galaxy Movie 12 CAM 6.9 5 The Super Mario Galaxy Movie (2026)" [ref=e340] [cursor=pointer]:
+                    - /url: /movie/the-super-mario-galaxy-movie-2026
+                    - generic [ref=e341]:
+                      - img "The Super Mario Galaxy Movie" [ref=e342]
+                      - generic [ref=e343]:
+                        - generic: "12"
+                        - generic [ref=e345]: CAM
+                      - generic [ref=e347]:
+                        - generic [ref=e348]:
+                          - img [ref=e349]
+                          - generic [ref=e351]: "6.9"
+                        - generic [ref=e352]:
+                          - img [ref=e353]
+                          - generic [ref=e356]: "5"
+                    - heading "The Super Mario Galaxy Movie (2026)" [level=3] [ref=e358]
+                  - link "JUJUTSU KAISEN 13 S1 8.6 3 JUJUTSU KAISEN (2020)" [ref=e359] [cursor=pointer]:
+                    - /url: /series/jujutsu-kaisen-2020
+                    - generic [ref=e360]:
+                      - img "JUJUTSU KAISEN" [ref=e361]
+                      - generic [ref=e362]:
+                        - generic: "13"
+                        - generic [ref=e364]: S1
+                      - generic [ref=e366]:
+                        - generic [ref=e367]:
+                          - img [ref=e368]
+                          - generic [ref=e370]: "8.6"
+                        - generic [ref=e371]:
+                          - img [ref=e372]
+                          - generic [ref=e375]: "3"
+                    - heading "JUJUTSU KAISEN (2020)" [level=3] [ref=e377]
+                  - 'link "Avatar: Fire and Ash 14 WEB-DL 7.3 26 Avatar: Fire and Ash (2025)" [ref=e378] [cursor=pointer]':
+                    - /url: /movie/avatar-fire-and-ash-2025
+                    - generic [ref=e379]:
+                      - 'img "Avatar: Fire and Ash" [ref=e380]'
+                      - generic [ref=e381]:
+                        - generic: "14"
+                        - generic [ref=e383]: WEB-DL
+                      - generic [ref=e385]:
+                        - generic [ref=e386]:
+                          - img [ref=e387]
+                          - generic [ref=e389]: "7.3"
+                        - generic [ref=e390]:
+                          - img [ref=e391]
+                          - generic [ref=e394]: "26"
+                    - 'heading "Avatar: Fire and Ash (2025)" [level=3] [ref=e396]'
+                  - link "XO, Kitty 15 S3 8.1 0 XO, Kitty (2023)" [ref=e397] [cursor=pointer]:
+                    - /url: /series/xo-kitty-2023
+                    - generic [ref=e398]:
+                      - img "XO, Kitty" [ref=e399]
+                      - generic [ref=e400]:
+                        - generic: "15"
+                        - generic [ref=e402]: S3
+                      - generic [ref=e404]:
+                        - generic [ref=e405]:
+                          - img [ref=e406]
+                          - generic [ref=e408]: "8.1"
+                        - generic [ref=e409]:
+                          - img [ref=e410]
+                          - generic [ref=e413]: "0"
+                    - heading "XO, Kitty (2023)" [level=3] [ref=e415]
+            - generic [ref=e417]:
+              - link "QQ101" [ref=e419] [cursor=pointer]:
+                - /url: https://rebrand.ly/qq101idlxx
+                - img "QQ101" [ref=e420]
+              - link "QQ882" [ref=e422] [cursor=pointer]:
+                - /url: https://rebrand.ly/qq882idlxx
+                - img "QQ882" [ref=e423]
+          - generic [ref=e424]:
+            - generic [ref=e425]:
+              - heading "Trending in Indonesia" [level=2] [ref=e427]
+              - generic [ref=e428]:
+                - button "Scroll left" [ref=e429] [cursor=pointer]:
+                  - img [ref=e430]
+                - button "Scroll right" [ref=e432] [cursor=pointer]:
+                  - img [ref=e433]
+                - generic [ref=e435]:
+                  - link "Bloodhounds 1 S2 8.3 25 Bloodhounds (2023)" [ref=e436] [cursor=pointer]:
+                    - /url: /series/bloodhounds-2023
+                    - generic [ref=e437]:
+                      - img "Bloodhounds" [ref=e438]
+                      - generic [ref=e439]:
+                        - generic: "1"
+                        - generic [ref=e441]: S2
+                      - generic [ref=e443]:
+                        - generic [ref=e444]:
+                          - img [ref=e445]
+                          - generic [ref=e447]: "8.3"
+                        - generic [ref=e448]:
+                          - img [ref=e449]
+                          - generic [ref=e452]: "25"
+                    - heading "Bloodhounds (2023)" [level=3] [ref=e454]
+                  - link "Perfect Crown 2 S1 8.6 10 Perfect Crown (2026)" [ref=e455] [cursor=pointer]:
+                    - /url: /series/perfect-crown-2026
+                    - generic [ref=e456]:
+                      - img "Perfect Crown" [ref=e457]
+                      - generic [ref=e458]:
+                        - generic: "2"
+                        - generic [ref=e460]: S1
+                      - generic [ref=e462]:
+                        - generic [ref=e463]:
+                          - img [ref=e464]
+                          - generic [ref=e466]: "8.6"
+                        - generic [ref=e467]:
+                          - img [ref=e468]
+                          - generic [ref=e471]: "10"
+                    - heading "Perfect Crown (2026)" [level=3] [ref=e473]
+                  - link "Phantom Lawyer 3 S1 7.5 5 Phantom Lawyer (2026)" [ref=e474] [cursor=pointer]:
+                    - /url: /series/phantom-lawyer-2026
+                    - generic [ref=e475]:
+                      - img "Phantom Lawyer" [ref=e476]
+                      - generic [ref=e477]:
+                        - generic: "3"
+                        - generic [ref=e479]: S1
+                      - generic [ref=e481]:
+                        - generic [ref=e482]:
+                          - img [ref=e483]
+                          - generic [ref=e485]: "7.5"
+                        - generic [ref=e486]:
+                          - img [ref=e487]
+                          - generic [ref=e490]: "5"
+                    - heading "Phantom Lawyer (2026)" [level=3] [ref=e492]
+                  - link "The Boys 4 S5 8.4 28 The Boys (2019)" [ref=e493] [cursor=pointer]:
+                    - /url: /series/the-boys-2019
+                    - generic [ref=e494]:
+                      - img "The Boys" [ref=e495]
+                      - generic [ref=e496]:
+                        - generic: "4"
+                        - generic [ref=e498]: S5
+                      - generic [ref=e500]:
+                        - generic [ref=e501]:
+                          - img [ref=e502]
+                          - generic [ref=e504]: "8.4"
+                        - generic [ref=e505]:
+                          - img [ref=e506]
+                          - generic [ref=e509]: "28"
+                    - heading "The Boys (2019)" [level=3] [ref=e511]
+                  - link "One Piece 5 S23 8.7 5 One Piece (1999)" [ref=e512] [cursor=pointer]:
+                    - /url: /series/one-piece-1999
+                    - generic [ref=e513]:
+                      - img "One Piece" [ref=e514]
+                      - generic [ref=e515]:
+                        - generic: "5"
+                        - generic [ref=e517]: S23
+                      - generic [ref=e519]:
+                        - generic [ref=e520]:
+                          - img [ref=e521]
+                          - generic [ref=e523]: "8.7"
+                        - generic [ref=e524]:
+                          - img [ref=e525]
+                          - generic [ref=e528]: "5"
+                    - heading "One Piece (1999)" [level=3] [ref=e530]
+                  - link "In Your Radiant Season 6 S1 8.4 10 In Your Radiant Season (2026)" [ref=e531] [cursor=pointer]:
+                    - /url: /series/in-your-radiant-season-2026
+                    - generic [ref=e532]:
+                      - img "In Your Radiant Season" [ref=e533]
+                      - generic [ref=e534]:
+                        - generic: "6"
+                        - generic [ref=e536]: S1
+                      - generic [ref=e538]:
+                        - generic [ref=e539]:
+                          - img [ref=e540]
+                          - generic [ref=e542]: "8.4"
+                        - generic [ref=e543]:
+                          - img [ref=e544]
+                          - generic [ref=e547]: "10"
+                    - heading "In Your Radiant Season (2026)" [level=3] [ref=e549]
+                  - 'link "Ready or Not: Here I Come 7 CAM 7.1 21 Ready or Not: Here I Come (2026)" [ref=e550] [cursor=pointer]':
+                    - /url: /movie/ready-or-not-here-i-come-2026
+                    - generic [ref=e551]:
+                      - 'img "Ready or Not: Here I Come" [ref=e552]'
+                      - generic [ref=e553]:
+                        - generic: "7"
+                        - generic [ref=e555]: CAM
+                      - generic [ref=e557]:
+                        - generic [ref=e558]:
+                          - img [ref=e559]
+                          - generic [ref=e561]: "7.1"
+                        - generic [ref=e562]:
+                          - img [ref=e563]
+                          - generic [ref=e566]: "21"
+                    - 'heading "Ready or Not: Here I Come (2026)" [level=3] [ref=e568]'
+                  - link "High Potential 8 S2 8.0 3 High Potential (2024)" [ref=e569] [cursor=pointer]:
+                    - /url: /series/high-potential-2024
+                    - generic [ref=e570]:
+                      - img "High Potential" [ref=e571]
+                      - generic [ref=e572]:
+                        - generic: "8"
+                        - generic [ref=e574]: S2
+                      - generic [ref=e576]:
+                        - generic [ref=e577]:
+                          - img [ref=e578]
+                          - generic [ref=e580]: "8.0"
+                        - generic [ref=e581]:
+                          - img [ref=e582]
+                          - generic [ref=e585]: "3"
+                    - heading "High Potential (2024)" [level=3] [ref=e587]
+                  - link "Project Hail Mary 9 CAM 8.2 17 Project Hail Mary (2026)" [ref=e588] [cursor=pointer]:
+                    - /url: /movie/project-hail-mary-2026
+                    - generic [ref=e589]:
+                      - img "Project Hail Mary" [ref=e590]
+                      - generic [ref=e591]:
+                        - generic: "9"
+                        - generic [ref=e593]: CAM
+                      - generic [ref=e595]:
+                        - generic [ref=e596]:
+                          - img [ref=e597]
+                          - generic [ref=e599]: "8.2"
+                        - generic [ref=e600]:
+                          - img [ref=e601]
+                          - generic [ref=e604]: "17"
+                    - heading "Project Hail Mary (2026)" [level=3] [ref=e606]
+                  - link "Game of Thrones 10 S8 8.5 14 Game of Thrones (2011)" [ref=e607] [cursor=pointer]:
+                    - /url: /series/game-of-thrones-2011
+                    - generic [ref=e608]:
+                      - img "Game of Thrones" [ref=e609]
+                      - generic [ref=e610]:
+                        - generic: "10"
+                        - generic [ref=e612]: S8
+                      - generic [ref=e614]:
+                        - generic [ref=e615]:
+                          - img [ref=e616]
+                          - generic [ref=e618]: "8.5"
+                        - generic [ref=e619]:
+                          - img [ref=e620]
+                          - generic [ref=e623]: "14"
+                    - heading "Game of Thrones (2011)" [level=3] [ref=e625]
+                  - link "Euphoria 11 S4 8.3 13 Euphoria (2019)" [ref=e626] [cursor=pointer]:
+                    - /url: /series/euphoria-2019
+                    - generic [ref=e627]:
+                      - img "Euphoria" [ref=e628]
+                      - generic [ref=e629]:
+                        - generic: "11"
+                        - generic [ref=e631]: S4
+                      - generic [ref=e633]:
+                        - generic [ref=e634]:
+                          - img [ref=e635]
+                          - generic [ref=e637]: "8.3"
+                        - generic [ref=e638]:
+                          - img [ref=e639]
+                          - generic [ref=e642]: "13"
+                    - heading "Euphoria (2019)" [level=3] [ref=e644]
+                  - link "The Super Mario Galaxy Movie 12 CAM 6.9 5 The Super Mario Galaxy Movie (2026)" [ref=e645] [cursor=pointer]:
+                    - /url: /movie/the-super-mario-galaxy-movie-2026
+                    - generic [ref=e646]:
+                      - img "The Super Mario Galaxy Movie" [ref=e647]
+                      - generic [ref=e648]:
+                        - generic: "12"
+                        - generic [ref=e650]: CAM
+                      - generic [ref=e652]:
+                        - generic [ref=e653]:
+                          - img [ref=e654]
+                          - generic [ref=e656]: "6.9"
+                        - generic [ref=e657]:
+                          - img [ref=e658]
+                          - generic [ref=e661]: "5"
+                    - heading "The Super Mario Galaxy Movie (2026)" [level=3] [ref=e663]
+                  - link "JUJUTSU KAISEN 13 S1 8.6 3 JUJUTSU KAISEN (2020)" [ref=e664] [cursor=pointer]:
+                    - /url: /series/jujutsu-kaisen-2020
+                    - generic [ref=e665]:
+                      - img "JUJUTSU KAISEN" [ref=e666]
+                      - generic [ref=e667]:
+                        - generic: "13"
+                        - generic [ref=e669]: S1
+                      - generic [ref=e671]:
+                        - generic [ref=e672]:
+                          - img [ref=e673]
+                          - generic [ref=e675]: "8.6"
+                        - generic [ref=e676]:
+                          - img [ref=e677]
+                          - generic [ref=e680]: "3"
+                    - heading "JUJUTSU KAISEN (2020)" [level=3] [ref=e682]
+                  - 'link "Avatar: Fire and Ash 14 WEB-DL 7.3 26 Avatar: Fire and Ash (2025)" [ref=e683] [cursor=pointer]':
+                    - /url: /movie/avatar-fire-and-ash-2025
+                    - generic [ref=e684]:
+                      - 'img "Avatar: Fire and Ash" [ref=e685]'
+                      - generic [ref=e686]:
+                        - generic: "14"
+                        - generic [ref=e688]: WEB-DL
+                      - generic [ref=e690]:
+                        - generic [ref=e691]:
+                          - img [ref=e692]
+                          - generic [ref=e694]: "7.3"
+                        - generic [ref=e695]:
+                          - img [ref=e696]
+                          - generic [ref=e699]: "26"
+                    - 'heading "Avatar: Fire and Ash (2025)" [level=3] [ref=e701]'
+                  - link "XO, Kitty 15 S3 8.1 0 XO, Kitty (2023)" [ref=e702] [cursor=pointer]:
+                    - /url: /series/xo-kitty-2023
+                    - generic [ref=e703]:
+                      - img "XO, Kitty" [ref=e704]
+                      - generic [ref=e705]:
+                        - generic: "15"
+                        - generic [ref=e707]: S3
+                      - generic [ref=e709]:
+                        - generic [ref=e710]:
+                          - img [ref=e711]
+                          - generic [ref=e713]: "8.1"
+                        - generic [ref=e714]:
+                          - img [ref=e715]
+                          - generic [ref=e718]: "0"
+                    - heading "XO, Kitty (2023)" [level=3] [ref=e720]
+            - generic [ref=e722]:
+              - link "QQ888" [ref=e724] [cursor=pointer]:
+                - /url: https://rebrand.ly/qq888betidlxx
+                - img "QQ888" [ref=e725]
+              - link "QQ801" [ref=e727] [cursor=pointer]:
+                - /url: https://rebrand.ly/qq801idlxx
+                - img "QQ801" [ref=e728]
+    - contentinfo [ref=e933]:
+      - generic [ref=e935]:
+        - button "IDLIX" [ref=e937] [cursor=pointer]:
+          - img "IDLIX" [ref=e939]
+        - paragraph [ref=e940]: IDLIX does not host, store, or distribute any media files. All content is automatically grabbed from third-party providers on the Internet.
+        - link [ref=e942] [cursor=pointer]:
+          - /url: https://discord.gg/yVPFdhua4K
+          - img [ref=e943]
+  - alert [ref=e945]
