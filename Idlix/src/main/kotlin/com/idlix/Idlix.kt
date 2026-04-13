@@ -57,19 +57,75 @@ class Idlix : MainAPI() {
     override val mainPage = mainPageOf(
         "$mainUrl/api/movies?page=%d&limit=36&sort=createdAt" to "Movie Terbaru",
         "$mainUrl/api/series?page=%d&limit=36&sort=createdAt" to "TV Series Terbaru",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=netflix" to "Netflix",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=hbo" to "HBO",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=disney-plus" to "Disney+",
         "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=prime-video" to "Amazon Prime",
         "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=apple-tv-plus" to "Apple TV+",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=disney-plus" to "Disney+",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=hbo" to "HBO",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=netflix" to "Netflix",
+        "$mainUrl/api/leaderboard#topMovies" to "Top 5 Watched Movies",
+        "$mainUrl/api/leaderboard#topSeries" to "Top 5 Watched Series",
+        "$mainUrl/api/leaderboard#topFavourited" to "Top 5 Favorites",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=animation&country=JP&language=ja" to "Anime",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=science-fiction" to "Science Fiction",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=action" to "Action",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=comedy" to "Comedy",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=drama" to "Drama",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=romance" to "Romance",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=animation" to "Animation",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=horror" to "Horror",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=thriller" to "Thriller",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=mystery" to "Mystery",
     )
 
     override suspend fun getMainPage(
         page: Int,
         request: MainPageRequest
     ): HomePageResponse {
-        val url = if (request.data.contains("%d")) request.data.format(page) else request.data
-        val res = app.get(url, timeout = 10000L).parsedSafe<ApiResponse>()
+        val rawData = request.data
+        val requestUrl = if (rawData.contains("%d")) rawData.format(page) else rawData
+
+        if (requestUrl.contains("/api/leaderboard")) {
+            val section = requestUrl.substringAfter("#", "topMovies")
+            val leaderboard = app.get("$mainUrl/api/leaderboard", timeout = 10000L)
+                .parsedSafe<LeaderboardResponse>() ?: return newHomePageResponse(request.name, emptyList())
+
+            val items = when (section) {
+                "topMovies" -> leaderboard.topMovies
+                "topSeries" -> leaderboard.topSeries
+                "topFavourited" -> leaderboard.topFavourited
+                else -> leaderboard.topMovies
+            }
+
+            val home = items.mapNotNull { item ->
+                val title = item.title ?: return@mapNotNull null
+                val slug = item.slug ?: return@mapNotNull null
+                val poster = item.posterPath?.let { "https://image.tmdb.org/t/p/w342$it" }
+                val contentType = item.contentType ?: "movie"
+                val year = (item.releaseDate ?: item.firstAirDate)?.substringBefore("-")?.toIntOrNull()
+                val quality = getSearchQuality(item.quality)
+                val score = Score.from10(item.voteAverage?.toString())
+
+                if (contentType == "movie") {
+                    newMovieSearchResponse(title, "$mainUrl/api/movies/$slug", TvType.Movie) {
+                        this.posterUrl = poster
+                        this.year = year
+                        this.quality = quality
+                        this.score = score
+                    }
+                } else {
+                    newTvSeriesSearchResponse(title, "$mainUrl/api/series/$slug", TvType.TvSeries) {
+                        this.posterUrl = poster
+                        this.year = year
+                        this.quality = quality
+                        this.score = score
+                    }
+                }
+            }
+
+            return newHomePageResponse(request.name, home)
+        }
+
+        val res = app.get(requestUrl, timeout = 10000L).parsedSafe<ApiResponse>()
             ?: return newHomePageResponse(request.name, emptyList())
         val home = res.data.map { item ->
             val title = item.title ?: "UnKnown"
