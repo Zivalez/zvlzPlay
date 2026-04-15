@@ -29,6 +29,10 @@ class Otakudesu : MainAPI() {
     )
 
     companion object {
+        // Backend streaming/cache service base URL (change before building if needed)
+        const val BACKEND_BASE = "http://43.157.223.73:4019"
+        const val BACKEND_POLL_SECONDS = 30 // default polling timeout in seconds
+
         const val acefile = "https://acefile.co"
         val mirrorBlackList = arrayOf(
             "Mega",
@@ -135,6 +139,10 @@ class Otakudesu : MainAPI() {
 
     data class ResponseData(@JsonProperty("data") val data: String)
 
+    // Backend response types
+    data class DirectResp(@JsonProperty("status") val status: String, @JsonProperty("url") val url: String?)
+    data class StatusResp(@JsonProperty("status") val status: String, @JsonProperty("downloaded") val downloaded: Long?)
+
     override suspend fun loadLinks(
         data: String,
         isCasting: Boolean,
@@ -199,6 +207,77 @@ class Otakudesu : MainAPI() {
         callback: (ExtractorLink) -> Unit,
         quality: Int = Qualities.Unknown.value
     ) {
+        // If this is a MEGA link, try to resolve via our VPS backend to get a local direct URL
+        try {
+            if (url.contains("mega.nz/file/")) {
+                val backendBase = BACKEND_BASE
+                val encoded = java.net.URLEncoder.encode(url, "UTF-8")
+
+                // First, try /direct in case already cached
+                val directRespText = app.get("$backendBase/direct?url=$encoded").text
+                val direct = tryParseJson<DirectResp>(directRespText)
+                if (direct != null && direct.status == "done" && direct.url != null) {
+                    // We have a ready direct URL on the VPS
+                    loadExtractor(direct.url, referer, subtitleCallback) { link ->
+                        runBlocking {
+                            callback.invoke(
+                                newExtractorLink(
+                                    link.name,
+                                    link.name,
+                                    link.url,
+                                    link.type
+                                ) {
+                                    this.referer = link.referer
+                                    this.quality = quality
+                                    this.headers = link.headers
+                                    this.extractorData = link.extractorData
+                                }
+                            )
+                        }
+                    }
+                    return
+                }
+
+                // If not ready, trigger background download and poll status for a short time
+                app.get("$backendBase/video?url=$encoded") // start background
+                val maxWait = BACKEND_POLL_SECONDS // seconds
+                var waited = 0
+                while (waited < maxWait) {
+                    kotlinx.coroutines.delay(1000)
+                    val s = app.get("$backendBase/status?url=$encoded").text
+                    val st = tryParseJson<StatusResp>(s)
+                    if (st != null && st.status == "done") {
+                        val d = tryParseJson<DirectResp>(app.get("$backendBase/direct?url=$encoded").text)
+                        if (d != null && d.status == "done" && d.url != null) {
+                            loadExtractor(d.url, referer, subtitleCallback) { link ->
+                                runBlocking {
+                                    callback.invoke(
+                                        newExtractorLink(
+                                            link.name,
+                                            link.name,
+                                            link.url,
+                                            link.type
+                                        ) {
+                                            this.referer = link.referer
+                                            this.quality = quality
+                                            this.headers = link.headers
+                                            this.extractorData = link.extractorData
+                                        }
+                                    )
+                                }
+                            }
+                            return
+                        }
+                    }
+                    waited += 1
+                }
+                // fallback: proceed with original mega link (CloudStream may handle it differently)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        // Default behavior: load using existing extractor logic
         loadExtractor(url, referer, subtitleCallback) { link ->
             runBlocking {
                 callback.invoke(
