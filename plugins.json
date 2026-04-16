@@ -161,7 +161,7 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuronime.png",
-        "fileHash": "sha256-8f4c528955eb9de7ded186fd789d866539203b456a0f879aacfd904b45d8df33",
+        "fileHash": "sha256-044352924fc3510f01f0649a57032dadfcfd4cdf794c22e35afef3d66ff2f127",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 28810,
@@ -175,7 +175,7 @@
             "Anime",
             "OVA"
         ],
-        "version": 4,
+        "version": 5,
         "internalName": "Kuronime",
         "description": "Anime Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Kuronime.cs3",
