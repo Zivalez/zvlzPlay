@@ -1,5 +1,5 @@
 // use an integer for version numbers
-version = 4
+version = 5
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
