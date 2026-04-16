@@ -29,25 +29,30 @@ w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Samehadaku/build.gradle.kts:13
 > Task :AnimeSail:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :Alqanime:preBuild UP-TO-DATE
 > Task :AnimeSail:preBuild UP-TO-DATE
-> Task :AnimeSail:preDebugBuild UP-TO-DATE
 > Task :Alqanime:preDebugBuild UP-TO-DATE
+> Task :AnimeSail:preDebugBuild UP-TO-DATE
 > Task :Alqanime:generateDebugResValues
 > Task :AnimeSail:generateDebugResValues
-> Task :AnimeSail:generateDebugResources
 > Task :Alqanime:generateDebugResources
+> Task :AnimeSail:generateDebugResources
 > Task :Funmovieslix:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :Funmovieslix:preBuild UP-TO-DATE
 > Task :Funmovieslix:preDebugBuild UP-TO-DATE
 > Task :Funmovieslix:generateDebugResValues FROM-CACHE
 > Task :Funmovieslix:generateDebugResources FROM-CACHE
-> Task :AnimeSail:packageDebugResources
 > Task :Funmovieslix:javaPreCompileDebug
+> Task :Hentaicop:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :Hentaicop:preBuild UP-TO-DATE
+> Task :Hentaicop:preDebugBuild UP-TO-DATE
+> Task :Hentaicop:generateDebugResValues FROM-CACHE
+> Task :AnimeSail:packageDebugResources
+> Task :Hentaicop:generateDebugResources FROM-CACHE
 > Task :Alqanime:packageDebugResources
 > Task :AnimeSail:parseDebugLocalResources
 > Task :Alqanime:parseDebugLocalResources
 > Task :AnimeSail:generateDebugRFile
 > Task :Alqanime:generateDebugRFile
-> Task :AnimeSail:compileDebugKotlin
+
 > Task :Alqanime:compileDebugKotlin
 w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/src/main/kotlin/com/alqanime/Alqanime.kt:149:26 Type annotation class 'Nullable' of the inferred type is inaccessible. Check the module classpath for missing or conflicting dependencies. This will become an error in language version 2.4. See https://youtrack.jetbrains.com/issue/KT-80247.
 w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/src/main/kotlin/com/alqanime/Alqanime.kt:286:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
@@ -80,6 +85,8 @@ w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/src/main/kotlin/com/a
 - To keep applying to the value parameter only, use the '@param:' annotation target.
 
 See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
+
+> Task :AnimeSail:compileDebugKotlin
 
 > Task :AnimeSail:compileDex
 WARNING: D8: Unexpected error during rewriting of Kotlin metadata for class 'com.animesail.AnimeSail':
@@ -5152,11 +5159,6 @@ Compiled dex to /home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/build/intermedi
 > Task :Alqanime:make
 Made Cloudstream package at /home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/build/Alqanime.cs3
 
-> Task :Hentaicop:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :Hentaicop:preBuild UP-TO-DATE
-> Task :Hentaicop:preDebugBuild UP-TO-DATE
-> Task :Hentaicop:generateDebugResValues FROM-CACHE
-> Task :Hentaicop:generateDebugResources FROM-CACHE
 > Task :Hentaicop:packageDebugResources FROM-CACHE
 > Task :Hentaicop:parseDebugLocalResources FROM-CACHE
 > Task :Hentaicop:generateDebugRFile FROM-CACHE
@@ -15114,13 +15116,11 @@ w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idli
 
 See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
 
+> Task :Kuronime:compileDebugKotlin
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:251:17 Suspension functions can only be called within coroutine body.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:258:45 Unresolved reference 'fixQuality'.
+
 > Task :Kuronime:compileDebugKotlin FAILED
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:250:17 Unresolved reference 'newExtractorLink'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:256:26 Unresolved reference 'referer'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:257:26 Unresolved reference 'quality'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:257:45 Unresolved reference 'fixQuality'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:258:26 Unresolved reference 'headers'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:259:26 Unresolved reference 'extractorData'.
 
 > Task :Idlix:compileDex
 WARNING: D8: Unexpected error during rewriting of Kotlin metadata for class 'com.idlix.ApiItem':
@@ -21471,5 +21471,5 @@ Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilat
 	... 2 more
 
 
-BUILD FAILED in 2m 38s
+BUILD FAILED in 2m 32s
 71 actionable tasks: 42 executed, 29 from cache

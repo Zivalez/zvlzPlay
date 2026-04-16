@@ -11,6 +11,7 @@ import com.lagradost.cloudstream3.utils.M3u8Helper
 import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
 import com.lagradost.nicehttp.RequestBodyTypes
+import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.jsoup.nodes.Element
@@ -247,19 +248,21 @@ class Kuronime : MainAPI() {
         callback: (ExtractorLink) -> Unit
     ) {
         loadExtractor(url ?: return, referer, subtitleCallback) { link ->
-            callback(
-                newExtractorLink(
-                    sourceName ?: link.source,
-                    link.name.ifBlank { sourceName ?: link.source },
-                    link.url,
-                    link.type
-                ) {
-                    this.referer = link.referer
-                    this.quality = quality?.fixQuality() ?: link.quality
-                    this.headers = link.headers
-                    this.extractorData = link.extractorData
-                }
-            )
+            runBlocking {
+                callback(
+                    newExtractorLink(
+                        sourceName ?: link.source,
+                        link.name.ifBlank { sourceName ?: link.source },
+                        link.url,
+                        link.type
+                    ) {
+                        this.referer = link.referer
+                        this.quality = quality?.fixQuality() ?: link.quality
+                        this.headers = link.headers
+                        this.extractorData = link.extractorData
+                    }
+                )
+            }
         }
     }
 
@@ -294,6 +297,13 @@ class Kuronime : MainAPI() {
                 it.replaceFirstChar { ch -> ch.uppercase() }
             }
         }
+    }
+
+    private fun String.fixQuality(): Int = when (uppercase()) {
+        "4K" -> Qualities.P2160.value
+        "FULLHD" -> Qualities.P1080.value
+        "MP4HD" -> Qualities.P720.value
+        else -> filter { it.isDigit() }.toIntOrNull() ?: Qualities.Unknown.value
     }
 
     private fun getBaseUrl(url: String): String {
