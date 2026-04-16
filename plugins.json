@@ -161,10 +161,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuronime.png",
-        "fileHash": "sha256-2a8644df1725119c89f2aaab75834b81e296534b3bb43a62959a3a788b1d8d52",
+        "fileHash": "sha256-8f4c528955eb9de7ded186fd789d866539203b456a0f879aacfd904b45d8df33",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 25217,
+        "fileSize": 28810,
         "status": 1,
         "language": "id",
         "authors": [
@@ -253,10 +253,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/otakudesu.png",
-        "fileHash": "sha256-57e9e69278343e7568a118495ea1ca0e679208a31fd8585840690daf942bf70a",
+        "fileHash": "sha256-ecd5aa73cfea170b03b190e5a61df25e09a7a381bba3a1665873cbb3d8de4b55",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 31627,
+        "fileSize": 31629,
         "status": 1,
         "language": "id",
         "authors": [
@@ -272,7 +272,7 @@
         "description": "Streaming Anime Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Otakudesu.cs3",
         "name": "Otakudesu",
-        "jarHash": "sha256-8398c47bc4aae2765725a4b508d72b28ba32fa55b20589eb6111657e535892d7"
+        "jarHash": "sha256-127530c674b44d3505eeed0cc538750dde0d66a8beaee46b176ec616db834661"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/pencurimovie.png",
