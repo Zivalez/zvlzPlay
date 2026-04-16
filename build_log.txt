@@ -26,26 +26,30 @@ w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Samehadaku/build.gradle.kts:12
 w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Samehadaku/build.gradle.kts:13:9: 'targetSdk: Int?' is deprecated. Will be removed from library DSL in v9.0. Use testOptions.targetSdk or/and lint.targetSdk instead
 
 > Task :Alqanime:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :Alqanime:preBuild UP-TO-DATE
-> Task :Alqanime:preDebugBuild UP-TO-DATE
 > Task :AnimeSail:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :AnimeSail:preBuild UP-TO-DATE
 > Task :AnimeSail:preDebugBuild UP-TO-DATE
+> Task :Alqanime:preBuild UP-TO-DATE
+> Task :Alqanime:preDebugBuild UP-TO-DATE
 > Task :AnimeSail:generateDebugResValues
 > Task :Alqanime:generateDebugResValues
-> Task :Alqanime:generateDebugResources
 > Task :AnimeSail:generateDebugResources
-> Task :AnimeSail:javaPreCompileDebug
+> Task :Alqanime:generateDebugResources
 > Task :Funmovieslix:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :Funmovieslix:preBuild UP-TO-DATE
 > Task :Funmovieslix:preDebugBuild UP-TO-DATE
 > Task :Funmovieslix:generateDebugResValues FROM-CACHE
 > Task :Funmovieslix:generateDebugResources FROM-CACHE
-> Task :Alqanime:packageDebugResources
-> Task :Funmovieslix:javaPreCompileDebug FROM-CACHE
+> Task :Funmovieslix:javaPreCompileDebug
+> Task :Hentaicop:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :Hentaicop:preBuild UP-TO-DATE
+> Task :Hentaicop:preDebugBuild UP-TO-DATE
+> Task :Hentaicop:generateDebugResValues FROM-CACHE
 > Task :AnimeSail:packageDebugResources
-> Task :AnimeSail:parseDebugLocalResources
+> Task :Hentaicop:generateDebugResources FROM-CACHE
+> Task :Alqanime:packageDebugResources
 > Task :Alqanime:parseDebugLocalResources
+> Task :AnimeSail:parseDebugLocalResources
 > Task :AnimeSail:generateDebugRFile
 > Task :Alqanime:generateDebugRFile
 > Task :AnimeSail:compileDebugKotlin
@@ -2460,6 +2464,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 
 Compiled dex to /home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/build/intermediates/classes.dex
 
+> Task :AnimeSail:javaPreCompileDebug FROM-CACHE
 > Task :AnimeSail:compileDebugJavaWithJavac NO-SOURCE
 > Task :AnimeSail:bundleLibRuntimeToJarDebug
 > Task :AnimeSail:processDebugJavaRes
@@ -5152,11 +5157,6 @@ Compiled dex to /home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/build/intermedi
 > Task :Alqanime:make
 Made Cloudstream package at /home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/build/Alqanime.cs3
 
-> Task :Hentaicop:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :Hentaicop:preBuild UP-TO-DATE
-> Task :Hentaicop:preDebugBuild UP-TO-DATE
-> Task :Hentaicop:generateDebugResValues FROM-CACHE
-> Task :Hentaicop:generateDebugResources FROM-CACHE
 > Task :Hentaicop:packageDebugResources FROM-CACHE
 > Task :Hentaicop:parseDebugLocalResources FROM-CACHE
 > Task :Hentaicop:generateDebugRFile FROM-CACHE
@@ -15114,16 +15114,11 @@ w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/src/main/kotlin/com/idli
 
 See https://youtrack.jetbrains.com/issue/KT-73255 for more details.
 
-> Task :Kuronime:compileDebugKotlin
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:14:8 Unresolved reference 'kotlinx'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:251:13 Unresolved reference 'runBlocking'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:253:21 Suspension functions can only be called within coroutine body.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:303:17 Unresolved reference 'Qualities'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:304:21 Unresolved reference 'Qualities'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:305:20 Unresolved reference 'Qualities'.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:306:58 Unresolved reference 'Qualities'.
-
 > Task :Kuronime:compileDebugKotlin FAILED
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Extractors.kt:85:13 Suspension functions can only be called within coroutine body.
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:167:5 'loadLinks' overrides nothing. Potential signatures for overriding:
+suspend fun loadLinks(data: String, isCasting: Boolean, subtitleCallback: (SubtitleFile) -> Unit, callback: (ExtractorLink) -> Unit): Boolean
+e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Kuronime/src/main/kotlin/com/kuronime/Kuronime.kt:171:20 Unresolved reference 'ExtractorLink'.
 
 > Task :Idlix:compileDex
 WARNING: D8: Unexpected error during rewriting of Kotlin metadata for class 'com.idlix.ApiItem':
@@ -21474,5 +21469,5 @@ Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilat
 	... 2 more
 
 
-BUILD FAILED in 2m 32s
+BUILD FAILED in 2m 30s
 71 actionable tasks: 42 executed, 29 from cache

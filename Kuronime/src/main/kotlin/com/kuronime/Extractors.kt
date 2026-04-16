@@ -9,6 +9,7 @@ import com.lagradost.cloudstream3.utils.Qualities
 import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
 import com.lagradost.nicehttp.RequestBodyTypes
+import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.net.URI
@@ -81,19 +82,21 @@ private suspend fun loadFixedExtractor(
     callback: (ExtractorLink) -> Unit
 ) {
     loadExtractor(url ?: return, referer, subtitleCallback) { link ->
-        callback(
-            newExtractorLink(
-                sourceName ?: link.source,
-                link.name.ifBlank { sourceName ?: link.source },
-                link.url,
-                link.type
-            ) {
-                this.referer = link.referer
-                this.quality = quality?.fixQuality() ?: link.quality
-                this.headers = link.headers
-                this.extractorData = link.extractorData
-            }
-        )
+        runBlocking {
+            callback.invoke(
+                newExtractorLink(
+                    sourceName ?: link.source,
+                    link.name.ifBlank { sourceName ?: link.source },
+                    link.url,
+                    link.type
+                ) {
+                    this.referer = link.referer
+                    this.quality = quality?.fixQuality() ?: link.quality
+                    this.headers = link.headers
+                    this.extractorData = link.extractorData
+                }
+            )
+        }
     }
 }
 
