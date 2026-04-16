@@ -199,9 +199,8 @@ class Kuronime : MainAPI() {
                 )
                 val source =
                     tryParseJson<Sources>(decrypt?.toJsonFormat())?.src?.replace("\\", "")
-                val sourceName = resolveSourceName(source)
                 M3u8Helper.generateM3u8(
-                    sourceName,
+                    this.name,
                     source ?: return@runAllAsync,
                     "$animekuUrl/",
                     headers = mapOf("Origin" to animekuUrl)
@@ -219,7 +218,6 @@ class Kuronime : MainAPI() {
                         loadFixedExtractor(
                             entry.value,
                             embed.key.removePrefix("v"),
-                            resolveSourceName(entry.value, embed.key.removePrefix("v")),
                             "$mainUrl/",
                             subtitleCallback,
                             callback
@@ -240,59 +238,11 @@ class Kuronime : MainAPI() {
     private suspend fun loadFixedExtractor(
         url: String? = null,
         quality: String? = null,
-        sourceName: String? = null,
         referer: String? = null,
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ) {
-        loadExtractor(url ?: return, referer, subtitleCallback) { link ->
-            callback(
-                newExtractorLink(
-                    sourceName ?: link.source,
-                    link.name.ifBlank { sourceName ?: link.source },
-                    link.url,
-                    link.type
-                ) {
-                    this.referer = link.referer
-                    this.quality = quality?.fixQuality() ?: link.quality
-                    this.headers = link.headers
-                    this.extractorData = link.extractorData
-                }
-            )
-        }
-    }
-
-    private fun resolveSourceName(url: String?, hint: String? = null): String {
-        hint?.toSourceLabel()?.let { return it }
-
-        val host = runCatching { url?.let { URI(it).host } }.getOrNull()
-            ?.lowercase()
-            ?.removePrefix("www.")
-            ?.takeIf { it.isNotBlank() }
-
-        host?.toSourceLabel()?.let { return it }
-
-        return hint?.toSourceLabel() ?: name
-    }
-
-    private fun String.toSourceLabel(): String? {
-        val cleaned = lowercase().replace(Regex("[^a-z0-9]+"), " ").trim()
-        if (cleaned.isBlank() || cleaned.matches(Regex("v\\d+")) || cleaned.all { it.isDigit() }) {
-            return null
-        }
-
-        return when {
-            cleaned.contains("pixeldrain") -> "Pixeldrain"
-            cleaned == "vip" || cleaned.contains(" vip ") || cleaned.startsWith("vip ") || cleaned.endsWith(" vip") -> "VIP"
-            cleaned.contains("mega") -> "Mega"
-            cleaned.contains("filemoon") -> "Filemoon"
-            cleaned.contains("streamwish") -> "Streamwish"
-            cleaned.contains("tune pk") || cleaned.contains("tunepk") -> "Tune.pk"
-            cleaned.contains("dood") -> "DoodStream"
-            else -> cleaned.split(Regex("\\s+")).joinToString(" ") {
-                it.replaceFirstChar { ch -> ch.uppercase() }
-            }
-        }
+        loadExtractor(url ?: return, referer, subtitleCallback, callback)
     }
 
     private fun getBaseUrl(url: String): String {
