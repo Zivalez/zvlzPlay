@@ -3,6 +3,7 @@ package com.gomunime
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.amap
 import com.lagradost.cloudstream3.utils.ExtractorLink
+import com.lagradost.cloudstream3.utils.ExtractorLinkType
 import com.lagradost.cloudstream3.utils.Qualities
 import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
@@ -44,7 +45,12 @@ private suspend fun loadServerSource(
     val direct = document.findDirectVideoSource()
     if (!direct.isNullOrBlank()) {
         callback(
-            newExtractorLink(server.name, server.name, direct) {
+            newExtractorLink(
+                server.name,
+                server.name,
+                direct,
+                if (direct.contains(".m3u8", ignoreCase = true)) ExtractorLinkType.M3U8 else ExtractorLinkType.VIDEO
+            ) {
                 this.referer = server.url
                 this.quality = qualityFromUrl(direct)
             }
@@ -55,7 +61,7 @@ private suspend fun loadServerSource(
     val cepat = document.findCepatPlaylistSource(server.url)
     if (!cepat.isNullOrBlank()) {
         callback(
-            newExtractorLink(server.name, server.name, cepat) {
+            newExtractorLink(server.name, server.name, cepat, ExtractorLinkType.M3U8) {
                 this.referer = server.url
                 this.quality = Qualities.Unknown.value
             }
