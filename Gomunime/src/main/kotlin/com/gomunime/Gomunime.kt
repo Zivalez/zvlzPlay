@@ -147,7 +147,7 @@ class Gomunime : MainAPI() {
                     this.name = "Episode ${epNum ?: ""}".trim()
                 }
             }
-            .distinctBy { it.url }
+            .distinctBy { "${it.name}-${it.episode}" }
             .sortedBy { it.episode ?: Int.MAX_VALUE }
     }
 
