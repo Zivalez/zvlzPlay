@@ -1,0 +1,4 @@
+- generic [ref=e1]:
+  - text: 
+  - button "play video" [ref=e3] [cursor=pointer]: 
+  - text:       

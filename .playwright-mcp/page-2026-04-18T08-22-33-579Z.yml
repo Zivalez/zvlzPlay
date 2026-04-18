@@ -1,0 +1,864 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic:
+      - text: 
+      - banner [ref=e3]:
+        - heading "Gomunime - Nonton Anime Sub Indo Gratis Terlengkap" [level=1] [ref=e5]:
+          - link "Gomunime - Nonton Anime Sub Indo Gratis Terlengkap" [ref=e6] [cursor=pointer]:
+            - /url: https://gomunime.top/
+            - img "Gomunime - Nonton Anime Sub Indo Gratis Terlengkap" [ref=e7]
+      - generic [ref=e9]:
+        - textbox "Search..." [ref=e10]
+        - button "search" [ref=e11] [cursor=pointer]:
+          - generic [ref=e12]: 
+        - text: 
+      - text: 
+      - generic [ref=e14]:
+        - checkbox "Switch Mode" [checked]
+        - generic [ref=e15] [cursor=pointer]: 
+  - navigation [ref=e16]:
+    - generic [ref=e18]:
+      - navigation:
+        - list [ref=e19]:
+          - listitem [ref=e20]:
+            - link "Home" [ref=e21] [cursor=pointer]:
+              - /url: https://gomunime.top
+          - listitem [ref=e22]:
+            - link "AZ Lists" [ref=e23] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/
+          - listitem [ref=e24]:
+            - link "Schedule" [ref=e25] [cursor=pointer]:
+              - /url: https://gomunime.top/schedule/
+          - listitem [ref=e26]:
+            - link "Bookmark" [ref=e27] [cursor=pointer]:
+              - /url: https://gomunime.top/bookmark/
+  - generic [ref=e29]:
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - paragraph [ref=e32]:
+          - text: Selamat datang di
+          - strong [ref=e33]: Gomunime
+          - text: ", situs nonton"
+          - strong [ref=e34]: anime
+          - text: sub Indo gratis terlengkap.
+          - strong [ref=e35]: Gomunime
+          - text: menyediakan ribuan judul
+          - strong [ref=e36]: anime
+          - text: terbaru yang bisa kamu streaming dan download dengan kualitas HD. Semua
+          - strong [ref=e37]: anime
+          - text: di
+          - strong [ref=e38]: Gomunime
+          - text: tersedia dengan subtitle Indonesia dan diupdate setiap hari.
+        - paragraph [ref=e39]:
+          - strong [ref=e40]: Gomunime
+          - text: menghadirkan koleksi
+          - strong [ref=e41]: anime
+          - text: dari berbagai genre populer. Nonton
+          - strong [ref=e42]: anime
+          - text: action,
+          - strong [ref=e43]: anime
+          - text: fantasy,
+          - strong [ref=e44]: anime
+          - text: romance,
+          - strong [ref=e45]: anime
+          - text: isekai,
+          - strong [ref=e46]: anime
+          - text: shounen,
+          - strong [ref=e47]: anime
+          - text: seinen, dan masih banyak lagi hanya di
+          - strong [ref=e48]: Gomunime
+          - text: .
+        - paragraph [ref=e49]:
+          - text: Di
+          - strong [ref=e50]: Gomunime
+          - text: kamu bisa nonton
+          - strong [ref=e51]: anime
+          - text: ongoing terbaru maupun
+          - strong [ref=e52]: anime
+          - text: yang sudah tamat.
+          - strong [ref=e53]: Gomunime
+          - text: adalah pilihan terbaik untuk nonton
+          - strong [ref=e54]: anime
+          - text: sub Indo gratis tanpa registrasi. Bookmark
+          - strong [ref=e55]: Gomunime
+          - text: sekarang dan nikmati
+          - strong [ref=e56]: anime
+          - text: favoritmu kapan saja.
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - heading "Nonton Anime Sub Indo Terbaru di Gomunime" [level=2] [ref=e59]
+          - link "View All" [ref=e60] [cursor=pointer]:
+            - /url: https://gomunime.top/anime/?status=&type=&order=update
+        - generic [ref=e61]:
+          - generic:
+            - article [ref=e62]:
+              - link "TV Ep 1 Golden Kamuy Season 5 Episode 1 Subtitle Indonesia Golden Kamuy Season 5 Golden Kamuy Season 5 Episode 1 Subtitle Indonesia" [ref=e64] [cursor=pointer]:
+                - /url: https://gomunime.top/golden-kamuy-season-5-episode-1-subtitle-indonesia/
+                - generic [ref=e65]:
+                  - generic [ref=e66]: TV
+                  - text: 
+                  - generic [ref=e68]: Ep 1
+                  - img "Golden Kamuy Season 5 Episode 1 Subtitle Indonesia" [ref=e69]
+                - generic [ref=e70]:
+                  - text: Golden Kamuy Season 5
+                  - heading "Golden Kamuy Season 5 Episode 1 Subtitle Indonesia" [level=3] [ref=e71]
+            - article [ref=e72]:
+              - 'link "Completed TV Ep 12 Enen no Shouboutai: San no Shou Season 3 (Selesai) Enen no Shouboutai: San no Shou Enen no Shouboutai: San no Shou Season 3 (Selesai)" [ref=e74] [cursor=pointer]':
+                - /url: https://gomunime.top/enen-no-shouboutai-san-no-shou-season-3-selesai/
+                - generic [ref=e75]:
+                  - generic [ref=e76]: Completed
+                  - generic [ref=e77]: TV
+                  - text: 
+                  - generic [ref=e79]: Ep 12
+                  - 'img "Enen no Shouboutai: San no Shou Season 3 (Selesai)" [ref=e80]'
+                - generic [ref=e81]:
+                  - text: "Enen no Shouboutai: San no Shou"
+                  - 'heading "Enen no Shouboutai: San no Shou Season 3 (Selesai)" [level=3] [ref=e82]'
+            - article [ref=e83]:
+              - link "TV Ep 3 Hokuto no Ken Fist Of The North Star Episode 3 Subtitle Indonesia Hokuto no Ken Fist Of The North Star Hokuto no Ken Fist Of The North Star Episode 3 Subtitle Indonesia" [ref=e85] [cursor=pointer]:
+                - /url: https://gomunime.top/hokuto-no-ken-fist-of-the-north-star-episode-3-subtitle-indonesia/
+                - generic [ref=e86]:
+                  - generic [ref=e87]: TV
+                  - text: 
+                  - generic [ref=e89]: Ep 3
+                  - img "Hokuto no Ken Fist Of The North Star Episode 3 Subtitle Indonesia" [ref=e90]
+                - generic [ref=e91]:
+                  - text: Hokuto no Ken Fist Of The North Star
+                  - heading "Hokuto no Ken Fist Of The North Star Episode 3 Subtitle Indonesia" [level=3] [ref=e92]
+            - article [ref=e93]:
+              - link "TV Ep 2 Kami no Shizuku Episode 2 Subtitle Indonesia Kami no Shizuku Kami no Shizuku Episode 2 Subtitle Indonesia" [ref=e95] [cursor=pointer]:
+                - /url: https://gomunime.top/kami-no-shizuku-episode-2-subtitle-indonesia/
+                - generic [ref=e96]:
+                  - generic [ref=e97]: TV
+                  - text: 
+                  - generic [ref=e99]: Ep 2
+                  - img "Kami no Shizuku Episode 2 Subtitle Indonesia" [ref=e100]
+                - generic [ref=e101]:
+                  - text: Kami no Shizuku
+                  - heading "Kami no Shizuku Episode 2 Subtitle Indonesia" [level=3] [ref=e102]
+            - article [ref=e103]:
+              - link "TV Ep 3 Snowball Earth Episode 3 Subtitle Indonesia Snowball Earth Snowball Earth Episode 3 Subtitle Indonesia" [ref=e105] [cursor=pointer]:
+                - /url: https://gomunime.top/snowball-earth-episode-3-subtitle-indonesia/
+                - generic [ref=e106]:
+                  - generic [ref=e107]: TV
+                  - text: 
+                  - generic [ref=e109]: Ep 3
+                  - img "Snowball Earth Episode 3 Subtitle Indonesia" [ref=e110]
+                - generic [ref=e111]:
+                  - text: Snowball Earth
+                  - heading "Snowball Earth Episode 3 Subtitle Indonesia" [level=3] [ref=e112]
+            - article [ref=e113]:
+              - link "TV Ep 3 Otonari no Tenshi Sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2 Episode 3 Subtitle Indonesia Otonari no Tenshi Sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2 Otonari no Tenshi Sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2 Episode 3 Subtitle Indonesia" [ref=e115] [cursor=pointer]:
+                - /url: https://gomunime.top/otonari-no-tenshi-sama-ni-itsunomanika-dame-ningen-ni-sareteita-ken-2-episode-3-subtitle-indonesia/
+                - generic [ref=e116]:
+                  - generic [ref=e117]: TV
+                  - text: 
+                  - generic [ref=e119]: Ep 3
+                  - img "Otonari no Tenshi Sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2 Episode 3 Subtitle Indonesia" [ref=e120]
+                - generic [ref=e121]:
+                  - text: Otonari no Tenshi Sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2
+                  - heading "Otonari no Tenshi Sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2 Episode 3 Subtitle Indonesia" [level=3] [ref=e122]
+            - article [ref=e123]:
+              - link "TV Ep 3 Jishou Akuyaku Reijou na Konyakusha no Kansatsu Kiroku Episode 3 Subtitle Indonesia Jishou Akuyaku Reijou na Konyakusha no Kansatsu Kiroku Jishou Akuyaku Reijou na Konyakusha no Kansatsu Kiroku Episode 3 Subtitle Indonesia" [ref=e125] [cursor=pointer]:
+                - /url: https://gomunime.top/jishou-akuyaku-reijou-na-konyakusha-no-kansatsu-kiroku-episode-3-subtitle-indonesia/
+                - generic [ref=e126]:
+                  - generic [ref=e127]: TV
+                  - text: 
+                  - generic [ref=e129]: Ep 3
+                  - img "Jishou Akuyaku Reijou na Konyakusha no Kansatsu Kiroku Episode 3 Subtitle Indonesia" [ref=e130]
+                - generic [ref=e131]:
+                  - text: Jishou Akuyaku Reijou na Konyakusha no Kansatsu Kiroku
+                  - heading "Jishou Akuyaku Reijou na Konyakusha no Kansatsu Kiroku Episode 3 Subtitle Indonesia" [level=3] [ref=e132]
+            - article [ref=e133]:
+              - link "TV Ep 3 Mata Korosarete Shimatta no Desu Ne Tantei Sama Episode 3 Subtitle Indonesia Mata Korosarete Shimatta no Desu Ne Tantei Sama Mata Korosarete Shimatta no Desu Ne Tantei Sama Episode 3 Subtitle Indonesia" [ref=e135] [cursor=pointer]:
+                - /url: https://gomunime.top/mata-korosarete-shimatta-no-desu-ne-tantei-sama-episode-3-subtitle-indonesia/
+                - generic [ref=e136]:
+                  - generic [ref=e137]: TV
+                  - text: 
+                  - generic [ref=e139]: Ep 3
+                  - img "Mata Korosarete Shimatta no Desu Ne Tantei Sama Episode 3 Subtitle Indonesia" [ref=e140]
+                - generic [ref=e141]:
+                  - text: Mata Korosarete Shimatta no Desu Ne Tantei Sama
+                  - heading "Mata Korosarete Shimatta no Desu Ne Tantei Sama Episode 3 Subtitle Indonesia" [level=3] [ref=e142]
+            - article [ref=e143]:
+              - link "TV Ep 2 Awajima Hyakkei Episode 2 Subtitle Indonesia Awajima Hyakkei Awajima Hyakkei Episode 2 Subtitle Indonesia" [ref=e145] [cursor=pointer]:
+                - /url: https://gomunime.top/awajima-hyakkei-episode-2-subtitle-indonesia/
+                - generic [ref=e146]:
+                  - generic [ref=e147]: TV
+                  - text: 
+                  - generic [ref=e149]: Ep 2
+                  - img "Awajima Hyakkei Episode 2 Subtitle Indonesia" [ref=e150]
+                - generic [ref=e151]:
+                  - text: Awajima Hyakkei
+                  - heading "Awajima Hyakkei Episode 2 Subtitle Indonesia" [level=3] [ref=e152]
+            - article [ref=e153]:
+              - link "TV Ep 3 Haibara Kun no Tsuyokute Seishun New Game Episode 3 Subtitle Indonesia Haibara Kun no Tsuyokute Seishun New Game Haibara Kun no Tsuyokute Seishun New Game Episode 3 Subtitle Indonesia" [ref=e155] [cursor=pointer]:
+                - /url: https://gomunime.top/haibara-kun-no-tsuyokute-seishun-new-game-episode-3-subtitle-indonesia/
+                - generic [ref=e156]:
+                  - generic [ref=e157]: TV
+                  - text: 
+                  - generic [ref=e159]: Ep 3
+                  - img "Haibara Kun no Tsuyokute Seishun New Game Episode 3 Subtitle Indonesia" [ref=e160]
+                - generic [ref=e161]:
+                  - text: Haibara Kun no Tsuyokute Seishun New Game
+                  - heading "Haibara Kun no Tsuyokute Seishun New Game Episode 3 Subtitle Indonesia" [level=3] [ref=e162]
+            - article [ref=e163]:
+              - link "TV Ep 3 Reincarnation no Kaben Episode 3 Subtitle Indonesia Reincarnation no Kaben Reincarnation no Kaben Episode 3 Subtitle Indonesia" [ref=e165] [cursor=pointer]:
+                - /url: https://gomunime.top/reincarnation-no-kaben-episode-3-subtitle-indonesia/
+                - generic [ref=e166]:
+                  - generic [ref=e167]: TV
+                  - text: 
+                  - generic [ref=e169]: Ep 3
+                  - img "Reincarnation no Kaben Episode 3 Subtitle Indonesia" [ref=e170]
+                - generic [ref=e171]:
+                  - text: Reincarnation no Kaben
+                  - heading "Reincarnation no Kaben Episode 3 Subtitle Indonesia" [level=3] [ref=e172]
+            - article [ref=e173]:
+              - link "TV Ep 3 Kirio Fanclub Episode 3 Subtitle Indonesia Kirio Fanclub Kirio Fanclub Episode 3 Subtitle Indonesia" [ref=e175] [cursor=pointer]:
+                - /url: https://gomunime.top/kirio-fanclub-episode-3-subtitle-indonesia/
+                - generic [ref=e176]:
+                  - generic [ref=e177]: TV
+                  - text: 
+                  - generic [ref=e179]: Ep 3
+                  - img "Kirio Fanclub Episode 3 Subtitle Indonesia" [ref=e180]
+                - generic [ref=e181]:
+                  - text: Kirio Fanclub
+                  - heading "Kirio Fanclub Episode 3 Subtitle Indonesia" [level=3] [ref=e182]
+            - article [ref=e183]:
+              - link "TV Ep 3 Koori no Jouheki Episode 3 Subtitle Indonesia Koori no Jouheki Koori no Jouheki Episode 3 Subtitle Indonesia" [ref=e185] [cursor=pointer]:
+                - /url: https://gomunime.top/koori-no-jouheki-episode-3-subtitle-indonesia/
+                - generic [ref=e186]:
+                  - generic [ref=e187]: TV
+                  - text: 
+                  - generic [ref=e189]: Ep 3
+                  - img "Koori no Jouheki Episode 3 Subtitle Indonesia" [ref=e190]
+                - generic [ref=e191]:
+                  - text: Koori no Jouheki
+                  - heading "Koori no Jouheki Episode 3 Subtitle Indonesia" [level=3] [ref=e192]
+            - article [ref=e193]:
+              - link "TV Ep 2 Kujima Utaeba Ie Hororo Episode 2 Subtitle Indonesia Kujima Utaeba Ie Hororo Kujima Utaeba Ie Hororo Episode 2 Subtitle Indonesia" [ref=e195] [cursor=pointer]:
+                - /url: https://gomunime.top/kujima-utaeba-ie-hororo-episode-2-subtitle-indonesia/
+                - generic [ref=e196]:
+                  - generic [ref=e197]: TV
+                  - text: 
+                  - generic [ref=e199]: Ep 2
+                  - img "Kujima Utaeba Ie Hororo Episode 2 Subtitle Indonesia" [ref=e200]
+                - generic [ref=e201]:
+                  - text: Kujima Utaeba Ie Hororo
+                  - heading "Kujima Utaeba Ie Hororo Episode 2 Subtitle Indonesia" [level=3] [ref=e202]
+            - article [ref=e203]:
+              - link "TV Ep 2 Himekishi wa Barbaroi no Yome Episode 2 Subtitle Indonesia Himekishi wa Barbaroi no Yome Himekishi wa Barbaroi no Yome Episode 2 Subtitle Indonesia" [ref=e205] [cursor=pointer]:
+                - /url: https://gomunime.top/himekishi-wa-barbaroi-no-yome-episode-2-subtitle-indonesia/
+                - generic [ref=e206]:
+                  - generic [ref=e207]: TV
+                  - text: 
+                  - generic [ref=e209]: Ep 2
+                  - img "Himekishi wa Barbaroi no Yome Episode 2 Subtitle Indonesia" [ref=e210]
+                - generic [ref=e211]:
+                  - text: Himekishi wa Barbaroi no Yome
+                  - heading "Himekishi wa Barbaroi no Yome Episode 2 Subtitle Indonesia" [level=3] [ref=e212]
+            - article [ref=e213]:
+              - link "TV Ep 2 Otaku ni Yasashii Gal wa Inai Episode 2 Subtitle Indonesia Otaku ni Yasashii Gal wa Inai Otaku ni Yasashii Gal wa Inai Episode 2 Subtitle Indonesia" [ref=e215] [cursor=pointer]:
+                - /url: https://gomunime.top/otaku-ni-yasashii-gal-wa-inai-episode-2-subtitle-indonesia/
+                - generic [ref=e216]:
+                  - generic [ref=e217]: TV
+                  - text: 
+                  - generic [ref=e219]: Ep 2
+                  - img "Otaku ni Yasashii Gal wa Inai Episode 2 Subtitle Indonesia" [ref=e220]
+                - generic [ref=e221]:
+                  - text: Otaku ni Yasashii Gal wa Inai
+                  - heading "Otaku ni Yasashii Gal wa Inai Episode 2 Subtitle Indonesia" [level=3] [ref=e222]
+            - article [ref=e223]:
+              - link "TV Ep 3 Nigashita Sakana wa Ookikatta ga Tsuriageta Sakana ga Ookisugita Ken Episode 3 Subtitle Indonesia Nigashita Sakana wa Ookikatta ga Tsuriageta Sakana ga Ookisugita Ken Nigashita Sakana wa Ookikatta ga Tsuriageta Sakana ga Ookisugita Ken Episode 3 Subtitle Indonesia" [ref=e225] [cursor=pointer]:
+                - /url: https://gomunime.top/nigashita-sakana-wa-ookikatta-ga-tsuriageta-sakana-ga-ookisugita-ken-episode-3-subtitle-indonesia/
+                - generic [ref=e226]:
+                  - generic [ref=e227]: TV
+                  - text: 
+                  - generic [ref=e229]: Ep 3
+                  - img "Nigashita Sakana wa Ookikatta ga Tsuriageta Sakana ga Ookisugita Ken Episode 3 Subtitle Indonesia" [ref=e230]
+                - generic [ref=e231]:
+                  - text: Nigashita Sakana wa Ookikatta ga Tsuriageta Sakana ga Ookisugita Ken
+                  - heading "Nigashita Sakana wa Ookikatta ga Tsuriageta Sakana ga Ookisugita Ken Episode 3 Subtitle Indonesia" [level=3] [ref=e232]
+            - article [ref=e233]:
+              - link "TV Ep 5 Dorohedoro Season 2 Episode 5 Subtitle Indonesia Dorohedoro Season 2 Dorohedoro Season 2 Episode 5 Subtitle Indonesia" [ref=e235] [cursor=pointer]:
+                - /url: https://gomunime.top/dorohedoro-season-2-episode-5-subtitle-indonesia/
+                - generic [ref=e236]:
+                  - generic [ref=e237]: TV
+                  - text: 
+                  - generic [ref=e239]: Ep 5
+                  - img "Dorohedoro Season 2 Episode 5 Subtitle Indonesia" [ref=e240]
+                - generic [ref=e241]:
+                  - text: Dorohedoro Season 2
+                  - heading "Dorohedoro Season 2 Episode 5 Subtitle Indonesia" [level=3] [ref=e242]
+            - article [ref=e243]:
+              - link "TV Ep 2 Rezero Kara Hajimeru Isekai Seikatsu Season 4 Episode 2 Subtitle Indonesia Rezero Kara Hajimeru Isekai Seikatsu Season 4 Rezero Kara Hajimeru Isekai Seikatsu Season 4 Episode 2 Subtitle Indonesia" [ref=e245] [cursor=pointer]:
+                - /url: https://gomunime.top/rezero-kara-hajimeru-isekai-seikatsu-season-4-episode-2-subtitle-indonesia/
+                - generic [ref=e246]:
+                  - generic [ref=e247]: TV
+                  - text: 
+                  - generic [ref=e249]: Ep 2
+                  - img "Rezero Kara Hajimeru Isekai Seikatsu Season 4 Episode 2 Subtitle Indonesia" [ref=e250]
+                - generic [ref=e251]:
+                  - text: Rezero Kara Hajimeru Isekai Seikatsu Season 4
+                  - heading "Rezero Kara Hajimeru Isekai Seikatsu Season 4 Episode 2 Subtitle Indonesia" [level=3] [ref=e252]
+            - article [ref=e253]:
+              - link "TV Ep 6 Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu E Season 4 2 Nensei Hen 1 Gakki Episode 6 Subtitle Indonesia Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu E Season 4 2 Nensei Hen 1 Gakki Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu E Season 4 2 Nensei Hen 1 Gakki Episode 6 Subtitle Indonesia" [ref=e255] [cursor=pointer]:
+                - /url: https://gomunime.top/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-season-4-2-nensei-hen-1-gakki-episode-6-subtitle-indonesia/
+                - generic [ref=e256]:
+                  - generic [ref=e257]: TV
+                  - text: 
+                  - generic [ref=e259]: Ep 6
+                  - img "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu E Season 4 2 Nensei Hen 1 Gakki Episode 6 Subtitle Indonesia" [ref=e260]
+                - generic [ref=e261]:
+                  - text: Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu E Season 4 2 Nensei Hen 1 Gakki
+                  - heading "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu E Season 4 2 Nensei Hen 1 Gakki Episode 6 Subtitle Indonesia" [level=3] [ref=e262]
+          - link "Next" [ref=e264] [cursor=pointer]:
+            - /url: https://gomunime.top/page/2/
+            - text: Next
+            - generic [ref=e265]: 
+    - generic [ref=e266]:
+      - generic [ref=e269]:
+        - heading "Pasang Iklan" [level=3] [ref=e270]
+        - paragraph [ref=e271]: "Email: aanichin81@gmail.com"
+      - link "WhatsApp Logo Gabung Saluran WhatsApp Anime ID Official" [ref=e275] [cursor=pointer]:
+        - /url: https://whatsapp.com/channel/0029VbAjawQCsU9JaJnX9j1A
+        - img "WhatsApp Logo"
+        - text: Gabung Saluran WhatsApp Anime ID Official
+      - list [ref=e277]:
+        - listitem [ref=e278]:
+          - link "Action" [ref=e279] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/action/
+        - listitem [ref=e280]:
+          - link "Adult Cast" [ref=e281] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/adult-cast/
+        - listitem [ref=e282]:
+          - link "Adventure" [ref=e283] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/adventure/
+        - listitem [ref=e284]:
+          - link "Anthropomorphic" [ref=e285] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/anthropomorphic/
+        - listitem [ref=e286]:
+          - link "Avant Garde" [ref=e287] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/avant-garde/
+        - listitem [ref=e288]:
+          - link "Award Winning" [ref=e289] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/award-winning/
+        - listitem [ref=e290]:
+          - link "CGDCT" [ref=e291] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/cgdct/
+        - listitem [ref=e292]:
+          - link "Childcare" [ref=e293] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/childcare/
+        - listitem [ref=e294]:
+          - link "Comedy" [ref=e295] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/comedy/
+        - listitem [ref=e296]:
+          - link "Crossdressing" [ref=e297] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/crossdressing/
+        - listitem [ref=e298]:
+          - link "Delinquents" [ref=e299] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/delinquents/
+        - listitem [ref=e300]:
+          - link "Detective" [ref=e301] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/detective/
+        - listitem [ref=e302]:
+          - link "Drama" [ref=e303] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/drama/
+        - listitem [ref=e304]:
+          - link "Ecchi" [ref=e305] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/ecchi/
+        - listitem [ref=e306]:
+          - link "Educational" [ref=e307] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/educational/
+        - listitem [ref=e308]:
+          - link "Erotica" [ref=e309] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/erotica/
+        - listitem [ref=e310]:
+          - link "Fantasy" [ref=e311] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/fantasy/
+        - listitem [ref=e312]:
+          - link "Gag Humor" [ref=e313] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/gag-humor/
+        - listitem [ref=e314]:
+          - link "Girls Love" [ref=e315] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/girls-love/
+        - listitem [ref=e316]:
+          - link "Gore" [ref=e317] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/gore/
+        - listitem [ref=e318]:
+          - link "Gourmet" [ref=e319] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/gourmet/
+        - listitem [ref=e320]:
+          - link "Harem" [ref=e321] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/harem/
+        - listitem [ref=e322]:
+          - link "High Stakes Game" [ref=e323] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/high-stakes-game/
+        - listitem [ref=e324]:
+          - link "Historical" [ref=e325] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/historical/
+        - listitem [ref=e326]:
+          - link "Horror" [ref=e327] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/horror/
+        - listitem [ref=e328]:
+          - link "Idols (Female)" [ref=e329] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/idols-female/
+        - listitem [ref=e330]:
+          - link "Idols (Male)" [ref=e331] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/idols-male/
+        - listitem [ref=e332]:
+          - link "Isekai" [ref=e333] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/isekai/
+        - listitem [ref=e334]:
+          - link "Iyashikei" [ref=e335] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/iyashikei/
+        - listitem [ref=e336]:
+          - link "Josei" [ref=e337] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/josei/
+        - listitem [ref=e338]:
+          - link "Love Polygon" [ref=e339] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/love-polygon/
+        - listitem [ref=e340]:
+          - link "Love Status Quo" [ref=e341] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/love-status-quo/
+        - listitem [ref=e342]:
+          - link "Mahou Shoujo" [ref=e343] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/mahou-shoujo/
+        - listitem [ref=e344]:
+          - link "Martial Arts" [ref=e345] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/martial-arts/
+        - listitem [ref=e346]:
+          - link "Mecha" [ref=e347] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/mecha/
+        - listitem [ref=e348]:
+          - link "Medical" [ref=e349] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/medical/
+        - listitem [ref=e350]:
+          - link "Military" [ref=e351] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/military/
+        - listitem [ref=e352]:
+          - link "Music" [ref=e353] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/music/
+        - listitem [ref=e354]:
+          - link "Mystery" [ref=e355] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/mystery/
+        - listitem [ref=e356]:
+          - link "Mythology" [ref=e357] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/mythology/
+        - listitem [ref=e358]:
+          - link "Organized Crime" [ref=e359] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/organized-crime/
+        - listitem [ref=e360]:
+          - link "Otaku Culture" [ref=e361] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/otaku-culture/
+        - listitem [ref=e362]:
+          - link "Parody" [ref=e363] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/parody/
+        - listitem [ref=e364]:
+          - link "Performing Arts" [ref=e365] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/performing-arts/
+        - listitem [ref=e366]:
+          - link "Pets" [ref=e367] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/pets/
+        - listitem [ref=e368]:
+          - link "Psychological" [ref=e369] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/psychological/
+        - listitem [ref=e370]:
+          - link "Racing" [ref=e371] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/racing/
+        - listitem [ref=e372]:
+          - link "Reincarnation" [ref=e373] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/reincarnation/
+        - listitem [ref=e374]:
+          - link "Reverse Harem" [ref=e375] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/reverse-harem/
+        - listitem [ref=e376]:
+          - link "Romance" [ref=e377] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/romance/
+        - listitem [ref=e378]:
+          - link "Samurai" [ref=e379] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/samurai/
+        - listitem [ref=e380]:
+          - link "School" [ref=e381] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/school/
+        - listitem [ref=e382]:
+          - link "Sci-Fi" [ref=e383] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/sci-fi/
+        - listitem [ref=e384]:
+          - link "Seinen" [ref=e385] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/seinen/
+        - listitem [ref=e386]:
+          - link "Shoujo" [ref=e387] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/shoujo/
+        - listitem [ref=e388]:
+          - link "Shounen" [ref=e389] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/shounen/
+        - listitem [ref=e390]:
+          - link "Slice of Life" [ref=e391] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/slice-of-life/
+        - listitem [ref=e392]:
+          - link "Space" [ref=e393] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/space/
+        - listitem [ref=e394]:
+          - link "Sports" [ref=e395] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/sports/
+        - listitem [ref=e396]:
+          - link "Strategy Game" [ref=e397] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/strategy-game/
+        - listitem [ref=e398]:
+          - link "Super Power" [ref=e399] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/super-power/
+        - listitem [ref=e400]:
+          - link "Supernatural" [ref=e401] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/supernatural/
+        - listitem [ref=e402]:
+          - link "Survival" [ref=e403] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/survival/
+        - listitem [ref=e404]:
+          - link "Suspense" [ref=e405] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/suspense/
+        - listitem [ref=e406]:
+          - link "Team Sports" [ref=e407] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/team-sports/
+        - listitem [ref=e408]:
+          - link "Time Travel" [ref=e409] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/time-travel/
+        - listitem [ref=e410]:
+          - link "Urban Fantasy" [ref=e411] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/urban-fantasy/
+        - listitem [ref=e412]:
+          - link "Vampire" [ref=e413] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/vampire/
+        - listitem [ref=e414]:
+          - link "Video Game" [ref=e415] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/video-game/
+        - listitem [ref=e416]:
+          - link "Villainess" [ref=e417] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/villainess/
+        - listitem [ref=e418]:
+          - link "Workplace" [ref=e419] [cursor=pointer]:
+            - /url: https://gomunime.top/genres/workplace/
+      - generic [ref=e420]:
+        - heading "Popular Anime" [level=3] [ref=e422]
+        - list [ref=e424]:
+          - listitem [ref=e425]:
+            - generic [ref=e426] [cursor=pointer]: Weekly
+          - listitem [ref=e427]:
+            - generic [ref=e428] [cursor=pointer]: Monthly
+          - listitem [ref=e429]:
+            - generic [ref=e430] [cursor=pointer]: All
+        - generic [ref=e431]:
+          - list [ref=e433]:
+            - listitem [ref=e434]:
+              - generic [ref=e435]: "1"
+              - link "One Piece" [ref=e437] [cursor=pointer]:
+                - /url: https://gomunime.top/anime/one-piece/
+                - img "One Piece" [ref=e438]
+              - generic [ref=e439]:
+                - heading "One Piece" [level=4] [ref=e440]:
+                  - link "One Piece" [ref=e441] [cursor=pointer]:
+                    - /url: https://gomunime.top/anime/one-piece/
+                - generic [ref=e442]:
+                  - text: "Genres:"
+                  - link "Action" [ref=e443] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/action/
+                  - text: ","
+                  - link "Adventure" [ref=e444] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/adventure/
+                  - text: ","
+                  - link "Fantasy" [ref=e445] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/fantasy/
+                  - text: ","
+                  - link "Shounen" [ref=e446] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/shounen/
+                - generic [ref=e448]:
+                  - generic [ref=e451]:
+                    - text: 
+                    - generic [ref=e452]: 
+                  - generic [ref=e453]: "8.73"
+            - listitem [ref=e454]:
+              - generic [ref=e455]: "2"
+              - link "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu E Season 4 2 Nensei Hen 1 Gakki" [ref=e457] [cursor=pointer]:
+                - /url: https://gomunime.top/anime/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-season-4-2-nensei-hen-1-gakki/
+                - img "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu E Season 4 2 Nensei Hen 1 Gakki" [ref=e458]
+              - heading "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu E Season 4 2 Nensei Hen 1 Gakki" [level=4] [ref=e460]:
+                - link "Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu E Season 4 2 Nensei Hen 1 Gakki" [ref=e461] [cursor=pointer]:
+                  - /url: https://gomunime.top/anime/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-season-4-2-nensei-hen-1-gakki/
+            - listitem [ref=e462]:
+              - generic [ref=e463]: "3"
+              - link "Ingoku Danchi" [ref=e465] [cursor=pointer]:
+                - /url: https://gomunime.top/anime/ingoku-danchi/
+                - img "Ingoku Danchi" [ref=e466]
+              - heading "Ingoku Danchi" [level=4] [ref=e468]:
+                - link "Ingoku Danchi" [ref=e469] [cursor=pointer]:
+                  - /url: https://gomunime.top/anime/ingoku-danchi/
+            - listitem [ref=e470]:
+              - generic [ref=e471]: "4"
+              - link "Solo Leveling Season 2" [ref=e473] [cursor=pointer]:
+                - /url: https://gomunime.top/anime/solo-leveling-season-2/
+                - img "Solo Leveling Season 2" [ref=e474]
+              - generic [ref=e475]:
+                - heading "Solo Leveling Season 2" [level=4] [ref=e476]:
+                  - link "Solo Leveling Season 2" [ref=e477] [cursor=pointer]:
+                    - /url: https://gomunime.top/anime/solo-leveling-season-2/
+                - generic [ref=e478]:
+                  - text: "Genres:"
+                  - link "Action" [ref=e479] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/action/
+                  - text: ","
+                  - link "Adult Cast" [ref=e480] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/adult-cast/
+                  - text: ","
+                  - link "Adventure" [ref=e481] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/adventure/
+                  - text: ","
+                  - link "Fantasy" [ref=e482] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/fantasy/
+                  - text: ","
+                  - link "Urban Fantasy" [ref=e483] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/urban-fantasy/
+                - generic [ref=e485]:
+                  - generic [ref=e488]:
+                    - text: 
+                    - generic [ref=e489]: 
+                  - generic [ref=e490]: "8.89"
+            - listitem [ref=e491]:
+              - generic [ref=e492]: "5"
+              - link "Detective Conan" [ref=e494] [cursor=pointer]:
+                - /url: https://gomunime.top/anime/detective-conan/
+                - img "Detective Conan" [ref=e495]
+              - heading "Detective Conan" [level=4] [ref=e497]:
+                - link "Detective Conan" [ref=e498] [cursor=pointer]:
+                  - /url: https://gomunime.top/anime/detective-conan/
+            - listitem [ref=e499]:
+              - generic [ref=e500]: "6"
+              - link "Haite Kudasai Takaminesan" [ref=e502] [cursor=pointer]:
+                - /url: https://gomunime.top/anime/haite-kudasai-takaminesan/
+                - img "Haite Kudasai Takaminesan" [ref=e503]
+              - generic [ref=e504]:
+                - heading "Haite Kudasai Takaminesan" [level=4] [ref=e505]:
+                  - link "Haite Kudasai Takaminesan" [ref=e506] [cursor=pointer]:
+                    - /url: https://gomunime.top/anime/haite-kudasai-takaminesan/
+                - generic [ref=e507]:
+                  - text: "Genres:"
+                  - link "Comedy" [ref=e508] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/comedy/
+                  - text: ","
+                  - link "Ecchi" [ref=e509] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/ecchi/
+                  - text: ","
+                  - link "Romance" [ref=e510] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/romance/
+                  - text: ","
+                  - link "School" [ref=e511] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/school/
+                  - text: ","
+                  - link "Shounen" [ref=e512] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/shounen/
+                - generic [ref=e514]:
+                  - generic [ref=e517]:
+                    - text: 
+                    - generic [ref=e518]: 
+                  - generic [ref=e519]: "8.19"
+            - listitem [ref=e520]:
+              - generic [ref=e521]: "7"
+              - link "Boruto Naruto Next Generations" [ref=e523] [cursor=pointer]:
+                - /url: https://gomunime.top/anime/boruto-naruto-next-generations/
+                - img "Boruto Naruto Next Generations" [ref=e524]
+              - generic [ref=e525]:
+                - heading "Boruto Naruto Next Generations" [level=4] [ref=e526]:
+                  - link "Boruto Naruto Next Generations" [ref=e527] [cursor=pointer]:
+                    - /url: https://gomunime.top/anime/boruto-naruto-next-generations/
+                - generic [ref=e528]:
+                  - text: "Genres:"
+                  - link "Action" [ref=e529] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/action/
+                  - text: ","
+                  - link "Adventure" [ref=e530] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/adventure/
+                  - text: ","
+                  - link "Fantasy" [ref=e531] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/fantasy/
+                  - text: ","
+                  - link "Martial Arts" [ref=e532] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/martial-arts/
+                  - text: ","
+                  - link "Shounen" [ref=e533] [cursor=pointer]:
+                    - /url: https://gomunime.top/genres/shounen/
+                - generic [ref=e535]:
+                  - generic [ref=e538]:
+                    - text: 
+                    - generic [ref=e539]: 
+                  - generic [ref=e540]: "8.57"
+            - listitem [ref=e541]:
+              - generic [ref=e542]: "8"
+              - link "Isekai Nonbiri Nouka 2" [ref=e544] [cursor=pointer]:
+                - /url: https://gomunime.top/anime/isekai-nonbiri-nouka-2/
+                - img "Isekai Nonbiri Nouka 2" [ref=e545]
+              - heading "Isekai Nonbiri Nouka 2" [level=4] [ref=e547]:
+                - link "Isekai Nonbiri Nouka 2" [ref=e548] [cursor=pointer]:
+                  - /url: https://gomunime.top/anime/isekai-nonbiri-nouka-2/
+            - listitem [ref=e549]:
+              - generic [ref=e550]: "9"
+              - link "Yomi no Tsugai" [ref=e552] [cursor=pointer]:
+                - /url: https://gomunime.top/anime/yomi-no-tsugai/
+                - img "Yomi no Tsugai" [ref=e553]
+              - heading "Yomi no Tsugai" [level=4] [ref=e555]:
+                - link "Yomi no Tsugai" [ref=e556] [cursor=pointer]:
+                  - /url: https://gomunime.top/anime/yomi-no-tsugai/
+            - listitem [ref=e557]:
+              - generic [ref=e558]: "10"
+              - link "Tsue to Tsurugi no Wistoria Season 2" [ref=e560] [cursor=pointer]:
+                - /url: https://gomunime.top/anime/tsue-to-tsurugi-no-wistoria-season-2/
+                - img "Tsue to Tsurugi no Wistoria Season 2" [ref=e561]
+              - heading "Tsue to Tsurugi no Wistoria Season 2" [level=4] [ref=e563]:
+                - link "Tsue to Tsurugi no Wistoria Season 2" [ref=e564] [cursor=pointer]:
+                  - /url: https://gomunime.top/anime/tsue-to-tsurugi-no-wistoria-season-2/
+          - text:                                
+      - generic [ref=e565]:
+        - heading "Ongoing Anime" [level=3] [ref=e567]
+        - list [ref=e569]:
+          - listitem [ref=e570]:
+            - link "Golden Kamuy Season 5 Episode 1" [ref=e571] [cursor=pointer]:
+              - /url: https://gomunime.top/golden-kamuy-season-5-episode-1-subtitle-indonesia/
+              - generic [ref=e572]:
+                - generic [ref=e573]: 
+                - text: Golden Kamuy Season 5
+              - generic [ref=e574]: Episode 1
+          - listitem [ref=e575]:
+            - link "Hokuto no Ken Fist Of The North Star Episode 3" [ref=e576] [cursor=pointer]:
+              - /url: https://gomunime.top/hokuto-no-ken-fist-of-the-north-star-episode-3-subtitle-indonesia/
+              - generic [ref=e577]:
+                - generic [ref=e578]: 
+                - text: Hokuto no Ken Fist Of The North Star
+              - generic [ref=e579]: Episode 3
+          - listitem [ref=e580]:
+            - link "Kami no Shizuku Episode 2" [ref=e581] [cursor=pointer]:
+              - /url: https://gomunime.top/kami-no-shizuku-episode-2-subtitle-indonesia/
+              - generic [ref=e582]:
+                - generic [ref=e583]: 
+                - text: Kami no Shizuku
+              - generic [ref=e584]: Episode 2
+          - listitem [ref=e585]:
+            - link "Snowball Earth Episode 3" [ref=e586] [cursor=pointer]:
+              - /url: https://gomunime.top/snowball-earth-episode-3-subtitle-indonesia/
+              - generic [ref=e587]:
+                - generic [ref=e588]: 
+                - text: Snowball Earth
+              - generic [ref=e589]: Episode 3
+          - listitem [ref=e590]:
+            - link "Otonari no Tenshi Sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2 Episode 3" [ref=e591] [cursor=pointer]:
+              - /url: https://gomunime.top/otonari-no-tenshi-sama-ni-itsunomanika-dame-ningen-ni-sareteita-ken-2-episode-3-subtitle-indonesia/
+              - generic [ref=e592]:
+                - generic [ref=e593]: 
+                - text: Otonari no Tenshi Sama ni Itsunomanika Dame Ningen ni Sareteita Ken 2
+              - generic [ref=e594]: Episode 3
+  - contentinfo [ref=e596]:
+    - list [ref=e599]:
+      - listitem [ref=e600]:
+        - link "Tentang Gomunime" [ref=e601] [cursor=pointer]:
+          - /url: https://gomunime.top/about-gomunime/
+      - listitem [ref=e602]:
+        - link "Penjelasan Legal Gomunime" [ref=e603] [cursor=pointer]:
+          - /url: https://gomunime.top/penjelasan-legal-gomunime/
+      - listitem [ref=e604]:
+        - link "FAQ Gomunime" [ref=e605] [cursor=pointer]:
+          - /url: https://gomunime.top/faq-gomunime/
+      - listitem [ref=e606]:
+        - link "Persyaratan Layanan" [ref=e607] [cursor=pointer]:
+          - /url: https://gomunime.top/persyaratan-layanan/
+      - listitem [ref=e608]:
+        - link "Kebijakan Privasi Gomunime" [ref=e609] [cursor=pointer]:
+          - /url: https://gomunime.top/kebijakan-privasi/
+    - generic [ref=e610]:
+      - generic [ref=e611]:
+        - generic [ref=e612]: A-Z LIST
+        - text: Searching order by alphabet name A to Z.
+        - list [ref=e613]:
+          - listitem [ref=e614]:
+            - link "#" [ref=e615] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=.
+          - listitem [ref=e616]:
+            - link "0-9" [ref=e617] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=0-9
+          - listitem [ref=e618]:
+            - link "A" [ref=e619] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=A
+          - listitem [ref=e620]:
+            - link "B" [ref=e621] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=B
+          - listitem [ref=e622]:
+            - link "C" [ref=e623] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=C
+          - listitem [ref=e624]:
+            - link "D" [ref=e625] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=D
+          - listitem [ref=e626]:
+            - link "E" [ref=e627] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=E
+          - listitem [ref=e628]:
+            - link "F" [ref=e629] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=F
+          - listitem [ref=e630]:
+            - link "G" [ref=e631] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=G
+          - listitem [ref=e632]:
+            - link "H" [ref=e633] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=H
+          - listitem [ref=e634]:
+            - link "I" [ref=e635] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=I
+          - listitem [ref=e636]:
+            - link "J" [ref=e637] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=J
+          - listitem [ref=e638]:
+            - link "K" [ref=e639] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=K
+          - listitem [ref=e640]:
+            - link "L" [ref=e641] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=L
+          - listitem [ref=e642]:
+            - link "M" [ref=e643] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=M
+          - listitem [ref=e644]:
+            - link "N" [ref=e645] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=N
+          - listitem [ref=e646]:
+            - link "O" [ref=e647] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=O
+          - listitem [ref=e648]:
+            - link "P" [ref=e649] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=P
+          - listitem [ref=e650]:
+            - link "Q" [ref=e651] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=Q
+          - listitem [ref=e652]:
+            - link "R" [ref=e653] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=R
+          - listitem [ref=e654]:
+            - link "S" [ref=e655] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=S
+          - listitem [ref=e656]:
+            - link "T" [ref=e657] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=T
+          - listitem [ref=e658]:
+            - link "U" [ref=e659] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=U
+          - listitem [ref=e660]:
+            - link "V" [ref=e661] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=V
+          - listitem [ref=e662]:
+            - link "W" [ref=e663] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=W
+          - listitem [ref=e664]:
+            - link "X" [ref=e665] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=X
+          - listitem [ref=e666]:
+            - link "Y" [ref=e667] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=Y
+          - listitem [ref=e668]:
+            - link "Z" [ref=e669] [cursor=pointer]:
+              - /url: https://gomunime.top/az-lists/?show=Z
+      - generic [ref=e671]:
+        - text: Copyright © 2026 Gomunime. All Rights Reserved
+        - paragraph [ref=e672]: "Disclaimer: This site Gomunime does not store any files on its server. All contents are provided by non-affiliated third parties."
