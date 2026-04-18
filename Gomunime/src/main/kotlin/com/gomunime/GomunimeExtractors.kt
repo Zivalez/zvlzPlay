@@ -8,6 +8,7 @@ import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
 import kotlinx.coroutines.runBlocking
 import org.jsoup.nodes.Document
+import java.net.URI
 
 suspend fun loadGomunimeLinks(
     data: String,
@@ -36,15 +37,27 @@ private suspend fun loadServerSource(
     subtitleCallback: (SubtitleFile) -> Unit,
     callback: (ExtractorLink) -> Unit
 ) {
-    val direct = runCatching {
-        app.get(server.url, referer = referer).document.findDirectVideoSource()
-    }.getOrNull()
+    val document = runCatching {
+        app.get(server.url, referer = referer).document
+    }.getOrNull() ?: return
 
+    val direct = document.findDirectVideoSource()
     if (!direct.isNullOrBlank()) {
         callback(
             newExtractorLink(server.name, server.name, direct) {
                 this.referer = server.url
                 this.quality = qualityFromUrl(direct)
+            }
+        )
+        return
+    }
+
+    val cepat = document.findCepatPlaylistSource(server.url)
+    if (!cepat.isNullOrBlank()) {
+        callback(
+            newExtractorLink(server.name, server.name, cepat) {
+                this.referer = server.url
+                this.quality = Qualities.Unknown.value
             }
         )
         return
@@ -72,6 +85,20 @@ private suspend fun loadServerSource(
 private fun decodeIframeUrl(encoded: String): String? {
     val html = runCatching { base64Decode(encoded) }.getOrNull()?.takeIf { it.isNotBlank() } ?: return null
     return Regex("""src="([^"]+)"""").find(html)?.groupValues?.getOrNull(1)?.takeIf { it.isNotBlank() }
+}
+
+private fun Document.findCepatPlaylistSource(pageUrl: String): String? {
+    val raw = Regex("""file\s*:\s*["']([^"']+)["']""", RegexOption.IGNORE_CASE)
+        .find(html())
+        ?.groupValues
+        ?.getOrNull(1)
+        ?.trim()
+        ?.takeIf { it.isNotBlank() }
+        ?: return null
+
+    return runCatching {
+        URI(pageUrl).resolve(raw).toString()
+    }.getOrNull()?.takeIf { it.isNotBlank() }
 }
 
 private fun Document.findDirectVideoSource(): String? {

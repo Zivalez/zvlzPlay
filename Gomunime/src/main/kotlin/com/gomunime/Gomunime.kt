@@ -27,7 +27,6 @@ class Gomunime : MainAPI() {
         "$mainUrl/anime/page/%d/?status=ongoing&type=&order=update" to "Ongoing",
         "$mainUrl/anime/page/%d/?status=completed&type=&order=update" to "Completed",
         "$mainUrl/anime/page/%d/?status=&type=&order=popular" to "Popular",
-        "$mainUrl/anime/page/%d/?status=&type=movie&order=update" to "Movie",
         "$mainUrl/genres/action/page/%d/" to "Action",
         "$mainUrl/genres/fantasy/page/%d/" to "Fantasy",
         "$mainUrl/genres/isekai/page/%d/" to "Isekai",
