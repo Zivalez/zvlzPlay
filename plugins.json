@@ -71,10 +71,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/gomunime.png",
-        "fileHash": "sha256-e55f264a98d12afe6f9b0e7332e404b357d4a4d8d5b64ce239cf7cccd98c6e02",
+        "fileHash": "sha256-106b12864dea37c4e193a1b0f2be091a4d1b8f387253224d5e734cb7ef5ab84b",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 21333,
+        "fileSize": 22089,
         "status": 3,
         "language": "id",
         "authors": [
