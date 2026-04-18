@@ -88,7 +88,7 @@ private fun decodeIframeUrl(encoded: String): String? {
 }
 
 private fun Document.findCepatPlaylistSource(pageUrl: String): String? {
-    val raw = Regex("""file\s*:\s*["']([^"']+)["']""", RegexOption.IGNORE_CASE)
+    val raw = Regex("""["']?file["']?\s*:\s*["']([^"']+)["']""", RegexOption.IGNORE_CASE)
         .find(html())
         ?.groupValues
         ?.getOrNull(1)
