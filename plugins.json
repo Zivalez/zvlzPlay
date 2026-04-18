@@ -70,6 +70,28 @@
         "jarHash": "sha256-5a415321975cf9c47168fe47a2efa732eac633676f3a7400f3b3bc95f5b19d8f"
     },
     {
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/gomunime.png",
+        "fileHash": "sha256-e55f264a98d12afe6f9b0e7332e404b357d4a4d8d5b64ce239cf7cccd98c6e02",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 21333,
+        "status": 3,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "Anime",
+            "AnimeMovie",
+            "OVA"
+        ],
+        "version": 1,
+        "internalName": "Gomunime",
+        "description": "Streaming anime subtitle Indonesia",
+        "url": "https://cloudstream.zvlz.my.id/builds/Gomunime.cs3",
+        "name": "Gomunime"
+    },
+    {
         "iconUrl": "https://hentaicop.com/wp-content/uploads/2025/05/hencopwhite-2.png",
         "fileHash": "sha256-7e80fc942d25a606ea743e6b3019c9e4edff36481061eb017f9560b677359fec",
         "apiVersion": 1,
