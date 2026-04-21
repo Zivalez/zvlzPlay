@@ -21,7 +21,7 @@ cloudstream {
     language = "id"
     description = "Streaming anime subtitle Indonesia"
     authors = listOf("Zivalez")
-    status = 3
+    status = 1
     tvTypes = listOf(
         "Anime",
         "AnimeMovie",
