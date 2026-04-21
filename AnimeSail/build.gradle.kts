@@ -9,7 +9,6 @@ cloudstream {
     language = "id"
     authors = listOf("Asm0d3usX", "Zivalez")
     description = "Streaming Anime Subtitle Indonesia dari AnimeSail"
-    isCrossPlatform = true
     status = 0
     tvTypes = listOf(
         "AnimeMovie",

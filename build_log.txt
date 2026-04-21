@@ -15,7 +15,7 @@ For more details see https://docs.gradle.org/8.12/release-notes.html
 Starting a Gradle Daemon (subsequent builds will be faster)
 
 > Configure project :Alqanime
-Fetching JAR
+Fetching JAR: cloudstream.jar
 
 > Configure project :Idlix
 w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Idlix/build.gradle.kts:12:9: 'compileSdkVersion(Int): Unit' is deprecated. Replaced by compileSdk
@@ -26,13 +26,13 @@ w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Samehadaku/build.gradle.kts:12
 w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Samehadaku/build.gradle.kts:13:9: 'targetSdk: Int?' is deprecated. Will be removed from library DSL in v9.0. Use testOptions.targetSdk or/and lint.targetSdk instead
 
 > Task :AnimeSail:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :AnimeSail:preBuild UP-TO-DATE
 > Task :Alqanime:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :Alqanime:preBuild UP-TO-DATE
 > Task :Alqanime:preDebugBuild UP-TO-DATE
-> Task :AnimeSail:preBuild UP-TO-DATE
 > Task :AnimeSail:preDebugBuild UP-TO-DATE
-> Task :AnimeSail:generateDebugResValues
 > Task :Alqanime:generateDebugResValues
+> Task :AnimeSail:generateDebugResValues
 > Task :Alqanime:generateDebugResources
 > Task :AnimeSail:generateDebugResources
 > Task :AnimeSail:javaPreCompileDebug
@@ -47,9 +47,7 @@ w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Samehadaku/build.gradle.kts:13
 > Task :AnimeSail:parseDebugLocalResources
 > Task :Alqanime:generateDebugRFile
 > Task :AnimeSail:generateDebugRFile
-> Task :Alqanime:compileDebugKotlin
 > Task :AnimeSail:compileDebugKotlin
-
 > Task :Alqanime:compileDebugKotlin
 w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/src/main/kotlin/com/alqanime/Alqanime.kt:149:26 Type annotation class 'Nullable' of the inferred type is inaccessible. Check the module classpath for missing or conflicting dependencies. This will become an error in language version 2.4. See https://youtrack.jetbrains.com/issue/KT-80247.
 w: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/src/main/kotlin/com/alqanime/Alqanime.kt:286:9 This annotation is currently applied to the value parameter only, but in the future it will also be applied to field.
@@ -121,7 +119,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -288,7 +286,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -455,7 +453,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -622,7 +620,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -789,7 +787,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -956,7 +954,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -1123,7 +1121,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -1290,7 +1288,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -1457,7 +1455,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -1624,7 +1622,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -1791,7 +1789,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -1958,7 +1956,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -2095,14 +2093,7 @@ Compiled dex to /home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/build/intermed
 > Task :AnimeSail:createFullJarDebug
 
 > Task :AnimeSail:compilePluginJar
-Made Cloudstream cross-platform package at /home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/build/AnimeSail.jar
-
-> Task :AnimeSail:make
-Made Cloudstream package at /home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/build/AnimeSail.cs3
-
-> Task :Funmovieslix:packageDebugResources FROM-CACHE
-> Task :Funmovieslix:parseDebugLocalResources FROM-CACHE
-> Task :Funmovieslix:generateDebugRFile FROM-CACHE
+Made CloudStream cross-platform package at /home/runner/work/zvlzPlay/zvlzPlay/src/AnimeSail/build/AnimeSail.jar
 
 > Task :Alqanime:compileDex
 WARNING: D8: Unexpected error during rewriting of Kotlin metadata for class 'com.alqanime.Alqanime$loadLinks$2$1':
@@ -2142,7 +2133,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -2340,7 +2331,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -2538,7 +2529,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -2736,7 +2727,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -2934,7 +2925,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -3132,7 +3123,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -3330,7 +3321,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -3528,7 +3519,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -3726,7 +3717,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -3924,7 +3915,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -4122,7 +4113,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -4320,7 +4311,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -4518,7 +4509,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -4716,7 +4707,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -4914,7 +4905,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -5112,7 +5103,7 @@ com.android.tools.r8.internal.Os0: Should never be called
 	at com.android.tools.r8.D8.run(R8_8.7.18_f8bee6d6fb926b7ebb3b15bf98f726f9d57471456ea20fce6d17d9a020197688:11)
 	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:127)
 	at com.android.builder.dexing.DexArchiveBuilder.convert$default(DexArchiveBuilder.kt:44)
-	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:80)
+	at com.lagradost.cloudstream3.gradle.tasks.CompileDexTask.compileDex(CompileDexTask.kt:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -5274,32 +5265,23 @@ com.android.tools.r8.internal.Os0: Should never be called
 
 Compiled dex to /home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/build/intermediates/classes.dex
 
+> Task :Alqanime:generateManifest
+
 > Task :Alqanime:make
-Made Cloudstream package at /home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/build/Alqanime.cs3
+Made CloudStream package at /home/runner/work/zvlzPlay/zvlzPlay/src/Alqanime/build/Alqanime.cs3
 
-> Task :Funmovieslix:javaPreCompileDebug FROM-CACHE
-> Task :Gomunime:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :Gomunime:preBuild UP-TO-DATE
-> Task :Gomunime:preDebugBuild UP-TO-DATE
-> Task :Gomunime:generateDebugResValues FROM-CACHE
-> Task :Gomunime:generateDebugResources FROM-CACHE
-> Task :Gomunime:packageDebugResources
-> Task :Gomunime:parseDebugLocalResources FROM-CACHE
-> Task :Gomunime:generateDebugRFile
-
-> Task :Gomunime:compileDebugKotlin
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Gomunime/src/main/kotlin/com/gomunime/Gomunime.kt:150:14 Cannot infer type for type parameter 'K'. Specify it explicitly.
-e: file:///home/runner/work/zvlzPlay/zvlzPlay/src/Gomunime/src/main/kotlin/com/gomunime/Gomunime.kt:150:30 Unresolved reference 'url'.
-
-> Task :Gomunime:compileDebugKotlin FAILED
+> Task :Funmovieslix:packageDebugResources FROM-CACHE
+> Task :Funmovieslix:parseDebugLocalResources FROM-CACHE
+> Task :Funmovieslix:generateDebugRFile FROM-CACHE
+> Task :AnimeSail:ensureJarCompatibility FAILED
 > Task :Funmovieslix:compileDebugKotlin
 
 FAILURE: Build failed with an exception.
 
 * What went wrong:
-Execution failed for task ':Gomunime:compileDebugKotlin'.
-> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-   > Compilation error. See log for more details
+Execution failed for task ':AnimeSail:ensureJarCompatibility'.
+> The cross-platform JAR file contains Android imports! This will cause compatibility issues.
+  Remove 'isCrossPlatform = true' or remove the Android imports.
 
 * Try:
 > Run with --info or --debug option to get more log output.
@@ -5307,7 +5289,7 @@ Execution failed for task ':Gomunime:compileDebugKotlin'.
 > Get more help at https://help.gradle.org.
 
 * Exception is:
-org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':Gomunime:compileDebugKotlin'.
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':AnimeSail:ensureJarCompatibility'.
 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:130)
 	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:293)
 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:128)
@@ -5338,49 +5320,16 @@ org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':Gomunim
 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
-	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:111)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:138)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:123)
-	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
-	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$10(DefaultBuildLifecycleController.java:313)
-	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
-	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$8(StateTransitionController.java:177)
-	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:46)
-	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:177)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:304)
-	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:220)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:263)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:127)
-	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:181)
-	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:50)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:198)
-	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:198)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
-Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionException: A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-	at org.gradle.workers.internal.DefaultWorkerExecutor$WorkItemExecution.waitForCompletion(DefaultWorkerExecutor.java:287)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.lambda$waitForItemsAndGatherFailures$2(DefaultAsyncWorkTracker.java:130)
-	at org.gradle.internal.Factories$1.create(Factories.java:31)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withoutLocks(DefaultWorkerLeaseService.java:335)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withoutLocks(DefaultWorkerLeaseService.java:318)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withoutLock(DefaultWorkerLeaseService.java:323)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForItemsAndGatherFailures(DefaultAsyncWorkTracker.java:126)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForItemsAndGatherFailures(DefaultAsyncWorkTracker.java:92)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForAll(DefaultAsyncWorkTracker.java:78)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForCompletion(DefaultAsyncWorkTracker.java:66)
-	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:252)
+Caused by: org.gradle.api.GradleException: The cross-platform JAR file contains Android imports! This will cause compatibility issues.
+Remove 'isCrossPlatform = true' or remove the Android imports.
+	at com.lagradost.cloudstream3.gradle.tasks.EnsureJarCompatibilityTask.checkOutput(EnsureJarCompatibilityTask.kt:42)
+	at com.lagradost.cloudstream3.gradle.tasks.TasksKt.registerTasks$lambda$30$lambda$28(Tasks.kt:115)
+	at com.lagradost.cloudstream3.gradle.tasks.TasksKt.registerTasks$lambda$30$lambda$29(Tasks.kt:114)
+	at org.gradle.api.internal.AbstractTask$TaskActionWrapper.execute(AbstractTask.java:831)
+	at org.gradle.api.internal.AbstractTask$TaskActionWrapper.execute(AbstractTask.java:804)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:244)
 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:29)
 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:26)
 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
@@ -5419,13 +5368,8 @@ Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionExcept
 	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:40)
 	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:29)
 	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
-	at org.gradle.internal.execution.steps.BuildCacheStep.executeAndStoreInCache(BuildCacheStep.java:145)
-	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$executeWithCache$4(BuildCacheStep.java:101)
-	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$executeWithCache$5(BuildCacheStep.java:101)
-	at org.gradle.internal.Try$Success.map(Try.java:175)
-	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithCache(BuildCacheStep.java:85)
-	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$0(BuildCacheStep.java:74)
-	at org.gradle.internal.Either$Left.fold(Either.java:115)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:75)
+	at org.gradle.internal.Either$Right.fold(Either.java:175)
 	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
 	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:73)
 	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:48)
@@ -5448,7 +5392,7 @@ Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionExcept
 	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:64)
 	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:43)
 	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.executeWithNonEmptySources(AbstractSkipEmptyWorkStep.java:125)
-	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:61)
+	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:56)
 	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:36)
 	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
 	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:36)
@@ -5497,69 +5441,9 @@ Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionExcept
 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
-	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:111)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:138)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:123)
-	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
-	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$10(DefaultBuildLifecycleController.java:313)
-	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
-	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$8(StateTransitionController.java:177)
-	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:46)
-	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:177)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:304)
-	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:220)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:263)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:127)
-	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:181)
-	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:50)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:198)
-	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:198)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
-Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilation error. See log for more details
-	at org.jetbrains.kotlin.gradle.tasks.TasksUtilsKt.throwExceptionIfCompilationFailed(tasksUtils.kt:21)
-	at org.jetbrains.kotlin.compilerRunner.GradleKotlinCompilerWork.run(GradleKotlinCompilerWork.kt:112)
-	at org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction.execute(GradleCompilerRunnerWithWorkers.kt:75)
-	at org.gradle.workers.internal.DefaultWorkerServer.execute(DefaultWorkerServer.java:63)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create(NoIsolationWorkerFactory.java:66)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create(NoIsolationWorkerFactory.java:62)
-	at org.gradle.internal.classloader.ClassLoaderUtils.executeInClassloader(ClassLoaderUtils.java:100)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1.lambda$execute$0(NoIsolationWorkerFactory.java:62)
-	at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:44)
-	at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:41)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-	at org.gradle.workers.internal.AbstractWorker.executeWrappedInBuildOperation(AbstractWorker.java:41)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1.execute(NoIsolationWorkerFactory.java:59)
-	at org.gradle.workers.internal.DefaultWorkerExecutor.lambda$submitWork$0(DefaultWorkerExecutor.java:174)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runExecution(DefaultConditionalExecutionQueue.java:194)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.access$700(DefaultConditionalExecutionQueue.java:127)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner$1.run(DefaultConditionalExecutionQueue.java:169)
-	at org.gradle.internal.Factories$1.create(Factories.java:31)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:263)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:127)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:132)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runBatch(DefaultConditionalExecutionQueue.java:164)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.run(DefaultConditionalExecutionQueue.java:133)
-	... 2 more
 
 
-BUILD FAILED in 2m 25s
-34 actionable tasks: 25 executed, 9 from cache
+BUILD FAILED in 2m 16s
+28 actionable tasks: 23 executed, 5 from cache
