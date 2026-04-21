@@ -337,7 +337,7 @@ class Kuramanime : MainAPI() {
             var currentQuality = "Unknown"
             var qualityIndex = 0
             
-            downloadSection.children().forEach { element ->
+            downloadSection.children()?.forEach { element ->
                 when (element.tagName()) {
                     "h6" -> {
                         currentQuality = element.text().trim()
