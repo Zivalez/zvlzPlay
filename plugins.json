@@ -22,30 +22,6 @@
         "name": "Alqanime"
     },
     {
-        "iconUrl": "https://aghanim.xyz/wp-content/themes/animesail/assets/images/ico.png",
-        "fileHash": "sha256-778f155e092e39cc22dbf0e1a3581650ce507473efaceda941f59aa1dbee3419",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 17742,
-        "status": 0,
-        "language": "id",
-        "authors": [
-            "Asm0d3usX",
-            "Zivalez"
-        ],
-        "tvTypes": [
-            "AnimeMovie",
-            "Anime",
-            "OVA"
-        ],
-        "version": 1,
-        "internalName": "AnimeSail",
-        "description": "Streaming Anime Subtitle Indonesia dari AnimeSail",
-        "url": "https://cloudstream.zvlz.my.id/builds/AnimeSail.cs3",
-        "name": "AnimeSail",
-        "jarHash": "sha256-f9fc1360a70d0a351aac5055101e7e6a2f30c8d6ec32c84167a3db06f72e7603"
-    },
-    {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/funmovieslix.png",
         "fileHash": "sha256-3f74fc9606219c132cebfbb820c59cd8144a436ace1b321664c5a0ce566c60eb",
         "apiVersion": 1,
@@ -66,8 +42,7 @@
         "internalName": "Funmovieslix",
         "description": "Nonton Streaming Film & Drakor Gratis Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Funmovieslix.cs3",
-        "name": "Funmovieslix",
-        "jarHash": "sha256-5a415321975cf9c47168fe47a2efa732eac633676f3a7400f3b3bc95f5b19d8f"
+        "name": "Funmovieslix"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/gomunime.png",
@@ -75,7 +50,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 22114,
-        "status": 3,
+        "status": 1,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -163,7 +138,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 29722,
-        "status": 0,
+        "status": 3,
         "language": "id",
         "authors": [
             "TeKuma25",
@@ -248,8 +223,7 @@
         "internalName": "Moviebox",
         "description": "Movie Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Moviebox.cs3",
-        "name": "Moviebox",
-        "jarHash": "sha256-f6361d474c6d0ced180ea89512115f5cba6f6f7fd254738ce5d89e188a99cd2c"
+        "name": "Moviebox"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/nontonanimeid.png",
@@ -293,8 +267,7 @@
         "internalName": "Otakudesu",
         "description": "Streaming Anime Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Otakudesu.cs3",
-        "name": "Otakudesu",
-        "jarHash": "sha256-127530c674b44d3505eeed0cc538750dde0d66a8beaee46b176ec616db834661"
+        "name": "Otakudesu"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/pencurimovie.png",
@@ -315,8 +288,7 @@
         "internalName": "Pencurimovie",
         "description": "Nonton Film & Serial Streaming Online",
         "url": "https://cloudstream.zvlz.my.id/builds/Pencurimovie.cs3",
-        "name": "Pencurimovie",
-        "jarHash": "sha256-f4f123e5b6dfa5f1fd38209f070f05914d8db93a422b8fad6b9e96981ccb117b"
+        "name": "Pencurimovie"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/samehadaku.png",
