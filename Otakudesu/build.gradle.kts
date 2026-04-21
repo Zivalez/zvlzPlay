@@ -11,7 +11,6 @@ cloudstream {
     language = "id"
     description = "Streaming Anime Sub Indo"
     authors = listOf("Zivalez")
-    isCrossPlatform = true
     status = 1
     tvTypes = listOf(
         "AnimeMovie",

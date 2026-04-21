@@ -7,5 +7,4 @@ cloudstream {
     status = 1
     tvTypes = listOf("Movie")
     iconUrl = "https://cloudstream.zvlz.my.id/icon/pencurimovie.png"
-    isCrossPlatform = true
 }
