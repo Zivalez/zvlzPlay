@@ -206,8 +206,8 @@ class Kuramanime : MainAPI() {
         var document = app.get(data, headers = commonHeaders).document
 
         // Check if we need to bypass Kuramanime's protection
-        val downloadSection = document.selectFirst("div#animeDownloadLink")
-        val isProtected = downloadSection?.select(".reload-error").isNotEmpty() ?: true
+        val initialDownloadSection = document.selectFirst("div#animeDownloadLink")
+        val isProtected = initialDownloadSection?.select(".reload-error").isNotEmpty() ?: true
         
         if (isProtected) {
             var bypassed = false
