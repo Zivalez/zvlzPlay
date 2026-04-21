@@ -263,9 +263,8 @@ class Kuramanime : MainAPI() {
                             "X-Requested-With" to "XMLHttpRequest",
                             "Content-Type" to "application/x-www-form-urlencoded; charset=UTF-8"
                         )
-                        
-                        val bypassBody = "authorization=$authToken"
-                        val bypassResponse = app.post(bypassUrl, headers = bypassHeaders, data = bypassBody)
+
+                        val bypassResponse = app.post(bypassUrl, headers = bypassHeaders, data = mapOf("authorization" to authToken))
                         
                         if (bypassResponse.code == 200) {
                             document = bypassResponse.document
