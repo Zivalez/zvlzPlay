@@ -1,0 +1,116 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e8]:
+        - link "IDLIX" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img "IDLIX" [ref=e12]
+        - navigation [ref=e13]:
+          - link "Home" [ref=e14] [cursor=pointer]:
+            - /url: /
+            - img [ref=e15]
+            - text: Home
+          - link "Movies" [ref=e18] [cursor=pointer]:
+            - /url: /movie
+            - img [ref=e19]
+            - text: Movies
+          - link "TV Series" [ref=e23] [cursor=pointer]:
+            - /url: /series
+            - img [ref=e24]
+            - text: TV Series
+          - link "Genres" [ref=e27] [cursor=pointer]:
+            - /url: /genre
+            - img [ref=e28]
+            - text: Genres
+          - link "Leaderboard" [ref=e32] [cursor=pointer]:
+            - /url: /leaderboard
+            - img [ref=e33]
+            - text: Leaderboard
+          - link "Country" [ref=e38] [cursor=pointer]:
+            - /url: /country
+            - img [ref=e39]
+            - text: Country
+          - link "Year" [ref=e44] [cursor=pointer]:
+            - /url: /year
+            - img [ref=e45]
+            - text: Year
+          - link "Network" [ref=e49] [cursor=pointer]:
+            - /url: /network
+            - img [ref=e50]
+            - text: Network
+        - generic [ref=e54]:
+          - button [ref=e55] [cursor=pointer]:
+            - img [ref=e56]
+          - link "Sign In" [ref=e59] [cursor=pointer]:
+            - /url: /auth/login
+          - link "Sign Up" [ref=e60] [cursor=pointer]:
+            - /url: /auth/register
+    - main [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic:
+            - img "Episode 2"
+          - button [ref=e64] [cursor=pointer]:
+            - img [ref=e66]
+        - generic [ref=e69]:
+          - link "KILL BLUE" [ref=e70] [cursor=pointer]:
+            - /url: /series/kill-blue-2026
+          - heading "Season 1 Episode 2" [level=1] [ref=e71]
+          - paragraph [ref=e72]: Episode 2
+          - generic [ref=e73]:
+            - generic [ref=e74]: 23min
+            - generic [ref=e75]:
+              - img [ref=e76]
+              - text: "8.0"
+            - generic [ref=e78]: ·
+            - generic [ref=e79]: Japan
+            - generic [ref=e80]: ·
+            - generic [ref=e81]: JA
+            - button "Share" [ref=e83] [cursor=pointer]:
+              - img [ref=e84]
+              - text: Share
+          - 'link "Prev Ep 1: Let''s Go to School" [ref=e88] [cursor=pointer]':
+            - /url: /series/kill-blue-2026/season/1/episode/1
+            - img [ref=e89]
+            - generic [ref=e91]:
+              - paragraph [ref=e92]: Prev
+              - paragraph [ref=e93]: "Ep 1: Let's Go to School"
+          - generic [ref=e95]:
+            - generic [ref=e96]:
+              - heading "Episodes" [level=2] [ref=e97]
+              - button "Oldest" [ref=e99] [cursor=pointer]:
+                - img [ref=e100]
+                - text: Oldest
+            - generic [ref=e104]:
+              - link "Let's Go to School S01E01 11 Apr 26 6.0 23m Let's Go to School A wasp sting turns legendary hitman Juzo Ogami into a 13-year-old. Now he must infiltrate a middle school!" [ref=e105] [cursor=pointer]:
+                - /url: /series/kill-blue-2026/season/1/episode/1
+                - generic [ref=e106]:
+                  - img "Let's Go to School" [ref=e107]
+                  - generic [ref=e108]: S01E01
+                  - generic [ref=e109]: 11 Apr 26
+                  - generic [ref=e111]:
+                    - generic [ref=e112]:
+                      - img [ref=e113]
+                      - generic [ref=e115]: "6.0"
+                    - generic [ref=e116]: 23m
+                - generic [ref=e117]:
+                  - heading "Let's Go to School" [level=3] [ref=e118]
+                  - paragraph [ref=e119]: A wasp sting turns legendary hitman Juzo Ogami into a 13-year-old. Now he must infiltrate a middle school!
+              - link "Episode 2 S01E02 18 Apr 26 23m Episode 2" [ref=e120] [cursor=pointer]:
+                - /url: /series/kill-blue-2026/season/1/episode/2
+                - generic [ref=e121]:
+                  - img "Episode 2" [ref=e122]
+                  - generic [ref=e123]: S01E02
+                  - generic [ref=e124]: 18 Apr 26
+                  - generic [ref=e127]: 23m
+                - heading "Episode 2" [level=3] [ref=e129]
+    - contentinfo [ref=e130]:
+      - generic [ref=e132]:
+        - link "IDLIX" [ref=e134] [cursor=pointer]:
+          - /url: /
+          - img "IDLIX" [ref=e136]
+        - paragraph [ref=e137]: IDLIX does not host, store, or distribute any media files. All content is automatically grabbed from third-party providers on the Internet.
+        - link [ref=e139] [cursor=pointer]:
+          - /url: https://discord.gg/yVPFdhua4K
+          - img [ref=e140]
+  - alert [ref=e142]

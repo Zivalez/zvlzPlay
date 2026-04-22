@@ -40,6 +40,10 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.security.MessageDigest
 import java.text.Normalizer
+import java.util.Base64
+import javax.crypto.Cipher
+import javax.crypto.spec.GCMParameterSpec
+import javax.crypto.spec.SecretKeySpec
 
 class Idlix : MainAPI() {
     override var mainUrl = base64Decode("aHR0cHM6Ly96MS5pZGxpeGt1LmNvbQ==")
@@ -364,6 +368,37 @@ class Idlix : MainAPI() {
             else -> null
         } ?: return false
 
+        val embedHtml = try {
+            app.get("$mainUrl$embedUrl", referer = mainUrl).text
+        } catch (_: Exception) {
+            return false
+        }
+
+        val dataA = Regex("""data-a=\"([0-9a-fA-F]+)\"""").find(embedHtml)?.groupValues?.getOrNull(1)
+        val dataP = Regex("""data-p=\"([^\"]+)\"""").find(embedHtml)?.groupValues?.getOrNull(1)
+        val dataV = Regex("""data-v=\"([^\"]+)\"""").find(embedHtml)?.groupValues?.getOrNull(1)
+        val cssHex = Regex("""--_[0-9a-fA-F]+:\\s*\"?([0-9a-fA-F]{32})\"?""").find(embedHtml)?.groupValues?.getOrNull(1)
+
+        if (dataA != null && dataP != null && dataV != null && cssHex != null) {
+            try {
+                val keyHex = dataA + cssHex
+                val keyBytes = keyHex.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
+                val ctBytes = Base64.getDecoder().decode(dataP)
+                val ivBytes = Base64.getDecoder().decode(dataV)
+                val cipher = Cipher.getInstance("AES/GCM/NoPadding")
+                val keySpec = SecretKeySpec(keyBytes, "AES")
+                val gcmSpec = GCMParameterSpec(128, ivBytes)
+                cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmSpec)
+                val plain = cipher.doFinal(ctBytes)
+                val finalUrl = String(plain, Charsets.UTF_8)
+                loadExtractor(finalUrl, mainUrl, subtitleCallback, callback)
+                return true
+            } catch (e: Exception) {
+                // fallback to old resolver
+            }
+        }
+
+        // fallback to previous resolver
         val iframeResolver = WebViewResolver(
             interceptUrl = Regex("""/video/"""),
             additionalUrls = listOf(Regex("""/video/""")),
