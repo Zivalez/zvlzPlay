@@ -1,3 +1,5 @@
+// zvlzPlay\Kuramanime\build.gradle.kts
+
 dependencies {
 //    implementation(kotlin("stdlib"))
     implementation("com.github.Blatzar:NiceHttp:0.4.11")

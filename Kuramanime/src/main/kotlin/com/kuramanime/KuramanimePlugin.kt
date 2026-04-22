@@ -1,3 +1,4 @@
+// zvlzPlay\Kuramanime\src\main\kotlin\com\kuramanime\KuramanimePlugin.kt
 package com.kuramanime
 
 import android.content.Context

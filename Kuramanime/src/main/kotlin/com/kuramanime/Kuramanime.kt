@@ -1,3 +1,5 @@
+// zvlzPlay\Kuramanime\src\main\kotlin\com\kuramanime\Kuramanime.kt
+
 package com.kuramanime
 
 import com.lagradost.cloudstream3.*
@@ -205,26 +207,44 @@ class Kuramanime : MainAPI() {
     ): Boolean {
         var document = app.get(data, headers = commonHeaders).document
 
-        // Check for protection error
-        if (document.select("#animeDownloadLink .reload-error").isNotEmpty()) {
+        // Check for protection error (Halaman Decoy v1)
+        if (document.select("#animeDownloadLink .reload-error").isNotEmpty() || document.select("#animeVideoPlayer .reload-error").isNotEmpty()) {
             var bypassed = false
             
-            // Fast Path: Try known token file logic
+            // Fast Path: Dinamis bypass token dari file config JS
             try {
-                val tokenUrl = "$mainUrl/assets/Ks6sqSgloPTlHMl.txt"
-                val token = app.get(tokenUrl, headers = commonHeaders).text.trim()
-                // Validate token looks like a short string (e.g. CIaaYfKYwc)
-                if (token.isNotEmpty() && token.length < 50) {
-                    val postUrl = "$data?Ub3BzhijicHXZdv=$token&C2XAPerzX1BM7V9=kuramadrive&page=1"
-                    val postHeaders = commonHeaders + mapOf("X-Requested-With" to "XMLHttpRequest")
-                    val postResponse = app.post(postUrl, headers = postHeaders)
-                    if (postResponse.code == 200 && !postResponse.text.contains("Terjadi kesalahan")) {
-                        document = postResponse.document
-                        bypassed = true
+                // 1. Cari identifier JS dari attribute data-kk
+                val jsId = document.selectFirst("[data-kk]")?.attr("data-kk")
+                
+                if (jsId != null) {
+                    val jsUrl = "$mainUrl/assets/js/$jsId.js"
+                    val jsContent = app.get(jsUrl, headers = commonHeaders).text
+                    
+                    // 2. Ekstrak config parameter pake Regex
+                    val routeParam = Regex("""MIX_AUTH_ROUTE_PARAM:\s*['"]([^'"]+)['"]""").find(jsContent)?.groupValues?.get(1)
+                    val pageTokenKey = Regex("""MIX_PAGE_TOKEN_KEY:\s*['"]([^'"]+)['"]""").find(jsContent)?.groupValues?.get(1)
+                    val streamServerKey = Regex("""MIX_STREAM_SERVER_KEY:\s*['"]([^'"]+)['"]""").find(jsContent)?.groupValues?.get(1)
+                    
+                    if (routeParam != null && pageTokenKey != null && streamServerKey != null) {
+                        // 3. Ambil token dinamis dari file .txt
+                        val tokenUrl = "$mainUrl/assets/$routeParam"
+                        val token = app.get(tokenUrl, headers = commonHeaders).text.trim()
+                        
+                        if (token.isNotEmpty() && token.length < 50) {
+                            // 4. Hit POST buat dapetin halaman aslinya (v2)
+                            val postUrl = "$data?$pageTokenKey=$token&$streamServerKey=kuramadrive&page=1"
+                            val postHeaders = commonHeaders + mapOf("X-Requested-With" to "XMLHttpRequest")
+                            val postResponse = app.post(postUrl, headers = postHeaders)
+                            
+                            if (postResponse.code == 200 && !postResponse.text.contains("Terjadi kesalahan")) {
+                                document = postResponse.document
+                                bypassed = true
+                            }
+                        }
                     }
                 }
             } catch (e: Exception) {
-                // Ignore, proceed to WebView fallback
+                // Ignore, lanjut ke WebView fallback
             }
 
             // Slow Path: WebView fallback
@@ -240,20 +260,23 @@ class Kuramanime : MainAPI() {
             }
         }
 
-        // 1. Direct Stream (Kuramadrive S1 / R2)
-        val directLink = document.select("video#player").attr("src")
-        if (directLink.contains("r2.cloudflarestorage.com")) {
-            callback.invoke(
-                newExtractorLink(
-                    name,
-                    "Kuramadrive Direct",
-                    directLink,
-                    ExtractorLinkType.VIDEO
-                ) {
-                    this.referer = mainUrl
-                    this.quality = Qualities.Unknown.value
-                }
-            )
+        // 1. Direct Stream (Ekstrak dari tag <source> di dalem <video>)
+        document.select("video#player source").forEach { source ->
+            val srcUrl = source.attr("src")
+            val size = source.attr("size").toIntOrNull() ?: Qualities.Unknown.value
+            
+            if (srcUrl.isNotBlank() && srcUrl.contains("r2.cloudflarestorage.com")) {
+                callback.invoke(
+                    newExtractorLink(
+                        name,
+                        "Kuramadrive Direct ${size}p",
+                        srcUrl,
+                        referer = mainUrl,
+                        quality = size,
+                        type = ExtractorLinkType.VIDEO
+                    )
+                )
+            }
         }
 
         // 2. Download Links (Iterate children statefully)

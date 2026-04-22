@@ -1,0 +1,207 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e8]:
+        - link "IDLIX" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img "IDLIX" [ref=e12]
+        - navigation [ref=e13]:
+          - link "Home" [ref=e14] [cursor=pointer]:
+            - /url: /
+            - img [ref=e15]
+            - text: Home
+          - link "Movies" [ref=e18] [cursor=pointer]:
+            - /url: /movie
+            - img [ref=e19]
+            - text: Movies
+          - link "TV Series" [ref=e23] [cursor=pointer]:
+            - /url: /series
+            - img [ref=e24]
+            - text: TV Series
+          - link "Genres" [ref=e27] [cursor=pointer]:
+            - /url: /genre
+            - img [ref=e28]
+            - text: Genres
+          - link "Leaderboard" [ref=e32] [cursor=pointer]:
+            - /url: /leaderboard
+            - img [ref=e33]
+            - text: Leaderboard
+          - link "Country" [ref=e38] [cursor=pointer]:
+            - /url: /country
+            - img [ref=e39]
+            - text: Country
+          - link "Year" [ref=e44] [cursor=pointer]:
+            - /url: /year
+            - img [ref=e45]
+            - text: Year
+          - link "Network" [ref=e49] [cursor=pointer]:
+            - /url: /network
+            - img [ref=e50]
+            - text: Network
+        - generic [ref=e54]:
+          - button [ref=e55] [cursor=pointer]:
+            - img [ref=e56]
+          - link "Sign In" [ref=e59] [cursor=pointer]:
+            - /url: /auth/login
+          - link "Sign Up" [ref=e60] [cursor=pointer]:
+            - /url: /auth/register
+    - main [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic:
+            - img "Furusato"
+          - button [ref=e64] [cursor=pointer]:
+            - img [ref=e66]
+        - generic [ref=e69]:
+          - 'link "Monarch: Legacy of Monsters"':
+            - /url: /series/monarch-legacy-of-monsters-2023
+            - 'img "Monarch: Legacy of Monsters"'
+          - heading "Season 2 Episode 5" [level=1] [ref=e70]
+          - paragraph [ref=e71]: Furusato
+          - generic [ref=e72]:
+            - generic [ref=e73]: 45min
+            - generic [ref=e74]:
+              - img [ref=e75]
+              - text: "7.7"
+            - generic [ref=e77]: ·
+            - generic [ref=e78]: Japan
+            - generic [ref=e79]: ·
+            - generic [ref=e80]: EN
+            - button "Share" [ref=e82] [cursor=pointer]:
+              - img [ref=e83]
+              - text: Share
+          - paragraph [ref=e86]: In Santa Soledad, Titan X becomes a target for Apex, forcing Shaw and the Randas to infiltrate the covert experiment.
+          - generic [ref=e87]:
+            - 'link "Prev Ep 4: Trespass" [ref=e88] [cursor=pointer]':
+              - /url: /series/monarch-legacy-of-monsters-2023/season/2/episode/4
+              - img [ref=e89]
+              - generic [ref=e91]:
+                - paragraph [ref=e92]: Prev
+                - paragraph [ref=e93]: "Ep 4: Trespass"
+            - 'link "Next Ep 6: Requiem" [ref=e94] [cursor=pointer]':
+              - /url: /series/monarch-legacy-of-monsters-2023/season/2/episode/6
+              - generic [ref=e95]:
+                - paragraph [ref=e96]: Next
+                - paragraph [ref=e97]: "Ep 6: Requiem"
+              - img [ref=e98]
+          - generic [ref=e100]:
+            - generic [ref=e101]:
+              - heading "Episodes" [level=2] [ref=e102]
+              - generic [ref=e103]:
+                - button "Oldest" [ref=e104] [cursor=pointer]:
+                  - img [ref=e105]
+                  - text: Oldest
+                - button "Season 2" [ref=e110] [cursor=pointer]:
+                  - generic [ref=e111]: Season 2
+                  - img [ref=e112]
+            - generic [ref=e114]:
+              - link "Cause and Effect S02E01 26 Feb 26 7.1 54m Cause and Effect Decades after being presumed dead, Keiko's return shocks Monarch. Cate defies orders to save Shaw—and unleashes a terrifying new Titan." [ref=e115] [cursor=pointer]:
+                - /url: /series/monarch-legacy-of-monsters-2023/season/2/episode/1
+                - generic [ref=e116]:
+                  - img "Cause and Effect" [ref=e117]
+                  - generic [ref=e118]: S02E01
+                  - generic [ref=e119]: 26 Feb 26
+                  - generic [ref=e121]:
+                    - generic [ref=e122]:
+                      - img [ref=e123]
+                      - generic [ref=e125]: "7.1"
+                    - generic [ref=e126]: 54m
+                - generic [ref=e127]:
+                  - heading "Cause and Effect" [level=3] [ref=e128]
+                  - paragraph [ref=e129]: Decades after being presumed dead, Keiko's return shocks Monarch. Cate defies orders to save Shaw—and unleashes a terrifying new Titan.
+              - link "Resonance S02E02 5 Mar 26 7.3 45m Resonance Lee and Keiko investigate a secretive village with a cult devoted to a mysterious creature. Cate crosses paths with a deadly stowaway." [ref=e130] [cursor=pointer]:
+                - /url: /series/monarch-legacy-of-monsters-2023/season/2/episode/2
+                - generic [ref=e131]:
+                  - img "Resonance" [ref=e132]
+                  - generic [ref=e133]: S02E02
+                  - generic [ref=e134]: 5 Mar 26
+                  - generic [ref=e136]:
+                    - generic [ref=e137]:
+                      - img [ref=e138]
+                      - generic [ref=e140]: "7.3"
+                    - generic [ref=e141]: 45m
+                - generic [ref=e142]:
+                  - heading "Resonance" [level=3] [ref=e143]
+                  - paragraph [ref=e144]: Lee and Keiko investigate a secretive village with a cult devoted to a mysterious creature. Cate crosses paths with a deadly stowaway.
+              - link "Secrets S02E03 12 Mar 26 7.8 44m Secrets Shaw, Keiko, Hiroshi, and Kentaro go rogue in an attempt to find Titan X. Cate struggles with feelings of guilt. A buried secret is exposed." [ref=e145] [cursor=pointer]:
+                - /url: /series/monarch-legacy-of-monsters-2023/season/2/episode/3
+                - generic [ref=e146]:
+                  - img "Secrets" [ref=e147]
+                  - generic [ref=e148]: S02E03
+                  - generic [ref=e149]: 12 Mar 26
+                  - generic [ref=e151]:
+                    - generic [ref=e152]:
+                      - img [ref=e153]
+                      - generic [ref=e155]: "7.8"
+                    - generic [ref=e156]: 44m
+                - generic [ref=e157]:
+                  - heading "Secrets" [level=3] [ref=e158]
+                  - paragraph [ref=e159]: Shaw, Keiko, Hiroshi, and Kentaro go rogue in an attempt to find Titan X. Cate struggles with feelings of guilt. A buried secret is exposed.
+              - link "Trespass S02E04 19 Mar 26 7.2 45m Trespass To get Hiroshi's device back, Shaw and the team execute a daring heist at Apex Cybernetics." [ref=e160] [cursor=pointer]:
+                - /url: /series/monarch-legacy-of-monsters-2023/season/2/episode/4
+                - generic [ref=e161]:
+                  - img "Trespass" [ref=e162]
+                  - generic [ref=e163]: S02E04
+                  - generic [ref=e164]: 19 Mar 26
+                  - generic [ref=e166]:
+                    - generic [ref=e167]:
+                      - img [ref=e168]
+                      - generic [ref=e170]: "7.2"
+                    - generic [ref=e171]: 45m
+                - generic [ref=e172]:
+                  - heading "Trespass" [level=3] [ref=e173]
+                  - paragraph [ref=e174]: To get Hiroshi's device back, Shaw and the team execute a daring heist at Apex Cybernetics.
+              - link "Furusato S02E05 26 Mar 26 6.9 45m Furusato In Santa Soledad, Titan X becomes a target for Apex, forcing Shaw and the Randas to infiltrate the covert experiment." [ref=e175] [cursor=pointer]:
+                - /url: /series/monarch-legacy-of-monsters-2023/season/2/episode/5
+                - generic [ref=e176]:
+                  - img "Furusato" [ref=e177]
+                  - generic [ref=e178]: S02E05
+                  - generic [ref=e179]: 26 Mar 26
+                  - generic [ref=e181]:
+                    - generic [ref=e182]:
+                      - img [ref=e183]
+                      - generic [ref=e185]: "6.9"
+                    - generic [ref=e186]: 45m
+                - generic [ref=e187]:
+                  - heading "Furusato" [level=3] [ref=e188]
+                  - paragraph [ref=e189]: In Santa Soledad, Titan X becomes a target for Apex, forcing Shaw and the Randas to infiltrate the covert experiment.
+              - link "Requiem S02E06 2 Apr 26 52m Requiem Shaw and Suzuki test a \"Titan phone\" designed to summon Godzilla, triggering an unforeseen event that puts Shaw in the path of his own past." [ref=e190] [cursor=pointer]:
+                - /url: /series/monarch-legacy-of-monsters-2023/season/2/episode/6
+                - generic [ref=e191]:
+                  - img "Requiem" [ref=e192]
+                  - generic [ref=e193]: S02E06
+                  - generic [ref=e194]: 2 Apr 26
+                  - generic [ref=e197]: 52m
+                - generic [ref=e198]:
+                  - heading "Requiem" [level=3] [ref=e199]
+                  - paragraph [ref=e200]: Shaw and Suzuki test a "Titan phone" designed to summon Godzilla, triggering an unforeseen event that puts Shaw in the path of his own past.
+              - link "String Theory S02E07 9 Apr 26 53m String Theory Shaw receives an impossible radio transmission. Cate and Keiko uncover an ancient link to Titan X. Isabel has a proposition for Kentaro." [ref=e201] [cursor=pointer]:
+                - /url: /series/monarch-legacy-of-monsters-2023/season/2/episode/7
+                - generic [ref=e202]:
+                  - img "String Theory" [ref=e203]
+                  - generic [ref=e204]: S02E07
+                  - generic [ref=e205]: 9 Apr 26
+                  - generic [ref=e208]: 53m
+                - generic [ref=e209]:
+                  - heading "String Theory" [level=3] [ref=e210]
+                  - paragraph [ref=e211]: Shaw receives an impossible radio transmission. Cate and Keiko uncover an ancient link to Titan X. Isabel has a proposition for Kentaro.
+              - link "Separate Ways S02E08 16 Apr 26 40m Separate Ways Titan X makes landfall in Australia, where Shaw lures Godzilla into a showdown. Isabel uses the battle as a distraction for her secret operation." [ref=e212] [cursor=pointer]:
+                - /url: /series/monarch-legacy-of-monsters-2023/season/2/episode/8
+                - generic [ref=e213]:
+                  - img "Separate Ways" [ref=e214]
+                  - generic [ref=e215]: S02E08
+                  - generic [ref=e216]: 16 Apr 26
+                  - generic [ref=e219]: 40m
+                - generic [ref=e220]:
+                  - heading "Separate Ways" [level=3] [ref=e221]
+                  - paragraph [ref=e222]: Titan X makes landfall in Australia, where Shaw lures Godzilla into a showdown. Isabel uses the battle as a distraction for her secret operation.
+    - contentinfo [ref=e223]:
+      - generic [ref=e225]:
+        - link "IDLIX" [ref=e227] [cursor=pointer]:
+          - /url: /
+          - img "IDLIX" [ref=e229]
+        - paragraph [ref=e230]: IDLIX does not host, store, or distribute any media files. All content is automatically grabbed from third-party providers on the Internet.
+        - link [ref=e232] [cursor=pointer]:
+          - /url: https://discord.gg/yVPFdhua4K
+          - img [ref=e233]
+  - alert [ref=e235]
