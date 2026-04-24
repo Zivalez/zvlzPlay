@@ -133,6 +133,26 @@
         "name": "Idlix"
     },
     {
+        "iconUrl": "https://cdn.kingbokep.video/favicon-32x32.png",
+        "fileHash": "sha256-93615083787a46dfe7b149091137b244f8b5a5cbd02064b6311afc7b6ebde14c",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 14447,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "NSFW"
+        ],
+        "version": 1,
+        "internalName": "King",
+        "description": "KingBokep provider",
+        "url": "https://cloudstream.zvlz.my.id/builds/King.cs3",
+        "name": "King"
+    },
+    {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuramanime.png",
         "fileHash": "sha256-5f07fd346cb3bd8c158aeecb553b0869840a6988266cfa08f675579dbb54eec3",
         "apiVersion": 1,
