@@ -5,7 +5,7 @@ import com.lagradost.cloudstream3.utils.*
 import com.lagradost.nicehttp.RequestBodyTypes
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
-import com.lagradost.cloudstream3.network.WebViewResolver
+import com.lagradost.cloudstream3.utils.loadExtractor
 
 class KingV2 : MainAPI() {
     override var mainUrl = "https://185.169.252.47"
@@ -196,11 +196,21 @@ class KingV2 : MainAPI() {
                         if (m2 != null) { playlist = m2.value; foundReferer = iframeUrl; break }
                     } catch (_: Exception) {}
 
+                    // If HTTP-only fetch couldn't resolve the embed, delegate to shared extractor
+                    // This lets the app/resolver handle JS-heavy hosts (e.g., stream18) without running Playwright here
+                    try {
+                        loadExtractor(iframeUrl, c, subtitleCallback) { link ->
+                            // Forward extracted links to the caller
+                            callback(link)
+                        }
+                        // We delegated extraction to loadExtractor; consider links provided
+                        return true
+                    } catch (_: Exception) {
+                        // ignore and continue trying other candidates
+                    }
+
                     // WebView/Playwright is not allowed inside providers.
-                    // Rely on HTTP fetching and HTML heuristics only.
-                    // (Previously attempted JS render here; removed per Cloudstream rules.)
-                    // No further action for JS-only embeds — rely on earlier HTML/embed parsing.
-                    
+                    // Rely on HTTP fetching and HTML heuristics only in-provider.
                 }
 
                 // 5) JSON-LD fallback

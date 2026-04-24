@@ -25,7 +25,7 @@ version = 1
 cloudstream {
     language = "id"
     authors = listOf("Zivalez")
-    description = "KingV2 provider for KINGBOKEP (alternate host)"
+    description = "KingV2 provider for KingBokep (alternate host)"
     // status: 1 = stable, 0 = experimental
     status = 1
     tvTypes = listOf("NSFW")
