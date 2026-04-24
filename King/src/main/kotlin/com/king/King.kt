@@ -3,6 +3,8 @@ package com.king
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.nicehttp.RequestBodyTypes
+import com.lagradost.cloudstream3.utils.AppUtils.toJson
+import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 
 class King : MainAPI() {
     override var mainUrl = "https://kingbokep.tv"
@@ -38,7 +40,6 @@ class King : MainAPI() {
             home.add(
                 newMovieSearchResponse(title, href, TvType.Movie, false) {
                     this.posterUrl = poster
-                    this.description = duration
                 }
             )
         }
@@ -58,7 +59,8 @@ class King : MainAPI() {
         val items = doc.select("li.video-card")
         return items.mapNotNull { el ->
             val a = el.selectFirst("a.group") ?: return@mapNotNull null
-            val href = a.attr("href").trim().trimStart('/')
+            val hrefRaw = a.attr("href").trim()
+            val href = if (hrefRaw.startsWith("http")) hrefRaw else "$mainUrl/${hrefRaw.trimStart('/') }"
             val title = a.attr("title") ?: a.selectFirst("span.video-card-title")?.text() ?: ""
             val poster = a.selectFirst("img")?.attr("data-src") ?: a.selectFirst("img")?.attr("src")
             newMovieSearchResponse(title, href, TvType.Movie, false) { this.posterUrl = poster }
