@@ -153,6 +153,25 @@
         "name": "King"
     },
     {
+        "fileHash": "sha256-86f9347cf0a9eabd4c835cb98e007282077982d2c5527a0eb68a0424cb4a96f3",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 16416,
+        "status": 1,
+        "language": "id",
+        "authors": [
+            "dit"
+        ],
+        "tvTypes": [
+            "NSFW"
+        ],
+        "version": -1,
+        "internalName": "KingV2",
+        "description": "KingV2 provider for KINGBOKEP (alternate host)",
+        "url": "https://cloudstream.zvlz.my.id/builds/KingV2.cs3",
+        "name": "KingV2"
+    },
+    {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuramanime.png",
         "fileHash": "sha256-5f07fd346cb3bd8c158aeecb553b0869840a6988266cfa08f675579dbb54eec3",
         "apiVersion": 1,
