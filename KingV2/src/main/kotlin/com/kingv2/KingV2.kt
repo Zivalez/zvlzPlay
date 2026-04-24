@@ -5,6 +5,7 @@ import com.lagradost.cloudstream3.utils.*
 import com.lagradost.nicehttp.RequestBodyTypes
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
+import com.lagradost.cloudstream3.network.WebViewResolver
 
 class KingV2 : MainAPI() {
     override var mainUrl = "https://185.169.252.47"
@@ -55,12 +56,29 @@ class KingV2 : MainAPI() {
             seen.add(href)
 
             // title fallbacks: title attr, span.video-card-title, span.title, aria-label, img alt
-            val title = a.attr("title").ifBlank {
+            var title = a.attr("title").ifBlank {
                 a.selectFirst("span.video-card-title")?.text()
                     ?: a.selectFirst("span.title")?.text()
                     ?: a.attr("aria-label")
                     ?: a.selectFirst("img")?.attr("alt")
                     ?: ""
+            }
+            // If title still blank, try to find another anchor on the page with the same href that contains text
+            if (title.isBlank()) {
+                val anchors = document.select("a[href]")
+                for (other in anchors) {
+                    val oHrefRaw = other.attr("href").trim()
+                    if (oHrefRaw.isBlank()) continue
+                    val oHref = if (oHrefRaw.startsWith("http")) oHrefRaw else "$mainUrl/${oHrefRaw.trimStart('/') }"
+                    if (oHref == href) {
+                        val txt = other.text().trim()
+                        if (txt.isNotBlank()) { title = txt; break }
+                        val spanTitle = other.selectFirst("span.title")?.text()?.trim()
+                        if (!spanTitle.isNullOrBlank()) { title = spanTitle; break }
+                        val alt = other.selectFirst("img")?.attr("alt")?.trim()
+                        if (!alt.isNullOrBlank()) { title = alt; break }
+                    }
+                }
             }
 
             val poster = a.selectFirst("img")?.attr("data-src") ?: a.selectFirst("img")?.attr("src")
@@ -142,27 +160,50 @@ class KingV2 : MainAPI() {
 
         var playlist: String? = null
         var foundReferer: String? = null
+        val m3u8Regex = Regex("https?://[^\\\"'\\s>]+\\.m3u8[^\\\"'\\s>]*")
+
         for (c in candidates) {
             try {
                 val doc = app.get(c).document
-                // check for data-playlist on video tag
+
+                // 1) direct data-playlist on video
                 playlist = doc.selectFirst("video#bokep-player")?.attr("data-playlist")
                 if (!playlist.isNullOrBlank()) { foundReferer = c; break }
 
-                // check for meta og:video / ld contentUrl on the page
-                playlist = doc.selectFirst("meta[property=og:video]")?.attr("content") ?: doc.selectFirst("meta[itemprop=contentUrl]")?.attr("content")
+                // 2) meta tags
+                playlist = doc.selectFirst("meta[property=\"og:video\"]")?.attr("content") ?: doc.selectFirst("meta[itemprop=contentUrl]")?.attr("content")
                 if (!playlist.isNullOrBlank()) { foundReferer = c; break }
 
-                // check for iframe embed src and try to resolve embed
-                val iframe = doc.selectFirst("iframe")?.attr("data-litespeed-src") ?: doc.selectFirst("iframe")?.attr("src")
+                // 3) search HTML for any direct .m3u8 link
+                val html = doc.html()
+                val m = m3u8Regex.find(html)
+                if (m != null) { playlist = m.value; foundReferer = c; break }
+
+                // 4) try iframe embed
+                val iframeEl = doc.selectFirst("iframe")
+                val iframe = iframeEl?.attr("data-litespeed-src") ?: iframeEl?.attr("src")
                 if (!iframe.isNullOrBlank()) {
-                    val iframeUrl = if (iframe.startsWith("//")) "https:$iframe" else iframe
-                    val embedDoc = app.get(iframeUrl).document
-                    playlist = embedDoc.selectFirst("meta[itemprop=contentUrl]")?.attr("content") ?: embedDoc.selectFirst("meta[property=og:video]")?.attr("content")
-                    if (!playlist.isNullOrBlank()) { foundReferer = iframeUrl; break }
+                    val iframeUrl = if (iframe.startsWith("//")) "https:$iframe" else if (iframe.startsWith("http")) iframe else "$mainUrl/${iframe.trimStart('/') }"
+
+                    // try plain HTTP fetch of embed
+                    try {
+                        val embedDoc = app.get(iframeUrl).document
+                        playlist = embedDoc.selectFirst("meta[itemprop=contentUrl]")?.attr("content") ?: embedDoc.selectFirst("meta[property=\"og:video\"]")?.attr("content")
+                        if (!playlist.isNullOrBlank()) { foundReferer = iframeUrl; break }
+
+                        val emHtml = embedDoc.html()
+                        val m2 = m3u8Regex.find(emHtml)
+                        if (m2 != null) { playlist = m2.value; foundReferer = iframeUrl; break }
+                    } catch (_: Exception) {}
+
+                    // WebView/Playwright is not allowed inside providers.
+                    // Rely on HTTP fetching and HTML heuristics only.
+                    // (Previously attempted JS render here; removed per Cloudstream rules.)
+                    // No further action for JS-only embeds — rely on earlier HTML/embed parsing.
+                    
                 }
 
-                // as fallback, try JSON-LD VideoObject contentUrl on the page
+                // 5) JSON-LD fallback
                 val ld = doc.select("script[type=application/ld+json]").mapNotNull { it.data() }.firstOrNull()
                 if (!ld.isNullOrBlank()) {
                     try {
@@ -171,6 +212,14 @@ class KingV2 : MainAPI() {
                         if (content is String) { playlist = content; foundReferer = c; break }
                     } catch (_: Exception) {}
                 }
+
+                // 6) try to find hlsplaylist.php or hlsnew2.php pattern in HTML and build absolute URL
+                val hlsMatch = Regex("(https?://[^\"]*hls(?:playlist|new2)\\.php[^\"']*)").find(html)
+                if (hlsMatch != null) {
+                    playlist = hlsMatch.groupValues[1]
+                    if (!playlist.isNullOrBlank()) { foundReferer = c; break }
+                }
+
             } catch (e: Exception) {
                 // ignore and try next candidate
             }
