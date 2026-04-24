@@ -117,15 +117,22 @@ class King : MainAPI() {
 
         val durationStr = doc.selectFirst("[data-pagefind-meta=duration]")?.text()
 
-        // Parse duration into seconds (MM:SS or HH:MM:SS)
+        // Parse duration and convert to minutes for CloudStream UI (providers expect minutes)
         val duration = durationStr?.split(":")?.mapNotNull { it.toIntOrNull() }?.let { parts ->
             when (parts.size) {
-                3 -> parts[0] * 3600 + parts[1] * 60 + parts[2]
-                2 -> parts[0] * 60 + parts[1]
+                // HH:MM:SS -> convert to total minutes (hours*60 + minutes)
+                3 -> parts[0] * 60 + parts[1]
+                // MM:SS -> minutes
+                2 -> parts[0]
+                // single number assume minutes
                 1 -> parts[0]
                 else -> 0
             }
-        } ?: 0
+        } ?: run {
+            // fallback: try meta[property=video:duration] which is in seconds; convert to minutes (round up)
+            val videoDurationSec = doc.selectFirst("meta[property=video:duration]")?.attr("content")?.toIntOrNull()
+            if (videoDurationSec != null) (videoDurationSec + 59) / 60 else 0
+        }
 
         // Tags / categories
         val tags = doc.select("a[href*='/category/']").map { it.text().trim() }.filter { it.isNotEmpty() }.distinct()
