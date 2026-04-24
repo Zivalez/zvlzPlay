@@ -16,7 +16,6 @@ class King : MainAPI() {
 
     override val mainPage = mainPageOf(
         "$mainUrl/page/%d/" to "Terbaru",
-        "$mainUrl/category/indonesia/page/%d/" to "Indonesia",
         "$mainUrl/category/viral/page/%d/" to "Viral"
     )
 
@@ -67,13 +66,9 @@ class King : MainAPI() {
             )
         }
 
-        // Use horizontal (landscape) layout for category lists to match extensions/Twitch pattern
-        val isHorizontal = rawData.contains("/category/") || request.name.lowercase().contains("indonesia") || request.name.lowercase().contains("viral")
-        return if (isHorizontal) {
-            newHomePageResponse(listOf(HomePageList(request.name, home, isHorizontalImages = true)))
-        } else {
-            newHomePageResponse(request.name, home)
-        }
+        // Force horizontal (landscape) layout for all lists
+        val isHorizontal = true
+        return newHomePageResponse(listOf(HomePageList(request.name, home, isHorizontalImages = true)))
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
@@ -91,12 +86,35 @@ class King : MainAPI() {
     }
 
     override suspend fun load(url: String): LoadResponse {
-        val slug = url.substringAfterLast("/")
-        val doc = app.get("$mainUrl/$slug/").document
+        // normalize slug from URL even if trailing slash present
+        val slug = url.trimEnd('/').substringAfterLast('/')
+        // fetch the page using the original URL (works with absolute or relative urls)
+        val doc = app.get(url).document
 
         val title = doc.selectFirst("h1")?.text()?.trim() ?: ""
-        val poster = doc.selectFirst("video#bokep-player")?.attr("poster")
-        val playlist = doc.selectFirst("video#bokep-player")?.attr("data-playlist")
+
+        val videoEl = doc.selectFirst("video#bokep-player")
+        val playlist = videoEl?.attr("data-playlist")
+        var poster = videoEl?.attr("poster")
+
+        // Prefer thumbnailUrl from JSON-LD if available
+        if (poster.isNullOrBlank()) {
+            val ld = doc.select("script[type=application/ld+json]")
+                .mapNotNull { it.data() }
+                .firstOrNull { it.contains("\"thumbnailUrl\"") }
+            if (ld != null) {
+                try {
+                    val parsed = parseJson<Map<String, Any>>(ld)
+                    val thumbAny = parsed["thumbnailUrl"]
+                    if (thumbAny is String) poster = thumbAny
+                } catch (e: Exception) {
+                    // ignore parse errors
+                }
+            }
+        }
+
+        if (poster.isNullOrBlank()) poster = doc.selectFirst("meta[property=og:image]")?.attr("content")
+
         val durationStr = doc.selectFirst("[data-pagefind-meta=duration]")?.text()
 
         // Parse duration into seconds (MM:SS or HH:MM:SS)
@@ -131,7 +149,8 @@ class King : MainAPI() {
 
         val tvType = TvType.Movie
 
-        return newMovieLoadResponse(title, url, tvType, LoadData(slug).toJson()) {
+        // Pass slug + detailPath so loadLinks can reconstruct the exact view path
+        return newMovieLoadResponse(title, url, tvType, LoadData(id = slug, detailPath = "view/$slug").toJson()) {
             this.posterUrl = poster
             this.plot = doc.selectFirst("meta[name=description]")?.attr("content")
             this.year = year
@@ -147,15 +166,38 @@ class King : MainAPI() {
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         val media = parseJson<LoadData>(data)
-        val slug = media.id ?: media.detailPath ?: media.title ?: ""
-        val playlist = app.get("$mainUrl/$slug/").document.selectFirst("video#bokep-player")?.attr("data-playlist") ?: return false
+        val candidates = mutableListOf<String>()
+
+        // prefer explicit detailPath if provided
+        media.detailPath?.let {
+            val dp = it.trim()
+            if (dp.startsWith("http")) candidates.add(dp)
+            else candidates.add("$mainUrl/${dp.trimStart('/')}/")
+        }
+
+        // try common patterns based on id/slug
+        media.id?.let {
+            if (it.isNotBlank()) {
+                candidates.add("$mainUrl/view/${it.trimStart('/')}/")
+                candidates.add("$mainUrl/${it.trimStart('/')}/")
+            }
+        }
+
+        var playlist: String? = null
+        for (c in candidates) {
+            try {
+                val doc = app.get(c).document
+                playlist = doc.selectFirst("video#bokep-player")?.attr("data-playlist")
+                if (!playlist.isNullOrBlank()) break
+            } catch (e: Exception) {
+                // try next candidate
+            }
+        }
+
+        if (playlist.isNullOrBlank()) return false
 
         // Use M3u8Helper to generate extractor links for all variants/qualities
-        M3u8Helper.generateM3u8(
-            name,
-            playlist,
-            "$mainUrl/",
-        ).forEach(callback)
+        M3u8Helper.generateM3u8(name, playlist, "$mainUrl/").forEach(callback)
 
         return true
     }
