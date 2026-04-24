@@ -23,11 +23,34 @@ class King : MainAPI() {
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val home = mutableListOf<SearchResponse>()
         val rawData = request.data
-        val requestUrl = if (rawData.contains("%d")) rawData.format(page) else rawData
+        val requestUrl = if (rawData.contains("%d")) {
+            // Some sites use '/' for the first page and '/page/2/' for others.
+            val formatted = rawData.format(page)
+            if (page == 1) formatted.replace("/page/1/", "/") else formatted
+        } else {
+            // If caller passed a base url (like / or /category/name/), append paging for page>1
+            if (page == 1) rawData else rawData.trimEnd('/') + "/page/$page/"
+        }
 
         val document = app.get(requestUrl).document
 
-        val items = document.select("li.video-card")
+        var items = document.select("li.video-card")
+
+        // Some pages (e.g. /page/1/) may return a 404 or different template. If we got no items for the first page,
+        // try a fallback to the site root or the category base (without /page/1/).
+        if (items.isEmpty() && page == 1) {
+            val fallbackUrl = when {
+                rawData.contains("%d") -> rawData.format(1).replace("/page/1/", "/")
+                rawData.endsWith("/") -> rawData
+                else -> rawData + "/"
+            }
+            try {
+                val fallbackDoc = app.get(fallbackUrl).document
+                items = fallbackDoc.select("li.video-card")
+            } catch (e: Exception) {
+                // ignore and continue with empty list
+            }
+        }
 
         items.forEach { el ->
             val a = el.selectFirst("a.group") ?: return@forEach
