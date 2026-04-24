@@ -32,20 +32,38 @@ class KingV2 : MainAPI() {
         }
 
         val document = app.get(requestUrl).document
-        var items = document.select("div.video-block, div.col-6")
-
+        // Collect candidate elements and dedupe by href to avoid duplicate cards
+        var items = document.select("li.video-card, div.video-block, div.col-6, a.thumb, a.group")
         if (items.isEmpty()) {
-            // fallback to generic anchors on the page
-            items = document.select("a.thumb")
+            items = document.select("a.thumb, a.group")
         }
 
+        val seen = mutableSetOf<String>()
         items.forEach { el ->
-            val a = el.selectFirst("a.thumb, a.infos, a.group") ?: return@forEach
+            // element might be an anchor itself or a container with an anchor inside
+            val a = when {
+                el.tagName().equals("a", true) -> el
+                else -> el.selectFirst("a.thumb, a.infos, a.group, a") ?: return@forEach
+            }
+
             val hrefRaw = a.attr("href").trim()
+            if (hrefRaw.isBlank()) return@forEach
             val href = if (hrefRaw.startsWith("http")) hrefRaw else "$mainUrl/${hrefRaw.trimStart('/') }"
-            val title = a.attr("title").ifBlank { a.selectFirst("span.title")?.text() ?: a.attr("aria-label") ?: "" }
+
+            // skip duplicates
+            if (seen.contains(href)) return@forEach
+            seen.add(href)
+
+            // title fallbacks: title attr, span.video-card-title, span.title, aria-label, img alt
+            val title = a.attr("title").ifBlank {
+                a.selectFirst("span.video-card-title")?.text()
+                    ?: a.selectFirst("span.title")?.text()
+                    ?: a.attr("aria-label")
+                    ?: a.selectFirst("img")?.attr("alt")
+                    ?: ""
+            }
+
             val poster = a.selectFirst("img")?.attr("data-src") ?: a.selectFirst("img")?.attr("src")
-            val duration = el.selectFirst(".duration")?.text()
 
             home.add(newMovieSearchResponse(title, href, TvType.Movie, false) { this.posterUrl = poster })
         }
@@ -123,26 +141,50 @@ class KingV2 : MainAPI() {
         media.id?.let { if (it.isNotBlank()) { candidates.add("$mainUrl/view/${it.trimStart('/')}/") ; candidates.add("$mainUrl/${it.trimStart('/')}/") } }
 
         var playlist: String? = null
+        var foundReferer: String? = null
         for (c in candidates) {
             try {
                 val doc = app.get(c).document
                 // check for data-playlist on video tag
                 playlist = doc.selectFirst("video#bokep-player")?.attr("data-playlist")
-                if (!playlist.isNullOrBlank()) break
-                // check for iframe embed src
+                if (!playlist.isNullOrBlank()) { foundReferer = c; break }
+
+                // check for meta og:video / ld contentUrl on the page
+                playlist = doc.selectFirst("meta[property=og:video]")?.attr("content") ?: doc.selectFirst("meta[itemprop=contentUrl]")?.attr("content")
+                if (!playlist.isNullOrBlank()) { foundReferer = c; break }
+
+                // check for iframe embed src and try to resolve embed
                 val iframe = doc.selectFirst("iframe")?.attr("data-litespeed-src") ?: doc.selectFirst("iframe")?.attr("src")
                 if (!iframe.isNullOrBlank()) {
-                    // if iframe points to a stream host, try to fetch and parse embed
-                    val embedDoc = app.get(if (iframe.startsWith("//")) "https:$iframe" else iframe).document
+                    val iframeUrl = if (iframe.startsWith("//")) "https:$iframe" else iframe
+                    val embedDoc = app.get(iframeUrl).document
                     playlist = embedDoc.selectFirst("meta[itemprop=contentUrl]")?.attr("content") ?: embedDoc.selectFirst("meta[property=og:video]")?.attr("content")
+                    if (!playlist.isNullOrBlank()) { foundReferer = iframeUrl; break }
                 }
-                if (!playlist.isNullOrBlank()) break
-            } catch (e: Exception) {}
+
+                // as fallback, try JSON-LD VideoObject contentUrl on the page
+                val ld = doc.select("script[type=application/ld+json]").mapNotNull { it.data() }.firstOrNull()
+                if (!ld.isNullOrBlank()) {
+                    try {
+                        val parsed = parseJson<Map<String, Any>>(ld)
+                        val content = parsed["contentUrl"]
+                        if (content is String) { playlist = content; foundReferer = c; break }
+                    } catch (_: Exception) {}
+                }
+            } catch (e: Exception) {
+                // ignore and try next candidate
+            }
         }
 
         if (playlist.isNullOrBlank()) return false
 
-        M3u8Helper.generateM3u8(name, playlist, "$mainUrl/").forEach(callback)
+        // Normalize playlist URL and pick referer
+        if (playlist.startsWith("//")) playlist = "https:$playlist"
+        if (playlist.startsWith("/")) playlist = "$mainUrl$playlist"
+        val referer = foundReferer ?: "$mainUrl/"
+
+        // Use page/embed URL as referer when generating m3u8 links
+        M3u8Helper.generateM3u8(name, playlist, referer).forEach(callback)
         return true
     }
 
