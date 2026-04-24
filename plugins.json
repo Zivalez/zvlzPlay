@@ -153,10 +153,10 @@
         "name": "King"
     },
     {
-        "fileHash": "sha256-86f9347cf0a9eabd4c835cb98e007282077982d2c5527a0eb68a0424cb4a96f3",
+        "fileHash": "sha256-8ac7ae8a2b00a696f61cea90cc7d8644ae4d860e31f4e363b112d5d2fbf61bf9",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 16416,
+        "fileSize": 18112,
         "status": 1,
         "language": "id",
         "authors": [
