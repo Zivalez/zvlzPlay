@@ -154,10 +154,10 @@
     },
     {
         "iconUrl": "https://185.169.252.47/wp-content/uploads/2025/06/favicon.ico",
-        "fileHash": "sha256-aeb8d55cc7fc5e1e10c59a2fce3e207c1abccd6318bba5ae25c884c20b80c5a6",
+        "fileHash": "sha256-4fd712ed38591a01f0f8183e1d6d8f4838db5808e35de9d97138fecd6b152dfd",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 20079,
+        "fileSize": 20619,
         "status": 1,
         "language": "id",
         "authors": [
@@ -168,7 +168,7 @@
         ],
         "version": 1,
         "internalName": "KingV2",
-        "description": "KingV2 provider for KINGBOKEP (alternate host)",
+        "description": "KingV2 provider for KingBokep (alternate host)",
         "url": "https://cloudstream.zvlz.my.id/builds/KingV2.cs3",
         "name": "KingV2"
     },
