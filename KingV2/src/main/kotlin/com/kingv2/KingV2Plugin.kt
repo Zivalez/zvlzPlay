@@ -1,9 +1,11 @@
-import com.lagradost.cloudstream3.MainAPI
-import com.lagradost.cloudstream3.annotations.CloudstreamPlugin
+package com.kingv2
+
+import com.lagradost.cloudstream3.plugins.CloudstreamPlugin
+import com.lagradost.cloudstream3.plugins.Plugin
 
 @CloudstreamPlugin
-class KingV2Plugin : com.lagradost.cloudstream3.Plugin() {
-    override fun loadPlugin() {
+class KingV2Plugin : Plugin() {
+    override fun load(context: android.content.Context) {
         registerMainAPI(KingV2())
     }
 }
