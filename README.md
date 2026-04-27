@@ -73,7 +73,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Kuronime | Anime | ✅ aktif |
 | Gomunime | Anime | ✅ aktif |
 | Winbu | Anime, Donghua | ✅ aktif |
-| Kuramanime | Anime, Donghua | 🧪 beta |
+| Kuramanime | Anime, Donghua | ✅ aktif |
 | Zoronime | Anime | ❌ mati |
 
 Keterangan status:
@@ -89,6 +89,7 @@ Keterangan status:
 
 ### Provider mana yang paling bagus buat nonton Anime?
 - **Samehadaku** (paling lengkap & streaming tercepat)
+- **Kuramanime** (streaming terupdate, tercepat & stabil)
 - **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime**, **Gomunime** (alternatif)
 
 ### Provider mana buat nonton Drama & Movie?

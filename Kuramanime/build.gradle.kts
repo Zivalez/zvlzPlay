@@ -18,13 +18,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 }
 // use an integer for version numbers
-version = 8
+version = 9
 
 
 cloudstream {
     language = "id"
-    description = "Nonton Anime, Donghua, Movie Sub Indo Terlengkap & Terbaru"
-    authors = listOf("TeKuma25", "Zivalez")
+    description = "Nonton Anime, Donghua, Movie Sub Indo Terlengkap, Terbaru & Terupdate"
+    authors = listOf("Zivalez")
 
     /**
      * Status int as the following:
