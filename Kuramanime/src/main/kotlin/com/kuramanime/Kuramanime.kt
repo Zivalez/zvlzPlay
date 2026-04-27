@@ -13,7 +13,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 
 class Kuramanime : MainAPI() {
-    override var mainUrl = "https://v15.kuramanime.tel"
+    override var mainUrl = "https://v17.kuramanime.ink"
     override var name = "Kuramanime"
     override val hasQuickSearch = false
     override val hasMainPage = true
@@ -205,45 +205,57 @@ class Kuramanime : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        var document = app.get(data, headers = commonHeaders).document
+        // Step 1: Initial GET — kemungkinan dapat halaman v1 (decoy)
+        val initialResponse = app.get(data, headers = commonHeaders)
+        var document = initialResponse.document
 
-        // Check for protection error
-        if (document.select("#animeDownloadLink .reload-error").isNotEmpty()) {
-            var bypassed = false
-            
-            // Fast Path: Try known token file logic
+        // Step 2: Detect halaman decoy via DOM struktur (BUKAN substring, karena v2 juga
+        // mengandung "Terjadi kesalahan" di #tokenErrorText yang hidden).
+        // Decoy v1: #animeDownloadLink berisi <span class="reload-error">.
+        // Real v2:  #animeDownloadLink berisi <h6> + <a> bergantian.
+        val isDecoy = document.select("#animeDownloadLink .reload-error").isNotEmpty() ||
+            document.select("#animeDownloadLink a[href]").isEmpty()
+
+        if (isDecoy) {
+            // Step 3: Bypass via WebViewResolver. Kuramanime memakai obfuscated JS
+            // (`leviathan.js`) yang generate body `authorization=...` untuk POST final.
+            // Tidak feasible direplikasi native, jadi biarkan WebView eksekusi JS-nya.
+            //
+            // Regex match POST request final ke episode URL dengan query string yang
+            // berisi token (parameter dinamis seperti Ub3BzhijicHXZdv=...&C2XAPerzX1BM7V9=...).
+            // Response request itu = HTML halaman v2 lengkap dengan download links.
+            val resolver = WebViewResolver(
+                interceptUrl = Regex("""/anime/\d+/[^/]+/episode/\d+\?[^#]*page=\d+"""),
+                additionalUrls = listOf(Regex("""/anime/\d+/[^/]+/episode/\d+\?""")),
+                userAgent = userAgent,
+                useOkhttp = false,
+                timeout = 20_000L
+            )
+
             try {
-                val tokenUrl = "$mainUrl/assets/Ks6sqSgloPTlHMl.txt"
-                val token = app.get(tokenUrl, headers = commonHeaders).text.trim()
-                // Validate token looks like a short string (e.g. CIaaYfKYwc)
-                if (token.isNotEmpty() && token.length < 50) {
-                    val postUrl = "$data?Ub3BzhijicHXZdv=$token&C2XAPerzX1BM7V9=kuramadrive&page=1"
-                    val postHeaders = commonHeaders + mapOf("X-Requested-With" to "XMLHttpRequest")
-                    val postResponse = app.post(postUrl, headers = postHeaders)
-                    if (postResponse.code == 200 && !postResponse.text.contains("Terjadi kesalahan")) {
-                        document = postResponse.document
-                        bypassed = true
+                val webViewResponse = app.get(
+                    data,
+                    headers = commonHeaders,
+                    interceptor = resolver,
+                    cookies = initialResponse.cookies
+                )
+                if (webViewResponse.code == 200) {
+                    val webDoc = webViewResponse.document
+                    // Validasi sukses bypass: harus ada <a href> di #animeDownloadLink.
+                    if (webDoc.select("#animeDownloadLink a[href]").isNotEmpty()) {
+                        document = webDoc
                     }
                 }
-            } catch (e: Exception) {
-                // Ignore, proceed to WebView fallback
-            }
-
-            // Slow Path: WebView fallback
-            if (!bypassed) {
-                val resolver = WebViewResolver(
-                    Regex("""episode/\d+\?.*"""),
-                    userAgent = userAgent
-                )
-                val webViewResponse = app.get(data, headers = commonHeaders, interceptor = resolver)
-                if (webViewResponse.code == 200) {
-                    document = webViewResponse.document
-                }
+            } catch (_: Exception) {
+                // WebView gagal (timeout / WebView tidak available) — lanjut dengan
+                // halaman decoy. Section download akan kosong, tapi gak crash.
             }
         }
 
-        // 1. Direct Stream (Kuramadrive S1 / R2)
-        val directLink = document.select("video#player").attr("src")
+        // Step 4: Direct Stream (jarang ke-set di HTML v2 karena di-load JS,
+        // tapi cek kalau ada — fallback ke R2 storage untuk Kuramadrive S1).
+        val player = document.selectFirst("video#player")
+        val directLink = player?.attr("src").orEmpty()
         if (directLink.contains("r2.cloudflarestorage.com")) {
             callback.invoke(
                 newExtractorLink(
@@ -257,20 +269,55 @@ class Kuramanime : MainAPI() {
                 }
             )
         }
+        val hlsSrc = player?.attr("data-hls-src").orEmpty()
+        if (hlsSrc.isNotBlank() && hlsSrc.startsWith("http")) {
+            callback.invoke(
+                newExtractorLink(
+                    name,
+                    "Kuramadrive HLS",
+                    hlsSrc,
+                    ExtractorLinkType.M3U8
+                ) {
+                    this.referer = mainUrl
+                    this.quality = Qualities.Unknown.value
+                }
+            )
+        }
 
-        // 2. Download Links (Iterate children statefully)
+        // Step 5: Download Links — iterasi <h6> (label kualitas) + <a> (link) bergantian.
+        // Pattern di #animeDownloadLink:
+        //   <h6>MKV 480p (Softsub)</h6>
+        //   <a href="https://pixeldrain.com/...">Extra 1</a>
+        //   <a href="https://v1.kuramadrive.com/kdrive/...">kDrive</a>
+        //   ...
+        //   <h6>MP4 720p (Hardsub)</h6>
+        //   <a href="...">...</a>
         val downloadSection = document.selectFirst("div#animeDownloadLink")
         var currentQuality = "Unknown"
 
         downloadSection?.children()?.forEach { element ->
-            when (element.tagName()) {
+            when (element.tagName().lowercase()) {
                 "h6" -> {
                     currentQuality = element.text().trim()
                 }
                 "a" -> {
                     val url = element.attr("href")
-                    if (url.isNotBlank()) {
-                        loadFixedExtractor(url, currentQuality, mainUrl, subtitleCallback, callback)
+                    if (url.isNotBlank() && !url.startsWith("#")) {
+                        when {
+                            url.contains("dropbox.com") -> {
+                                handleDropbox(url, currentQuality, callback)
+                            }
+                            url.contains("mypikpak.com") -> {
+                                // Skip silently
+                            }
+                            else -> loadFixedExtractor(
+                                url,
+                                currentQuality,
+                                mainUrl,
+                                subtitleCallback,
+                                callback
+                            )
+                        }
                     }
                 }
             }
@@ -309,5 +356,35 @@ class Kuramanime : MainAPI() {
             this.contains("360", true) -> Qualities.P360.value
             else -> Qualities.Unknown.value
         }
+    }
+
+    /**
+     * Dropbox download URL: convert `dl=0` (preview page) → `dl=1` (direct file).
+     * Format input: `https://www.dropbox.com/scl/fi/.../filename.mkv?rlkey=...&dl=0`
+     * Setelah `dl=1`, Dropbox akan redirect ke `dl.dropboxusercontent.com/...` direct file.
+     * Player CloudStream bisa langsung handle URL final tersebut sebagai VIDEO.
+     */
+    private fun handleDropbox(
+        url: String,
+        quality: String,
+        callback: (ExtractorLink) -> Unit
+    ) {
+        val direct = when {
+            url.contains("dl=0") -> url.replace("dl=0", "dl=1")
+            url.contains("dl=1") -> url
+            url.contains("?") -> "$url&dl=1"
+            else -> "$url?dl=1"
+        }
+        callback.invoke(
+            newExtractorLink(
+                name,
+                "Dropbox - $quality",
+                direct,
+                ExtractorLinkType.VIDEO
+            ) {
+                this.referer = mainUrl
+                this.quality = quality.fixQuality()
+            }
+        )
     }
 }

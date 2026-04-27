@@ -57,22 +57,29 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 9.  Done
 
 
-## Provider yang Aktif Saat Ini
+## Daftar Provider
 
 | Provider | Konten | Status |
 | ------ | ------ | ------ |
-| Idlix | Movie, TV Series, Drama Korea, Anime | ✅ aktif |
-| LayarKaca | Movie, TV Series, Drama Korea | ✅ aktif |
-| Pencurimovie | Movie, TV Series | ✅ aktif |
-| Funmovieslix | Movie, TV Series, Drama | ✅ aktif |
-| Moviebox | Movie, TV Series, Anime, K-Drama, C-Drama | ✅ aktif |
+| Idlix | Movie, TV Series, Drama Asia, Anime | ✅ aktif |
+| LayarKaca | Movie, TV Series, Drama Asia, Anime Movie | ✅ aktif |
+| Pencurimovie | Movie | ✅ aktif |
+| Funmovieslix | Movie, TV Series, Drama Asia | ✅ aktif |
+| Moviebox | Movie, TV Series, Anime, Drama Asia | ✅ aktif |
 | Samehadaku | Anime | ✅ aktif |
 | Otakudesu | Anime | ✅ aktif |
 | Alqanime | Anime | ✅ aktif |
 | Nontonanimeid | Anime | ✅ aktif |
-| Kuronime | Anime, Live Action, Donghua | ✅ aktif |
-| Kuramanime | Anime, Donghua | ❌ nonaktif |
+| Kuronime | Anime | ✅ aktif |
+| Gomunime | Anime | ✅ aktif |
 | Winbu | Anime, Donghua | ✅ aktif |
+| Kuramanime | Anime, Donghua | 🧪 beta |
+| Zoronime | Anime | ❌ mati |
+
+Keterangan status:
+- ✅ **aktif** — stabil & bisa dipake normal
+- 🧪 **beta** — bisa dipake tapi belum stabil, kadang error
+- ❌ **mati** — situs/server lagi down, sementara ga bisa dipake
 
 ## FAQ (Pertanyaan yang sering ditanyain)
 
@@ -82,7 +89,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ### Provider mana yang paling bagus buat nonton Anime?
 - **Samehadaku** (paling lengkap & streaming tercepat)
-- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime** (alternatif)
+- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime**, **Gomunime** (alternatif)
 
 ### Provider mana buat nonton Drama & Movie?
 - **Idlix** (paling lengkap)
@@ -90,6 +97,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ### Donghua ada?
 - Ada, bisa lewat **Winbu** (kategori Donghua)
+- **Kuramanime** juga ada Donghua, tapi statusnya masih beta
 
 ### Kok search gak nemu?
 - Pastiin provider sudah di install
