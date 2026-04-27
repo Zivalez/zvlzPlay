@@ -336,54 +336,98 @@ class Kuramanime : MainAPI() {
     /**
      * Bypass v1 decoy → v2 real page menggunakan WebViewResolver.
      *
-     * Kuramanime memakai obfuscated `leviathan.js` yang generate body
-     * `authorization=...` untuk POST final. Tidak feasible direplikasi
-     * native, jadi WebView eksekusi JS-nya.
+     * Kenapa pendekatan interceptor biasa GAGAL:
+     *   - WebViewResolver sebagai okhttp Interceptor cuma capture URL match,
+     *     dan body yang di-return adalah body GET awal (= v1 decoy 67KB).
+     *   - Body POST response (= v2 90KB) TIDAK accessible via shouldInterceptRequest
+     *     karena WebView abstraksi response body dari WebViewClient callback.
      *
-     * Regex match POST URL pattern (XHR yang bawa v2 HTML response).
-     * Jika WebViewResolver berhasil capture, response body = v2 HTML.
+     * Pendekatan yang BENAR (terbukti via reading SDK source):
+     *   - Pakai parameter `script` + `scriptCallback` di WebViewResolver yang
+     *     internally pakai `view.evaluateJavascript(script) { scriptCallback(...) }`.
+     *   - Script di-eksekusi pada SETIAP shouldInterceptRequest (banyak kali selama
+     *     page load). Kita poll DOM, return HTML lengkap kalau v2 sudah ter-inject.
+     *   - Pakai `resolveUsingWebView(...)` langsung (bukan via app.get interceptor)
+     *     karena script param hanya bekerja di flow ini.
      */
     private suspend fun tryWebViewBypass(
         url: String,
         cookies: Map<String, String>
     ): org.jsoup.nodes.Document? {
-        return try {
-            val resolver = WebViewResolver(
-                // Match URL yang akan return v2 HTML — POST dengan query token+page=N.
-                // Pattern dynamic key (Ub3BzhijicHXZdv, C2XAPerzX1BM7V9) sudah ditangani
-                // dengan match `page=\d+` yang stabil.
-                interceptUrl = Regex("""/anime/\d+/[^/]+/episode/\d+\?[^"'\s]*page=\d+"""),
-                // Allow request lain juga (hindari resolver block resource yang JS butuh)
-                additionalUrls = listOf(
-                    Regex("""leviathan\.js"""),
-                    Regex("""check-episode"""),
-                    Regex("""Ks6sqSgloPTlHMl\.txt"""),
-                    // Rotating R2 stream domains — kalau player auto-fetch metadata
-                    Regex("""(anisphia|asuna|amiya|iino|chisato|kitasan|komari|horikita)\.my\.id/kdrive/""")
-                ),
-                userAgent = userAgent,
-                useOkhttp = false,
-                timeout = 30_000L
-            )
+        val capturedHtml = java.util.concurrent.atomic.AtomicReference<String?>(null)
 
-            val response = app.get(
-                url,
+        // JS yang dieksekusi via evaluateJavascript pada tiap request load.
+        // - Kalau DOM masih v1: return null (skip)
+        // - Kalau DOM sudah v2 (ada <source src=".../kdrive/...">): return outerHTML
+        // evaluateJavascript akan JSON-encode hasilnya sebelum di-pass ke callback.
+        val script = """
+            (function() {
+                try {
+                    var sources = document.querySelectorAll('video#player source[src*="/kdrive/"]');
+                    var dlLinks = document.querySelectorAll('#animeDownloadLink a[href]');
+                    if (sources.length > 0 && dlLinks.length > 0) {
+                        return document.documentElement.outerHTML;
+                    }
+                    return null;
+                } catch(e) { return null; }
+            })()
+        """.trimIndent()
+
+        val resolver = WebViewResolver(
+            // interceptUrl gak akan match — biarkan WebView jalan sampai timeout
+            // atau sampai requestCallBack return true.
+            interceptUrl = Regex("""__KURAMANIME_WV_NEVER_MATCH__"""),
+            // Match-all → requestCallBack di-check tiap resource load → destroy
+            // WebView dini setelah scriptCallback berhasil capture v2 HTML.
+            additionalUrls = listOf(Regex(""".*""")),
+            userAgent = userAgent,
+            useOkhttp = false,
+            script = script,
+            scriptCallback = { result ->
+                // result adalah JSON-encoded string. JS return null → result = "null".
+                // JS return "<html>..." → result = "\"<html>...\"" (escaped).
+                if (result != null && result.length > 5000 && result != "null") {
+                    val decoded = try {
+                        // Decode JSON string. JSONArray trick handles all escape sequences.
+                        org.json.JSONArray("[$result]").getString(0)
+                    } catch (e: Exception) {
+                        null
+                    }
+                    if (decoded != null && decoded.contains("/kdrive/")) {
+                        if (capturedHtml.get() == null) {
+                            Log.d(TAG, "scriptCallback: captured v2 HTML, len=${decoded.length}")
+                        }
+                        capturedHtml.set(decoded)
+                    }
+                }
+            },
+            timeout = 30_000L
+        )
+
+        try {
+            // Pakai resolveUsingWebView langsung (bukan interceptor).
+            // requestCallBack return true → destroy WebView segera setelah HTML ter-capture.
+            resolver.resolveUsingWebView(
+                url = url,
+                referer = mainUrl,
                 headers = commonHeaders,
-                interceptor = resolver,
-                cookies = cookies
+                method = "GET",
+                requestCallBack = { capturedHtml.get() != null }
             )
-            Log.d(TAG, "tryWebViewBypass response: code=${response.code}, url=${response.url}, bodyLen=${response.text.length}")
-
-            val doc = response.document
-            val hasSources = doc.select("video#player source[src*=/kdrive/]").isNotEmpty()
-            val hasDlLinks = doc.select("#animeDownloadLink a[href]").isNotEmpty()
-            Log.d(TAG, "tryWebViewBypass parsed: hasSources=$hasSources, hasDlLinks=$hasDlLinks")
-
-            if (hasSources || hasDlLinks) doc else null
         } catch (e: Exception) {
             Log.e(TAG, "tryWebViewBypass exception: ${e.message}")
-            null
         }
+
+        val html = capturedHtml.get()
+        Log.d(TAG, "tryWebViewBypass done: htmlLen=${html?.length ?: 0}")
+        if (html.isNullOrEmpty()) return null
+
+        val doc = Jsoup.parse(html, url)
+        val hasSources = doc.select("video#player source[src*=/kdrive/]").isNotEmpty()
+        val hasDlLinks = doc.select("#animeDownloadLink a[href]").isNotEmpty()
+        Log.d(TAG, "tryWebViewBypass parsed: hasSources=$hasSources, hasDlLinks=$hasDlLinks")
+
+        return if (hasSources || hasDlLinks) doc else null
     }
 
     private suspend fun loadFixedExtractor(
