@@ -364,7 +364,7 @@ class Kuramanime : MainAPI() {
      * Setelah `dl=1`, Dropbox akan redirect ke `dl.dropboxusercontent.com/...` direct file.
      * Player CloudStream bisa langsung handle URL final tersebut sebagai VIDEO.
      */
-    private fun handleDropbox(
+    private suspend fun handleDropbox(
         url: String,
         quality: String,
         callback: (ExtractorLink) -> Unit
