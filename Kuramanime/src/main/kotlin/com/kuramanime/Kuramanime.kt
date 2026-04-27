@@ -208,119 +208,100 @@ class Kuramanime : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        // Step 1: Initial GET — kemungkinan dapat halaman v1 (decoy)
+        // ============================================================
+        // FAKTA TEKNIS (terkonfirmasi via inspeksi network + JS):
+        // ============================================================
+        // 1. Halaman v1 (decoy) di-render saat GET awal — section
+        //    #animeDownloadLink berisi <span class="reload-error">.
+        // 2. Bypass mengharuskan POST ke URL yang sama dengan query
+        //    `?Ub3BzhijicHXZdv=<URL_TOKEN>&C2XAPerzX1BM7V9=kuramadrive&page=1`
+        //    + body `authorization=<COMPUTED_TOKEN>` (form-urlencoded).
+        // 3. URL_TOKEN didapat dari GET /assets/Ks6sqSgloPTlHMl.txt
+        //    dengan header x-fuck-id (BISA direplikasi native).
+        // 4. COMPUTED_TOKEN di-generate client-side oleh leviathan.js
+        //    yang heavy-obfuscated → TIDAK BISA direplikasi native.
+        //    Token ini SESSION-SCOPED (tetap sama selama session aktif).
+        // 5. Response v2 HTML berisi:
+        //    - <video><source>...</source></video> dengan 3 quality MP4
+        //      di rotating R2 domain (anisphia/asuna/amiya/iino/chisato/
+        //      kitasan/komari/horikita).my.id/kdrive/<hash>/...mp4
+        //    - <div id="animeDownloadLink"> dengan link kdrive/dropbox/dll.
+        //
+        // STRATEGI: WebView wajib karena harus eksekusi leviathan.js.
+        // ============================================================
+
         val initialResponse = app.get(data, headers = commonHeaders)
         var document = initialResponse.document
 
-        // Step 2: Detect halaman decoy via DOM struktur.
-        val isDecoy = document.select("#animeDownloadLink .reload-error").isNotEmpty() ||
-            document.select("#animeDownloadLink a[href]").isEmpty()
+        // Detect halaman decoy berdasarkan struktur DOM:
+        // - v1 decoy: #animeDownloadLink berisi .reload-error span (kosong dari <a>)
+        // - v2 real:  #animeDownloadLink berisi <h6>+<a> bergantian, +
+        //             <video#player> punya >=1 <source> dengan src berisi /kdrive/
+        val isDecoy = document.select("#animeDownloadLink a[href]").isEmpty() ||
+            document.select("video#player source[src*=/kdrive/]").isEmpty()
         Log.d(TAG, "loadLinks: data=$data, isDecoy=$isDecoy")
 
-        var streamCaptured = false
-
         if (isDecoy) {
-            // Strategi 1: Capture stream URL (m3u8 atau direct video) dari traffic WebView.
-            // Pattern Idlix yang terbukti work: WebView load page, leviathan.js eksekusi,
-            // m3u8/video URL ke-fire saat player init → kita intercept URL-nya.
-            try {
-                val streamResolver = WebViewResolver(
-                    interceptUrl = Regex("""\.m3u8(\?|$)|kuramadrive\.com/k(drive|turbo)/[a-zA-Z0-9_\-]+(/|\?|$)|r2\.cloudflarestorage\.com"""),
-                    additionalUrls = listOf(Regex("""kuramadrive\.com|cloudflarestorage""")),
-                    userAgent = userAgent,
-                    useOkhttp = false,
-                    timeout = 30_000L
-                )
-                val streamResp = app.get(
-                    data,
-                    headers = commonHeaders,
-                    interceptor = streamResolver,
-                    cookies = initialResponse.cookies
-                )
-                val streamUrl = streamResp.url
-                Log.d(TAG, "stream WebView: code=${streamResp.code}, url=$streamUrl")
-
-                if (streamUrl.isNotBlank() && streamUrl != data && (
-                        streamUrl.contains(".m3u8") ||
-                            streamUrl.contains("kuramadrive.com/k") ||
-                            streamUrl.contains("cloudflarestorage.com")
-                        )) {
-                    val type = when {
-                        streamUrl.contains(".m3u8") -> ExtractorLinkType.M3U8
-                        else -> ExtractorLinkType.VIDEO
-                    }
-                    callback.invoke(
-                        newExtractorLink(name, "Kuramadrive", streamUrl, type) {
-                            this.referer = mainUrl
-                            this.quality = Qualities.Unknown.value
-                        }
-                    )
-                    streamCaptured = true
-                    Log.d(TAG, "stream captured: $streamUrl")
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "stream WebView failed: ${e.message}")
-            }
-
-            // Strategi 2: Capture v2 HTML untuk download links section.
-            try {
-                val v2Resolver = WebViewResolver(
-                    interceptUrl = Regex("""/anime/\d+/[^/]+/episode/\d+\?[^"']*page=\d+"""),
-                    userAgent = userAgent,
-                    useOkhttp = false,
-                    timeout = 25_000L
-                )
-                val v2Resp = app.get(
-                    data,
-                    headers = commonHeaders,
-                    interceptor = v2Resolver,
-                    cookies = initialResponse.cookies
-                )
-                val webDoc = v2Resp.document
-                val linkCount = webDoc.select("#animeDownloadLink a[href]").size
-                Log.d(TAG, "v2 WebView: code=${v2Resp.code}, bodyLen=${v2Resp.text.length}, links=$linkCount")
-                if (linkCount > 0) {
-                    document = webDoc
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "v2 WebView failed: ${e.message}")
+            // Bypass via WebView. Regex match request response yang membawa v2 HTML
+            // (POST ke episode URL dengan query token + page=N). WebView load page,
+            // leviathan.js execute → POST fire → kita intercept response.
+            //
+            // Catatan: jika WebViewResolver di environment ini cuma capture navigation
+            // (bukan XHR), regex tetap perlu dicoba — match XHR atau navigation
+            // sama-sama akan return v2 HTML.
+            val v2Doc = tryWebViewBypass(data, initialResponse.cookies)
+            if (v2Doc != null) {
+                document = v2Doc
+                Log.d(TAG, "WebView bypass success")
+            } else {
+                Log.d(TAG, "WebView bypass failed — falling back to v1 doc (no links expected)")
             }
         }
 
-        // Step 4: Extract video player URL dari document (kalau ada).
-        val player = document.selectFirst("video#player")
-        val directLink = player?.attr("src").orEmpty()
-        if (directLink.contains("r2.cloudflarestorage.com")) {
+        // ============================================================
+        // EXTRACT STREAMS dari <source> elements (v2 punya 3 quality)
+        // ============================================================
+        // Pattern domain: rotating *.my.id/kdrive/<hash>/Filename-XXXp.mp4
+        // Contoh: https://iino.my.id/kdrive/l48Ep4svpECT/Kuramanime-TOBATLR-04-720p.mp4?lud=...&pid=...&sid=...
+        // URL ini sudah DIRECT — gak perlu di-extract lagi, langsung emit sebagai VIDEO.
+        var streamCount = 0
+        document.select("video#player source").forEach { source ->
+            val src = source.attr("src")
+            if (src.isBlank() || !src.contains("/kdrive/")) return@forEach
+
+            val size = source.attr("size") // "720", "480", "360"
+            val qualityLabel = if (size.isNotBlank()) "${size}p" else "Auto"
+            val q = qualityLabel.fixQuality()
+
             callback.invoke(
                 newExtractorLink(
                     name,
-                    "Kuramadrive R2",
-                    directLink,
+                    "Kuramadrive Stream - $qualityLabel",
+                    src,
                     ExtractorLinkType.VIDEO
                 ) {
                     this.referer = mainUrl
-                    this.quality = Qualities.Unknown.value
+                    this.quality = q
                 }
             )
-            streamCaptured = true
+            streamCount++
         }
-        val hlsSrc = player?.attr("data-hls-src").orEmpty()
+
+        // HLS source (alternative — kadang ada untuk stream live/long anime)
+        val hlsSrc = document.selectFirst("video#player")?.attr("data-hls-src").orEmpty()
         if (hlsSrc.isNotBlank() && hlsSrc.startsWith("http")) {
             callback.invoke(
-                newExtractorLink(
-                    name,
-                    "Kuramadrive HLS",
-                    hlsSrc,
-                    ExtractorLinkType.M3U8
-                ) {
+                newExtractorLink(name, "Kuramadrive HLS", hlsSrc, ExtractorLinkType.M3U8) {
                     this.referer = mainUrl
                     this.quality = Qualities.Unknown.value
                 }
             )
-            streamCaptured = true
+            streamCount++
         }
 
-        // Step 5: Download Links — iterasi <h6> + <a> bergantian.
+        // ============================================================
+        // EXTRACT DOWNLOAD LINKS dari #animeDownloadLink
+        // ============================================================
         val downloadSection = document.selectFirst("div#animeDownloadLink")
         var currentQuality = "Unknown"
         var dlCount = 0
@@ -337,14 +318,10 @@ class Kuramanime : MainAPI() {
                                 handleDropbox(url, currentQuality, callback)
                             }
                             url.contains("mypikpak.com") -> {
-                                // Skip — butuh auth
+                                // Skip — butuh auth login
                             }
                             else -> loadFixedExtractor(
-                                url,
-                                currentQuality,
-                                mainUrl,
-                                subtitleCallback,
-                                callback
+                                url, currentQuality, mainUrl, subtitleCallback, callback
                             )
                         }
                     }
@@ -352,8 +329,61 @@ class Kuramanime : MainAPI() {
             }
         }
 
-        Log.d(TAG, "loadLinks done: streamCaptured=$streamCaptured, dlLinks=$dlCount")
-        return true
+        Log.d(TAG, "loadLinks done: streams=$streamCount, dlLinks=$dlCount")
+        return streamCount > 0 || dlCount > 0
+    }
+
+    /**
+     * Bypass v1 decoy → v2 real page menggunakan WebViewResolver.
+     *
+     * Kuramanime memakai obfuscated `leviathan.js` yang generate body
+     * `authorization=...` untuk POST final. Tidak feasible direplikasi
+     * native, jadi WebView eksekusi JS-nya.
+     *
+     * Regex match POST URL pattern (XHR yang bawa v2 HTML response).
+     * Jika WebViewResolver berhasil capture, response body = v2 HTML.
+     */
+    private suspend fun tryWebViewBypass(
+        url: String,
+        cookies: Map<String, String>
+    ): org.jsoup.nodes.Document? {
+        return try {
+            val resolver = WebViewResolver(
+                // Match URL yang akan return v2 HTML — POST dengan query token+page=N.
+                // Pattern dynamic key (Ub3BzhijicHXZdv, C2XAPerzX1BM7V9) sudah ditangani
+                // dengan match `page=\d+` yang stabil.
+                interceptUrl = Regex("""/anime/\d+/[^/]+/episode/\d+\?[^"'\s]*page=\d+"""),
+                // Allow request lain juga (hindari resolver block resource yang JS butuh)
+                additionalUrls = listOf(
+                    Regex("""leviathan\.js"""),
+                    Regex("""check-episode"""),
+                    Regex("""Ks6sqSgloPTlHMl\.txt"""),
+                    // Rotating R2 stream domains — kalau player auto-fetch metadata
+                    Regex("""(anisphia|asuna|amiya|iino|chisato|kitasan|komari|horikita)\.my\.id/kdrive/""")
+                ),
+                userAgent = userAgent,
+                useOkhttp = false,
+                timeout = 30_000L
+            )
+
+            val response = app.get(
+                url,
+                headers = commonHeaders,
+                interceptor = resolver,
+                cookies = cookies
+            )
+            Log.d(TAG, "tryWebViewBypass response: code=${response.code}, url=${response.url}, bodyLen=${response.text.length}")
+
+            val doc = response.document
+            val hasSources = doc.select("video#player source[src*=/kdrive/]").isNotEmpty()
+            val hasDlLinks = doc.select("#animeDownloadLink a[href]").isNotEmpty()
+            Log.d(TAG, "tryWebViewBypass parsed: hasSources=$hasSources, hasDlLinks=$hasDlLinks")
+
+            if (hasSources || hasDlLinks) doc else null
+        } catch (e: Exception) {
+            Log.e(TAG, "tryWebViewBypass exception: ${e.message}")
+            null
+        }
     }
 
     private suspend fun loadFixedExtractor(
