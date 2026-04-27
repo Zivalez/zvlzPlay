@@ -174,14 +174,13 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuramanime.png",
-        "fileHash": "sha256-16c37a0f5401b011f4e7b011a7a18fdaf6f1acb88b871dc19af249ae4f89da85",
+        "fileHash": "sha256-c010b0cd6a3f29d26e3f346d9ee43894d973a691b0996adcfeffb8801fbad242",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 34121,
         "status": 3,
         "language": "id",
         "authors": [
-            "TeKuma25",
             "Zivalez"
         ],
         "tvTypes": [
@@ -190,9 +189,9 @@
             "Donghua",
             "OVA"
         ],
-        "version": 8,
+        "version": 9,
         "internalName": "Kuramanime",
-        "description": "Nonton Anime, Donghua, Movie Sub Indo Terlengkap & Terbaru",
+        "description": "Nonton Anime, Donghua, Movie Sub Indo Terlengkap, Terbaru & Terupdate",
         "url": "https://cloudstream.zvlz.my.id/builds/Kuramanime.cs3",
         "name": "Kuramanime"
     },
