@@ -174,10 +174,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuramanime.png",
-        "fileHash": "sha256-7a61fe1bbeb1191382598bc14d24975e54d49474ff29e12303af19c0ccd56d5d",
+        "fileHash": "sha256-1c43ac4da7618acbe244f83f3b52e4de555aaf71413a7a23bd8819a2464360da",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 33748,
+        "fileSize": 32762,
         "status": 3,
         "language": "id",
         "authors": [
