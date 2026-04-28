@@ -23,7 +23,7 @@ version = 9
 
 cloudstream {
     language = "id"
-    description = "Nonton Anime, Donghua, Movie Sub Indo Terlengkap, Terbaru & Terupdate"
+    description = "Anime, Donghua, Movie Sub Indo Terlengkap & Terupdate"
     authors = listOf("Zivalez")
 
     /**
@@ -33,7 +33,7 @@ cloudstream {
      * 2: Slow
      * 3: Beta only
      * */
-    status = 3
+    status = 1
     tvTypes = listOf(
         "AnimeMovie",
         "Anime",

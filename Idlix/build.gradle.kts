@@ -36,7 +36,7 @@ version = 10
 cloudstream {
     // metadata
     language = "id"
-    description = "Nonton Film Streaming Movie Idlix Subtitle Indonesia"
+    description = "Nonton Film & Series Streaming Idlix Subtitle Indonesia"
     authors = listOf("Hexated", "Phisher98", "Asm0d3usX", "Zivalez")
     status = 1
     tvTypes = listOf("Movie", "TvSeries", "AsianDrama", "Anime")

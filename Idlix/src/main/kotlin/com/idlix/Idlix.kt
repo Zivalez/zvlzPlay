@@ -11,6 +11,7 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addTMDbId
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.MainAPI
 import com.lagradost.cloudstream3.MainPageRequest
+import com.lagradost.cloudstream3.Qualities
 import com.lagradost.cloudstream3.Score
 import com.lagradost.cloudstream3.SearchQuality
 import com.lagradost.cloudstream3.SearchResponse
@@ -23,7 +24,6 @@ import com.lagradost.cloudstream3.app
 import com.lagradost.cloudstream3.base64Decode
 import com.lagradost.cloudstream3.getQualityFromString
 import com.lagradost.cloudstream3.mainPageOf
-import com.lagradost.cloudstream3.network.WebViewResolver
 import com.lagradost.cloudstream3.newEpisode
 import com.lagradost.cloudstream3.newHomePageResponse
 import com.lagradost.cloudstream3.newMovieLoadResponse
@@ -34,16 +34,10 @@ import com.lagradost.cloudstream3.toNewSearchResponseList
 import com.lagradost.cloudstream3.utils.AppUtils
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.ExtractorLink
-import com.lagradost.cloudstream3.utils.loadExtractor
+import com.lagradost.cloudstream3.utils.ExtractorLinkType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
-import java.security.MessageDigest
 import java.text.Normalizer
-import java.util.Base64
-import javax.crypto.Cipher
-import javax.crypto.spec.GCMParameterSpec
-import javax.crypto.spec.SecretKeySpec
 
 class Idlix : MainAPI() {
     override var mainUrl = base64Decode("aHR0cHM6Ly96MS5pZGxpeGt1LmNvbQ==")
@@ -317,113 +311,61 @@ class Idlix : MainAPI() {
         val contentId = parsed.id
         val contentType = parsed.type
 
-        val ts = System.currentTimeMillis()
-        val aclrRes = app.get("$mainUrl/pagead/ad_frame.js?_=$ts").text
-        val aclr = Regex("""__aclr\s*=\s*"([a-f0-9]+)"""")
-            .find(aclrRes)
-            ?.groupValues
-            ?.getOrNull(1)
+        // NEW FLOW: Token-based redemption system
+        // Step 1: Get play info with claim token
+        val playInfoUrl = when (contentType) {
+            "movie" -> "$mainUrl/api/watch/play-info/movie/$contentId"
+            "episode" -> "$mainUrl/api/watch/play-info/series/$contentId"
+            else -> return false
+        }
 
-        val challengeJson = """
-{
-  "contentType": "$contentType",
-  "contentId": "$contentId"${if (aclr != null) ",\n  \"clearance\": \"$aclr\"" else ""}
-}
-""".trimIndent()
+        val playInfo = app.get(
+            playInfoUrl,
+            headers = mapOf(
+                "accept" to "application/json",
+                "referer" to mainUrl,
+                "user-agent" to USER_AGENT,
+            )
+        ).parsedSafe<PlayInfoResponse>() ?: return false
 
-        val baseHeaders = mapOf(
-            "accept" to "*/*",
-            "content-type" to "application/json",
-            "origin" to mainUrl,
-            "referer" to mainUrl,
-            "user-agent" to USER_AGENT,
-        )
-
-        val challengeRes = app.post(
-            "$mainUrl/api/watch/challenge",
-            requestBody = challengeJson.toRequestBody("application/json".toMediaType()),
-            headers = baseHeaders
-        ).parsedSafe<ChallengeResponse>() ?: return false
-
-        val nonce = solvePow(challengeRes.challenge, challengeRes.difficulty)
-
-        val solveJson = """
-{
-  "challenge": "${challengeRes.challenge}",
-  "signature": "${challengeRes.signature}",
-  "nonce": $nonce
-}
-""".trimIndent()
-
-        val solveRes = app.post(
-            "$mainUrl/api/watch/solve",
-            requestBody = solveJson.toRequestBody("application/json".toMediaType()),
-            headers = baseHeaders
-        ).text
-
-        val json = JSONObject(solveRes)
-        val embedUrl = when {
-            json.has("embedUrl") -> json.optString("embedUrl")
-            json.has("url") -> json.optString("url")
-            else -> null
-        } ?: return false
-
-        val embedHtml = try {
-            app.get("$mainUrl$embedUrl", referer = mainUrl).text
-        } catch (_: Exception) {
+        if (playInfo.kind != "pentos" || playInfo.claim.isNullOrEmpty()) {
             return false
         }
 
-        val dataA = Regex("""data-a=\"([0-9a-fA-F]+)\"""").find(embedHtml)?.groupValues?.getOrNull(1)
-        val dataP = Regex("""data-p=\"([^\"]+)\"""").find(embedHtml)?.groupValues?.getOrNull(1)
-        val dataV = Regex("""data-v=\"([^\"]+)\"""").find(embedHtml)?.groupValues?.getOrNull(1)
-        val cssHex = Regex("""--_[0-9a-fA-F]+:\\s*\"?([0-9a-fA-F]{32})\"?""").find(embedHtml)?.groupValues?.getOrNull(1)
+        // Step 2: Redeem claim token to get stream manifest URL
+        val redeemUrl = playInfo.redeemUrl ?: "https://e2e.majorplay.net/api/play"
 
-        if (dataA != null && dataP != null && dataV != null && cssHex != null) {
-            try {
-                val keyHex = dataA + cssHex
-                val keyBytes = keyHex.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
-                val ctBytes = Base64.getDecoder().decode(dataP)
-                val ivBytes = Base64.getDecoder().decode(dataV)
-                val cipher = Cipher.getInstance("AES/GCM/NoPadding")
-                val keySpec = SecretKeySpec(keyBytes, "AES")
-                val gcmSpec = GCMParameterSpec(128, ivBytes)
-                cipher.init(Cipher.DECRYPT_MODE, keySpec, gcmSpec)
-                val plain = cipher.doFinal(ctBytes)
-                val finalUrl = String(plain, Charsets.UTF_8)
-                loadExtractor(finalUrl, mainUrl, subtitleCallback, callback)
-                return true
-            } catch (e: Exception) {
-                // fallback to old resolver
-            }
+        val redeemBody = """{"claim":"${playInfo.claim}"}""".toRequestBody("text/plain".toMediaType())
+
+        val redeemRes = app.post(
+            redeemUrl,
+            requestBody = redeemBody,
+            headers = mapOf(
+                "content-type" to "text/plain",
+                "referer" to mainUrl,
+                "user-agent" to USER_AGENT,
+            )
+        ).parsedSafe<RedeemResponse>() ?: return false
+
+        if (redeemRes.code != "ok" || redeemRes.url.isNullOrEmpty()) {
+            return false
         }
 
-        // fallback to previous resolver
-        val iframeResolver = WebViewResolver(
-            interceptUrl = Regex("""/video/"""),
-            additionalUrls = listOf(Regex("""/video/""")),
-            useOkhttp = false,
-            timeout = 15_000L
+        // Step 3: Return HLS M3U8 as extractor link
+        // The URL points to an M3U8 manifest (despite .json extension in some cases)
+        callback.invoke(
+            newExtractorLink(
+                source = name,
+                name = "Idlix ${playInfo.title ?: "Auto"}",
+                url = redeemRes.url,
+                type = ExtractorLinkType.M3U8
+            ) {
+                this.referer = mainUrl
+                this.quality = Qualities.Unknown.value
+            }
         )
 
-        val finalUrl = app.get("$mainUrl$embedUrl", interceptor = iframeResolver).url
-        loadExtractor(finalUrl, mainUrl, subtitleCallback, callback)
         return true
-    }
-
-    private fun solvePow(challenge: String, difficulty: Int): Int {
-        val target = "0".repeat(difficulty)
-        var nonce = 0
-        while (true) {
-            val hash = sha256(challenge + nonce)
-            if (hash.startsWith(target)) return nonce
-            nonce++
-        }
-    }
-
-    private fun sha256(input: String): String {
-        val bytes = MessageDigest.getInstance("SHA-256").digest(input.toByteArray())
-        return bytes.joinToString("") { "%02x".format(it) }
     }
 }
 

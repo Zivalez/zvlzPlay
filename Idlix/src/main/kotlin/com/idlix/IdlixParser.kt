@@ -154,3 +154,27 @@ data class LoadData(
     val id: String,
     val type: String // "movie" or "episode"
 )
+
+// NEW: Token redemption flow data classes
+data class PlayInfoResponse(
+    val kind: String? = null,
+    val claim: String? = null,
+    val redeemUrl: String? = null,
+    val videoId: String? = null,
+    val title: String? = null,
+    val durationSec: Int? = null
+)
+
+data class RedeemResponse(
+    val code: String? = null,
+    val url: String? = null,
+    val expiresAt: Long? = null,
+    val videoId: String? = null,
+    val subtitles: List<SubtitleInfo>? = null
+)
+
+data class SubtitleInfo(
+    val lang: String? = null,
+    val url: String? = null,
+    val label: String? = null
+)
