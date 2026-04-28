@@ -108,10 +108,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/idlix.png",
-        "fileHash": "sha256-f545823779e3b6e5b91545793f62f416b220d3d8cd14441afcba7f533d1fec41",
+        "fileHash": "sha256-070831749eb7a4035fee66e7606bfe4b2bedbd599470ecd324f5be92dea74230",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 54306,
+        "fileSize": 50685,
         "status": 1,
         "language": "id",
         "authors": [
@@ -128,7 +128,7 @@
         ],
         "version": 10,
         "internalName": "Idlix",
-        "description": "Nonton Film Streaming Movie Idlix Subtitle Indonesia",
+        "description": "Nonton Film & Series Streaming Idlix Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Idlix.cs3",
         "name": "Idlix"
     },
@@ -178,7 +178,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 34121,
-        "status": 3,
+        "status": 1,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -191,7 +191,7 @@
         ],
         "version": 9,
         "internalName": "Kuramanime",
-        "description": "Nonton Anime, Donghua, Movie Sub Indo Terlengkap, Terbaru & Terupdate",
+        "description": "Anime, Donghua, Movie Sub Indo Terlengkap & Terupdate",
         "url": "https://cloudstream.zvlz.my.id/builds/Kuramanime.cs3",
         "name": "Kuramanime"
     },
