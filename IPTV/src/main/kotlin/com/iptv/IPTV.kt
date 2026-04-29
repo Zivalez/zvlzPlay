@@ -96,8 +96,8 @@ class IPTV : MainAPI() {
     // order shown to the user. Matched against parsed channel names with
     // tolerant comparison (spaces/dots/case ignored).
     private val popularNames = listOf(
-        "Indosiar", "SCTV", "RCTI", "Trans 7", "Trans TV",
-        "GTV", "MNC TV", "ANTV", "iNews", "tvOne",
+        "Indosiar", "SCTV", "MNC TV", "Trans 7", "Trans TV",
+        "GTV", "RCTI", "RCTI HD", "ANTV", "iNews", "tvOne",
         "Kompas TV", "NET.", "Metro TV", "RTV", "MDTV"
     )
 
