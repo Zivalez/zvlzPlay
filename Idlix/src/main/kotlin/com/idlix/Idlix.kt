@@ -413,29 +413,59 @@ class Idlix : MainAPI() {
         val script = """
             (function() {
                 try {
-                    // Monitor for redirect to rm358.com
-                    var originalOpen = window.open;
                     var capturedRedirect = null;
-                    window.open = function(url) {
-                        if (url && url.includes('rm358.com')) {
+
+                    // Monitor window.open for new tab
+                    var originalOpen = window.open;
+                    window.open = function(url, target, features) {
+                        if (url && (url.includes('rm358.com') || url.includes('rm358'))) {
                             capturedRedirect = url;
+                            return null; // Prevent actual open to capture URL
                         }
-                        return originalOpen.apply(this, arguments);
+                        return originalOpen.call(window, url, target, features);
                     };
 
-                    // Find and click the play button
-                    var playButton = document.querySelector('button[aria-label*="Play"], button.play, .play-btn');
-                    if (playButton) {
-                        playButton.click();
-                        // Wait a bit for redirect to happen
-                        setTimeout(function() {
-                            if (capturedRedirect) {
-                                return capturedRedirect;
+                    // Wait for page to load then try to find and click play button
+                    setTimeout(function() {
+                        // Try specific selector for Idlix play button
+                        var playButton = document.querySelector('main button');
+                        if (playButton) {
+                            playButton.click();
+                            return 'clicked_main_button';
+                        }
+
+                        // Fallback to other selectors
+                        var selectors = [
+                            'button img',
+                            'button[aria-label*="Play"]',
+                            'button[aria-label*="play"]',
+                            '.play-btn',
+                            'video'
+                        ];
+
+                        for (var i = 0; i < selectors.length; i++) {
+                            var element = document.querySelector(selectors[i]);
+                            if (element) {
+                                if (element.tagName === 'VIDEO') {
+                                    return element.src || 'video_found_no_src';
+                                } else {
+                                    element.click();
+                                    return 'clicked:' + selectors[i];
+                                }
                             }
-                        }, 2000);
-                        return 'clicked';
-                    }
-                    return 'not_found';
+                        }
+
+                        return 'not_found';
+                    }, 3000);
+
+                    // Check if redirect was captured
+                    setTimeout(function() {
+                        if (capturedRedirect) {
+                            return capturedRedirect;
+                        }
+                    }, 5000);
+
+                    return 'waiting';
                 } catch(e) { return 'ERR:' + e.message; }
             })()
         """.trimIndent()
