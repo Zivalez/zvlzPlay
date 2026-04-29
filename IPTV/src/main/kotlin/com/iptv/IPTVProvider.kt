@@ -41,7 +41,7 @@ class IPTVProvider : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val apiUrl = request.data
-        val response = app.get(apiUrl).text
+        val response = app.get(apiUrl).textLarge
         val channels = parseChannelsFromJson(response)
         
         return newHomePageResponse(
@@ -98,7 +98,7 @@ class IPTVProvider : MainAPI() {
     override suspend fun load(url: String): LoadResponse {
         val channelId = url
         val apiUrl = "$mainUrl/api/channels.json"
-        val response = app.get(apiUrl).text
+        val response = app.get(apiUrl).textLarge
         
         // Find channel data from JSON
         val channelData = findChannelData(response, channelId)
@@ -186,7 +186,7 @@ class IPTVProvider : MainAPI() {
             callback: (ExtractorLink) -> Unit
         ) {
             // URL is the streams API endpoint
-            val response = app.get(url).text
+            val response = app.get(url).textLarge
             val streams = parseStreamsFromJson(response)
             
             streams.forEach { stream ->
