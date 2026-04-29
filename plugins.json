@@ -134,10 +134,10 @@
     },
     {
         "iconUrl": "https://www.google.com/s2/favicons?domain=iptv-org.github.io&sz=%size%",
-        "fileHash": "sha256-f11c94428658d43f60c441c3f03a347676ce4da6be11659cf74e55c678969d7d",
+        "fileHash": "sha256-7d84bf712524eca0267bdb6280b53fcde98665fa12f8693bbc5ded8bc9fb72f0",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 13185,
+        "fileSize": 14160,
         "status": 3,
         "authors": [
             "Zivalez"
@@ -150,7 +150,7 @@
         "description": "Watch Indonesian TV channels via IPTV",
         "url": "https://cloudstream.zvlz.my.id/builds/IPTV.cs3",
         "name": "IPTV",
-        "jarHash": "sha256-62c2358762785ebcca7208c7cf1bc24c334728bbe80a9d4b47ce8758b163fee4"
+        "jarHash": "sha256-16491e51877ace142b82f940cb38668c1aaeb85c2a5c9462984af0d40c60a1bc"
     },
     {
         "iconUrl": "https://cdn.kingbokep.video/favicon-32x32.png",
