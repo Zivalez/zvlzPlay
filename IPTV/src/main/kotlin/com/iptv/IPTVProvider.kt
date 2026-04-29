@@ -10,7 +10,6 @@ import com.lagradost.cloudstream3.SearchResponse
 import com.lagradost.cloudstream3.SubtitleFile
 import com.lagradost.cloudstream3.TvType
 import com.lagradost.cloudstream3.app
-import com.lagradost.cloudstream3.fixUrl
 import com.lagradost.cloudstream3.mainPageOf
 import com.lagradost.cloudstream3.newHomePageResponse
 import com.lagradost.cloudstream3.newLiveSearchResponse
@@ -21,7 +20,23 @@ import com.lagradost.cloudstream3.utils.ExtractorLinkType
 import com.lagradost.cloudstream3.utils.getQualityFromName
 import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
-import java.lang.RuntimeException
+
+// Data classes for iptv-org API responses
+data class Channel(
+    val id: String? = null,
+    val name: String? = null,
+    val country: String? = null,
+    val logo: String? = null,
+    val categories: List<String>? = null
+)
+
+data class Stream(
+    val channel: String? = null,
+    val url: String? = null,
+    val quality: String? = null,
+    val referrer: String? = null,
+    val user_agent: String? = null
+)
 
 class IPTVProvider : MainAPI() {
     override var mainUrl = "https://iptv-org.github.io"
@@ -41,14 +56,25 @@ class IPTVProvider : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val apiUrl = request.data
-        val response = app.get(apiUrl).documentLarge
-        val channels = parseChannelsFromJson(response)
+        val channels = app.get(apiUrl).parsedSafe<List<Channel>>() ?: emptyList()
+        val filteredChannels = channels.filter { it.country == "ID" }
+        
+        val searchResponses = filteredChannels.mapNotNull { channel ->
+            if (!channel.id.isNullOrEmpty() && !channel.name.isNullOrEmpty()) {
+                newLiveSearchResponse(
+                    channel.name!!,
+                    channel.id!!,
+                    TvType.Live,
+                    fix = false
+                ) { posterUrl = channel.logo ?: "" }
+            } else null
+        }
         
         return newHomePageResponse(
             listOf(
                 HomePageList(
                     request.name,
-                    channels,
+                    searchResponses,
                     isHorizontalImages = isHorizontal
                 )
             ),
@@ -56,61 +82,21 @@ class IPTVProvider : MainAPI() {
         )
     }
 
-    private fun parseChannelsFromJson(json: String): List<LiveSearchResponse> {
-        // Parse JSON response from iptv-org API
-        // Format: [{"id":"ChannelID.id","name":"Channel Name","country":"ID","logo":"url",...}]
-        val lines = json.split("\n")
-        val channels = mutableListOf<LiveSearchResponse>()
-        
-        for (line in lines) {
-            if (line.contains("\"id\"") && line.contains("\"country\":\"ID\"")) {
-                try {
-                    val id = extractJsonValue(line, "id")
-                    val name = extractJsonValue(line, "name")
-                    val logo = extractJsonValue(line, "logo") ?: ""
-                    
-                    if (!id.isNullOrEmpty() && !name.isNullOrEmpty()) {
-                        channels.add(
-                            newLiveSearchResponse(
-                                name!!,
-                                id!!,
-                                TvType.Live,
-                                fix = false
-                            ) { posterUrl = logo }
-                        )
-                    }
-                } catch (e: Exception) {
-                    // Skip invalid entries
-                }
-            }
-        }
-        
-        return channels
-    }
-
-    private fun extractJsonValue(line: String, key: String): String? {
-        val pattern = "\"$key\":\"([^\"]+)\""
-        val regex = Regex(pattern)
-        val match = regex.find(line)
-        return match?.groupValues?.get(1)
-    }
-
     override suspend fun load(url: String): LoadResponse {
         val channelId = url
         val apiUrl = "$mainUrl/api/channels.json"
-        val response = app.get(apiUrl).documentLarge
+        val channels = app.get(apiUrl).parsedSafe<List<Channel>>() ?: emptyList()
         
-        // Find channel data from JSON
-        val channelData = findChannelData(response, channelId)
+        val channel = channels.find { it.id == channelId }
         
-        if (channelData == null) {
+        if (channel == null) {
             throw RuntimeException("Channel not found: $channelId")
         }
         
-        val name = channelData["name"] ?: "Unknown Channel"
-        val logo = channelData["logo"] ?: ""
-        val country = channelData["country"] ?: ""
-        val categories = channelData["categories"] ?: ""
+        val name = channel.name ?: "Unknown Channel"
+        val logo = channel.logo ?: ""
+        val country = channel.country ?: ""
+        val categories = channel.categories?.joinToString(", ") ?: ""
         
         val tags = listOfNotNull(
             if (country.isNotEmpty()) "Country: $country" else null,
@@ -130,31 +116,22 @@ class IPTVProvider : MainAPI() {
         }
     }
 
-    private fun findChannelData(json: String, channelId: String): Map<String, String>? {
-        val lines = json.split("\n")
-        for (line in lines) {
-            if (line.contains("\"id\":\"$channelId\"")) {
-                val data = mutableMapOf<String, String>()
-                data["id"] = extractJsonValue(line, "id") ?: ""
-                data["name"] = extractJsonValue(line, "name") ?: ""
-                data["logo"] = extractJsonValue(line, "logo") ?: ""
-                data["country"] = extractJsonValue(line, "country") ?: ""
-                data["categories"] = extractJsonValue(line, "categories") ?: ""
-                return data
-            }
-        }
-        return null
-    }
-
     override suspend fun search(query: String): List<SearchResponse>? {
         val apiUrl = "$mainUrl/api/channels.json?country=ID"
-        val response = app.get(apiUrl).documentLarge
-        val channels = parseChannelsFromJson(response)
+        val channels = app.get(apiUrl).parsedSafe<List<Channel>>() ?: emptyList()
         
-        // Filter by query
         return channels.filter { 
-            it.name.contains(query, ignoreCase = true) 
-        }.map { it as SearchResponse }
+            !it.name.isNullOrEmpty() && it.name!!.contains(query, ignoreCase = true)
+        }.mapNotNull { channel ->
+            if (!channel.id.isNullOrEmpty()) {
+                newLiveSearchResponse(
+                    channel.name!!,
+                    channel.id!!,
+                    TvType.Live,
+                    fix = false
+                ) { posterUrl = channel.logo ?: "" }
+            } else null
+        }
     }
 
     override suspend fun loadLinks(
@@ -171,26 +148,16 @@ class IPTVProvider : MainAPI() {
         override val name = "IPTV"
         override val requiresReferer = false
 
-        data class StreamData(
-            val channel: String?,
-            val url: String?,
-            val quality: String?,
-            val referrer: String?,
-            val user_agent: String?
-        )
-
         override suspend fun getUrl(
             url: String,
             referer: String?,
             subtitleCallback: (SubtitleFile) -> Unit,
             callback: (ExtractorLink) -> Unit
         ) {
-            // URL is the streams API endpoint
-            val response = app.get(url).documentLarge
-            val streams = parseStreamsFromJson(response)
+            val streams = app.get(url).parsedSafe<List<Stream>>() ?: emptyList()
             
             streams.forEach { stream ->
-                if (stream.url != null && stream.url.isNotEmpty()) {
+                if (!stream.url.isNullOrEmpty()) {
                     val quality = getQualityFromName(stream.quality ?: "SD")
                     callback.invoke(
                         newExtractorLink(
@@ -201,45 +168,13 @@ class IPTVProvider : MainAPI() {
                             this.type = ExtractorLinkType.M3U8
                             this.quality = quality
                             this.referer = stream.referrer ?: ""
-                            if (stream.user_agent != null && stream.user_agent.isNotEmpty()) {
+                            if (!stream.user_agent.isNullOrEmpty()) {
                                 this.headers = mapOf("User-Agent" to stream.user_agent)
                             }
                         }
                     )
                 }
             }
-        }
-
-        private fun parseStreamsFromJson(json: String): List<StreamData> {
-            val lines = json.split("\n")
-            val streams = mutableListOf<StreamData>()
-            
-            for (line in lines) {
-                if (line.contains("\"url\"")) {
-                    try {
-                        val channel = extractJsonValue(line, "channel")
-                        val url = extractJsonValue(line, "url")
-                        val quality = extractJsonValue(line, "quality")
-                        val referrer = extractJsonValue(line, "referrer")
-                        val userAgent = extractJsonValue(line, "user_agent")
-                        
-                        if (url != null && url.isNotEmpty()) {
-                            streams.add(StreamData(channel, url, quality, referrer, userAgent))
-                        }
-                    } catch (e: Exception) {
-                        // Skip invalid entries
-                    }
-                }
-            }
-            
-            return streams
-        }
-
-        private fun extractJsonValue(line: String, key: String): String? {
-            val pattern = "\"$key\":\"?([^\"]+)\"?"
-            val regex = Regex(pattern)
-            val match = regex.find(line)
-            return match?.groupValues?.get(1)
         }
     }
 }
