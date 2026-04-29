@@ -1,6 +1,5 @@
 package com.iptv
 
-import android.util.Log
 import com.lagradost.cloudstream3.ErrorLoadingException
 import com.lagradost.cloudstream3.HomePageList
 import com.lagradost.cloudstream3.HomePageResponse
@@ -68,18 +67,18 @@ class IPTV : MainAPI() {
         val text = try {
             app.get(playlistUrl).text
         } catch (e: Exception) {
-            Log.e(TAG, "loadAll: failed to fetch playlist", e)
+            println("$TAG: loadAll: failed to fetch playlist - ${e.message}")
             return cache ?: emptyList()
         }
 
         val parsed = parseM3U(text)
         if (parsed.isEmpty()) {
-            Log.w(TAG, "loadAll: parser returned 0 channels (response size=${text.length})")
+            println("$TAG: loadAll: parser returned 0 channels (response size=${text.length})")
             return cache ?: emptyList()
         }
         cache = parsed
         cacheTime = now
-        Log.d(TAG, "loadAll: parsed ${parsed.size} channels")
+        println("$TAG: loadAll: parsed ${parsed.size} channels")
         return parsed
     }
 
@@ -172,7 +171,7 @@ class IPTV : MainAPI() {
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         val entry = runCatching { parseJson<IptvChannel>(data) }.getOrNull() ?: return false
-        Log.d(TAG, "loadLinks: name=${entry.name} url=${entry.url}")
+        println("$TAG: loadLinks: name=${entry.name} url=${entry.url}")
 
         val type = when {
             entry.url.contains(".mpd", ignoreCase = true) -> ExtractorLinkType.DASH
@@ -208,7 +207,7 @@ class IPTV : MainAPI() {
             .toList()
 
         if (lines.firstOrNull()?.startsWith("#EXTM3U", ignoreCase = true) != true) {
-            Log.w(TAG, "parseM3U: missing #EXTM3U header")
+            println("$TAG: parseM3U: missing #EXTM3U header")
             return emptyList()
         }
 
