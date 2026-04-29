@@ -396,7 +396,7 @@ class Idlix : MainAPI() {
                 name,
                 "Idlix Series (Redirect)",
                 redirectUrl,
-                ExtractorLinkType.REDIRECT
+                ExtractorLinkType.VIDEO
             ) {
                 this.referer = mainUrl
                 this.quality = Qualities.Unknown.value
@@ -413,10 +413,26 @@ class Idlix : MainAPI() {
         val script = """
             (function() {
                 try {
+                    // Monitor for redirect to rm358.com
+                    var originalOpen = window.open;
+                    var capturedRedirect = null;
+                    window.open = function(url) {
+                        if (url && url.includes('rm358.com')) {
+                            capturedRedirect = url;
+                        }
+                        return originalOpen.apply(this, arguments);
+                    };
+
                     // Find and click the play button
                     var playButton = document.querySelector('button[aria-label*="Play"], button.play, .play-btn');
                     if (playButton) {
                         playButton.click();
+                        // Wait a bit for redirect to happen
+                        setTimeout(function() {
+                            if (capturedRedirect) {
+                                return capturedRedirect;
+                            }
+                        }, 2000);
                         return 'clicked';
                     }
                     return 'not_found';
@@ -433,15 +449,11 @@ class Idlix : MainAPI() {
             scriptCallback = { result ->
                 callbackInvocations.incrementAndGet()
                 Log.d(TAG, "scriptCallback: $result")
-            },
-            requestCallBack = { request ->
-                val url = request.url.toString()
-                if (url.contains("rm358.com")) {
-                    Log.d(TAG, "requestCallBack: Captured redirect URL: $url")
-                    capturedUrl.set(url)
-                    true
-                } else {
-                    false
+                if (result != null && result != "null" && result != "clicked" && result != "not_found" && !result.startsWith("ERR:")) {
+                    if (result.contains("rm358.com")) {
+                        Log.d(TAG, "scriptCallback: Captured redirect URL: $result")
+                        capturedUrl.set(result)
+                    }
                 }
             },
             timeout = 30_000L
@@ -456,7 +468,8 @@ class Idlix : MainAPI() {
                     "Referer" to mainUrl,
                     "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
                 ),
-                method = "GET"
+                method = "GET",
+                requestCallBack = { capturedUrl.get() != null }
             )
         } catch (e: Exception) {
             Log.e(TAG, "tryWebViewBypass exception: ${e.message}")
