@@ -307,6 +307,8 @@ class Idlix : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
+        Log.d(TAG, "loadPentosLinks($kind): contentId=$contentId")
+
         // Step 1: Get play info with claim token
         val playInfoUrl = "$mainUrl/api/watch/play-info/$kind/$contentId"
 
@@ -317,10 +319,15 @@ class Idlix : MainAPI() {
                 "referer" to mainUrl,
                 "user-agent" to USER_AGENT,
             )
-        ).parsedSafe<PlayInfoResponse>() ?: return false
+        ).parsedSafe<PlayInfoResponse>()
+
+        if (playInfo == null) {
+            Log.e(TAG, "loadPentosLinks($kind): play-info parse failed: $playInfoUrl")
+            return false
+        }
 
         if (playInfo.kind != "pentos" || playInfo.claim.isNullOrEmpty()) {
-            Log.e(TAG, "loadPentosLinks($kind): invalid play-info response")
+            Log.e(TAG, "loadPentosLinks($kind): invalid play-info kind=${playInfo.kind} hasClaim=${!playInfo.claim.isNullOrEmpty()}")
             return false
         }
 
@@ -333,17 +340,27 @@ class Idlix : MainAPI() {
             requestBody = redeemBody,
             headers = mapOf(
                 "content-type" to "text/plain",
-                "referer" to mainUrl,
+                "origin" to mainUrl,
+                "referer" to "$mainUrl/",
                 "user-agent" to USER_AGENT,
             )
-        ).parsedSafe<RedeemResponse>() ?: return false
+        ).parsedSafe<RedeemResponse>()
 
-        if (redeemRes.code != "ok" || redeemRes.url.isNullOrEmpty()) {
-            Log.e(TAG, "loadPentosLinks($kind): invalid redeem response")
+        if (redeemRes == null) {
+            Log.e(TAG, "loadPentosLinks($kind): redeem parse failed at $redeemUrl")
             return false
         }
 
-        // Step 3: Return HLS M3U8 as extractor link
+        if (redeemRes.code != "ok" || redeemRes.url.isNullOrEmpty()) {
+            Log.e(TAG, "loadPentosLinks($kind): redeem error code=${redeemRes.code} url=${redeemRes.url}")
+            return false
+        }
+
+        Log.d(TAG, "loadPentosLinks($kind): success url=${redeemRes.url}")
+
+        // Step 3: Return HLS M3U8 as extractor link.
+        // The URL has .json extension but Content-Type is application/vnd.apple.mpegurl.
+        // Forward Origin & Referer so segment fetches on rotated CDNs (wiseacademia.asia, etc.) succeed.
         callback.invoke(
             newExtractorLink(
                 name,
@@ -351,14 +368,18 @@ class Idlix : MainAPI() {
                 redeemRes.url,
                 ExtractorLinkType.M3U8
             ) {
-                this.referer = mainUrl
+                this.referer = "$mainUrl/"
                 this.quality = Qualities.Unknown.value
+                this.headers = mapOf(
+                    "Origin" to mainUrl,
+                    "User-Agent" to USER_AGENT,
+                )
             }
         )
 
-        // Step 4: Forward subtitles if any
+        // Step 4: Forward subtitles if any (API uses `path`, fallback to `url`)
         redeemRes.subtitles?.forEach { sub ->
-            val subUrl = sub.url ?: return@forEach
+            val subUrl = sub.path ?: sub.url ?: return@forEach
             if (subUrl.isEmpty()) return@forEach
             subtitleCallback.invoke(
                 SubtitleFile(sub.label ?: sub.lang ?: "Unknown", subUrl)

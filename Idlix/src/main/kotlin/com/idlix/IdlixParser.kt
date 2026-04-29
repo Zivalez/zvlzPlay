@@ -179,5 +179,6 @@ data class RedeemResponse(
 data class SubtitleInfo(
     val lang: String? = null,
     val url: String? = null,
+    val path: String? = null,
     val label: String? = null
 )
