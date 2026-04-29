@@ -133,6 +133,26 @@
         "name": "Idlix"
     },
     {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=iptv-org.github.io&sz=%size%",
+        "fileHash": "sha256-f11c94428658d43f60c441c3f03a347676ce4da6be11659cf74e55c678969d7d",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 13185,
+        "status": 3,
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 1,
+        "internalName": "IPTV",
+        "description": "Watch Indonesian TV channels via IPTV",
+        "url": "https://cloudstream.zvlz.my.id/builds/IPTV.cs3",
+        "name": "IPTV",
+        "jarHash": "sha256-62c2358762785ebcca7208c7cf1bc24c334728bbe80a9d4b47ce8758b163fee4"
+    },
+    {
         "iconUrl": "https://cdn.kingbokep.video/favicon-32x32.png",
         "fileHash": "sha256-577ceb9f56d489b942e4351e703e2287983f18b5091e96d026ee50e50847c008",
         "apiVersion": 1,
@@ -351,6 +371,27 @@
         "description": "Nonton & Download Anime Streaming Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Samehadaku.cs3",
         "name": "Samehadaku"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=twitch.tv&sz=%size%",
+        "fileHash": "sha256-19614cd8cafbc8f828e45826ed2163f1548a9a294735d6ba0f66dc2fbadab68f",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 15242,
+        "status": 1,
+        "authors": [
+            "CranberrySoup",
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": 2,
+        "internalName": "TwitchProvider",
+        "description": "Watch livestreams from Twitch",
+        "url": "https://cloudstream.zvlz.my.id/builds/TwitchProvider.cs3",
+        "name": "TwitchProvider",
+        "jarHash": "sha256-8664fabfae1ead3c6450e26ce0c69245219186bfb176901f024dab96a083d5d7"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.png",
