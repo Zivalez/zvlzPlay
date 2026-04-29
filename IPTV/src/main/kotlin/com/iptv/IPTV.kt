@@ -92,15 +92,37 @@ class IPTV : MainAPI() {
         "Family", "Weather", "Legislative", "Shop"
     )
 
+    // Curated list of mainstream Indonesian TV channels. Order here is the
+    // order shown to the user. Matched against parsed channel names with
+    // tolerant comparison (spaces/dots/case ignored).
+    private val popularNames = listOf(
+        "Indosiar", "SCTV", "RCTI", "Trans 7", "Trans TV",
+        "GTV", "MNC TV", "ANTV", "iNews", "tvOne",
+        "Kompas TV", "NET.", "Metro TV", "RTV", "MDTV"
+    )
+
+    private fun normalizeForMatch(s: String): String =
+        s.lowercase().replace(Regex("[\\s.\\-_]"), "")
+
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val all = loadAll()
         if (all.isEmpty()) {
             throw ErrorLoadingException("Tidak dapat memuat daftar channel IPTV. Cek koneksi internet.")
         }
 
+        // Build a normalized-name lookup so multiple feeds of the same channel
+        // (e.g. "Trans TV (720p)" and "Trans TV (1080p)") are both reachable
+        // — we keep the highest-quality / first match per popular name.
+        val popularRow = popularNames.mapNotNull { wanted ->
+            val target = normalizeForMatch(wanted)
+            all.firstOrNull { normalizeForMatch(it.name) == target }
+                ?: all.firstOrNull { normalizeForMatch(it.name).startsWith(target) }
+                ?: all.firstOrNull { normalizeForMatch(it.name).contains(target) }
+        }.distinctBy { it.url }
+
         val grouped = all.groupBy { it.group?.takeIf { g -> g.isNotBlank() } ?: "Lainnya" }
 
-        val rows = grouped.entries
+        val groupRows = grouped.entries
             .sortedWith(
                 compareBy(
                     { groupOrder.indexOf(it.key).let { idx -> if (idx == -1) Int.MAX_VALUE else idx } },
@@ -110,20 +132,31 @@ class IPTV : MainAPI() {
             .map { (group, items) ->
                 HomePageList(
                     name = group,
-                    list = items.map { entry ->
-                        newLiveSearchResponse(
-                            entry.name,
-                            entry.toJson(),
-                            TvType.Live,
-                            fix = false
-                        ) { posterUrl = entry.logo }
-                    },
+                    list = items.map { it.toLiveSearchResponse() },
                     isHorizontalImages = true
                 )
             }
 
+        val rows = buildList {
+            if (popularRow.isNotEmpty()) {
+                add(
+                    HomePageList(
+                        name = "Popular",
+                        list = popularRow.map { it.toLiveSearchResponse() },
+                        isHorizontalImages = true
+                    )
+                )
+            }
+            addAll(groupRows)
+        }
+
         return newHomePageResponse(rows, hasNext = false)
     }
+
+    private fun IptvChannel.toLiveSearchResponse(): SearchResponse =
+        newLiveSearchResponse(name, toJson(), TvType.Live, fix = false) {
+            posterUrl = logo
+        }
 
     override suspend fun search(query: String): List<SearchResponse> {
         if (query.isBlank()) return emptyList()

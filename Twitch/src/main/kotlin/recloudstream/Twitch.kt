@@ -24,7 +24,7 @@ import com.lagradost.cloudstream3.utils.newExtractorLink
 import org.jsoup.nodes.Element
 import java.lang.RuntimeException
 
-class TwitchProvider : MainAPI() {
+class Twitch : MainAPI() {
     override var mainUrl = "https://twitchtracker.com" // Easiest to scrape
     override var name = "Twitch"
     override val supportedTypes = setOf(TvType.Live)
