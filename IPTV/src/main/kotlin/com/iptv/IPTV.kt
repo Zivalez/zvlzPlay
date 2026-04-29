@@ -254,7 +254,7 @@ class IPTV : MainAPI() {
             }
 
             val attrs = parseExtInfAttrs(line)
-            val title = line.substringAfter(",").trim()
+            val title = extractExtInfTitle(line)
                 .ifBlank { attrs["tvg-name"] ?: "Unknown" }
 
             var ua: String? = attrs["http-user-agent"]
@@ -314,14 +314,30 @@ class IPTV : MainAPI() {
 
     private val attrRegex = Regex("""([A-Za-z0-9_-]+)="([^"]*)"""")
 
+    /**
+     * Parse all `key="value"` attributes from a #EXTINF line. We run the regex
+     * across the entire line (not a substring before the title comma) because
+     * attribute values may legitimately contain commas — e.g. the User-Agent
+     * "Mozilla/5.0 (...) AppleWebKit/537.36 (KHTML, like Gecko) ...". The
+     * regex is bounded by the surrounding double-quotes so it won't accidentally
+     * match into the channel title that follows the last attribute.
+     */
     private fun parseExtInfAttrs(line: String): Map<String, String> {
-        // Slice between `:-1` (or `:0`) and the comma that introduces the title.
-        val afterColon = line.substringAfter(":", "")
-        val attrPart = afterColon.substringBefore(",", afterColon)
-            .let { it.dropWhile { ch -> ch == '-' || ch.isDigit() } }
-            .trim()
-        return attrRegex.findAll(attrPart)
+        return attrRegex.findAll(line)
             .associate { it.groupValues[1].lowercase() to it.groupValues[2] }
+    }
+
+    /**
+     * Extract the channel title from a #EXTINF line. The title is everything
+     * after the comma that follows the LAST attribute's closing quote. We
+     * cannot use `substringAfter(",")` because attribute values may contain
+     * commas (see [parseExtInfAttrs]).
+     */
+    private fun extractExtInfTitle(line: String): String {
+        val matches = attrRegex.findAll(line).toList()
+        val tailStart = if (matches.isNotEmpty()) matches.last().range.last + 1 else 0
+        val tail = line.substring(tailStart)
+        return tail.substringAfter(",", "").trim()
     }
 
     /**

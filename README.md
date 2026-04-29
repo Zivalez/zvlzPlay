@@ -1,7 +1,7 @@
 # CloudStream x zvlzPlay
 
 Aplikasi Streaming/Download berbagai konten seperti:\
-**Anime / K-Drama / J-Drama / C-Drama / TV Series / Movies / dll**
+**Anime / K-Drama / J-Drama / C-Drama / TV Series / Movies / Live TV / Live Streamer / dll**
 
 ## Apa itu CloudStream dan zvlzPlay?
 
@@ -75,6 +75,8 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Winbu | Anime, Donghua | ✅ aktif |
 | Kuramanime | Anime, Donghua | ✅ aktif |
 | Zoronime | Anime | ❌ mati |
+| IPTV | Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll) | ✅ aktif |
+| Twitch | Live streamer global | ✅ aktif |
 
 Keterangan status:
 - ✅ **aktif** — stabil & bisa dipake normal
@@ -100,6 +102,13 @@ Keterangan status:
 - Ada, bisa lewat **Winbu** (kategori Donghua)
 - **Kuramanime** juga ada Donghua, tapi statusnya masih beta
 
+### Bisa nonton TV live (Indosiar, RCTI, SCTV, dll)?
+- Bisa, install **IPTV** dari list provider.
+- Channel populer Indonesia langsung ada di row "Popular". Sisanya dikelompokin per kategori (News, General, Sports, Religious, Kids, dll).
+
+### Mau nonton streamer di Twitch?
+- Install **Twitch** dari list provider.
+
 ### Kok search gak nemu?
 - Pastiin provider sudah di install
 - Di bagian search atur filter provider, diaktifkan semua jenis providernya
@@ -108,4 +117,4 @@ Keterangan status:
 ## Laporan
 
 Kalo ada server/provider yang mati, pc ke wa gw aja. \
-[chat atmint fast respon (slow respon berarti turu)](https://wa.me/6281281465721?text=oi%20min)
+[chat atmint fast respon (slow respon berarti turu atau sibuk)](https://wa.me/6281281465721?text=oi%20min)
