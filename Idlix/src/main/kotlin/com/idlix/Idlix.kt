@@ -9,10 +9,8 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
-import com.lagradost.cloudstream3.network.WebViewResolver
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.jsoup.Jsoup
 import java.text.Normalizer
 
 class Idlix : MainAPI() {
@@ -26,7 +24,7 @@ class Idlix : MainAPI() {
     override val hasMainPage = true
     override var lang = "id"
     override val hasDownloadSupport = true
-    override val usesWebView = true
+    override val usesWebView = false
     override val supportedTypes = setOf(
         TvType.Movie,
         TvType.TvSeries,
@@ -295,26 +293,22 @@ class Idlix : MainAPI() {
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         val parsed = runCatching { AppUtils.parseJson<LoadData>(data) }.getOrNull() ?: return false
-
-        val contentId = parsed.id
-        val contentType = parsed.type
-
-        // MOVIE FLOW: Token-based redemption system (working)
-        if (contentType == "movie") {
-            return loadMovieLinks(contentId, callback)
+        val kind = when (parsed.type) {
+            "movie"   -> "movie"
+            "episode" -> "episode"
+            else      -> return false
         }
-
-        // SERIES FLOW: WebView-based redirect capture
-        if (contentType == "episode") {
-            return loadSeriesLinks(parsed, callback)
-        }
-
-        return false
+        return loadPentosLinks(kind, parsed.id, subtitleCallback, callback)
     }
 
-    private suspend fun loadMovieLinks(contentId: String, callback: (ExtractorLink) -> Unit): Boolean {
+    private suspend fun loadPentosLinks(
+        kind: String, // "movie" | "episode"
+        contentId: String,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ): Boolean {
         // Step 1: Get play info with claim token
-        val playInfoUrl = "$mainUrl/api/watch/play-info/movie/$contentId"
+        val playInfoUrl = "$mainUrl/api/watch/play-info/$kind/$contentId"
 
         val playInfo = app.get(
             playInfoUrl,
@@ -326,7 +320,7 @@ class Idlix : MainAPI() {
         ).parsedSafe<PlayInfoResponse>() ?: return false
 
         if (playInfo.kind != "pentos" || playInfo.claim.isNullOrEmpty()) {
-            Log.e(TAG, "loadMovieLinks: Invalid play-info response")
+            Log.e(TAG, "loadPentosLinks($kind): invalid play-info response")
             return false
         }
 
@@ -345,7 +339,7 @@ class Idlix : MainAPI() {
         ).parsedSafe<RedeemResponse>() ?: return false
 
         if (redeemRes.code != "ok" || redeemRes.url.isNullOrEmpty()) {
-            Log.e(TAG, "loadMovieLinks: Invalid redeem response")
+            Log.e(TAG, "loadPentosLinks($kind): invalid redeem response")
             return false
         }
 
@@ -362,151 +356,16 @@ class Idlix : MainAPI() {
             }
         )
 
-        return true
-    }
-
-    private suspend fun loadSeriesLinks(loadData: LoadData, callback: (ExtractorLink) -> Unit): Boolean {
-        // Get episode page URL from LoadData
-        val seriesSlug = loadData.seriesSlug
-        val seasonNum = loadData.seasonNum
-        val episodeNum = loadData.episodeNum
-
-        if (seriesSlug == null || seasonNum == null || episodeNum == null) {
-            Log.e(TAG, "loadSeriesLinks: Missing seriesSlug, seasonNum, or episodeNum")
-            return false
-        }
-
-        val episodeUrl = "$mainUrl/series/$seriesSlug/season/$seasonNum/episode/$episodeNum"
-        Log.d(TAG, "loadSeriesLinks: Episode URL: $episodeUrl")
-
-        // Use WebView to capture redirect URL
-        val redirectUrl = tryWebViewBypass(episodeUrl)
-        if (redirectUrl.isNullOrEmpty()) {
-            Log.e(TAG, "loadSeriesLinks: Failed to capture redirect URL")
-            return false
-        }
-
-        Log.d(TAG, "loadSeriesLinks: Captured redirect URL: $redirectUrl")
-
-        // The redirect URL is rm358.com (ad network), we need to follow it
-        // For now, return the redirect URL as a link
-        // TODO: Follow redirect chain to get final video URL
-        callback.invoke(
-            newExtractorLink(
-                name,
-                "Idlix Series (Redirect)",
-                redirectUrl,
-                ExtractorLinkType.VIDEO
-            ) {
-                this.referer = mainUrl
-                this.quality = Qualities.Unknown.value
-            }
-        )
-
-        return true
-    }
-
-    private suspend fun tryWebViewBypass(url: String): String? {
-        val capturedUrl = java.util.concurrent.atomic.AtomicReference<String?>(null)
-        val callbackInvocations = java.util.concurrent.atomic.AtomicInteger(0)
-
-        val script = """
-            (function() {
-                try {
-                    var capturedRedirect = null;
-
-                    // Monitor window.open for new tab
-                    var originalOpen = window.open;
-                    window.open = function(url, target, features) {
-                        if (url && (url.includes('rm358.com') || url.includes('rm358'))) {
-                            capturedRedirect = url;
-                            return null; // Prevent actual open to capture URL
-                        }
-                        return originalOpen.call(window, url, target, features);
-                    };
-
-                    // Wait for page to load then try to find and click play button
-                    setTimeout(function() {
-                        // Try specific selector for Idlix play button
-                        var playButton = document.querySelector('main button');
-                        if (playButton) {
-                            playButton.click();
-                            return 'clicked_main_button';
-                        }
-
-                        // Fallback to other selectors
-                        var selectors = [
-                            'button img',
-                            'button[aria-label*="Play"]',
-                            'button[aria-label*="play"]',
-                            '.play-btn',
-                            'video'
-                        ];
-
-                        for (var i = 0; i < selectors.length; i++) {
-                            var element = document.querySelector(selectors[i]);
-                            if (element) {
-                                if (element.tagName === 'VIDEO') {
-                                    return element.src || 'video_found_no_src';
-                                } else {
-                                    element.click();
-                                    return 'clicked:' + selectors[i];
-                                }
-                            }
-                        }
-
-                        return 'not_found';
-                    }, 3000);
-
-                    // Check if redirect was captured
-                    setTimeout(function() {
-                        if (capturedRedirect) {
-                            return capturedRedirect;
-                        }
-                    }, 5000);
-
-                    return 'waiting';
-                } catch(e) { return 'ERR:' + e.message; }
-            })()
-        """.trimIndent()
-
-        val resolver = WebViewResolver(
-            interceptUrl = Regex("rm358\\.com"),
-            additionalUrls = emptyList(),
-            userAgent = USER_AGENT,
-            useOkhttp = false,
-            script = script,
-            scriptCallback = { result ->
-                callbackInvocations.incrementAndGet()
-                Log.d(TAG, "scriptCallback: $result")
-                if (result != null && result != "null" && result != "clicked" && result != "not_found" && !result.startsWith("ERR:")) {
-                    if (result.contains("rm358.com")) {
-                        Log.d(TAG, "scriptCallback: Captured redirect URL: $result")
-                        capturedUrl.set(result)
-                    }
-                }
-            },
-            timeout = 30_000L
-        )
-
-        try {
-            resolver.resolveUsingWebView(
-                url = url,
-                referer = mainUrl,
-                headers = mapOf(
-                    "User-Agent" to USER_AGENT,
-                    "Referer" to mainUrl,
-                    "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
-                ),
-                method = "GET",
-                requestCallBack = { capturedUrl.get() != null }
+        // Step 4: Forward subtitles if any
+        redeemRes.subtitles?.forEach { sub ->
+            val subUrl = sub.url ?: return@forEach
+            if (subUrl.isEmpty()) return@forEach
+            subtitleCallback.invoke(
+                SubtitleFile(sub.label ?: sub.lang ?: "Unknown", subUrl)
             )
-        } catch (e: Exception) {
-            Log.e(TAG, "tryWebViewBypass exception: ${e.message}")
         }
 
-        Log.d(TAG, "tryWebViewBypass done: scriptCalls=${callbackInvocations.get()}")
-        return capturedUrl.get()
+        return true
     }
 }
 
