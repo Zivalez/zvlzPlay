@@ -134,10 +134,10 @@
     },
     {
         "iconUrl": "https://www.google.com/s2/favicons?domain=iptv-org.github.io&sz=%size%",
-        "fileHash": "sha256-b73c958e5c8af5120abeaa1db59478948e8c93b478d840dcfa06e6ac54ced372",
+        "fileHash": "sha256-9429974c5643a2a3322c565a9d4898cd04f5b4485568b1454867617ff416e47b",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 18508,
+        "fileSize": 20157,
         "status": 3,
         "authors": [
             "Zivalez"
@@ -145,12 +145,12 @@
         "tvTypes": [
             "Live"
         ],
-        "version": 1,
+        "version": 2,
         "internalName": "IPTV",
-        "description": "Watch Indonesian TV channels via IPTV",
+        "description": "Tonton saluran TV Indonesia via IPTV",
         "url": "https://cloudstream.zvlz.my.id/builds/IPTV.cs3",
         "name": "IPTV",
-        "jarHash": "sha256-29cd1ebf10af8144f4201092e44c28fd26e6d80880df21ae4768f65bc5299b59"
+        "jarHash": "sha256-b40bf1318c9e8f2f34e44871d0eddfb6e034fe5d2b6f08b9fbd252154d722fff"
     },
     {
         "iconUrl": "https://cdn.kingbokep.video/favicon-32x32.png",
@@ -374,10 +374,10 @@
     },
     {
         "iconUrl": "https://www.google.com/s2/favicons?domain=twitch.tv&sz=%size%",
-        "fileHash": "sha256-19614cd8cafbc8f828e45826ed2163f1548a9a294735d6ba0f66dc2fbadab68f",
+        "fileHash": "sha256-851272edb730b6b90abf9497894782411c61dc78375567aff6f82a5fd7ef66af",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 15242,
+        "fileSize": 15209,
         "status": 1,
         "authors": [
             "CranberrySoup",
@@ -386,12 +386,12 @@
         "tvTypes": [
             "Live"
         ],
-        "version": 2,
-        "internalName": "TwitchProvider",
+        "version": 3,
+        "internalName": "Twitch",
         "description": "Watch livestreams from Twitch",
-        "url": "https://cloudstream.zvlz.my.id/builds/TwitchProvider.cs3",
-        "name": "TwitchProvider",
-        "jarHash": "sha256-8664fabfae1ead3c6450e26ce0c69245219186bfb176901f024dab96a083d5d7"
+        "url": "https://cloudstream.zvlz.my.id/builds/Twitch.cs3",
+        "name": "Twitch",
+        "jarHash": "sha256-31e47d37872aac2820d7bdf348680a37c7e301d924303167bc29db977b35ac03"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.png",
