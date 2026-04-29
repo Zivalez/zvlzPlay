@@ -31,7 +31,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("org.json:json:20240303")
 }
-version = 10
+version = 11
 
 cloudstream {
     // metadata

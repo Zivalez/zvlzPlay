@@ -364,7 +364,7 @@ class Idlix : MainAPI() {
         callback.invoke(
             newExtractorLink(
                 name,
-                "Idlix ${playInfo.title ?: "Auto"}",
+                name,
                 redeemRes.url,
                 ExtractorLinkType.M3U8
             ) {
