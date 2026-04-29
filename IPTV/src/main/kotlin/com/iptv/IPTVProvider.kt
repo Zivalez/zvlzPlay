@@ -69,11 +69,11 @@ class IPTVProvider : MainAPI() {
                     val name = extractJsonValue(line, "name")
                     val logo = extractJsonValue(line, "logo") ?: ""
                     
-                    if (id.isNotEmpty() && name.isNotEmpty()) {
+                    if (!id.isNullOrEmpty() && !name.isNullOrEmpty()) {
                         channels.add(
                             newLiveSearchResponse(
-                                name,
-                                id,
+                                name!!,
+                                id!!,
                                 TvType.Live,
                                 fix = false
                             ) { posterUrl = logo }
