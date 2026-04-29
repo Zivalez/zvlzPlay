@@ -152,7 +152,10 @@ data class ChallengeResponse(
 
 data class LoadData(
     val id: String,
-    val type: String // "movie" or "episode"
+    val type: String, // "movie" or "episode"
+    val seriesSlug: String? = null, // For episodes: series slug to construct URL
+    val seasonNum: Int? = null, // For episodes: season number
+    val episodeNum: Int? = null // For episodes: episode number
 )
 
 // NEW: Token redemption flow data classes

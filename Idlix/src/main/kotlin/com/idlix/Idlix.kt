@@ -1,5 +1,6 @@
 package com.idlix
 
+import android.util.Log
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.LoadResponse.Companion.addImdbId
@@ -8,16 +9,24 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
+import com.lagradost.cloudstream3.network.WebViewResolver
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.jsoup.Jsoup
 import java.text.Normalizer
 
 class Idlix : MainAPI() {
+    companion object {
+        private const val TAG = "Idlix"
+        private const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+
     override var mainUrl = base64Decode("aHR0cHM6Ly96MS5pZGxpeGt1LmNvbQ==")
     override var name = "Idlix"
     override val hasMainPage = true
     override var lang = "id"
     override val hasDownloadSupport = true
+    override val usesWebView = true
     override val supportedTypes = setOf(
         TvType.Movie,
         TvType.TvSeries,
@@ -185,7 +194,10 @@ class Idlix : MainAPI() {
                     newEpisode(
                         LoadData(
                             id = ep.id ?: return@forEach,
-                            type = "episode"
+                            type = "episode",
+                            seriesSlug = data.slug,
+                            seasonNum = data.firstSeason.seasonNumber,
+                            episodeNum = ep.episodeNumber
                         ).toJson()
                     ) {
                         this.name = ep.name
@@ -217,7 +229,10 @@ class Idlix : MainAPI() {
                         newEpisode(
                             LoadData(
                                 id = ep.id ?: return@forEach,
-                                type = "episode"
+                                type = "episode",
+                                seriesSlug = data.slug,
+                                seasonNum = seasonNum,
+                                episodeNum = ep.episodeNumber
                             ).toJson()
                         ) {
                             this.name = ep.name
@@ -284,13 +299,22 @@ class Idlix : MainAPI() {
         val contentId = parsed.id
         val contentType = parsed.type
 
-        // NEW FLOW: Token-based redemption system
-        // Step 1: Get play info with claim token
-        val playInfoUrl = when (contentType) {
-            "movie" -> "$mainUrl/api/watch/play-info/movie/$contentId"
-            "episode" -> "$mainUrl/api/watch/play-info/series/$contentId"
-            else -> return false
+        // MOVIE FLOW: Token-based redemption system (working)
+        if (contentType == "movie") {
+            return loadMovieLinks(contentId, callback)
         }
+
+        // SERIES FLOW: WebView-based redirect capture
+        if (contentType == "episode") {
+            return loadSeriesLinks(parsed, callback)
+        }
+
+        return false
+    }
+
+    private suspend fun loadMovieLinks(contentId: String, callback: (ExtractorLink) -> Unit): Boolean {
+        // Step 1: Get play info with claim token
+        val playInfoUrl = "$mainUrl/api/watch/play-info/movie/$contentId"
 
         val playInfo = app.get(
             playInfoUrl,
@@ -302,12 +326,12 @@ class Idlix : MainAPI() {
         ).parsedSafe<PlayInfoResponse>() ?: return false
 
         if (playInfo.kind != "pentos" || playInfo.claim.isNullOrEmpty()) {
+            Log.e(TAG, "loadMovieLinks: Invalid play-info response")
             return false
         }
 
         // Step 2: Redeem claim token to get stream manifest URL
         val redeemUrl = playInfo.redeemUrl ?: "https://e2e.majorplay.net/api/play"
-
         val redeemBody = """{"claim":"${playInfo.claim}"}""".toRequestBody("text/plain".toMediaType())
 
         val redeemRes = app.post(
@@ -321,11 +345,11 @@ class Idlix : MainAPI() {
         ).parsedSafe<RedeemResponse>() ?: return false
 
         if (redeemRes.code != "ok" || redeemRes.url.isNullOrEmpty()) {
+            Log.e(TAG, "loadMovieLinks: Invalid redeem response")
             return false
         }
 
         // Step 3: Return HLS M3U8 as extractor link
-        // The URL points to an M3U8 manifest (despite .json extension in some cases)
         callback.invoke(
             newExtractorLink(
                 name,
@@ -339,6 +363,107 @@ class Idlix : MainAPI() {
         )
 
         return true
+    }
+
+    private suspend fun loadSeriesLinks(loadData: LoadData, callback: (ExtractorLink) -> Unit): Boolean {
+        // Get episode page URL from LoadData
+        val seriesSlug = loadData.seriesSlug
+        val seasonNum = loadData.seasonNum
+        val episodeNum = loadData.episodeNum
+
+        if (seriesSlug == null || seasonNum == null || episodeNum == null) {
+            Log.e(TAG, "loadSeriesLinks: Missing seriesSlug, seasonNum, or episodeNum")
+            return false
+        }
+
+        val episodeUrl = "$mainUrl/series/$seriesSlug/season/$seasonNum/episode/$episodeNum"
+        Log.d(TAG, "loadSeriesLinks: Episode URL: $episodeUrl")
+
+        // Use WebView to capture redirect URL
+        val redirectUrl = tryWebViewBypass(episodeUrl)
+        if (redirectUrl.isNullOrEmpty()) {
+            Log.e(TAG, "loadSeriesLinks: Failed to capture redirect URL")
+            return false
+        }
+
+        Log.d(TAG, "loadSeriesLinks: Captured redirect URL: $redirectUrl")
+
+        // The redirect URL is rm358.com (ad network), we need to follow it
+        // For now, return the redirect URL as a link
+        // TODO: Follow redirect chain to get final video URL
+        callback.invoke(
+            newExtractorLink(
+                name,
+                "Idlix Series (Redirect)",
+                redirectUrl,
+                ExtractorLinkType.REDIRECT
+            ) {
+                this.referer = mainUrl
+                this.quality = Qualities.Unknown.value
+            }
+        )
+
+        return true
+    }
+
+    private suspend fun tryWebViewBypass(url: String): String? {
+        val capturedUrl = java.util.concurrent.atomic.AtomicReference<String?>(null)
+        val callbackInvocations = java.util.concurrent.atomic.AtomicInteger(0)
+
+        val script = """
+            (function() {
+                try {
+                    // Find and click the play button
+                    var playButton = document.querySelector('button[aria-label*="Play"], button.play, .play-btn');
+                    if (playButton) {
+                        playButton.click();
+                        return 'clicked';
+                    }
+                    return 'not_found';
+                } catch(e) { return 'ERR:' + e.message; }
+            })()
+        """.trimIndent()
+
+        val resolver = WebViewResolver(
+            interceptUrl = Regex("rm358\\.com"),
+            additionalUrls = emptyList(),
+            userAgent = USER_AGENT,
+            useOkhttp = false,
+            script = script,
+            scriptCallback = { result ->
+                callbackInvocations.incrementAndGet()
+                Log.d(TAG, "scriptCallback: $result")
+            },
+            requestCallBack = { request ->
+                val url = request.url.toString()
+                if (url.contains("rm358.com")) {
+                    Log.d(TAG, "requestCallBack: Captured redirect URL: $url")
+                    capturedUrl.set(url)
+                    true
+                } else {
+                    false
+                }
+            },
+            timeout = 30_000L
+        )
+
+        try {
+            resolver.resolveUsingWebView(
+                url = url,
+                referer = mainUrl,
+                headers = mapOf(
+                    "User-Agent" to USER_AGENT,
+                    "Referer" to mainUrl,
+                    "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+                ),
+                method = "GET"
+            )
+        } catch (e: Exception) {
+            Log.e(TAG, "tryWebViewBypass exception: ${e.message}")
+        }
+
+        Log.d(TAG, "tryWebViewBypass done: scriptCalls=${callbackInvocations.get()}")
+        return capturedUrl.get()
     }
 }
 
