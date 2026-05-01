@@ -37,7 +37,7 @@ zvlzPlay = isi/ekstensi buat dapetin konten streaming
 
 ## Download Aplikasi
 
-https://cloudstream.zvlz.my.id/cloudstream.md
+https://github.com/recloudstream/cloudstream/releases
 
 
 ## Cara Install & Pasang Extension zvlzPlay
@@ -113,8 +113,3 @@ Keterangan status:
 - Pastiin provider sudah di install
 - Di bagian search atur filter provider, diaktifkan semua jenis providernya
 - Lebih bagus install banyak provider biar hasil search lebih lengkap
-
-## Laporan
-
-Kalo ada server/provider yang mati, pc ke wa gw aja. \
-[chat atmint fast respon (slow respon berarti turu atau sibuk)](https://wa.me/6281281465721?text=oi%20min)

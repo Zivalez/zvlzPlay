@@ -18,3 +18,11 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+playwright.config.ts
+
+# Lainnya
+build_log.txt
+
+# Tests
+tests/
+package*.json
