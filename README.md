@@ -1,8 +1,18 @@
-# CloudStream x zvlzPlay
+<h1 align="center">CloudStream x zvlzPlay</h1>
 
-Streaming dan download berbagai konten seperti Anime, K-Drama, J-Drama, C-Drama, TV Series, Movies, Live TV, Live Streamer, dan lainnya. (mengandung konten NSFW)
+<p align="center">
+<img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="80" height="80">
+</p>
 
-> Read in [English](README_EN.md)
+<p align="center">
+Streaming dan download berbagai konten seperti Anime, K-Drama, J-Drama, C-Drama,<br>
+TV Series, Movies, Live TV, Live Streamer, dan lainnya.<br>
+(mengandung konten NSFW)
+</p>
+
+<p align="center">
+<a href="README.md">Bahasa Indonesia</a> | <a href="README_EN.md">English</a> | <a href="#">日本語</a>
+</p>
 
 
 ## Apa itu CloudStream?
