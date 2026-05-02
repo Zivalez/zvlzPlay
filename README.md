@@ -15,7 +15,7 @@ TV Series, Movies, Live TV, Live Streamer, dan lainnya.<br>
 </p>
 
 <p align="center">
-<a href="README.md">Bahasa Indonesia</a> | <a href="README_EN.md">English</a> | <a href="#">日本語</a>
+<a href="#">Bahasa Indonesia</a> | <a href="README_EN.md">English</a> | <a href="README_JP.md">日本語</a>
 </p>
 
 
