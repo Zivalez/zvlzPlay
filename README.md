@@ -1,115 +1,113 @@
 # CloudStream x zvlzPlay
 
-Aplikasi Streaming/Download berbagai konten seperti:\
-**Anime / K-Drama / J-Drama / C-Drama / TV Series / Movies / Live TV / Live Streamer / dll**
+Streaming dan download berbagai konten seperti Anime, K-Drama, J-Drama, C-Drama, TV Series, Movies, Live TV, Live Streamer, dan lainnya. (mengandung konten NSFW)
 
-## Apa itu CloudStream dan zvlzPlay?
+> Read in [English](README_EN.md)
 
-**CloudStream** itu aplikasi Android open-source yang dipake buat nonton film, anime, drama, dan TV series.\
-Enaknya apa? ga ada iklan, ga perlu login, full gratis.
 
-Tapi CloudStream itu nggak punya konten bawaan.\
-Dia cuma jadi “player + mesin pencari”.
+## Apa itu CloudStream?
 
-Supaya bisa nonton, perlu pasang yang namanya Ekstensi (plugin).\
-Ekstensi ini yang tugasnya ngambil (scraping) data video dari berbagai situs streaming di internet, trus nampilin di dalam CloudStream.
+**CloudStream** adalah aplikasi Android open-source untuk menonton film, anime, drama, dan TV series secara gratis, tanpa iklan, dan tanpa perlu membuat akun.
 
-**zvlzPlay** itu proyek khusus yang isinya kumpulan provider buat situs streaming Indonesia/internasional.\
-Jadi gampangnya:
+CloudStream sendiri tidak menyediakan konten bawaan, aplikasi ini hanya berfungsi sebagai player dan mesin pencari. Untuk bisa menonton, kamu perlu memasang **ekstensi (plugin)** yang bertugas mengambil data video dari berbagai situs streaming di internet.
 
-CloudStream = aplikasinya (wadahnya)\
-zvlzPlay = isi/ekstensi buat dapetin konten streaming
+
+## Apa itu zvlzPlay?
+
+**zvlzPlay** adalah kumpulan ekstensi/provider untuk CloudStream yang mendukung berbagai situs streaming Indonesia dan internasional.
+
+> **CloudStream** = aplikasinya (wadah)\
+> **zvlzPlay** = ekstensi untuk mendapatkan konten streaming
 
 
 ## Fitur
 
--    AdFree, No ads whatsoever
--    No tracking/analytics
--    Bookmarks
--    Phone and TV support
--    Chromecast
--    Bisa skip opening
--    Ga perlu login
--    Bisa pilih/ganti provider, sesuai kebutuhan
--    Resolusi tergantung provider (kebanyakan 1080p ke atas)
--    Universal search (kalo masang banyak provider lebih bagus, karna lebih lengkap dan beragam hasilnya)
+- Tanpa iklan
+- Tanpa tracking/analytics
+- Bookmark
+- Dukungan HP dan TV
+- Chromecast
+- Skip opening
+- Tidak perlu login
+- Bisa memilih dan mengganti provider sesuai kebutuhan
+- Resolusi tergantung provider (sebagian besar 1080p ke atas)
+- Universal search, semakin banyak provider yang dipasang, semakin lengkap hasil pencariannya
 
 
 ## Download Aplikasi
 
+Unduh CloudStream di sini:\
 https://github.com/recloudstream/cloudstream/releases
 
 
-## Cara Install & Pasang Extension zvlzPlay
+## Cara Install dan Pasang Ekstensi zvlzPlay
 
-1.  Install aplikasi\
-(btw setelah install, jangan kaget kalo kosong. karna blm ada extension yang kepasang)
-2.  Masuk ke **Settings** atau kalau bahasa Indonesia, masuk ke **Pengaturan**
-3.  Klik **Extensions** / **Ekstensi**
-4.  Pilih **Add Repository** / **Tambah Repository**
-5.  Copy link ini, lalu masukkan ke **Repository URL** (nama repository/nama arsip dikosongin aja)
-```markdown
+1. Install aplikasi CloudStream terlebih dahulu.\
+   Setelah install, tampilan akan kosong karena belum ada ekstensi yang terpasang.
+2. Buka **Settings**
+3. Masuk ke **Extensions**
+4. Pilih **Add Repository**
+5. Masukkan URL berikut sebagai Repository URL:
+```
 https://cloudstream.zvlz.my.id/builds/repo.json
 ```
-6.  Setelah nambahin repository, masuk ke **zvlzPlay**
-7.  Pilih provider yang mau dipake/digunakan
-8.  Balik ke **Home Screen**, pilih provider di pojok kanan bawah
-9.  Done
+6. Nama repository bisa dikosongkan atau diisi sesuai keinginan (misalnya: `zvlzPlay`).
+7. Setelah repository berhasil ditambahkan, buka **zvlzPlay** dan pilih provider yang ingin digunakan.
+8. Kembali ke **Home Screen**, lalu pilih provider di pojok kanan bawah.
+9. Selesai, selamat menonton.
 
 
 ## Daftar Provider
 
 | Provider | Konten | Status |
-| ------ | ------ | ------ |
-| Idlix | Movie, TV Series, Drama Asia, Anime | ✅ aktif |
-| LayarKaca | Movie, TV Series, Drama Asia, Anime Movie | ✅ aktif |
-| Pencurimovie | Movie | ✅ aktif |
-| Funmovieslix | Movie, TV Series, Drama Asia | ✅ aktif |
-| Moviebox | Movie, TV Series, Anime, Drama Asia | ✅ aktif |
-| Samehadaku | Anime | ✅ aktif |
-| Otakudesu | Anime | ✅ aktif |
-| Alqanime | Anime | ✅ aktif |
-| Nontonanimeid | Anime | ✅ aktif |
-| Kuronime | Anime | ✅ aktif |
-| Gomunime | Anime | ✅ aktif |
-| Winbu | Anime, Donghua | ✅ aktif |
-| Kuramanime | Anime, Donghua | ✅ aktif |
-| Zoronime | Anime | ❌ mati |
-| IPTV | Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll) | ✅ aktif |
-| Twitch | Live streamer global | ✅ aktif |
+| --- | --- | --- |
+| Idlix | Movie, TV Series, Drama Asia, Anime | ✅ Aktif |
+| LayarKaca | Movie, TV Series, Drama Asia, Anime Movie | ✅ Aktif |
+| Pencurimovie | Movie | ✅ Aktif |
+| Funmovieslix | Movie, TV Series, Drama Asia | ✅ Aktif |
+| Moviebox | Movie, TV Series, Anime, Drama Asia | ✅ Aktif |
+| Samehadaku | Anime | ✅ Aktif |
+| Otakudesu | Anime | ✅ Aktif |
+| Alqanime | Anime | ✅ Aktif |
+| Nontonanimeid | Anime | ✅ Aktif |
+| Kuronime | Anime | ✅ Aktif |
+| Gomunime | Anime | ✅ Aktif |
+| Winbu | Anime, Donghua | ✅ Aktif |
+| Kuramanime | Anime, Donghua | ✅ Aktif |
+| Zoronime | Anime | ❌ Mati |
+| IPTV | Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll) | ✅ Aktif |
+| Twitch | Live Streamer Global | ✅ Aktif |
 
 Keterangan status:
-- ✅ **aktif** — stabil & bisa dipake normal
-- 🧪 **beta** — bisa dipake tapi belum stabil, kadang error
-- ❌ **mati** — situs/server lagi down, sementara ga bisa dipake
+- ✅ **Aktif** : stabil dan bisa digunakan secara normal
+- 🧪 **Beta** : bisa digunakan tetapi belum sepenuhnya stabil
+- ❌ **Mati** : situs atau server sedang down, sementara tidak bisa digunakan
 
-## FAQ (Pertanyaan yang sering ditanyain)
 
+## FAQ
 
 ### Kenapa setelah install aplikasinya kosong?
-- Karena CloudStream butuh extension (repository) dulu.
+CloudStream membutuhkan ekstensi (repository) terlebih dahulu. Ikuti langkah di bagian [Cara Install](#cara-install-dan-pasang-ekstensi-zvlzplay) untuk menambahkan repository.
 
-### Provider mana yang paling bagus buat nonton Anime?
-- **Samehadaku** (paling lengkap & streaming tercepat)
-- **Kuramanime** (streaming terupdate, tercepat & stabil)
-- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime**, **Gomunime** (alternatif)
+### Provider mana yang paling bagus untuk Anime?
+- **Samehadaku** : paling lengkap dengan streaming tercepat
+- **Kuramanime** : update tercepat dan stabil
+- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime**, **Gomunime** : alternatif lainnya
 
-### Provider mana buat nonton Drama & Movie?
-- **Idlix** (paling lengkap)
+### Provider mana untuk Drama dan Movie?
+- **Idlix** : paling lengkap
 - **LayarKaca**, **Funmovieslix**, **Pencurimovie**, **Moviebox**
 
-### Donghua ada?
-- ada di **Kuramanime** 
-- **Winbu** (kategori Donghua)
+### Ada Donghua?
+- **Kuramanime** dan **Winbu** menyediakan konten Donghua.
 
 ### Bisa nonton TV live (Indosiar, RCTI, SCTV, dll)?
-- Bisa, install **IPTV** dari list provider.
-- Channel populer Indonesia langsung ada di row "Popular". Sisanya dikelompokin per kategori (News, General, Sports, Religious, Kids, dll).
+Bisa. Install provider **IPTV** dari daftar ekstensi. Channel populer Indonesia langsung tersedia di baris "Popular", sisanya dikelompokkan per kategori (News, Sports, Kids, dll).
 
-### Mau nonton streamer di Twitch?
-- Install **Twitch** dari list provider.
+### Bisa nonton streamer di Twitch?
+Bisa. Install provider **Twitch** dari daftar ekstensi.
 
-### Kok search gak nemu?
-- Pastiin provider sudah di install
-- Di bagian search atur filter provider, diaktifkan semua jenis providernya
-- Lebih bagus install banyak provider biar hasil search lebih lengkap
+### Kenapa search tidak menemukan hasil?
+- Pastikan provider sudah terpasang.
+- Di bagian search, atur filter provider dan aktifkan semua jenis provider.
+- Semakin banyak provider yang terpasang, semakin lengkap hasil pencariannya.
