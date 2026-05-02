@@ -99,8 +99,8 @@ Keterangan status:
 - **LayarKaca**, **Funmovieslix**, **Pencurimovie**, **Moviebox**
 
 ### Donghua ada?
-- Ada, bisa lewat **Winbu** (kategori Donghua)
-- **Kuramanime** juga ada Donghua, tapi statusnya masih beta
+- ada di **Kuramanime** 
+- **Winbu** (kategori Donghua)
 
 ### Bisa nonton TV live (Indosiar, RCTI, SCTV, dll)?
 - Bisa, install **IPTV** dari list provider.
