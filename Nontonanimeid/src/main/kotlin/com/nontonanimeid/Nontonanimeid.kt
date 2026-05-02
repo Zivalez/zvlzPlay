@@ -47,12 +47,10 @@ class Nontonanimeid : MainAPI() {
 
         if (isSinglePage && page > 1) return newHomePageResponse(request.name, emptyList(), hasNext = false)
 
-        // Episode Terbaru: page 1 = homepage, page 2+ = AJAX load more
         if (isEpisodeTerbaru) {
             val homePage = app.get(mainUrl).document
 
             if (loadmoreNonce == null) {
-                // Extract nonce from inline script: var misha_loadmore_params = {...}
                 loadmoreNonce = homePage.select("script:not([src])").mapNotNull { script ->
                     Regex(""""nonce"\s*:\s*"([^"]+)"""").find(script.data())?.groupValues?.get(1)
                 }.firstOrNull()
@@ -63,7 +61,6 @@ class Nontonanimeid : MainAPI() {
                 return newHomePageResponse(request.name, home, hasNext = loadmoreNonce != null)
             }
 
-            // page 2+ → AJAX
             val nonce = loadmoreNonce ?: return newHomePageResponse(request.name, emptyList(), hasNext = false)
             val offset = (page - 1) * pageSize
             val ajaxHtml = app.post(
@@ -115,7 +112,6 @@ class Nontonanimeid : MainAPI() {
                 }
             }
             else -> {
-                // article.animeseries or div.animeseries
                 val a = selectFirst("a") ?: return null
                 val href = a.absUrl("href").takeIf { it.isNotBlank() } ?: return null
                 val title = selectFirst("h3.entry-title span, h3.title span")?.text()?.trim()
@@ -157,7 +153,6 @@ class Nontonanimeid : MainAPI() {
             ?.text()
             ?.let { Regex("(\\d{4})").find(it)?.groupValues?.get(1)?.toIntOrNull() }
 
-        // Collect static episodes first
         val episodeLinksRaw = document.select("div.episode-list-items a.episode-item").map { ep ->
             Triple(
                 ep.attr("href"),
@@ -167,7 +162,6 @@ class Nontonanimeid : MainAPI() {
             )
         }.toMutableList()
 
-        // Check if there's a load more button (more episodes via AJAX)
         if (document.selectFirst("div.misha_loadmore2") != null) {
             val paramsDecoded = document.select("script[src]").mapNotNull { script ->
                 val src = script.attr("src")
@@ -220,7 +214,6 @@ class Nontonanimeid : MainAPI() {
 
         val episodeLinks = episodeLinksRaw.reversed()
 
-        // Fetch thumbnails in parallel — adds 2-3s but gives full episode art
         val episodes = episodeLinks.amap { (epHref, epTitle, epNum) ->
             val thumb = try {
                 app.get(epHref).document.selectFirst("div.featuredimgs img")?.attr("src")
@@ -242,7 +235,6 @@ class Nontonanimeid : MainAPI() {
         }
     }
 
-    // Decode Dean Edwards JS packer (eval(function(p,a,c,k,e,d){...}))
     private fun unpackJs(packed: String): String? {
         val match = Regex("""\}\s*\(\s*'((?:[^'\\]|\\.)*)',\s*(\d+),\s*(\d+),\s*'((?:[^'\\]|\\.)*)'\.split\(""")
             .find(packed) ?: return null
@@ -273,7 +265,6 @@ class Nontonanimeid : MainAPI() {
     ): Boolean {
         val document = app.get(data).document
 
-        // Extract nonce from base64-encoded inline script (var kotakajax={...})
         val nonce = document.select("script[src]").mapNotNull { script ->
             val src = script.attr("src")
             if (!src.startsWith("data:text/javascript;base64,")) return@mapNotNull null

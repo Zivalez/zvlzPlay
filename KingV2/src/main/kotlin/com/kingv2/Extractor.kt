@@ -27,13 +27,11 @@ open class Extractor : ExtractorApi() {
                 return
             }
 
-            // direct hlsplaylist / hlsnew2 endpoints
             Regex("(https?://[^\"']*hls(?:playlist|new2)\\.php[^\"']*)", RegexOption.IGNORE_CASE).find(html)?.groupValues?.get(1)?.let { p ->
                 M3u8Helper.generateM3u8(name, p, url).forEach(callback)
                 return
             }
 
-            // atob(...) simple base64 patterns
             Regex("atob\\(['\"]([^'\"]+)['\"]\\)", RegexOption.IGNORE_CASE).find(html)?.groupValues?.get(1)?.let { b64 ->
                 val decoded = runCatching { com.lagradost.cloudstream3.base64Decode(b64) }.getOrNull()
                 if (!decoded.isNullOrBlank()) {
@@ -45,10 +43,8 @@ open class Extractor : ExtractorApi() {
                 }
             }
 
-            // decode ?link= param if present
             Regex("[?&]link=([^&]+)").find(url)?.groupValues?.get(1)?.let { raw ->
                 var dec = java.net.URLDecoder.decode(raw, "UTF-8")
-                // try repeated base64 decodes
                 for (i in 0..3) {
                     val attempt = runCatching { com.lagradost.cloudstream3.base64Decode(dec) }.getOrNull() ?: break
                     if (attempt.isNotBlank()) dec = attempt else break
@@ -60,7 +56,6 @@ open class Extractor : ExtractorApi() {
                 }
             }
 
-            // try to find playerzyetsa-like arrays
             Regex("playerzyetsa[^=]*=\\s*(\\[[^\\]]+\\])", RegexOption.IGNORE_CASE).find(html)?.groupValues?.get(1)?.let { arr ->
                 m3u8Regex.find(arr)?.value?.let { pl -> M3u8Helper.generateM3u8(name, pl, url).forEach(callback); return }
             }

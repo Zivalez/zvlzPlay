@@ -121,8 +121,6 @@ class Samehadaku : MainAPI() {
             Pair(link, episode)
         }.reversed()
 
-        // Fetch episode thumbnails from the first episode page
-        // (anime page has no thumbnails, but episode pages do in their episode list sidebar)
         val thumbMap: Map<String, String> = if (episodeLinks.isNotEmpty()) {
             try {
                 app.get(episodeLinks.first().first).document

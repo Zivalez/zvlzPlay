@@ -43,7 +43,6 @@ class Alqanime : MainAPI() {
         "Referer" to mainUrl,
     )
 
-    // Genre pages use /tag/ not /genre/
     override val mainPage = mainPageOf(
         "$mainUrl/page/%d/" to "Rilisan Terbaru",
         "$mainUrl/advanced-search/page/%d/?status=ongoing&order=update" to "Sedang Tayang",
@@ -90,7 +89,6 @@ class Alqanime : MainAPI() {
         val document = app.get(url, headers = commonHeaders).document
 
         val rawTitle = document.selectFirst("h1.entry-title")?.text()?.trim() ?: return null
-        // Remove "Sub Indo", "BD Batch", "(BD)", "(Episode XX – XX)" and combinations
         val title = rawTitle
             .replace(Regex("\\s*\\(Episode[^)]*\\)", RegexOption.IGNORE_CASE), "")
             .replace(Regex("\\s*Sub Indo\\b.*", RegexOption.IGNORE_CASE), "")
@@ -101,7 +99,6 @@ class Alqanime : MainAPI() {
         val poster = document.selectFirst("div.thumb img")?.attr("src")
         val coverBg = document.selectFirst("div.ime img")?.attr("src")
         val trailerRaw = document.selectFirst("a.trailerbutton")?.attr("href")
-        // Convert YouTube watch URL to embed URL so addRaw = true can play it
         val trailer = trailerRaw?.let { url ->
             val videoId = Regex("[?&]v=([^&]+)").find(url)?.groupValues?.getOrNull(1)
             if (videoId != null) "https://www.youtube.com/embed/$videoId" else url
@@ -112,7 +109,6 @@ class Alqanime : MainAPI() {
             .ifBlank { null }
         val genres = document.select("div.genxed a").map { it.text() }
 
-        // Parse structured metadata from div.spe > span (each has a <b> label)
         val speMap = document.select("div.spe > span").associate { span ->
             val label = span.selectFirst("b")?.text()?.trim() ?: ""
             val value = span.text().replace(label, "").trim()
@@ -138,7 +134,6 @@ class Alqanime : MainAPI() {
         val scoreText = document.selectFirst("strong:contains(Score)")?.text()
             ?.replace("Score", "")?.trim()
 
-        // All episodes + their download links are already on this page (no separate episode pages)
         val episodes = mutableListOf<Episode>()
         for (col in document.select("div.sorattl.collapsible")) {
             val epTitle = col.selectFirst("h3")?.text()?.trim() ?: continue
@@ -148,7 +143,6 @@ class Alqanime : MainAPI() {
             val contentDiv = col.nextElementSibling()
                 ?.takeIf { it.hasClass("content") } ?: continue
 
-            // Collect all Pixeldrain folder IDs from this collapsible
             val pixeldrainFolderIds = mutableListOf<String>()
             for (tr in contentDiv.select("tr")) {
                 for (a in tr.select("div.slink a")) {
@@ -159,7 +153,6 @@ class Alqanime : MainAPI() {
             }
 
             if (pixeldrainFolderIds.isNotEmpty()) {
-                // Group by episode number: epNum → [EpisodeLink, ...]
                 val epMap = mutableMapOf<Int, MutableList<EpisodeLink>>()
                 val epThumbs = mutableMapOf<Int, String>()
                 for (listId in pixeldrainFolderIds) {
@@ -236,7 +229,6 @@ class Alqanime : MainAPI() {
             val resolvedUrl = resolveUrl(rawUrl)
             val qualityInt = quality.fixQuality()
 
-            // Direct Pixeldrain file stream URL → create ExtractorLink directly
             if (resolvedUrl.contains("pixeldrain.com/api/file/")) {
                 callback(newExtractorLink("Pixeldrain", "Pixeldrain", resolvedUrl) {
                     this.referer = "https://pixeldrain.com/"
@@ -259,14 +251,11 @@ class Alqanime : MainAPI() {
         return true
     }
 
-    // Resolve shortener/converter URLs to actual playable/extractable URLs
     private fun resolveUrl(url: String): String {
-        // ouo.io shortener: real URL is in the "s" query param (URL-encoded)
         if (url.contains("ouo.io")) {
             val sParam = Regex("[?&]s=([^&]+)").find(url)?.groupValues?.getOrNull(1)
             if (sParam != null) return URLDecoder.decode(sParam, "UTF-8")
         }
-        // acefile.co/f/{id}/... → acefile.co/player/{id} (required for Filesim extractor)
         if (url.contains("acefile.co/f/")) {
             val id = Regex("/f/(\\w+)").find(url)?.groupValues?.getOrNull(1)
             if (id != null) return "https://acefile.co/player/$id"

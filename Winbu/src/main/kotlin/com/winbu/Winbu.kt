@@ -65,7 +65,6 @@ class Winbu : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        // Extract nonce from homepage inline script
         val homeDoc = app.get(mainUrl, headers = commonHeaders).document
         val ajaxScript = homeDoc.select("script:not([src])").firstOrNull { it.data().contains("ajaxSearch") }
         val nonce = Regex(""""nonce"\s*:\s*"([^"]+)"""").find(ajaxScript?.data() ?: "")
@@ -110,7 +109,6 @@ class Winbu : MainAPI() {
         }
         val description = document.selectFirst("div.mli-desc p")?.text()?.trim()
 
-        // Trailer iframe src — only add if it has an actual video ID
         val trailerSrc = document.selectFirst("#pop-trailer iframe")?.attr("src")
             ?.takeIf { it.contains("youtube.com/embed/") && it.length > "https://www.youtube.com/embed/".length }
 
@@ -156,7 +154,6 @@ class Winbu : MainAPI() {
     ): Boolean {
         val document = app.get(data, headers = commonHeaders).document
 
-        // Resolve filedon.co/embed/ → direct video URL via #app data-page JSON
         suspend fun resolveFiledon(url: String, label: String) {
             val page = app.get(url, headers = commonHeaders + mapOf("Referer" to data)).document
             val dataPage = page.selectFirst("#app")?.attr("data-page") ?: return
@@ -184,7 +181,6 @@ class Winbu : MainAPI() {
             }
         }
 
-        // AJAX: iterate all player options
         document.select(".east_player_option").forEach { player ->
             val post = player.attr("data-post").takeIf { it.isNotEmpty() } ?: return@forEach
             val nume = player.attr("data-nume").takeIf { it.isNotEmpty() } ?: return@forEach
@@ -209,7 +205,6 @@ class Winbu : MainAPI() {
             handleUrl(iframeSrc, label)
         }
 
-        // Download links (Gofile, MEGA, Filedon, BuzzHeavier, etc.)
         document.select("#downloadb li").forEach { li ->
             val quality = li.selectFirst("strong")?.text()?.trim() ?: ""
             li.select("a[href]").forEach { a ->

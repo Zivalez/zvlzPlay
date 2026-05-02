@@ -27,32 +27,25 @@ class Moviebox : MainAPI() {
     )
 
     override val mainPage: List<MainPageData> = mainPageOf(
-        // Indonesia
         "6528093688173053896" to "Trending Film Indonesia",
         "5283462032510044280" to "Trending Drama Indonesia",
         "5848753831881965888" to "Film Horor Indonesia",
-        // Drama
         "4380734070238626200" to "K-Drama",
         "8624142774394406504" to "C-Drama",
         "1164329479448281992" to "Thai Drama",
         "7736026911486755336" to "Drama Barat",
-        // Anime & Animasi
         "5404290953194750296" to "Anime Trending",
         "7132534597631837112" to "Film Animasi",
-        // Umum 
         "872031290915189720"  to "Trending Sekarang",
         "997144265920760504"  to "Film Populer",
-        // Film 
         "1,ForYou"   to "Film Untuk Kamu",
         "1,Hottest"  to "Film Terpanas",
         "1,Latest"   to "Film Terbaru",
         "1,Rating"   to "Film Terbaik",
-        // Serial 
         "2,ForYou"   to "Serial Untuk Kamu",
         "2,Hottest"  to "Serial Terpanas",
         "2,Latest"   to "Serial Terbaru",
         "2,Rating"   to "Serial Terbaik",
-        // Animasi
         "1006,ForYou"  to "Animasi Untuk Kamu",
         "1006,Hottest" to "Animasi Terpanas",
         "1006,Latest"  to "Animasi Terbaru",

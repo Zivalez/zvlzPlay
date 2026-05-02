@@ -8,12 +8,6 @@ import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.Qualities
 import com.lagradost.cloudstream3.utils.newExtractorLink
 
-/**
- * Handles all desustream.info embed pages.
- * Two variants exist:
- *  1. Pages with a direct <video> tag (e.g. ondesuhd) — extract src, unescape HTML entities.
- *  2. Pages with a Blogger iframe — fetch Blogger page, call batchexecute API for MP4 URL.
- */
 open class DesuStream : ExtractorApi() {
     override val name = "DesuStream"
     override val mainUrl = "https://desustream.info/"
@@ -24,7 +18,6 @@ open class DesuStream : ExtractorApi() {
         try {
             val doc = app.get(url, referer = referer).document
 
-            // Case 1: direct <video> tag (e.g. ondesuhd pages)
             val videoSrc = doc.selectFirst("video source")?.attr("src")?.takeIf { it.isNotBlank() }
             if (videoSrc != null) {
                 val itag = Regex("""itag=(\d+)""").find(videoSrc)?.groupValues?.get(1)
@@ -35,7 +28,6 @@ open class DesuStream : ExtractorApi() {
                 return sources
             }
 
-            // Case 2: Blogger iframe — needs batchexecute
             val bloggerUrl = doc.selectFirst("iframe#myIframe")?.attr("abs:src")
                 ?: doc.selectFirst("iframe[src*='blogger.com/video.g']")?.attr("abs:src")
                 ?: return sources
@@ -54,8 +46,6 @@ open class DesuStream : ExtractorApi() {
                 data = mapOf("f.req" to """[[["WcwnYd","[\"$token\",\"\",0]",null,"generic"]]]""")
             ).text
 
-            // URL is doubly JSON-encoded: = → \u003d (inner) → \\u003d (outer)
-            // regex allows backslash sequences: (?:[^"\\]|\\.)*
             val urlRegex = Regex("""https://(?:[^"\\]|\\.)*googlevideo\.com/videoplayback(?:[^"\\]|\\.)*""")
             urlRegex.findAll(response).forEach { match ->
                 val videoUrl = match.value
@@ -84,10 +74,6 @@ open class DesuStream : ExtractorApi() {
     }
 }
 
-/**
- * Handles filedon.co embed pages (Inertia.js app).
- * The direct MP4 URL is embedded in the #app[data-page] JSON prop "url".
- */
 class Filedon : ExtractorApi() {
     override val name = "Filedon"
     override val mainUrl = "https://filedon.co/embed/"
@@ -99,7 +85,6 @@ class Filedon : ExtractorApi() {
             val doc = app.get(url, referer = referer).document
             val dataPage = doc.selectFirst("#app")?.attr("data-page") ?: return sources
 
-            // Extract the pre-signed MP4 URL from the Inertia props
             val videoUrl = Regex(""""url":"(https://[^"]+\.mp4[^"]*?)"""").find(dataPage)
                 ?.groupValues?.get(1)
                 ?.replace("\\/", "/")

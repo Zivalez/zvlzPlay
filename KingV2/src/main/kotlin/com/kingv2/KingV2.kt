@@ -33,7 +33,6 @@ class KingV2 : MainAPI() {
         }
 
         val document = app.get(requestUrl).document
-        // Collect candidate elements and dedupe by href to avoid duplicate cards
         var items = document.select("li.video-card, div.video-block, div.col-6, a.thumb, a.group")
         if (items.isEmpty()) {
             items = document.select("a.thumb, a.group")
@@ -41,7 +40,6 @@ class KingV2 : MainAPI() {
 
         val seen = mutableSetOf<String>()
         items.forEach { el ->
-            // element might be an anchor itself or a container with an anchor inside
             val a = when {
                 el.tagName().equals("a", true) -> el
                 else -> el.selectFirst("a.thumb, a.infos, a.group, a") ?: return@forEach
@@ -51,11 +49,9 @@ class KingV2 : MainAPI() {
             if (hrefRaw.isBlank()) return@forEach
             val href = if (hrefRaw.startsWith("http")) hrefRaw else "$mainUrl/${hrefRaw.trimStart('/') }"
 
-            // skip duplicates
             if (seen.contains(href)) return@forEach
             seen.add(href)
 
-            // title fallbacks: title attr, span.video-card-title, span.title, aria-label, img alt
             var title = a.attr("title").ifBlank {
                 a.selectFirst("span.video-card-title")?.text()
                     ?: a.selectFirst("span.title")?.text()
@@ -63,7 +59,6 @@ class KingV2 : MainAPI() {
                     ?: a.selectFirst("img")?.attr("alt")
                     ?: ""
             }
-            // If title still blank, try to find another anchor on the page with the same href that contains text
             if (title.isBlank()) {
                 val anchors = document.select("a[href]")
                 for (other in anchors) {
@@ -111,12 +106,10 @@ class KingV2 : MainAPI() {
         val ld = doc.select("script[type=application/ld+json]").mapNotNull{ it.data() }.firstOrNull()
         var poster = doc.selectFirst("meta[property=og:image]")?.attr("content") ?: doc.selectFirst("img.video-img")?.attr("data-src")
 
-        // get playlist from iframe embed or meta ld
         var playlist: String? = null
         playlist = doc.selectFirst("meta[itemprop=embedURL]")?.attr("content")
         if (playlist.isNullOrBlank()) playlist = doc.selectFirst("iframe")?.attr("data-litespeed-src")?.let { if (it.startsWith("//")) "https:$it" else it }
 
-        // try JSON-LD VideoObject contentUrl
         if (playlist.isNullOrBlank() && ld != null) {
             try {
                 val parsed = parseJson<Map<String, Any>>(ld)
@@ -127,7 +120,7 @@ class KingV2 : MainAPI() {
             } catch (_: Exception) {}
         }
 
-        // Normalize playlist (if embed link points to a player, we may need to resolve it)
+
 
         val durationStr = doc.selectFirst(".duration")?.text() ?: doc.selectFirst("meta[itemprop=duration]")?.attr("content")
         val duration = durationStr?.split(":")?.mapNotNull { it.toIntOrNull() }?.let { parts ->
@@ -166,26 +159,21 @@ class KingV2 : MainAPI() {
             try {
                 val doc = app.get(c).document
 
-                // 1) direct data-playlist on video
                 playlist = doc.selectFirst("video#bokep-player")?.attr("data-playlist")
                 if (!playlist.isNullOrBlank()) { foundReferer = c; break }
 
-                // 2) meta tags
                 playlist = doc.selectFirst("meta[property=\"og:video\"]")?.attr("content") ?: doc.selectFirst("meta[itemprop=contentUrl]")?.attr("content")
                 if (!playlist.isNullOrBlank()) { foundReferer = c; break }
 
-                // 3) search HTML for any direct .m3u8 link
                 val html = doc.html()
                 val m = m3u8Regex.find(html)
                 if (m != null) { playlist = m.value; foundReferer = c; break }
 
-                // 4) try iframe embed
                 val iframeEl = doc.selectFirst("iframe")
                 val iframe = iframeEl?.attr("data-litespeed-src") ?: iframeEl?.attr("src")
                 if (!iframe.isNullOrBlank()) {
                     val iframeUrl = if (iframe.startsWith("//")) "https:$iframe" else if (iframe.startsWith("http")) iframe else "$mainUrl/${iframe.trimStart('/') }"
 
-                    // try plain HTTP fetch of embed
                     try {
                         val embedDoc = app.get(iframeUrl).document
                         playlist = embedDoc.selectFirst("meta[itemprop=contentUrl]")?.attr("content") ?: embedDoc.selectFirst("meta[property=\"og:video\"]")?.attr("content")
@@ -196,24 +184,16 @@ class KingV2 : MainAPI() {
                         if (m2 != null) { playlist = m2.value; foundReferer = iframeUrl; break }
                     } catch (_: Exception) {}
 
-                    // If HTTP-only fetch couldn't resolve the embed, delegate to shared extractor
-                    // This lets the app/resolver handle JS-heavy hosts (e.g., stream18) without running Playwright here
                     try {
                         loadExtractor(iframeUrl, c, subtitleCallback) { link ->
-                            // Forward extracted links to the caller
                             callback(link)
                         }
-                        // We delegated extraction to loadExtractor; consider links provided
                         return true
                     } catch (_: Exception) {
-                        // ignore and continue trying other candidates
                     }
 
-                    // WebView/Playwright is not allowed inside providers.
-                    // Rely on HTTP fetching and HTML heuristics only in-provider.
                 }
 
-                // 5) JSON-LD fallback
                 val ld = doc.select("script[type=application/ld+json]").mapNotNull { it.data() }.firstOrNull()
                 if (!ld.isNullOrBlank()) {
                     try {
@@ -223,7 +203,6 @@ class KingV2 : MainAPI() {
                     } catch (_: Exception) {}
                 }
 
-                // 6) try to find hlsplaylist.php or hlsnew2.php pattern in HTML and build absolute URL
                 val hlsMatch = Regex("(https?://[^\"]*hls(?:playlist|new2)\\.php[^\"']*)").find(html)
                 if (hlsMatch != null) {
                     playlist = hlsMatch.groupValues[1]
@@ -231,18 +210,15 @@ class KingV2 : MainAPI() {
                 }
 
             } catch (e: Exception) {
-                // ignore and try next candidate
             }
         }
 
         if (playlist.isNullOrBlank()) return false
 
-        // Normalize playlist URL and pick referer
         if (playlist.startsWith("//")) playlist = "https:$playlist"
         if (playlist.startsWith("/")) playlist = "$mainUrl$playlist"
         val referer = foundReferer ?: "$mainUrl/"
 
-        // Use page/embed URL as referer when generating m3u8 links
         M3u8Helper.generateM3u8(name, playlist, referer).forEach(callback)
         return true
     }

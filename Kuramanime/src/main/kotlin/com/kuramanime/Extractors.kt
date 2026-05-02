@@ -1,4 +1,3 @@
-// zvlzPlay\Kuramanime\src\main\kotlin\com\kuramanime\Extractors.kt
 
 package com.kuramanime
 

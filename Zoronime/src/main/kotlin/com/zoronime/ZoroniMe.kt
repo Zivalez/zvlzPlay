@@ -37,7 +37,6 @@ class ZoroniMe : MainAPI() {
         "$mainUrl/completed?page=%d" to "Selesai"
     )
 
-    // Decode Next.js /_next/image?url=ENCODED_URL&w=...&q=... to real poster URL
     private fun extractNextImageUrl(srcAttr: String): String? {
         return Regex("""url=(https?[^&\s]+)""").find(srcAttr)?.groupValues?.get(1)?.let {
             try { URLDecoder.decode(it, "UTF-8") } catch (_: Exception) { it }
@@ -59,7 +58,6 @@ class ZoroniMe : MainAPI() {
             }
         }
 
-        // Find the last page number from visible pagination links
         val lastPage = document.select("a[href*='page=']")
             .mapNotNull { Regex("page=(\\d+)").find(it.attr("href"))?.groupValues?.get(1)?.toIntOrNull() }
             .maxOrNull() ?: 1
@@ -67,7 +65,6 @@ class ZoroniMe : MainAPI() {
         return newHomePageResponse(request.name, cards, hasNext = page < lastPage)
     }
 
-    // Search from the full A-Z anime list (all 1700+ titles in one page)
     override suspend fun search(query: String): List<SearchResponse> {
         val document = app.get("$mainUrl/anime").document
         return document.select("a[href^='/anime/']").mapNotNull { el ->
@@ -82,12 +79,10 @@ class ZoroniMe : MainAPI() {
     override suspend fun load(url: String): LoadResponse {
         val document = app.get(url).document
 
-        // Extract from JSON-LD TVSeries schema (has direct poster URL, title, genres, etc.)
         val tvSeriesJson = document.select("script[type='application/ld+json']")
             .mapNotNull { it.data().takeIf { d -> d.contains("\"TVSeries\"") } }
             .firstOrNull()
 
-        // Extract fields from JSON-LD string via regex (no external JSON library needed)
         fun String?.jsonStr(key: String) = this?.let {
             Regex(""""$key"\s*:\s*"((?:[^"\\]|\\.)*)"""").find(it)?.groupValues?.get(1)
         }
@@ -101,16 +96,13 @@ class ZoroniMe : MainAPI() {
                 ?.let { arr -> Regex(""""([^"]+)"""").findAll(arr).map { m -> m.groupValues[1] }.toList() }
         } ?: emptyList()
 
-        // Status: ongoing badge has bg-green-500, completed has other colors
         val status = if (document.selectFirst("span[class*='bg-green-500']") != null)
             ShowStatus.Ongoing else ShowStatus.Completed
 
-        // Synopsis: find h2 with "Sinopsis" text, take its next sibling's text
         val synopsisH2 = document.select("h2").firstOrNull { it.text().contains("Sinopsis", ignoreCase = true) }
         val synopsis = synopsisH2?.nextElementSibling()?.text()?.trim()
             ?: synopsisH2?.parent()?.nextElementSibling()?.text()?.trim()
 
-        // Episodes: listed newest-first, reverse to ascending order
         val episodes = document.select("a[href*='/episode/']")
             .distinctBy { it.attr("href") }
             .reversed()
@@ -141,22 +133,19 @@ class ZoroniMe : MainAPI() {
     ): Boolean {
         val html = app.get(data).text
 
-        // Find the RSC flight push block that contains the download quality list
         val pushPattern = Regex("""self\.__next_f\.push\(\[1,"((?:[^"\\]|\\.)*)"\]\)""")
         val inner = pushPattern.findAll(html)
             .map { it.groupValues[1] }
             .firstOrNull { it.contains("qualityList") } ?: return false
 
-        // Unescape the JSON-encoded string (Next.js RSC encoding)
         val unescaped = inner
-            .replace("\\\\", "\u0001")  // temp: protect literal backslash
+            .replace("\\\\", "\u0001")
             .replace("\\\"", "\"")
             .replace("\\n", "\n")
             .replace("\\r", "\r")
             .replace("\\t", "\t")
             .replace("\u0001", "\\")
 
-        // Locate "download":{ and extract its JSON object via brace counting
         val dlIdx = unescaped.indexOf("\"download\":{")
         if (dlIdx < 0) return false
 
@@ -186,7 +175,6 @@ class ZoroniMe : MainAPI() {
             for (urlEntry in quality.urlList) {
                 val rawUrl = urlEntry.url
 
-                // Pixeldrain single-file link: /u/{id} → direct stream via /api/file/{id}
                 val pixelMatch = Regex("""pixeldrain\.com/u/([A-Za-z0-9]+)""").find(rawUrl)
                 if (pixelMatch != null) {
                     callback(

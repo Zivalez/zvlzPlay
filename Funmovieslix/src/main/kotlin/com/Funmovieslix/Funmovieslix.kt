@@ -166,7 +166,6 @@ class Funmovieslix : MainAPI() {
     ): Boolean {
         val document = app.get(data).document
 
-        // 1. Get all <script> tags that contain "embeds"
         val scriptContent = document.select("script")
             .map { it.data() }
             .firstOrNull { it.contains("const embeds") }
@@ -174,7 +173,7 @@ class Funmovieslix : MainAPI() {
 
         val regex = Regex("""https:\\/\\/[^"]+""")
         val urls = regex.findAll(scriptContent)
-            .map { it.value.replace("\\/", "/").replace("\\", "") } // unescape \/ → / and remove \
+            .map { it.value.replace("\\/", "/").replace("\\", "") }
             .toList()
         urls.forEach { url ->
             loadExtractor(url,subtitleCallback,callback)

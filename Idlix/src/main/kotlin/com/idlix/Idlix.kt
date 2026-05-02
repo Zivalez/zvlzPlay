@@ -302,14 +302,13 @@ class Idlix : MainAPI() {
     }
 
     private suspend fun loadPentosLinks(
-        kind: String, // "movie" | "episode"
+        kind: String,
         contentId: String,
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         Log.d(TAG, "loadPentosLinks($kind): contentId=$contentId")
 
-        // Step 1: Get play info with claim token
         val playInfoUrl = "$mainUrl/api/watch/play-info/$kind/$contentId"
 
         val playInfo = app.get(
@@ -331,7 +330,6 @@ class Idlix : MainAPI() {
             return false
         }
 
-        // Step 2: Redeem claim token to get stream manifest URL
         val redeemUrl = playInfo.redeemUrl ?: "https://e2e.majorplay.net/api/play"
         val redeemBody = """{"claim":"${playInfo.claim}"}""".toRequestBody("text/plain".toMediaType())
 
@@ -358,9 +356,6 @@ class Idlix : MainAPI() {
 
         Log.d(TAG, "loadPentosLinks($kind): success url=${redeemRes.url}")
 
-        // Step 3: Return HLS M3U8 as extractor link.
-        // The URL has .json extension but Content-Type is application/vnd.apple.mpegurl.
-        // Forward Origin & Referer so segment fetches on rotated CDNs (wiseacademia.asia, etc.) succeed.
         callback.invoke(
             newExtractorLink(
                 name,
@@ -377,7 +372,6 @@ class Idlix : MainAPI() {
             }
         )
 
-        // Step 4: Forward subtitles if any (API uses `path`, fallback to `url`)
         redeemRes.subtitles?.forEach { sub ->
             val subUrl = sub.path ?: sub.url ?: return@forEach
             if (subUrl.isEmpty()) return@forEach

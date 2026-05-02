@@ -1,4 +1,3 @@
-// Kuramanime\src\main\kotlin\com\kuramanime\Kuramanime.kt
 
 package com.kuramanime
 
@@ -23,7 +22,6 @@ class Kuramanime : MainAPI() {
     override val usesWebView = true
     override val supportedTypes = setOf(TvType.Anime, TvType.AnimeMovie, TvType.OVA)
 
-    // Add User-Agent to bypass potential bot checks
     private val userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     private val commonHeaders = mapOf(
         "User-Agent" to userAgent,
@@ -208,18 +206,10 @@ class Kuramanime : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        // FAKTA TEKNIS:
-        // 1. GET awal return v1 decoy. Bypass = POST ke URL+query token+page=N
-        //    dengan body `authorization=<token>` (computed by obfuscated leviathan.js).
-        // 2. Token authorization SESSION-SCOPED, generated runtime — TIDAK BISA
-        //    direplikasi native, jadi WAJIB pakai WebView untuk eksekusi JS.
-        // 3. v2 HTML berisi 3 <source> di video#player (r2.cloudflarestorage.com
-        //    atau *.my.id/kdrive/...mp4) + download links di #animeDownloadLink.
 
         val initialResponse = app.get(data, headers = commonHeaders)
         var document = initialResponse.document
 
-        // v1 decoy TIDAK punya <source> tag dan TIDAK punya <a> di download section.
         val isDecoy = document.select("#animeDownloadLink a[href]").isEmpty() ||
             document.select("video#player source[src]").isEmpty()
         Log.d(TAG, "loadLinks: data=$data, isDecoy=$isDecoy")
@@ -234,9 +224,6 @@ class Kuramanime : MainAPI() {
             }
         }
 
-        // EXTRACT STREAMS dari <source>. Pattern src bervariasi:
-        //   - r2.cloudflarestorage.com/kuramadrive/.../*.mp4 (R2 direct signed)
-        //   - *.my.id/kdrive/<hash>/*.mp4 (rotating proxy)
         var streamCount = 0
         document.select("video#player source[src]").forEach { source ->
             val src = source.attr("src")
@@ -264,7 +251,6 @@ class Kuramanime : MainAPI() {
             streamCount++
         }
 
-        // HLS fallback
         val hlsSrc = document.selectFirst("video#player")?.attr("data-hls-src").orEmpty()
         if (hlsSrc.isNotBlank() && hlsSrc.startsWith("http")) {
             callback.invoke(
@@ -276,7 +262,6 @@ class Kuramanime : MainAPI() {
             streamCount++
         }
 
-        // EXTRACT DOWNLOAD LINKS dari #animeDownloadLink
         val downloadSection = document.selectFirst("div#animeDownloadLink")
         var currentQuality = "Unknown"
         var dlCount = 0
@@ -292,7 +277,6 @@ class Kuramanime : MainAPI() {
                             url.contains("dropbox.com") ->
                                 handleDropbox(url, currentQuality, callback)
                             url.contains("mypikpak.com") -> {
-                                // Skip — butuh auth login
                             }
                             else -> loadFixedExtractor(
                                 url, currentQuality, mainUrl, subtitleCallback, callback
@@ -307,18 +291,6 @@ class Kuramanime : MainAPI() {
         return streamCount > 0 || dlCount > 0
     }
 
-    /**
-     * Bypass v1 decoy via WebView script injection.
-     *
-     * Pakai parameter `script` + `scriptCallback` di WebViewResolver yang internally
-     * pakai `view.evaluateJavascript(script) { scriptCallback(...) }`. Script di-eksekusi
-     * pada SETIAP shouldInterceptRequest. Kita poll DOM, return outerHTML kalau v2
-     * sudah ter-inject (signal: ada <source> + <a> di download section).
-     *
-     * `interceptUrl` sengaja gak match apapun → WebView jalan sampai script capture
-     * v2 atau timeout. `additionalUrls = .*` bikin requestCallBack di-check tiap
-     * request → destroy WebView dini setelah HTML ter-capture.
-     */
     private suspend fun tryWebViewBypass(
         url: String,
         @Suppress("UNUSED_PARAMETER") cookies: Map<String, String>
@@ -425,12 +397,6 @@ class Kuramanime : MainAPI() {
         }
     }
 
-    /**
-     * Dropbox download URL: convert `dl=0` (preview page) → `dl=1` (direct file).
-     * Format input: `https://www.dropbox.com/scl/fi/.../filename.mkv?rlkey=...&dl=0`
-     * Setelah `dl=1`, Dropbox akan redirect ke `dl.dropboxusercontent.com/...` direct file.
-     * Player CloudStream bisa langsung handle URL final tersebut sebagai VIDEO.
-     */
     private suspend fun handleDropbox(
         url: String,
         quality: String,

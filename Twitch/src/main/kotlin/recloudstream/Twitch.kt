@@ -25,7 +25,7 @@ import org.jsoup.nodes.Element
 import java.lang.RuntimeException
 
 class Twitch : MainAPI() {
-    override var mainUrl = "https://twitchtracker.com" // Easiest to scrape
+    override var mainUrl = "https://twitchtracker.com"
     override var name = "Twitch"
     override val supportedTypes = setOf(TvType.Live)
 
@@ -42,7 +42,7 @@ class Twitch : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         return when (request.name) {
-            gamesName -> newHomePageResponse(parseGames(), hasNext = false) // Get top games
+            gamesName -> newHomePageResponse(parseGames(), hasNext = false)
             else -> {
                 val doc = app.get(request.data, params = mapOf("page" to page.toString())).document
                 val channels = doc.select("table#channels tr").map { element ->
@@ -79,7 +79,7 @@ class Twitch : MainAPI() {
         val doc = app.get("$mainUrl/games").document
         return doc.select("div.ranked-item")
             .take(5)
-            .mapNotNull { element -> // No apmap to prevent getting 503 by cloudflare
+            .mapNotNull { element ->
                 val game = element.select("div.ri-name > a")
                 val url = fixUrl(game.attr("href"))
                 val name = game.text()

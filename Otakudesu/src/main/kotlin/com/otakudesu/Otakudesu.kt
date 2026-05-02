@@ -143,8 +143,6 @@ class Otakudesu : MainAPI() {
     ): Boolean {
         val document = app.get(data).document
 
-        // --- Mirror streams ---
-        // Fetch nonce once, then fire all mirror AJAX calls in parallel with amap
         try {
             val scriptData = document.select("script:containsData(action:)").lastOrNull()?.data()
             val token = scriptData?.substringAfter("{action:\"")?.substringBefore("\"}").toString()
@@ -173,9 +171,6 @@ class Otakudesu : MainAPI() {
             e.printStackTrace()
         }
 
-        // --- Download links ---
-        // Collect all valid links first, then process in parallel with amap.
-        // Filter by link text (it.second) to correctly apply the blacklist.
         document.select("div.download li").flatMap { ele ->
             val quality = getQuality(ele.select("strong").text())
             ele.select("a")
