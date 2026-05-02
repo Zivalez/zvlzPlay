@@ -1,9 +1,0 @@
-- generic [active] [ref=e1]:
-  - application "Video Player" [ref=e2]:
-    - generic [ref=e4]:
-      - generic [ref=e8]: Volume 90%
-      - generic:
-        - button "Play" [ref=e9] [cursor=pointer]:
-          - img
-        - text: • /
-  - generic [ref=e11]: adahls

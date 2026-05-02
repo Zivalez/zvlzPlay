@@ -13,6 +13,7 @@ local.properties
 
 # Playwright
 node_modules/
+.playwright-mcp/
 /test-results/
 /playwright-report/
 /blob-report/
@@ -22,6 +23,7 @@ playwright.config.ts
 
 # Lainnya
 build_log.txt
+.kotlin/
 
 # Tests
 tests/
