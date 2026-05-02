@@ -31,13 +31,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("org.json:json:20240303")
 }
-version = 11
+version = 12
 
 cloudstream {
     // metadata
     language = "id"
     description = "Nonton Film & Series Streaming Idlix Subtitle Indonesia"
-    authors = listOf("Hexated", "Phisher98", "Asm0d3usX", "Zivalez")
+    authors = listOf("Hexated", "Phisher98", "Zivalez")
     status = 1
     tvTypes = listOf("Movie", "TvSeries", "AsianDrama", "Anime")
     iconUrl = "https://cloudstream.zvlz.my.id/icon/idlix.png"
