@@ -1,7 +1,9 @@
 <h1 align="center">CloudStream x zvlzPlay</h1>
 
 <p align="center">
+<a href="https://github.com/Zivalez/zvlzPlay">
 <img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="80" height="80">
+</a>
 </p>
 
 <p align="center">
