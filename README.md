@@ -5,8 +5,7 @@
     <picture>
       <img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="80" height="80">
     </picture>
-  </a>
-  <a href="https://github.com/Zivalez/zvlzPlay">
+  </a><a href="https://github.com/Zivalez/zvlzPlay">
     <picture>
       <img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="80" height="80">
     </picture>
