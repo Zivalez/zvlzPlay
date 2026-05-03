@@ -1,12 +1,13 @@
 <h1 align="center">CloudStream x zvlzPlay</h1>
 
-<p align="center" style="display: flex; justify-content: center; gap: 0;">
-  <a href="https://github.com/recloudstream/cloudstream">
-    <img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="80" height="80">
-  </a>
-  <a href="https://github.com/Zivalez/zvlzPlay">
-    <img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="80" height="80">
-  </a>
+<p align="center">
+  <table border="0" cellspacing="0" cellpadding="0" style="border: none; display: inline-table;">
+    <tr>
+      <td style="border: none; padding: 0;"><a href="https://github.com/recloudstream/cloudstream"><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="80" height="80"></a></td>
+      <td style="border: none; padding: 0; width: 5px;"></td>
+      <td style="border: none; padding: 0;"><a href="https://github.com/Zivalez/zvlzPlay"><img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="80" height="80"></a></td>
+    </tr>
+  </table>
 </p>
 
 <p align="center">
