@@ -1,19 +1,17 @@
 <h1 align="center">CloudStream x zvlzPlay</h1>
 
-<div align="center" width="100%">
-    <img src="https://avatars.githubusercontent.com/u/142050504" width="128" alt="zvlzPlay" />
-</div>
+<p align="center">
+<a href="https://github.com/recloudstream/cloudstream"><picture><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="100" height="100"></picture></a>
+<a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="100" height="100"></picture></a>
+</p>
 
 <p align="center">
 Streaming dan download berbagai konten seperti Anime, K-Drama, J-Drama, C-Drama,<br>
 TV Series, Movies, Live TV, Live Streamer, dan lainnya.<br>
-(mengandung konten NSFW)
+(mengandung konten NSFW)<br><br>
+<a target="_blank" href="LICENCE"><img src="https://img.shields.io/github/license/Zivalez/zvlzPlay"/></a>
+<a target="_blank" href="https://github.com/Zivalez/zvlzPlay"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay"/></a>
 </p>
-
-<p align="center">
-<a href="#">Bahasa Indonesia</a> | <a href="README_EN.md">English</a> | <a href="README_JP.md">日本語</a>
-</p>
-
 
 ## Apa itu CloudStream?
 
@@ -30,7 +28,7 @@ CloudStream sendiri tidak menyediakan konten bawaan, aplikasi ini hanya berfungs
 > **zvlzPlay** = ekstensi untuk mendapatkan konten streaming
 
 
-## Fitur https://cloudstream.zvlz.my.id/cloudstream.png
+## Fitur
 
 - Tanpa iklan
 - Tanpa tracking/analytics
