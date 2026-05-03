@@ -58,9 +58,9 @@ https://github.com/recloudstream/cloudstream/releases
 
 1. まずCloudStreamアプリをインストールしてください。\
    インストール直後は拡張機能が未インストールのため、画面は空の状態です。
-2. **Settings**を開きます。
-3. **Extensions**に進みます。
-4. **Add Repository**を選択します。
+2. `Settings`を開きます。
+3. `Extensions`に進みます。
+4. `Add Repository`を選択します。
 5. 以下のURLをRepository URLとして入力してください：
 ```
 https://cloudstream.zvlz.my.id/builds/repo.json

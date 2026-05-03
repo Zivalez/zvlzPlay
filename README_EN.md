@@ -58,9 +58,9 @@ https://github.com/recloudstream/cloudstream/releases
 
 1. Install the CloudStream app first.\
    After installation, the app will appear empty because no extensions are installed yet.
-2. Open **Settings**.
-3. Go to **Extensions**.
-4. Select **Add Repository**.
+2. Open `Settings`.
+3. Go to `Extensions`.
+4. Select `Add Repository`.
 5. Enter the following URL as the Repository URL:
 ```
 https://cloudstream.zvlz.my.id/builds/repo.json

@@ -1,10 +1,11 @@
 <h1 align="center">CloudStream x zvlzPlay</h1>
 
-<p align="center">
+<p align="center" style="display: flex; justify-content: center; gap: 0;">
+  <a href="https://github.com/recloudstream/cloudstream">
+    <img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="80" height="80">
+  </a>
   <a href="https://github.com/Zivalez/zvlzPlay">
-    <picture>
-      <img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="80" height="80">
-    </picture>
+    <img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="80" height="80">
   </a>
 </p>
 
@@ -34,7 +35,7 @@ CloudStream sendiri tidak menyediakan konten bawaan, aplikasi ini hanya berfungs
 > **zvlzPlay** = ekstensi untuk mendapatkan konten streaming
 
 
-## Fitur
+## Fitur https://cloudstream.zvlz.my.id/cloudstream.png
 
 - Tanpa iklan
 - Tanpa tracking/analytics
@@ -58,9 +59,9 @@ https://github.com/recloudstream/cloudstream/releases
 
 1. Install aplikasi CloudStream terlebih dahulu.\
    Setelah install, tampilan akan kosong karena belum ada ekstensi yang terpasang.
-2. Buka **Settings**
-3. Masuk ke **Extensions**
-4. Pilih **Add Repository**
+2. Buka `Settings`.
+3. Masuk ke `Extensions`.
+4. Pilih `Add Repository`.
 5. Masukkan URL berikut sebagai Repository URL:
 ```
 https://cloudstream.zvlz.my.id/builds/repo.json
