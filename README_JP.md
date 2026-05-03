@@ -1,12 +1,8 @@
 <h1 align="center">CloudStream x zvlzPlay</h1>
 
-<p align="center">
-  <a href="https://github.com/Zivalez/zvlzPlay">
-    <picture>
-      <img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="80" height="80">
-    </picture>
-  </a>
-</p>
+<div align="center" width="100%">
+    <img src="https://avatars.githubusercontent.com/u/142050504" width="128" alt="zvlzPlay" />
+</div>
 
 <p align="center">
 アニメ、韓国ドラマ、日本ドラマ、中国ドラマ、海外ドラマ、<br>

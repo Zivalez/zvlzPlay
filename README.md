@@ -1,17 +1,8 @@
 <h1 align="center">CloudStream x zvlzPlay</h1>
 
-<p align="center">
-  <a href="https://github.com/recloudstream/cloudstream">
-    <picture>
-      <img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="80" height="80">
-    </picture>
-  </a><!--
-  --><a href="https://github.com/Zivalez/zvlzPlay">
-    <picture>
-      <img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="80" height="80">
-    </picture>
-  </a>
-</p>
+<div align="center" width="100%">
+    <img src="https://avatars.githubusercontent.com/u/142050504" width="128" alt="zvlzPlay" />
+</div>
 
 <p align="center">
 Streaming dan download berbagai konten seperti Anime, K-Drama, J-Drama, C-Drama,<br>
