@@ -6,26 +6,26 @@
 </p>
 
 <p align="center">
-Streaming dan download berbagai konten seperti Anime, K-Drama, J-Drama, C-Drama,<br>
-TV Series, Movies, Live TV, Live Streamer, dan lainnya.<br>
-(mengandung konten NSFW)<br><br>
+Kumpulan plugin CloudStream buat nonton dan download Anime, Drama, Movie,<br>
+TV Series, Live TV, Live Streamer, dll.<br>
+(Mengandung konten NSFW)<br><br>
 <a target="_blank" href="LICENCE"><img src="https://img.shields.io/github/license/Zivalez/zvlzPlay"/></a>
 <a target="_blank" href="https://github.com/Zivalez/zvlzPlay"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay"/></a>
 </p>
 
 ## Apa itu CloudStream?
 
-**CloudStream** adalah aplikasi Android open-source untuk menonton film, anime, drama, dan TV series secara gratis, tanpa iklan, dan tanpa perlu membuat akun.
+**CloudStream** itu aplikasi open-source buat nonton film, anime, drama, sama TV series. Gratis, tanpa iklan.
 
-CloudStream sendiri tidak menyediakan konten bawaan, aplikasi ini hanya berfungsi sebagai player dan mesin pencari. Untuk bisa menonton, kamu perlu memasang **ekstensi (plugin)** yang bertugas mengambil data video dari berbagai situs streaming di internet.
+Tapi CloudStream ga langsung bawa konten dari awal. Anggap aja dia cuma media player + mesin pencari. Biar bisa dipake nonton, kamu perlu pasang **ekstensi** yang ngambil data video dari berbagai situs streaming.
 
 
 ## Apa itu zvlzPlay?
 
-**zvlzPlay** adalah kumpulan ekstensi/provider untuk CloudStream yang mendukung berbagai situs streaming Indonesia dan internasional.
+**zvlzPlay** itu sebuah ekstensi, Kumpulan provider CloudStream yang isinya berbagai situs streaming, kebanyakan Indonesia tapi ada juga yang internasional.
 
 > **CloudStream** = aplikasinya (wadah)\
-> **zvlzPlay** = ekstensi untuk mendapatkan konten streaming
+> **zvlzPlay** = ekstensi buat nyari sumber tontonan
 
 
 ## Fitur
@@ -36,33 +36,32 @@ CloudStream sendiri tidak menyediakan konten bawaan, aplikasi ini hanya berfungs
 - Dukungan HP dan TV
 - Chromecast
 - Skip opening
-- Tidak perlu login
-- Bisa memilih dan mengganti provider sesuai kebutuhan
-- Resolusi tergantung provider (sebagian besar 1080p ke atas)
-- Universal search, semakin banyak provider yang dipasang, semakin lengkap hasil pencariannya
+- Bisa pilih dan gonta-ganti provider sesuka hati
+- Resolusi tergantung provider, banyak yang 1080p ke atas
+- Universal search, makin banyak provider yang dipasang, makin rame hasilnya
 
 
 ## Download Aplikasi
 
-Unduh CloudStream di sini:\
+Ambil CloudStream dari sini:\
 https://github.com/recloudstream/cloudstream/releases
 
 
 ## Cara Install dan Pasang Ekstensi zvlzPlay
 
-1. Install aplikasi CloudStream terlebih dahulu.\
-   Setelah install, tampilan akan kosong karena belum ada ekstensi yang terpasang.
-2. Buka `Settings`.
-3. Masuk ke `Extensions`.
-4. Pilih `Add Repository`.
+1. Install CloudStream dulu.\
+   Kalau habis install tampilannya kosong, itu normal karna belum ada ekstensi.
+2. Buka **Settings**.
+3. Masuk ke **Extensions**.
+4. Pilih **Add Repository**.
 5. Masukkan URL berikut sebagai Repository URL:
 ```
 https://cloudstream.zvlz.my.id/builds/repo.json
 ```
-6. Nama repository bisa dikosongkan atau diisi sesuai keinginan (misalnya: `zvlzPlay`).
-7. Setelah repository berhasil ditambahkan, buka **zvlzPlay** dan pilih provider yang ingin digunakan.
-8. Kembali ke **Home Screen**, lalu pilih provider di pojok kanan bawah.
-9. Selesai, selamat menonton.
+6. Nama repository bebas, boleh dikosongin atau isi aja `zvlzPlay`.
+7. Kalau repository udah masuk, buka **zvlzPlay** lalu install provider yang mau dipake.
+8. Balik ke **Home Screen**, terus pilih provider dari pojok kanan bawah.
+9. Kelar.
 
 
 ## Daftar Provider
@@ -87,35 +86,35 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Twitch | Live Streamer Global | ✅ Aktif |
 
 Keterangan status:
-- ✅ **Aktif** : stabil dan bisa digunakan secara normal
-- 🧪 **Beta** : bisa digunakan tetapi belum sepenuhnya stabil
-- ❌ **Mati** : situs atau server sedang down, sementara tidak bisa digunakan
+- ✅ **Aktif** : aman dipake, harusnya jalan normal
+- 🧪 **Beta** : bisa dipake, tapi mungkin masih ada ngadat-ngadatnya
+- ❌ **Mati** : situs/server lg bermasalah, jadi sementara ga bisa dipake
 
 
 ## FAQ
 
 ### Kenapa setelah install aplikasinya kosong?
-CloudStream membutuhkan ekstensi (repository) terlebih dahulu. Ikuti langkah di bagian [Cara Install](#cara-install-dan-pasang-ekstensi-zvlzplay) untuk menambahkan repository.
+Karna CloudStream butuh ekstensi dulu. Ikuti langkah di bagian [Cara Install](#cara-install-dan-pasang-ekstensi-zvlzplay) buat nambahin repository.
 
 ### Provider mana yang paling bagus untuk Anime?
-- **Samehadaku** : paling lengkap dengan streaming tercepat
-- **Kuramanime** : update tercepat dan stabil
-- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime**, **Gomunime** : alternatif lainnya
+- **Samehadaku** : lumayan lengkap dan streamingnya kenceng
+- **Kuramanime** : update paling cepet dan stabil
+- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime**, **Gomunime** : bisa jadi cadangan kalau yang lain lagi rewel
 
 ### Provider mana untuk Drama dan Movie?
-- **Idlix** : paling lengkap
-- **LayarKaca**, **Funmovieslix**, **Pencurimovie**, **Moviebox**
+- **Idlix** : biasanya lumayan lengkap
+- **LayarKaca**, **Funmovieslix**, **Pencurimovie**, **Moviebox** : alternatif lainnya
 
 ### Ada Donghua?
-- **Kuramanime** dan **Winbu** menyediakan konten Donghua.
+- Ada. Coba **Kuramanime** atau **Winbu**.
 
 ### Bisa nonton TV live (Indosiar, RCTI, SCTV, dll)?
-Bisa. Install provider **IPTV** dari daftar ekstensi. Channel populer Indonesia langsung tersedia di baris "Popular", sisanya dikelompokkan per kategori (News, Sports, Kids, dll).
+Bisa. Install provider **IPTV** dari daftar ekstensi. Channel populer Indonesia ada di baris "Popular", sisanya dikelompokin per kategori kayak News, Sports, Kids, dan lainnya.
 
 ### Bisa nonton streamer di Twitch?
-Bisa. Install provider **Twitch** dari daftar ekstensi.
+Bisa. Install provider **Twitch** dari daftar ekstensi, terus tinggal pilih streamer yang mau ditonton.
 
 ### Kenapa search tidak menemukan hasil?
-- Pastikan provider sudah terpasang.
-- Di bagian search, atur filter provider dan aktifkan semua jenis provider.
-- Semakin banyak provider yang terpasang, semakin lengkap hasil pencariannya.
+- Pastiin provider udah terpasang.
+- Cek filter di halaman search, jangan sampai providernya belum aktif.
+- Makin banyak provider yang dipasang, makin banyak juga kemungkinan hasilnya muncul.
