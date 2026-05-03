@@ -50,7 +50,7 @@ https://github.com/recloudstream/cloudstream/releases
 ## Cara Install dan Pasang Ekstensi zvlzPlay
 
 1. Install CloudStream dulu.\
-   Kalau habis install tampilannya kosong, itu normal karna belum ada ekstensi.
+   Kalo habis install tampilannya kosong, itu normal karna blm ada ekstensi.
 2. Buka **Settings**.
 3. Masuk ke **Extensions**.
 4. Pilih **Add Repository**.
@@ -59,7 +59,7 @@ https://github.com/recloudstream/cloudstream/releases
 https://cloudstream.zvlz.my.id/builds/repo.json
 ```
 6. Nama repository bebas, boleh dikosongin atau isi aja `zvlzPlay`.
-7. Kalau repository udah masuk, buka **zvlzPlay** lalu install provider yang mau dipake.
+7. Kalo repository udah masuk, buka **zvlzPlay** lalu install provider yang mau dipake.
 8. Balik ke **Home Screen**, terus pilih provider dari pojok kanan bawah.
 9. Kelar.
 
@@ -99,7 +99,7 @@ Karna CloudStream butuh ekstensi dulu. Ikuti langkah di bagian [Cara Install](#c
 ### Provider mana yang paling bagus untuk Anime?
 - **Samehadaku** : lumayan lengkap dan streamingnya kenceng
 - **Kuramanime** : update paling cepet dan stabil
-- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime**, **Gomunime** : bisa jadi cadangan kalau yang lain lagi rewel
+- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime**, **Gomunime** : bisa jadi cadangan kalo yang lain lagi rewel
 
 ### Provider mana untuk Drama dan Movie?
 - **Idlix** : biasanya lumayan lengkap
@@ -116,5 +116,5 @@ Bisa. Install provider **Twitch** dari daftar ekstensi, terus tinggal pilih stre
 
 ### Kenapa search tidak menemukan hasil?
 - Pastiin provider udah terpasang.
-- Cek filter di halaman search, jangan sampai providernya belum aktif.
+- Cek filter di halaman search, jangan sampai providernya blm aktif.
 - Makin banyak provider yang dipasang, makin banyak juga kemungkinan hasilnya muncul.
