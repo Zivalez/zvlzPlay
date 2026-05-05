@@ -31,7 +31,7 @@ class VidBasic : ExtractorApi() {
         }.map { fixRelativeUrl(it, url) }.distinct()
 
         val iframe = document.selectFirst("iframe#embedvideo")?.attr("src")?.let { fixRelativeUrl(it, url) }
-        getDirectHls(iframe ?: url, url)?.let { direct ->
+        getDirectHls(url, referer ?: mainUrl)?.let { direct ->
             M3u8Helper.generateM3u8(
                 name,
                 direct,
@@ -62,9 +62,10 @@ class VidBasic : ExtractorApi() {
                     var match = text.match(/https?:[^\\"'<>\s]+\.m3u8[^\\"'<>\s]*/i);
                     return match ? match[0] : null;
                 }
-                try {
-                    if (window.jwplayer) {
-                        var player = window.jwplayer();
+                function findFromWindow(win) {
+                    try {
+                        if (!win || !win.jwplayer) return null;
+                        var player = win.jwplayer();
                         var item = player.getPlaylistItem && player.getPlaylistItem();
                         var current = findM3u8(item);
                         if (current) return current;
@@ -72,6 +73,17 @@ class VidBasic : ExtractorApi() {
                         if (current) return current;
                         current = findM3u8(player.getConfig && player.getConfig());
                         if (current) return current;
+                    } catch(e) {}
+                    return null;
+                }
+                try {
+                    var current = findFromWindow(window);
+                    if (current) return current;
+                } catch(e) {}
+                try {
+                    for (var i = 0; i < window.frames.length; i++) {
+                        var fromFrame = findFromWindow(window.frames[i]);
+                        if (fromFrame) return fromFrame;
                     }
                 } catch(e) {}
                 try { return findM3u8(document.documentElement.outerHTML); } catch(e) { return null; }
