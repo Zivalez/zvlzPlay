@@ -300,8 +300,6 @@ class WatchAdsOnTape : ExtractorApi() {
     }
 
     private fun extractStreamTapeUrl(html: String): String? {
-        // Find all JS assignments to robotlink/ideoolink/botlink
-        // Pattern: getElementById('botlink').innerHTML = '...' + ('...').substring(N)...
         val assignmentRegex = Regex(
             """getElementById\s*\(\s*['"](?:robotlink|ideoolink|botlink)['"]\s*\)\s*\.innerHTML\s*=\s*(.+?)(?:;|\n)""",
             RegexOption.IGNORE_CASE
@@ -310,7 +308,6 @@ class WatchAdsOnTape : ExtractorApi() {
         val assignments = assignmentRegex.findAll(html).toList()
         if (assignments.isEmpty()) return null
 
-        // Take the last assignment to ideoolink or botlink (the final computed value)
         val target = assignments.lastOrNull { match ->
             val fullMatch = match.value
             fullMatch.contains("ideoolink") || fullMatch.contains("botlink")
@@ -335,8 +332,6 @@ class WatchAdsOnTape : ExtractorApi() {
     }
 
     private fun evaluateConcat(expr: String): String? {
-        // Split by + and evaluate each part
-        // Handle patterns like: '//watc' + '' + ('xyzahadsontape.com/...').substring(4)
         val result = StringBuilder()
         val parts = expr.split("+")
 
@@ -344,7 +339,6 @@ class WatchAdsOnTape : ExtractorApi() {
             val trimmed = part.trim()
             if (trimmed.isEmpty()) continue
 
-            // Check for (string).substring(N).substring(M)... pattern
             val substringPattern = Regex("""\(\s*['"](.+?)['"]\s*\)((?:\s*\.substring\s*\(\s*\d+\s*\))+)""")
             val match = substringPattern.find(trimmed)
 
@@ -357,7 +351,6 @@ class WatchAdsOnTape : ExtractorApi() {
                 }
                 result.append(value)
             } else {
-                // Plain string literal
                 val literal = trimmed
                     .removeSurrounding("'")
                     .removeSurrounding("\"")
@@ -366,7 +359,6 @@ class WatchAdsOnTape : ExtractorApi() {
                 if (literal != trimmed || trimmed.startsWith("'") || trimmed.startsWith("\"")) {
                     result.append(literal)
                 }
-                // Skip non-string tokens (variable names, etc.)
             }
         }
 

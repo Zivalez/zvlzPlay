@@ -22,9 +22,14 @@ import com.lagradost.cloudstream3.newHomePageResponse
 import com.lagradost.cloudstream3.newMovieLoadResponse
 import com.lagradost.cloudstream3.newMovieSearchResponse
 import com.lagradost.cloudstream3.newTvSeriesLoadResponse
+import com.lagradost.cloudstream3.network.WebViewResolver
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.loadExtractor
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
+import org.json.JSONArray
+import java.util.concurrent.atomic.AtomicReference
 
 class Funmovieslix : MainAPI() {
     override var mainUrl = "https://funmovieslix.com"
@@ -46,7 +51,8 @@ class Funmovieslix : MainAPI() {
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
-        val document = app.get("$mainUrl/${request.data}/page/$page").document
+        val url = "$mainUrl/${request.data}/page/$page"
+        val document = getDocument(url)
         val home = document.select("#gmr-main-load div.movie-card").mapNotNull { it.toSearchResult() }
         return newHomePageResponse(
             list = HomePageList(
@@ -84,9 +90,55 @@ class Funmovieslix : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-            val document = app.get("${mainUrl}?s=$query").document
-            val results =document.select("#gmr-main-load div.movie-card").mapNotNull { it.toSearchResult() }
+            val document = getDocument("${mainUrl}?s=$query")
+            val results = document.select("#gmr-main-load div.movie-card").mapNotNull { it.toSearchResult() }
         return results
+    }
+
+    private suspend fun getDocument(url: String): Document {
+        val document = runCatching { app.get(url).document }.getOrNull()
+        if (document?.select("#gmr-main-load div.movie-card")?.isNotEmpty() == true) return document
+        return getDocumentByWebView(url) ?: document ?: Jsoup.parse("", url)
+    }
+
+    private suspend fun getDocumentByWebView(url: String): Document? {
+        val html = AtomicReference<String?>(null)
+        val script = """
+            (function() {
+                try {
+                    if (document.querySelectorAll('#gmr-main-load div.movie-card').length > 0) {
+                        return document.documentElement.outerHTML;
+                    }
+                    return null;
+                } catch(e) { return null; }
+            })()
+        """.trimIndent()
+
+        val resolver = WebViewResolver(
+            interceptUrl = Regex("""__FUNMOVIESLIX_WV_NEVER_MATCH__"""),
+            additionalUrls = listOf(Regex(""".*""")),
+            useOkhttp = false,
+            script = script,
+            scriptCallback = { result ->
+                if (result != null && result.length > 1000 && result != "null" && html.get() == null) {
+                    val decoded = runCatching { JSONArray("[$result]").getString(0) }.getOrNull()
+                    if (!decoded.isNullOrBlank() && decoded.contains("movie-card", true)) {
+                        html.set(decoded)
+                    }
+                }
+            },
+            timeout = 30_000L
+        )
+
+        runCatching {
+            resolver.resolveUsingWebView(
+                url = url,
+                referer = mainUrl,
+                requestCallBack = { html.get() != null }
+            )
+        }
+
+        return html.get()?.let { Jsoup.parse(it, url) }
     }
 
     override suspend fun load(url: String): LoadResponse {
