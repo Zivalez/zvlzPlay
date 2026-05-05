@@ -98,9 +98,34 @@ class Dramacool : MainAPI() {
 
     override suspend fun search(query: String): List<SearchResponse> {
         val encodedQuery = URLEncoder.encode(query, "UTF-8")
-        val results = app.get("$mainUrl/api?a=search&keyword=$encodedQuery&type=drama", referer = mainUrl)
-            .parsedSafe<List<SearchItem>>() ?: return emptyList()
-        return results.mapNotNull { item ->
+
+        val document = app.get("$mainUrl/search?type=movies&keyword=$encodedQuery", referer = mainUrl).document
+        val htmlResults = document.select("ul.list-episode-item-2 li, div.content-left ul li").mapNotNull { el ->
+            val anchor = el.selectFirst("a[href*=/drama-detail/]") ?: return@mapNotNull null
+            val href = fixUrlNull(anchor.attr("href")) ?: return@mapNotNull null
+            val title = anchor.attr("title").takeIf { it.isNotBlank() }
+                ?: el.selectFirst("h3.title")?.text()?.trim()
+                ?: el.selectFirst("img")?.attr("alt")?.trim()
+                ?: anchor.text().trim()
+            if (title.isBlank()) return@mapNotNull null
+            val poster = fixUrlNull(el.selectFirst("img")?.attr("data-original")?.takeIf { it.isNotBlank() }
+                ?: el.selectFirst("img")?.attr("data-src")?.takeIf { it.isNotBlank() }
+                ?: el.selectFirst("img")?.attr("src"))
+            val year = Regex("\\((\\d{4})\\)").find(title)?.groupValues?.getOrNull(1)?.toIntOrNull()
+            newTvSeriesSearchResponse(title, href, TvType.AsianDrama) {
+                this.posterUrl = poster
+                this.year = year
+            }
+        }.distinctBy { it.url }
+
+        if (htmlResults.isNotEmpty()) return htmlResults
+
+        val apiText = app.get("$mainUrl/api?a=search&keyword=$encodedQuery&type=drama", referer = mainUrl).text
+        val apiResults = runCatching {
+            AppUtils.parseJson<List<SearchItem>>(apiText)
+        }.getOrNull() ?: return emptyList()
+
+        return apiResults.mapNotNull { item ->
             val title = item.name ?: item.value ?: return@mapNotNull null
             val url = fixUrlNull(item.url ?: return@mapNotNull null) ?: return@mapNotNull null
             newTvSeriesSearchResponse(title, url, TvType.AsianDrama) {
