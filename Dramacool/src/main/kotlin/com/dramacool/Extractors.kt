@@ -30,88 +30,9 @@ class VidBasic : ExtractorApi() {
             it.attr("data-video").takeIf { link -> link.isNotBlank() }
         }.map { fixRelativeUrl(it, url) }.distinct()
 
-        val iframe = document.selectFirst("iframe#embedvideo")?.attr("src")?.let { fixRelativeUrl(it, url) }
-        getDirectHls(url, referer, iframe)?.let { direct ->
-            M3u8Helper.generateM3u8(name, direct, iframe ?: url).forEach(callback)
-        }
-
         nestedLinks.filterNot { it.contains(mainUrl, true) }.forEach { link ->
             loadExtractor(resolveExtractorUrl(link), url, subtitleCallback, callback)
         }
-    }
-
-    private suspend fun getDirectHls(url: String, referer: String?, iframe: String?): String? {
-        val html = iframe?.let { app.get(it, referer = url).text }
-        Regex("""https?://[^"'<>\s]+\.m3u8[^"'<>\s]*""", RegexOption.IGNORE_CASE)
-            .find(html.orEmpty())?.value?.let { return it }
-
-        return getDirectHlsByWebView(url, referer)
-    }
-
-    private suspend fun getDirectHlsByWebView(url: String, referer: String?): String? {
-        val direct = AtomicReference<String?>(null)
-        val script = """
-            (function() {
-                function findM3u8(value) {
-                    if (!value) return null;
-                    var text = typeof value === 'string' ? value : JSON.stringify(value);
-                    var match = text.match(/https?:[^\\"'<>\s]+\.m3u8[^\\"'<>\s]*/i);
-                    return match ? match[0] : null;
-                }
-                try {
-                    if (window.jwplayer) {
-                        var current = findM3u8(window.jwplayer().getPlaylist());
-                        if (current) return current;
-                        var item = window.jwplayer().getPlaylistItem && window.jwplayer().getPlaylistItem();
-                        current = findM3u8(item);
-                        if (current) return current;
-                        var config = window.jwplayer().getConfig && window.jwplayer().getConfig();
-                        current = findM3u8(config);
-                        if (current) return current;
-                    }
-                } catch(e) {}
-                try {
-                    for (var i = 0; i < window.frames.length; i++) {
-                        var frame = window.frames[i];
-                        if (frame.jwplayer) {
-                            var fromFrame = findM3u8(frame.jwplayer().getPlaylist());
-                            if (fromFrame) return fromFrame;
-                            var frameItem = frame.jwplayer().getPlaylistItem && frame.jwplayer().getPlaylistItem();
-                            fromFrame = findM3u8(frameItem);
-                            if (fromFrame) return fromFrame;
-                            var frameConfig = frame.jwplayer().getConfig && frame.jwplayer().getConfig();
-                            fromFrame = findM3u8(frameConfig);
-                            if (fromFrame) return fromFrame;
-                        }
-                    }
-                } catch(e) {}
-                try {
-                    return findM3u8(document.documentElement.outerHTML);
-                } catch(e) { return null; }
-            })()
-        """.trimIndent()
-
-        val resolver = WebViewResolver(
-            interceptUrl = Regex("""__DRAMACOOL_WV_NEVER_MATCH__"""),
-            additionalUrls = listOf(Regex(""".*""")),
-            useOkhttp = false,
-            script = script,
-            scriptCallback = { result ->
-                val value = result?.trim()?.trim('"')?.replace("\\/", "/")
-                if (!value.isNullOrBlank() && value.startsWith("http")) direct.compareAndSet(null, value)
-            },
-            timeout = 30_000L
-        )
-
-        runCatching {
-            resolver.resolveUsingWebView(
-                url = url,
-                referer = referer ?: mainUrl,
-                requestCallBack = { direct.get() != null }
-            )
-        }
-
-        return direct.get()
     }
 
     private fun fixRelativeUrl(url: String, baseUrl: String): String {

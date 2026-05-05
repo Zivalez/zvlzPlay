@@ -189,9 +189,11 @@ class Dramacool : MainAPI() {
         callback: (ExtractorLink) -> Unit
     ): Boolean {
         val document = app.get(data, referer = mainUrl).document
-        document.select("div.muti_link li[data-video]").mapNotNull { li ->
+        val links = document.select("div.muti_link li[data-video]").mapNotNull { li ->
             fixUrlNull(li.attr("data-video").trim()).takeIf { !it.isNullOrBlank() }
-        }.distinct().amap { link ->
+        }.distinct()
+        val extractorLinks = links.filterNot { it.contains("vidbasic", true) }.takeIf { it.isNotEmpty() } ?: links
+        extractorLinks.amap { link ->
             loadExtractor(resolveExtractorUrl(link), data, subtitleCallback, callback)
         }
         return true
