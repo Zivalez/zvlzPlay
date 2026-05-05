@@ -23,10 +23,10 @@
     },
     {
         "iconUrl": "https://asianctv.net/favicon.ico",
-        "fileHash": "sha256-babd314029e13c0eb92fee692eca06fe7018fb716db0ed8a3dc7fb06b45e10fe",
+        "fileHash": "sha256-8da2c34e4a4c67e76815d9390fc42d442e6f8cfed044f494fda281d8a4e1ca89",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 41196,
+        "fileSize": 41191,
         "status": 1,
         "language": "en",
         "authors": [
@@ -45,10 +45,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/funmovieslix.png",
-        "fileHash": "sha256-6c5f100d05847a6f49cec0e278618edb817b0ff7a682a7597dc4ad89206ac2f5",
+        "fileHash": "sha256-5ec1ad019fb99a3e03325bb73709d2bd39303adfbbecd5919007ccd9679a9850",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 21095,
+        "fileSize": 23703,
         "status": 1,
         "language": "id",
         "authors": [
