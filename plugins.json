@@ -23,7 +23,7 @@
     },
     {
         "iconUrl": "https://asianctv.net/favicon.ico",
-        "fileHash": "sha256-fa8b750dc2c8ccdba92ec2fa6848d91fd90fe726abe97e758f6a315571f167b6",
+        "fileHash": "sha256-babd314029e13c0eb92fee692eca06fe7018fb716db0ed8a3dc7fb06b45e10fe",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 41196,
@@ -37,7 +37,7 @@
             "TvSeries",
             "Movie"
         ],
-        "version": 1,
+        "version": 2,
         "internalName": "Dramacool",
         "description": "Asian Drama, Movies and Shows English Sub",
         "url": "https://cloudstream.zvlz.my.id/builds/Dramacool.cs3",
