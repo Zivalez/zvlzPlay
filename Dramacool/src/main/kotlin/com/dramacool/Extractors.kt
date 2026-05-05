@@ -10,6 +10,7 @@ import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.ExtractorLinkType
 import com.lagradost.cloudstream3.utils.M3u8Helper
 import com.lagradost.cloudstream3.utils.Qualities
+import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
 import java.util.concurrent.atomic.AtomicReference
 
@@ -24,16 +25,21 @@ class VidBasic : ExtractorApi() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ) {
-        val direct = getDirectHls(url, referer) ?: return
+        val document = app.get(url, referer = referer).document
+        val nestedLinks = document.select("li.linkserver[data-video]").mapNotNull {
+            it.attr("data-video").takeIf { link -> link.isNotBlank() }
+        }.map { fixRelativeUrl(it, url) }.distinct()
+
+        nestedLinks.filterNot { it.contains(mainUrl, true) }.forEach { link ->
+            loadExtractor(resolveExtractorUrl(link), url, subtitleCallback, callback)
+        }
+
+        val iframe = document.selectFirst("iframe#embedvideo")?.attr("src")?.let { fixRelativeUrl(it, url) }
+        val direct = getDirectHls(url, referer, iframe) ?: return
         M3u8Helper.generateM3u8(name, direct, url).forEach(callback)
     }
 
-    private suspend fun getDirectHls(url: String, referer: String?): String? {
-        val document = app.get(url, referer = referer).document
-        val iframe = document.selectFirst("iframe#embedvideo")?.attr("src")?.let {
-            if (it.startsWith("//")) "https:$it" else if (it.startsWith("/")) "$mainUrl$it" else it
-        }
-
+    private suspend fun getDirectHls(url: String, referer: String?, iframe: String?): String? {
         val html = iframe?.let { app.get(it, referer = url).text }
         Regex("""https?://[^"'<>\\\s]+\.m3u8[^"'<>\\\s]*""", RegexOption.IGNORE_CASE)
             .find(html.orEmpty())?.value?.let { return it }
@@ -93,6 +99,25 @@ class VidBasic : ExtractorApi() {
         }
 
         return direct.get()
+    }
+
+    private fun fixRelativeUrl(url: String, baseUrl: String): String {
+        return when {
+            url.startsWith("http") -> url
+            url.startsWith("//") -> "https:$url"
+            url.startsWith("/") -> "$mainUrl$url"
+            else -> "${baseUrl.substringBeforeLast("/")}/$url"
+        }
+    }
+
+    private suspend fun resolveExtractorUrl(url: String): String {
+        return runCatching {
+            when {
+                url.contains("hglink.to", true) ||
+                    url.contains("mixdrop.ps", true) -> app.get(url, referer = mainUrl).url
+                else -> url
+            }
+        }.getOrDefault(url)
     }
 }
 
