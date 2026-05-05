@@ -45,10 +45,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/funmovieslix.png",
-        "fileHash": "sha256-5ec1ad019fb99a3e03325bb73709d2bd39303adfbbecd5919007ccd9679a9850",
+        "fileHash": "sha256-7c1c4ccfd53f4eb6137fadf696ba016aadc8b6b9462f7095087f6b2adf835c07",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 23703,
+        "fileSize": 24500,
         "status": 1,
         "language": "id",
         "authors": [
