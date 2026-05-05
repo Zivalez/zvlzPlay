@@ -4,8 +4,6 @@ import com.lagradost.cloudstream3.SubtitleFile
 import com.lagradost.cloudstream3.app
 import com.lagradost.cloudstream3.extractors.MixDrop
 import com.lagradost.cloudstream3.extractors.StreamTape
-import com.lagradost.cloudstream3.extractors.StreamWishExtractor
-import com.lagradost.cloudstream3.extractors.VidhideExtractor
 import com.lagradost.cloudstream3.network.WebViewResolver
 import com.lagradost.cloudstream3.utils.ExtractorApi
 import com.lagradost.cloudstream3.utils.ExtractorLink
@@ -98,14 +96,108 @@ class VidBasic : ExtractorApi() {
     }
 }
 
-class Hanerix : StreamWishExtractor() {
-    override var name = "Hanerix"
-    override var mainUrl = "https://hanerix.com"
+open class XStreamHls : ExtractorApi() {
+    override val name = "XStream"
+    override val mainUrl = "https://example.com"
+    override val requiresReferer = true
+
+    override suspend fun getUrl(
+        url: String,
+        referer: String?,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ) {
+        val direct = getDirectHls(url, referer) ?: return
+        M3u8Helper.generateM3u8(name, direct, url).forEach(callback)
+    }
+
+    private suspend fun getDirectHls(url: String, referer: String?): String? {
+        val response = app.get(url, referer = referer ?: mainUrl)
+        findHls(response.text, response.url)?.let { return it }
+        return getDirectHlsByWebView(response.url, referer)
+    }
+
+    private fun findHls(text: String, baseUrl: String): String? {
+        val direct = Regex("""https?://[^"'<>\\\s]+\.m3u8[^"'<>\\\s]*""", RegexOption.IGNORE_CASE)
+            .find(text)?.value
+        if (!direct.isNullOrBlank()) return direct.replace("\\/", "/")
+
+        val relative = Regex("""["']((?:/[^"'<>\\\s]+)?/stream/[^"'<>\\\s]+\.m3u8[^"'<>\\\s]*)["']""", RegexOption.IGNORE_CASE)
+            .find(text)?.groupValues?.getOrNull(1)
+            ?.replace("\\/", "/")
+        return relative?.let { fixRelativeUrl(it, baseUrl) }
+    }
+
+    private suspend fun getDirectHlsByWebView(url: String, referer: String?): String? {
+        val direct = AtomicReference<String?>(null)
+        val script = """
+            (function() {
+                function absolute(value) {
+                    if (!value) return null;
+                    if (value.indexOf('http') === 0) return value;
+                    if (value.indexOf('//') === 0) return location.protocol + value;
+                    if (value.charAt(0) === '/') return location.origin + value;
+                    return new URL(value, location.href).href;
+                }
+                function findM3u8(value) {
+                    if (!value) return null;
+                    var text = typeof value === 'string' ? value : JSON.stringify(value);
+                    var match = text.match(/https?:[^\"'<>\\\s]+\.m3u8[^\"'<>\\\s]*/i);
+                    if (match) return match[0];
+                    var rel = text.match(/(?:\/[^\"'<>\\\s]+)?\/stream\/[^\"'<>\\\s]+\.m3u8[^\"'<>\\\s]*/i);
+                    return rel ? absolute(rel[0]) : null;
+                }
+                try {
+                    if (window.jwplayer) {
+                        var current = findM3u8(window.jwplayer().getPlaylist());
+                        if (current) return current;
+                    }
+                } catch(e) {}
+                try { return findM3u8(document.documentElement.outerHTML); } catch(e) { return null; }
+            })()
+        """.trimIndent()
+
+        val resolver = WebViewResolver(
+            interceptUrl = Regex("""__DRAMACOOL_XSTREAM_WV_NEVER_MATCH__"""),
+            additionalUrls = listOf(Regex(""".*""")),
+            useOkhttp = false,
+            script = script,
+            scriptCallback = { result ->
+                val value = result?.trim()?.trim('"')?.replace("\\/", "/")
+                if (!value.isNullOrBlank() && value.startsWith("http")) direct.compareAndSet(null, value)
+            },
+            timeout = 30_000L
+        )
+
+        runCatching {
+            resolver.resolveUsingWebView(
+                url = url,
+                referer = referer ?: mainUrl,
+                requestCallBack = { direct.get() != null }
+            )
+        }
+
+        return direct.get()
+    }
+
+    private fun fixRelativeUrl(url: String, baseUrl: String): String {
+        return when {
+            url.startsWith("http") -> url
+            url.startsWith("//") -> "https:$url"
+            url.startsWith("/") -> Regex("""https?://[^/]+""").find(baseUrl)?.value + url
+            else -> "${baseUrl.substringBeforeLast("/")}/$url"
+        }
+    }
 }
 
-class Minochinos : VidhideExtractor() {
-    override var name = "Minochinos"
-    override var mainUrl = "https://minochinos.com"
+class Hanerix : XStreamHls() {
+    override val name = "Hanerix"
+    override val mainUrl = "https://hanerix.com"
+}
+
+class Minochinos : XStreamHls() {
+    override val name = "Minochinos"
+    override val mainUrl = "https://minochinos.com"
 }
 
 class WatchAdsOnTape : StreamTape() {
