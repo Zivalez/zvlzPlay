@@ -30,18 +30,19 @@ class VidBasic : ExtractorApi() {
             it.attr("data-video").takeIf { link -> link.isNotBlank() }
         }.map { fixRelativeUrl(it, url) }.distinct()
 
+        val iframe = document.selectFirst("iframe#embedvideo")?.attr("src")?.let { fixRelativeUrl(it, url) }
+        getDirectHls(url, referer, iframe)?.let { direct ->
+            M3u8Helper.generateM3u8(name, direct, iframe ?: url).forEach(callback)
+        }
+
         nestedLinks.filterNot { it.contains(mainUrl, true) }.forEach { link ->
             loadExtractor(resolveExtractorUrl(link), url, subtitleCallback, callback)
         }
-
-        val iframe = document.selectFirst("iframe#embedvideo")?.attr("src")?.let { fixRelativeUrl(it, url) }
-        val direct = getDirectHls(url, referer, iframe) ?: return
-        M3u8Helper.generateM3u8(name, direct, url).forEach(callback)
     }
 
     private suspend fun getDirectHls(url: String, referer: String?, iframe: String?): String? {
         val html = iframe?.let { app.get(it, referer = url).text }
-        Regex("""https?://[^"'<>\\s]+\.m3u8[^"'<>\\s]*""", RegexOption.IGNORE_CASE)
+        Regex("""https?://[^"'<>\s]+\.m3u8[^"'<>\s]*""", RegexOption.IGNORE_CASE)
             .find(html.orEmpty())?.value?.let { return it }
 
         return getDirectHlsByWebView(url, referer)
@@ -54,12 +55,18 @@ class VidBasic : ExtractorApi() {
                 function findM3u8(value) {
                     if (!value) return null;
                     var text = typeof value === 'string' ? value : JSON.stringify(value);
-                    var match = text.match(/https?:[^\\"'<>\\s]+\.m3u8[^\\"'<>\\s]*/i);
+                    var match = text.match(/https?:[^\\"'<>\s]+\.m3u8[^\\"'<>\s]*/i);
                     return match ? match[0] : null;
                 }
                 try {
                     if (window.jwplayer) {
                         var current = findM3u8(window.jwplayer().getPlaylist());
+                        if (current) return current;
+                        var item = window.jwplayer().getPlaylistItem && window.jwplayer().getPlaylistItem();
+                        current = findM3u8(item);
+                        if (current) return current;
+                        var config = window.jwplayer().getConfig && window.jwplayer().getConfig();
+                        current = findM3u8(config);
                         if (current) return current;
                     }
                 } catch(e) {}
@@ -68,6 +75,12 @@ class VidBasic : ExtractorApi() {
                         var frame = window.frames[i];
                         if (frame.jwplayer) {
                             var fromFrame = findM3u8(frame.jwplayer().getPlaylist());
+                            if (fromFrame) return fromFrame;
+                            var frameItem = frame.jwplayer().getPlaylistItem && frame.jwplayer().getPlaylistItem();
+                            fromFrame = findM3u8(frameItem);
+                            if (fromFrame) return fromFrame;
+                            var frameConfig = frame.jwplayer().getConfig && frame.jwplayer().getConfig();
+                            fromFrame = findM3u8(frameConfig);
                             if (fromFrame) return fromFrame;
                         }
                     }
@@ -148,11 +161,11 @@ open class XStreamHls : ExtractorApi() {
     }
 
     private fun findHls(text: String, baseUrl: String): String? {
-        val direct = Regex("""https?://[^"'<>\\s]+\.m3u8[^"'<>\\s]*""", RegexOption.IGNORE_CASE)
+        val direct = Regex("""https?://[^"'<>\s]+\.m3u8[^"'<>\s]*""", RegexOption.IGNORE_CASE)
             .find(text)?.value
         if (!direct.isNullOrBlank()) return direct.replace("\\/", "/")
 
-        val relative = Regex("""["']((?:/[^"'<>\\s]+)?/stream/[^"'<>\\s]+\.m3u8[^"'<>\\s]*)["']""", RegexOption.IGNORE_CASE)
+        val relative = Regex("""["']([^"'<>\s]+\.m3u8[^"'<>\s]*)["']""", RegexOption.IGNORE_CASE)
             .find(text)?.groupValues?.getOrNull(1)
             ?.replace("\\/", "/")
         return relative?.let { fixRelativeUrl(it, baseUrl) }
@@ -172,14 +185,20 @@ open class XStreamHls : ExtractorApi() {
                 function findM3u8(value) {
                     if (!value) return null;
                     var text = typeof value === 'string' ? value : JSON.stringify(value);
-                    var match = text.match(/https?:[^\\"'<>\\s]+\.m3u8[^\\"'<>\\s]*/i);
+                    var match = text.match(/https?:[^\\"'<>\s]+\.m3u8[^\\"'<>\s]*/i);
                     if (match) return match[0];
-                    var rel = text.match(/(?:\/[^\\"'<>\\s]+)?\/stream\/[^\\"'<>\\s]+\.m3u8[^\\"'<>\\s]*/i);
+                    var rel = text.match(/[^\\"'<>\s]+\.m3u8[^\\"'<>\s]*/i);
                     return rel ? absolute(rel[0]) : null;
                 }
                 try {
                     if (window.jwplayer) {
                         var current = findM3u8(window.jwplayer().getPlaylist());
+                        if (current) return current;
+                        var item = window.jwplayer().getPlaylistItem && window.jwplayer().getPlaylistItem();
+                        current = findM3u8(item);
+                        if (current) return current;
+                        var config = window.jwplayer().getConfig && window.jwplayer().getConfig();
+                        current = findM3u8(config);
                         if (current) return current;
                     }
                 } catch(e) {}
@@ -394,12 +413,55 @@ class WatchAdsOnTape : ExtractorApi() {
     }
 }
 
-class M1xDrop : MixDrop() {
+open class DramacoolMixDrop : MixDrop() {
+    override suspend fun getUrl(
+        url: String,
+        referer: String?,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ) {
+        val response = app.get(url, referer = referer ?: mainUrl)
+        val scriptText = response.document.select("script").joinToString("\n") { script ->
+            val data = script.data()
+            if (data.contains("eval(function(p,a,c,k,e,d)")) runCatching { getAndUnpack(data) }.getOrDefault(data) else data
+        }
+
+        val direct = extractMdCoreUrl(scriptText, "wurl")
+            ?: extractMdCoreUrl(scriptText, "furl")
+            ?: Regex("""https?://[^"'<>\s]+\.mp4[^"'<>\s]*""", RegexOption.IGNORE_CASE).find(scriptText)?.value
+            ?: Regex("""["'](//[^"'<>\s]+\.mp4[^"'<>\s]*)["']""", RegexOption.IGNORE_CASE).find(scriptText)?.groupValues?.getOrNull(1)?.let { "https:$it" }
+            ?: return
+
+        callback.invoke(
+            newExtractorLink(name, name, direct.replace("\\/", "/"), ExtractorLinkType.VIDEO) {
+                this.referer = url
+                this.quality = Qualities.Unknown.value
+            }
+        )
+    }
+
+    private fun extractMdCoreUrl(text: String, key: String): String? {
+        val value = Regex("""MDCore\.$key\s*=\s*["']([^"']+)["']""", RegexOption.IGNORE_CASE)
+            .find(text)?.groupValues?.getOrNull(1)
+            ?.replace("\\/", "/")
+            ?.trim()
+            ?.takeIf { it.isNotBlank() }
+            ?: return null
+        return when {
+            value.startsWith("http") -> value
+            value.startsWith("//") -> "https:$value"
+            value.startsWith("/") -> "$mainUrl$value"
+            else -> null
+        }
+    }
+}
+
+class M1xDrop : DramacoolMixDrop() {
     override var name = "M1xDrop"
     override var mainUrl = "https://m1xdrop.bz"
 }
 
-class MixDropPs : MixDrop() {
+class MixDropPs : DramacoolMixDrop() {
     override var name = "MixDropPs"
     override var mainUrl = "https://mixdrop.ps"
 }
