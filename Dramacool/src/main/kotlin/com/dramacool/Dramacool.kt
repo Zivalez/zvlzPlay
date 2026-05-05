@@ -175,8 +175,8 @@ class Dramacool : MainAPI() {
     private suspend fun resolveExtractorUrl(url: String): String {
         return runCatching {
             when {
-                url.contains("hglink.to", true) ||
-                    url.contains("mixdrop.ps", true) -> app.get(url, referer = mainUrl).url
+                url.contains("hglink.to", true) -> url.replace("https://hglink.to/e/", "https://hanerix.com/e/")
+                    .replace("http://hglink.to/e/", "https://hanerix.com/e/")
                 else -> url
             }
         }.getOrDefault(url)

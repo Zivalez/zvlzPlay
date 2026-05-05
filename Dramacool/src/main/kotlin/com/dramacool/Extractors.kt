@@ -3,13 +3,13 @@ package com.dramacool
 import com.lagradost.cloudstream3.SubtitleFile
 import com.lagradost.cloudstream3.app
 import com.lagradost.cloudstream3.extractors.MixDrop
-import com.lagradost.cloudstream3.extractors.StreamTape
 import com.lagradost.cloudstream3.network.WebViewResolver
 import com.lagradost.cloudstream3.utils.ExtractorApi
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.ExtractorLinkType
 import com.lagradost.cloudstream3.utils.M3u8Helper
 import com.lagradost.cloudstream3.utils.Qualities
+import com.lagradost.cloudstream3.utils.getAndUnpack
 import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
 import java.util.concurrent.atomic.AtomicReference
@@ -41,7 +41,7 @@ class VidBasic : ExtractorApi() {
 
     private suspend fun getDirectHls(url: String, referer: String?, iframe: String?): String? {
         val html = iframe?.let { app.get(it, referer = url).text }
-        Regex("""https?://[^"'<>\\\s]+\.m3u8[^"'<>\\\s]*""", RegexOption.IGNORE_CASE)
+        Regex("""https?://[^"'<>\\s]+\.m3u8[^"'<>\\s]*""", RegexOption.IGNORE_CASE)
             .find(html.orEmpty())?.value?.let { return it }
 
         return getDirectHlsByWebView(url, referer)
@@ -54,7 +54,7 @@ class VidBasic : ExtractorApi() {
                 function findM3u8(value) {
                     if (!value) return null;
                     var text = typeof value === 'string' ? value : JSON.stringify(value);
-                    var match = text.match(/https?:[^\"'<>\\\s]+\.m3u8[^\"'<>\\\s]*/i);
+                    var match = text.match(/https?:[^\\"'<>\\s]+\.m3u8[^\\"'<>\\s]*/i);
                     return match ? match[0] : null;
                 }
                 try {
@@ -113,8 +113,8 @@ class VidBasic : ExtractorApi() {
     private suspend fun resolveExtractorUrl(url: String): String {
         return runCatching {
             when {
-                url.contains("hglink.to", true) ||
-                    url.contains("mixdrop.ps", true) -> app.get(url, referer = mainUrl).url
+                url.contains("hglink.to", true) -> url.replace("https://hglink.to/e/", "https://hanerix.com/e/")
+                    .replace("http://hglink.to/e/", "https://hanerix.com/e/")
                 else -> url
             }
         }.getOrDefault(url)
@@ -139,15 +139,20 @@ open class XStreamHls : ExtractorApi() {
     private suspend fun getDirectHls(url: String, referer: String?): String? {
         val response = app.get(url, referer = referer ?: mainUrl)
         findHls(response.text, response.url)?.let { return it }
-        return getDirectHlsByWebView(response.url, referer)
+        response.document.select("script").forEach { script ->
+            if (script.data().contains("eval(function(p,a,c,k,e,d)")) {
+                findHls(getAndUnpack(script.data()), response.url)?.let { return it }
+            }
+        }
+        return getDirectHlsByWebView(url, referer)
     }
 
     private fun findHls(text: String, baseUrl: String): String? {
-        val direct = Regex("""https?://[^"'<>\\\s]+\.m3u8[^"'<>\\\s]*""", RegexOption.IGNORE_CASE)
+        val direct = Regex("""https?://[^"'<>\\s]+\.m3u8[^"'<>\\s]*""", RegexOption.IGNORE_CASE)
             .find(text)?.value
         if (!direct.isNullOrBlank()) return direct.replace("\\/", "/")
 
-        val relative = Regex("""["']((?:/[^"'<>\\\s]+)?/stream/[^"'<>\\\s]+\.m3u8[^"'<>\\\s]*)["']""", RegexOption.IGNORE_CASE)
+        val relative = Regex("""["']((?:/[^"'<>\\s]+)?/stream/[^"'<>\\s]+\.m3u8[^"'<>\\s]*)["']""", RegexOption.IGNORE_CASE)
             .find(text)?.groupValues?.getOrNull(1)
             ?.replace("\\/", "/")
         return relative?.let { fixRelativeUrl(it, baseUrl) }
@@ -167,9 +172,9 @@ open class XStreamHls : ExtractorApi() {
                 function findM3u8(value) {
                     if (!value) return null;
                     var text = typeof value === 'string' ? value : JSON.stringify(value);
-                    var match = text.match(/https?:[^\"'<>\\\s]+\.m3u8[^\"'<>\\\s]*/i);
+                    var match = text.match(/https?:[^\\"'<>\\s]+\.m3u8[^\\"'<>\\s]*/i);
                     if (match) return match[0];
-                    var rel = text.match(/(?:\/[^\"'<>\\\s]+)?\/stream\/[^\"'<>\\\s]+\.m3u8[^\"'<>\\\s]*/i);
+                    var rel = text.match(/(?:\/[^\\"'<>\\s]+)?\/stream\/[^\\"'<>\\s]+\.m3u8[^\\"'<>\\s]*/i);
                     return rel ? absolute(rel[0]) : null;
                 }
                 try {
@@ -220,19 +225,183 @@ class Hanerix : XStreamHls() {
     override val mainUrl = "https://hanerix.com"
 }
 
+class Hglink : XStreamHls() {
+    override val name = "Hglink"
+    override val mainUrl = "https://hglink.to"
+}
+
 class Minochinos : XStreamHls() {
     override val name = "Minochinos"
     override val mainUrl = "https://minochinos.com"
 }
 
-class WatchAdsOnTape : StreamTape() {
-    override var name = "WatchAdsOnTape"
-    override var mainUrl = "https://watchadsontape.com"
+class WatchAdsOnTape : ExtractorApi() {
+    override val name = "WatchAdsOnTape"
+    override val mainUrl = "https://watchadsontape.com"
+    override val requiresReferer = false
+
+    override suspend fun getUrl(
+        url: String,
+        referer: String?,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ) {
+        val html = app.get(url, referer = referer).text
+
+        val videoUrl = extractStreamTapeUrl(html)
+            ?: extractStreamTapeUrlByWebView(url, referer)
+            ?: return
+
+        callback.invoke(
+            newExtractorLink(name, name, videoUrl, ExtractorLinkType.VIDEO) {
+                this.referer = url
+                this.quality = Qualities.Unknown.value
+            }
+        )
+    }
+
+    private fun extractStreamTapeUrl(html: String): String? {
+        // Find all JS assignments to robotlink/ideoolink/botlink
+        // Pattern: getElementById('botlink').innerHTML = '...' + ('...').substring(N)...
+        val assignmentRegex = Regex(
+            """getElementById\s*\(\s*['"](?:robotlink|ideoolink|botlink)['"]\s*\)\s*\.innerHTML\s*=\s*(.+?)(?:;|\n)""",
+            RegexOption.IGNORE_CASE
+        )
+
+        val assignments = assignmentRegex.findAll(html).toList()
+        if (assignments.isEmpty()) return null
+
+        // Take the last assignment to ideoolink or botlink (the final computed value)
+        val target = assignments.lastOrNull { match ->
+            val fullMatch = match.value
+            fullMatch.contains("ideoolink") || fullMatch.contains("botlink")
+        } ?: assignments.last()
+
+        val expr = target.groupValues[1].trim()
+        val resolved = evaluateConcat(expr) ?: return null
+
+        val path = resolved.replace("\\/", "/").trim()
+        if (!path.contains("get_video") && !path.contains("/e/")) return null
+
+        val fullUrl = when {
+            path.startsWith("http") -> path
+            path.startsWith("//") -> "https:$path"
+            path.startsWith("/") -> "$mainUrl$path"
+            else -> return null
+        }
+
+        return if (fullUrl.contains("&stream=")) fullUrl
+        else if (fullUrl.contains("?")) "$fullUrl&stream=1"
+        else "$fullUrl?stream=1"
+    }
+
+    private fun evaluateConcat(expr: String): String? {
+        // Split by + and evaluate each part
+        // Handle patterns like: '//watc' + '' + ('xyzahadsontape.com/...').substring(4)
+        val result = StringBuilder()
+        val parts = expr.split("+")
+
+        for (part in parts) {
+            val trimmed = part.trim()
+            if (trimmed.isEmpty()) continue
+
+            // Check for (string).substring(N).substring(M)... pattern
+            val substringPattern = Regex("""\(\s*['"](.+?)['"]\s*\)((?:\s*\.substring\s*\(\s*\d+\s*\))+)""")
+            val match = substringPattern.find(trimmed)
+
+            if (match != null) {
+                var value = match.groupValues[1]
+                val substringCalls = Regex("""\.substring\s*\(\s*(\d+)\s*\)""").findAll(match.groupValues[2])
+                for (sub in substringCalls) {
+                    val idx = sub.groupValues[1].toIntOrNull() ?: continue
+                    if (idx < value.length) value = value.substring(idx)
+                }
+                result.append(value)
+            } else {
+                // Plain string literal
+                val literal = trimmed
+                    .removeSurrounding("'")
+                    .removeSurrounding("\"")
+                    .replace("\\\"", "\"")
+                    .replace("\\'", "'")
+                if (literal != trimmed || trimmed.startsWith("'") || trimmed.startsWith("\"")) {
+                    result.append(literal)
+                }
+                // Skip non-string tokens (variable names, etc.)
+            }
+        }
+
+        return result.toString().takeIf { it.isNotBlank() }
+    }
+
+    private suspend fun extractStreamTapeUrlByWebView(url: String, referer: String?): String? {
+        val direct = AtomicReference<String?>(null)
+        val script = """
+            (function() {
+                try {
+                    var bot = document.getElementById('botlink');
+                    if (bot) {
+                        var text = bot.textContent || bot.innerText || '';
+                        if (text && text.indexOf('get_video') > -1) {
+                            var src = text.trim();
+                            if (src.indexOf('//') === 0) src = 'https:' + src;
+                            if (src.indexOf('&stream=') === -1) src += '&stream=1';
+                            return src;
+                        }
+                    }
+                } catch(e) {}
+                try {
+                    var ideo = document.getElementById('ideoolink');
+                    if (ideo) {
+                        var text = ideo.textContent || ideo.innerText || '';
+                        if (text && text.indexOf('get_video') > -1) {
+                            var src = text.trim();
+                            if (src.indexOf('//') === 0) src = 'https:' + src;
+                            if (src.indexOf('&stream=') === -1) src += '&stream=1';
+                            return src;
+                        }
+                    }
+                } catch(e) {}
+                try {
+                    var video = document.querySelector('video');
+                    if (video && video.src) return video.src;
+                } catch(e) {}
+                return null;
+            })()
+        """.trimIndent()
+
+        val resolver = WebViewResolver(
+            interceptUrl = Regex("""__DRAMACOOL_ST_WV_NEVER_MATCH__"""),
+            additionalUrls = listOf(Regex(""".*""")),
+            useOkhttp = false,
+            script = script,
+            scriptCallback = { result ->
+                val value = result?.trim()?.trim('"')?.replace("\\/", "/")
+                if (!value.isNullOrBlank() && value.startsWith("http")) direct.compareAndSet(null, value)
+            },
+            timeout = 20_000L
+        )
+
+        runCatching {
+            resolver.resolveUsingWebView(
+                url = url,
+                referer = referer ?: mainUrl,
+                requestCallBack = { direct.get() != null }
+            )
+        }
+
+        return direct.get()
+    }
 }
 
 class M1xDrop : MixDrop() {
     override var name = "M1xDrop"
     override var mainUrl = "https://m1xdrop.bz"
+}
+
+class MixDropPs : MixDrop() {
+    override var name = "MixDropPs"
+    override var mainUrl = "https://mixdrop.ps"
 }
 
 class UpnShare : ExtractorApi() {
@@ -266,7 +435,7 @@ class UpnShare : ExtractorApi() {
                 function findDirect(value) {
                     if (!value) return null;
                     var text = typeof value === 'string' ? value : JSON.stringify(value);
-                    var match = text.match(/https?:[^\"'<>\\\s]+\.(?:m3u8|mp4)[^\"'<>\\\s]*/i);
+                    var match = text.match(/https?:[^\\"'<>\\s]+\.(?:m3u8|mp4)[^\\"'<>\\s]*/i);
                     return match ? match[0] : null;
                 }
                 try {

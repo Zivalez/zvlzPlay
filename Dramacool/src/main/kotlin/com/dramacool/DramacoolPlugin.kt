@@ -10,9 +10,11 @@ class DramacoolPlugin : Plugin() {
         registerMainAPI(Dramacool())
         registerExtractorAPI(VidBasic())
         registerExtractorAPI(Hanerix())
+        registerExtractorAPI(Hglink())
         registerExtractorAPI(Minochinos())
         registerExtractorAPI(WatchAdsOnTape())
         registerExtractorAPI(M1xDrop())
+        registerExtractorAPI(MixDropPs())
         registerExtractorAPI(UpnShare())
     }
 }
