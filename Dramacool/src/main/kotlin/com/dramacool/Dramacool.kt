@@ -59,15 +59,14 @@ class Dramacool : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get("$mainUrl/${request.data.format(page)}").document
-        val fetchPoster = request.data.startsWith("kshow") || request.data.startsWith("country/")
         val home = document.select("ul.list-episode-item-2 li, div.left-tab-1 ul li, ul.switch-block li, div.content-left ul li")
-            .amap { it.toSearchResult(request.name.contains("Movie", true), fetchPoster) }
+            .mapNotNull { it.toSearchResult(request.name.contains("Movie", true)) }
             .filterNotNull()
             .distinctBy { it.url }
         return newHomePageResponse(request.name, home)
     }
 
-    private suspend fun Element.toSearchResult(forceMovie: Boolean = false, fetchPoster: Boolean = false): SearchResponse? {
+    private fun Element.toSearchResult(forceMovie: Boolean = false): SearchResponse? {
         val detail = selectFirst("a[href*=/drama-detail/]")
         val episode = selectFirst("a[href*=episode-][href$=.html]")
         val anchor = detail ?: episode ?: return null
@@ -81,7 +80,6 @@ class Dramacool : MainAPI() {
         val poster = fixUrlNull(selectFirst("img")?.attr("data-original")?.takeIf { it.isNotBlank() }
             ?: selectFirst("img")?.attr("data-src")?.takeIf { it.isNotBlank() }
             ?: selectFirst("img")?.attr("src"))
-            ?: if (fetchPoster) getPosterFromDetail(href) else null
         val year = selectFirst("span.year")?.text()?.toIntOrNull()
         val type = if (forceMovie) TvType.Movie else if (href.contains("episode-")) TvType.TvSeries else getTypeFromUrl(href)
 
@@ -96,15 +94,6 @@ class Dramacool : MainAPI() {
                 this.year = year
             }
         }
-    }
-
-    private suspend fun getPosterFromDetail(url: String): String? {
-        return runCatching {
-            app.get(url, referer = mainUrl).document
-                .selectFirst("div.details div.img img, div.detail img, div.img img")
-                ?.attr("src")
-                ?.let { fixUrlNull(it) }
-        }.getOrNull()
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
@@ -134,8 +123,7 @@ class Dramacool : MainAPI() {
             .distinctBy { it.data }
             .sortedBy { it.episode ?: 0 }
         val recommendations = document.select("div.content-right a[href*=/drama-detail/], ul.switch-block a[href*=/drama-detail/]")
-            .amap { it.parent()?.toSearchResult() ?: it.toSearchResult() }
-            .filterNotNull()
+            .mapNotNull { it.parent()?.toSearchResult() ?: it.toSearchResult() }
             .distinctBy { it.url }
 
         return if (episodes.size <= 1 && title.contains("movie", true)) {
