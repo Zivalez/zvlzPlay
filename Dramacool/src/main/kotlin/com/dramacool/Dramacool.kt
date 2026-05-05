@@ -21,8 +21,9 @@ class Dramacool : MainAPI() {
 
     override val mainPage = mainPageOf(
         "recently-added?page=%d" to "Recently Added",
+        "recently-added-movie?page=%d" to "Recently Added Movie",
         "most-popular-drama?page=%d" to "Popular Drama",
-        "kshow?page=%d" to "KShow",
+        "recently-added-kshow?page=%d" to "Recently Added KShow",
         "country/korean-drama?page=%d" to "Korean Drama",
         "country/japanese-drama?page=%d" to "Japanese Drama",
         "country/taiwanese-drama?page=%d" to "Taiwanese Drama",
@@ -59,18 +60,14 @@ class Dramacool : MainAPI() {
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val document = app.get("$mainUrl/${request.data.format(page)}").document
-        val fetchPoster = request.data.startsWith("kshow") || request.data.startsWith("country/")
         val home = document.select("ul.list-episode-item-2 li, div.left-tab-1 ul li, ul.switch-block li, div.content-left ul li")
-            .mapIndexed { index, element -> index to element }
-            .amap { (index, element) ->
-                element.toSearchResult(request.name.contains("Movie", true), fetchPoster && index < 12)
-            }
+            .mapNotNull { it.toSearchResult(request.name.contains("Movie", true)) }
             .filterNotNull()
             .distinctBy { it.url }
         return newHomePageResponse(request.name, home)
     }
 
-    private suspend fun Element.toSearchResult(forceMovie: Boolean = false, fetchPoster: Boolean = false): SearchResponse? {
+    private fun Element.toSearchResult(forceMovie: Boolean = false): SearchResponse? {
         val detail = selectFirst("a[href*=/drama-detail/]")
         val episode = selectFirst("a[href*=episode-][href$=.html]")
         val anchor = detail ?: episode ?: return null
@@ -84,7 +81,6 @@ class Dramacool : MainAPI() {
         val poster = fixUrlNull(selectFirst("img")?.attr("data-original")?.takeIf { it.isNotBlank() }
             ?: selectFirst("img")?.attr("data-src")?.takeIf { it.isNotBlank() }
             ?: selectFirst("img")?.attr("src"))
-            ?: if (fetchPoster) getPosterFromSearch(title, href) else null
         val year = selectFirst("span.year")?.text()?.toIntOrNull()
         val type = if (forceMovie) TvType.Movie else if (href.contains("episode-")) TvType.TvSeries else getTypeFromUrl(href)
 
@@ -99,22 +95,6 @@ class Dramacool : MainAPI() {
                 this.year = year
             }
         }
-    }
-
-    private suspend fun getPosterFromSearch(title: String, url: String): String? {
-        val keyword = title.substringBeforeLast("(").trim().takeIf { it.isNotBlank() } ?: title
-        val encodedQuery = URLEncoder.encode(keyword, "UTF-8")
-        val results = runCatching {
-            app.get("$mainUrl/api?a=search&keyword=$encodedQuery&type=drama", referer = mainUrl, timeout = 8_000L)
-                .parsedSafe<List<SearchItem>>()
-        }.getOrNull().orEmpty()
-        val path = url.removePrefix(mainUrl)
-        return results.firstOrNull { item ->
-            item.url == path ||
-                fixUrlNull(item.url) == url ||
-                item.name?.equals(keyword, true) == true ||
-                item.value?.equals(keyword, true) == true
-        }?.cover?.let { fixUrlNull(it) }
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
@@ -144,8 +124,7 @@ class Dramacool : MainAPI() {
             .distinctBy { it.data }
             .sortedBy { it.episode ?: 0 }
         val recommendations = document.select("div.content-right a[href*=/drama-detail/], ul.switch-block a[href*=/drama-detail/]")
-            .amap { it.parent()?.toSearchResult() ?: it.toSearchResult() }
-            .filterNotNull()
+            .mapNotNull { it.parent()?.toSearchResult() ?: it.toSearchResult() }
             .distinctBy { it.url }
 
         return if (episodes.size <= 1 && title.contains("movie", true)) {
