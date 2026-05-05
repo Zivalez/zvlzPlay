@@ -23,10 +23,10 @@
     },
     {
         "iconUrl": "https://asianctv.net/favicon.ico",
-        "fileHash": "sha256-85fb4789e438936ad85df8e6ce932e332e47f7da8d4ef241be465606ef6cff84",
+        "fileHash": "sha256-80074e9b52391d812aa4607461c46a661c3754695500ec0a2cf0884a79368b83",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 32540,
+        "fileSize": 36018,
         "status": 1,
         "language": "en",
         "authors": [
