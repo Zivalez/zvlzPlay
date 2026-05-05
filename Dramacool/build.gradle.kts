@@ -4,7 +4,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 }
 
-version = 1
+version = 2
 
 cloudstream {
     language = "en"

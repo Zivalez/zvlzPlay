@@ -73,6 +73,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Pencurimovie | Movie | ✅ Aktif |
 | Funmovieslix | Movie, TV Series, Drama Asia | ✅ Aktif |
 | Moviebox | Movie, TV Series, Anime, Drama Asia | ✅ Aktif |
+| Dramacool | Drama Asia, Variety Show | ✅ Aktif |
 | Samehadaku | Anime | ✅ Aktif |
 | Otakudesu | Anime | ✅ Aktif |
 | Alqanime | Anime | ✅ Aktif |
@@ -103,6 +104,7 @@ Karna CloudStream butuh ekstensi dulu. Ikuti langkah di bagian [Cara Install](#c
 
 ### Provider mana untuk Drama dan Movie?
 - **Idlix** : biasanya lumayan lengkap
+- **Dramacool** : fokus Drama Asia dan Variety Show
 - **LayarKaca**, **Funmovieslix**, **Pencurimovie**, **Moviebox** : alternatif lainnya
 
 ### Ada Donghua?
