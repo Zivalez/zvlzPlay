@@ -30,9 +30,75 @@ class VidBasic : ExtractorApi() {
             it.attr("data-video").takeIf { link -> link.isNotBlank() }
         }.map { fixRelativeUrl(it, url) }.distinct()
 
+        val iframe = document.selectFirst("iframe#embedvideo")?.attr("src")?.let { fixRelativeUrl(it, url) }
+        getDirectHls(iframe ?: url, url)?.let { direct ->
+            M3u8Helper.generateM3u8(
+                name,
+                direct,
+                iframe ?: url,
+                headers = mapOf("Origin" to mainUrl)
+            ).forEach(callback)
+        }
+
         nestedLinks.filterNot { it.contains(mainUrl, true) }.forEach { link ->
             loadExtractor(resolveExtractorUrl(link), url, subtitleCallback, callback)
         }
+    }
+
+    private suspend fun getDirectHls(url: String, referer: String): String? {
+        val response = app.get(url, referer = referer)
+        Regex("""https?://[^"'<>\s]+\.m3u8[^"'<>\s]*""", RegexOption.IGNORE_CASE)
+            .find(response.text)?.value?.replace("\\/", "/")?.let { return it }
+        return getDirectHlsByWebView(url, referer)
+    }
+
+    private suspend fun getDirectHlsByWebView(url: String, referer: String): String? {
+        val direct = AtomicReference<String?>(null)
+        val script = """
+            (function() {
+                function findM3u8(value) {
+                    if (!value) return null;
+                    var text = typeof value === 'string' ? value : JSON.stringify(value);
+                    var match = text.match(/https?:[^\\"'<>\s]+\.m3u8[^\\"'<>\s]*/i);
+                    return match ? match[0] : null;
+                }
+                try {
+                    if (window.jwplayer) {
+                        var player = window.jwplayer();
+                        var item = player.getPlaylistItem && player.getPlaylistItem();
+                        var current = findM3u8(item);
+                        if (current) return current;
+                        current = findM3u8(player.getPlaylist && player.getPlaylist());
+                        if (current) return current;
+                        current = findM3u8(player.getConfig && player.getConfig());
+                        if (current) return current;
+                    }
+                } catch(e) {}
+                try { return findM3u8(document.documentElement.outerHTML); } catch(e) { return null; }
+            })()
+        """.trimIndent()
+
+        val resolver = WebViewResolver(
+            interceptUrl = Regex("""__DRAMACOOL_VIDBASIC_WV_NEVER_MATCH__"""),
+            additionalUrls = listOf(Regex(""".*""")),
+            useOkhttp = false,
+            script = script,
+            scriptCallback = { result ->
+                val value = result?.trim()?.trim('"')?.replace("\\/", "/")
+                if (!value.isNullOrBlank() && value.startsWith("http")) direct.compareAndSet(null, value)
+            },
+            timeout = 30_000L
+        )
+
+        runCatching {
+            resolver.resolveUsingWebView(
+                url = url,
+                referer = referer,
+                requestCallBack = { direct.get() != null }
+            )
+        }
+
+        return direct.get()
     }
 
     private fun fixRelativeUrl(url: String, baseUrl: String): String {
