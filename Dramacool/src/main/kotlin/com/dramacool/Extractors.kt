@@ -1,5 +1,6 @@
 package com.dramacool
 
+import android.util.Base64
 import com.lagradost.cloudstream3.SubtitleFile
 import com.lagradost.cloudstream3.app
 import com.lagradost.cloudstream3.extractors.MixDrop
@@ -13,6 +14,9 @@ import com.lagradost.cloudstream3.utils.getAndUnpack
 import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
 import java.util.concurrent.atomic.AtomicReference
+import javax.crypto.Cipher
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.SecretKeySpec
 
 class VidBasic : ExtractorApi() {
     override val name = "VidBasic"
@@ -31,7 +35,7 @@ class VidBasic : ExtractorApi() {
         }.map { fixRelativeUrl(it, url) }.distinct()
 
         val iframe = document.selectFirst("iframe#embedvideo")?.attr("src")?.let { fixRelativeUrl(it, url) }
-        getDirectHls(url, referer ?: mainUrl)?.let { direct ->
+        getDirectHls(iframe ?: url, url, url)?.let { direct ->
             M3u8Helper.generateM3u8(
                 name,
                 direct,
@@ -45,11 +49,28 @@ class VidBasic : ExtractorApi() {
         }
     }
 
-    private suspend fun getDirectHls(url: String, referer: String): String? {
+    private suspend fun getDirectHls(url: String, referer: String, webViewUrl: String): String? {
         val response = app.get(url, referer = referer)
         Regex("""https?://[^"'<>\s]+\.m3u8[^"'<>\s]*""", RegexOption.IGNORE_CASE)
             .find(response.text)?.value?.replace("\\/", "/")?.let { return it }
-        return getDirectHlsByWebView(url, referer)
+
+        response.document.selectFirst("script[data-name=crypto][data-value]")
+            ?.attr("data-value")
+            ?.let { decryptVidBasicUrl(it) }
+            ?.takeIf { it.contains(".m3u8", true) }
+            ?.let { return it }
+
+        return getDirectHlsByWebView(webViewUrl, referer)
+    }
+
+    private fun decryptVidBasicUrl(encrypted: String): String? {
+        return runCatching {
+            val key = "94588293375053432799222445521289".toByteArray(Charsets.UTF_8)
+            val iv = "5259228356829423".toByteArray(Charsets.UTF_8)
+            val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
+            cipher.init(Cipher.DECRYPT_MODE, SecretKeySpec(key, "AES"), IvParameterSpec(iv))
+            String(cipher.doFinal(Base64.decode(encrypted, Base64.DEFAULT)), Charsets.UTF_8)
+        }.getOrNull()
     }
 
     private suspend fun getDirectHlsByWebView(url: String, referer: String): String? {
