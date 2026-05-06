@@ -44,29 +44,6 @@
         "name": "Dramacool"
     },
     {
-        "iconUrl": "https://cloudstream.zvlz.my.id/icon/funmovieslix.png",
-        "fileHash": "sha256-7c1c4ccfd53f4eb6137fadf696ba016aadc8b6b9462f7095087f6b2adf835c07",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 24500,
-        "status": 1,
-        "language": "id",
-        "authors": [
-            "Phisher98",
-            "Zivalez"
-        ],
-        "tvTypes": [
-            "Movie",
-            "TvSeries",
-            "AsianDrama"
-        ],
-        "version": 1,
-        "internalName": "Funmovieslix",
-        "description": "Nonton Streaming Film & Drakor Gratis Sub Indo",
-        "url": "https://cloudstream.zvlz.my.id/builds/Funmovieslix.cs3",
-        "name": "Funmovieslix"
-    },
-    {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/gomunime.png",
         "fileHash": "sha256-0c334b04505ff3787f2556972c35b293fe2abf5bde41c6eaa7c14a35f9fa344e",
         "apiVersion": 1,
@@ -281,6 +258,29 @@
         "description": "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online",
         "url": "https://cloudstream.zvlz.my.id/builds/LayarKaca.cs3",
         "name": "LayarKaca"
+    },
+    {
+        "iconUrl": "https://www.loklok.tv/favicon.ico",
+        "fileHash": "sha256-4a2b656464ec0ac7ec1ecc63b278e5a378de95689999ff73af53538684068b76",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 36078,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "Anime",
+            "AsianDrama"
+        ],
+        "version": 1,
+        "internalName": "Loklok",
+        "description": "Watch Movies, TV Series, Anime & Asian Drama with subtitles",
+        "url": "https://cloudstream.zvlz.my.id/builds/Loklok.cs3",
+        "name": "Loklok"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/moviebox.png",
