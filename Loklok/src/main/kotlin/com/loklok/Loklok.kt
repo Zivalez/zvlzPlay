@@ -1,5 +1,6 @@
 package com.loklok
 
+import android.util.Log
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.amap
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
@@ -27,6 +28,7 @@ class Loklok : MainAPI() {
     )
 
     companion object {
+        private const val TAG = "Loklok"
         private val mobileApiUrl = decodeReversedBase64("dg==LnQ=b2s=a2w=bG8=aS4=YXA=ZS0=aWw=b2I=LW0=Z2E=Ly8=czo=dHA=aHQ=") + "/" + base64Decode("Y21zL2FwcA==")
         private val h5ApiUrl = "https://h5-api.loklok.site/cms/web"
         private val h5ApiUrlV2 = "https://h5-api.loklok.site/cms/v2/h5"
@@ -88,15 +90,60 @@ class Loklok : MainAPI() {
         }
     }
 
+    private suspend fun apiGet(path: String): com.lagradost.nicehttp.NiceResponse {
+        val h5Url = "$h5ApiUrl/$path"
+        val mobileUrl = "$mobileApiUrl/$path"
+
+        return runCatching {
+            Log.d(TAG, "Trying H5 API: $h5Url")
+            val res = app.get(h5Url, headers = getH5Headers())
+            Log.d(TAG, "H5 API response code: ${res.code}")
+            if (res.code != 200) throw Exception("H5 API returned ${res.code}")
+            res
+        }.getOrElse { e ->
+            Log.d(TAG, "H5 API failed: ${e.message}, trying mobile API")
+            runCatching {
+                val res = app.get(mobileUrl, headers = mobileHeaders)
+                Log.d(TAG, "Mobile API response code: ${res.code}")
+                res
+            }.getOrElse { e2 ->
+                Log.e(TAG, "Both APIs failed. H5: ${e.message}, Mobile: ${e2.message}")
+                throw e2
+            }
+        }
+    }
+
+    private suspend fun apiPost(path: String, body: okhttp3.RequestBody, useV2: Boolean = false): com.lagradost.nicehttp.NiceResponse {
+        val h5Base = if (useV2) h5ApiUrlV2 else h5ApiUrl
+        val h5Url = "$h5Base/$path"
+        val mobileUrl = "$mobileApiUrl/$path"
+
+        return runCatching {
+            Log.d(TAG, "Trying H5 POST: $h5Url")
+            val res = app.post(h5Url, requestBody = body, headers = getH5Headers())
+            Log.d(TAG, "H5 POST response code: ${res.code}")
+            if (res.code != 200) throw Exception("H5 POST returned ${res.code}")
+            res
+        }.getOrElse { e ->
+            Log.d(TAG, "H5 POST failed: ${e.message}, trying mobile API")
+            runCatching {
+                val res = app.post(mobileUrl, requestBody = body, headers = mobileHeaders)
+                Log.d(TAG, "Mobile POST response code: ${res.code}")
+                res
+            }.getOrElse { e2 ->
+                Log.e(TAG, "Both POST APIs failed. H5: ${e.message}, Mobile: ${e2.message}")
+                throw e2
+            }
+        }
+    }
+
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val home = ArrayList<HomePageList>()
         for (i in 0..6) {
             val response = runCatching {
-                app.get("$mobileApiUrl/homePage/getHome?page=$i", headers = mobileHeaders)
-                    .parsedSafe<LoklokHomeResponse>()
-            }.getOrNull() ?: runCatching {
-                app.get("$h5ApiUrl/homePage/getHome?page=$i", headers = getH5Headers())
-                    .parsedSafe<LoklokHomeResponse>()
+                apiGet("homePage/getHome?page=$i").parsedSafe<LoklokHomeResponse>()
+            }.onFailure {
+                Log.e(TAG, "getMainPage page=$i failed: ${it.message}")
             }.getOrNull()
 
             response?.data?.recommendItems.orEmpty()
@@ -126,17 +173,10 @@ class Loklok : MainAPI() {
         ).toJson().toRequestBody(RequestBodyTypes.JSON.toMediaTypeOrNull())
 
         val results = runCatching {
-            app.post(
-                "$mobileApiUrl/search/v1/searchWithKeyWord",
-                requestBody = body,
-                headers = mobileHeaders
-            ).parsedSafe<LoklokSearchResponse>()?.data?.searchResults
-        }.getOrNull() ?: runCatching {
-            app.post(
-                "$h5ApiUrlV2/search/searchWithKeyWord",
-                requestBody = body,
-                headers = getH5Headers()
-            ).parsedSafe<LoklokSearchResponse>()?.data?.searchResults
+            apiPost("search/v1/searchWithKeyWord", body, useV2 = true)
+                .parsedSafe<LoklokSearchResponse>()?.data?.searchResults
+        }.onFailure {
+            Log.e(TAG, "search failed: ${it.message}")
         }.getOrNull()
 
         return results?.mapNotNull { it.toSearchResponse() }
@@ -146,15 +186,10 @@ class Loklok : MainAPI() {
         val data = parseJson<UrlData>(url)
 
         val res = runCatching {
-            app.get(
-                "$mobileApiUrl/movieDrama/get?id=${data.id}&category=${data.category}",
-                headers = mobileHeaders
-            ).parsedSafe<DetailResponse>()?.data
-        }.getOrNull() ?: runCatching {
-            app.get(
-                "$h5ApiUrl/movieDrama/get?id=${data.id}&category=${data.category}",
-                headers = getH5Headers()
-            ).parsedSafe<DetailResponse>()?.data
+            apiGet("movieDrama/get?id=${data.id}&category=${data.category}")
+                .parsedSafe<DetailResponse>()?.data
+        }.onFailure {
+            Log.e(TAG, "load failed: ${it.message}")
         }.getOrNull() ?: throw ErrorLoadingException("Failed to load details. Loklok might be geoblocked.")
 
         val actors = res.starList?.mapNotNull {
@@ -216,22 +251,10 @@ class Loklok : MainAPI() {
 
         res.definitionList?.amap { video ->
             val json = runCatching {
-                app.get(
-                    "$mobileApiUrl/media/previewInfo?category=${res.category}&contentId=${res.id}&episodeId=${res.epId}&definition=${video.code}",
-                    headers = mobileHeaders,
-                ).parsedSafe<PreviewResponse>()?.data
-            }.getOrNull() ?: runCatching {
-                val postBody = mapOf(
-                    "category" to (res.category ?: 0),
-                    "contentId" to (res.id ?: ""),
-                    "episodeId" to (res.epId ?: 0),
-                    "definition" to (video.code ?: "")
-                ).toJson().toRequestBody(RequestBodyTypes.JSON.toMediaTypeOrNull())
-                app.post(
-                    "$h5ApiUrl/h5/movieDrama/previewInfo",
-                    requestBody = postBody,
-                    headers = getH5Headers(),
-                ).parsedSafe<PreviewResponse>()?.data
+                apiGet("media/previewInfo?category=${res.category}&contentId=${res.id}&episodeId=${res.epId}&definition=${video.code}")
+                    .parsedSafe<PreviewResponse>()?.data
+            }.onFailure {
+                Log.e(TAG, "loadLinks previewInfo failed: ${it.message}")
             }.getOrNull()
 
             val mediaUrl = json?.mediaUrl ?: return@amap null
