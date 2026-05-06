@@ -1,6 +1,7 @@
 package com.loklok
 
 import com.lagradost.cloudstream3.*
+import com.lagradost.cloudstream3.amap
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
@@ -211,7 +212,7 @@ class Loklok : MainAPI() {
     ): Boolean {
         val res = parseJson<EpisodeData>(data)
 
-        res.definitionList?.apmap { video ->
+        res.definitionList?.amap { video ->
             val json = runCatching {
                 app.get(
                     "$mobileApiUrl/media/previewInfo?category=${res.category}&contentId=${res.id}&episodeId=${res.epId}&definition=${video.code}",
@@ -231,17 +232,17 @@ class Loklok : MainAPI() {
                 ).parsedSafe<PreviewResponse>()?.data
             }.getOrNull()
 
-            val mediaUrl = json?.mediaUrl ?: return@apmap null
+            val mediaUrl = json?.mediaUrl ?: return@amap null
 
             callback.invoke(
-                ExtractorLink(
+                newExtractorLink(
                     this.name,
                     this.name,
                     mediaUrl,
-                    "",
-                    getQualityFromDefinition(json.currentDefinition ?: video.code ?: ""),
-                    isM3u8 = true,
-                )
+                    ExtractorLinkType.M3U8
+                ) {
+                    this.quality = getQualityFromDefinition(json.currentDefinition ?: video.code ?: "")
+                }
             )
         }
 
