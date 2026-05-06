@@ -234,12 +234,22 @@ class Loklok : MainAPI() {
 
         val resolver = WebViewResolver(
             interceptUrl = Regex("""__LOKLOK_WV_NEVER_MATCH__"""),
-            additionalUrls = listOf(Regex(""".*""")),
+            additionalUrls = listOf(
+                Regex(""".*\.js.*"""),
+                Regex(""".*\.css.*"""),
+                Regex(""".*\.png.*"""),
+                Regex(""".*\.jpg.*"""),
+                Regex(""".*event-tracking-project.*""")
+            ),
             userAgent = BROWSER_UA,
             useOkhttp = false,
             script = script,
             scriptCallback = { result ->
-                if (result != null && result.length > 10 && result != "null" && !result.startsWith("\"ERR:")) {
+                if (result != null && result.length > 5 && result != "null") {
+                    if (result.startsWith("\"ERR:") || result.startsWith("ERR:")) {
+                        Log.e(TAG, "WebView fetch error: $result")
+                        captured.set(result) // Set to prevent timeout, will be handled below
+                    } else {
                     val decoded = try {
                         org.json.JSONArray("[$result]").getString(0)
                     } catch (e: Exception) {
@@ -251,6 +261,7 @@ class Loklok : MainAPI() {
                             Log.d(TAG, "scriptCallback: captured JSON, len=${decoded.length}")
                         }
                         captured.set(decoded)
+                    }
                     }
                 }
             },
@@ -268,7 +279,13 @@ class Loklok : MainAPI() {
             Log.e(TAG, "webViewApiCall exception: ${e.message}")
         }
 
-        return captured.get()
+        val finalResult = captured.get()
+        if (finalResult != null && (finalResult.startsWith("\"ERR:") || finalResult.startsWith("ERR:"))) {
+            Log.e(TAG, "webViewApiCall failed with: $finalResult")
+            return null
+        }
+
+        return finalResult
     }
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
