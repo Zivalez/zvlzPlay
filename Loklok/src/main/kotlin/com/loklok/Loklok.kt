@@ -32,7 +32,9 @@ class Loklok : MainAPI() {
         private val mobileApiUrl = decodeReversedBase64("dg==LnQ=b2s=a2w=bG8=aS4=YXA=ZS0=aWw=b2I=LW0=Z2E=Ly8=czo=dHA=aHQ=") + "/" + base64Decode("Y21zL2FwcA==")
         private val h5ApiUrl = "https://h5-api.loklok.site/cms/web"
         private val h5ApiUrlV2 = "https://h5-api.loklok.site/cms/v2/h5"
+        private const val H5_SITE = "https://h5.loklok.site"
         private const val IMAGE_PROXY = "https://images.weserv.nl"
+        private const val BROWSER_UA = "Mozilla/5.0 (Linux; Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.6422.165 Mobile Safari/537.36"
 
         private val deviceId = generateDeviceId()
 
@@ -41,6 +43,7 @@ class Loklok : MainAPI() {
             "versioncode" to "999999999",
             "clienttype" to "ios17",
             "deviceid" to deviceId,
+            "User-Agent" to BROWSER_UA,
         )
 
         private fun decodeReversedBase64(api: String): String {
@@ -66,11 +69,17 @@ class Loklok : MainAPI() {
             val timestamp = System.currentTimeMillis()
             return mapOf(
                 "lang" to "en",
-                "versioncode" to "32",
-                "clienttype" to "H5",
+                "versioncode" to "11132",
+                "clienttype" to "web_h5",
+                "platform" to "web",
                 "deviceid" to deviceId,
                 "timestamp" to timestamp.toString(),
                 "sign" to generateSign(timestamp),
+                "User-Agent" to BROWSER_UA,
+                "Accept" to "application/json, text/plain, */*",
+                "Accept-Language" to "en-US,en;q=0.9",
+                "Origin" to H5_SITE,
+                "Referer" to "$H5_SITE/",
             )
         }
     }
@@ -98,13 +107,21 @@ class Loklok : MainAPI() {
             Log.d(TAG, "Trying H5 API: $h5Url")
             val res = app.get(h5Url, headers = getH5Headers())
             Log.d(TAG, "H5 API response code: ${res.code}")
-            if (res.code != 200) throw Exception("H5 API returned ${res.code}")
+            if (res.code != 200) {
+                val body = res.text.take(500)
+                Log.d(TAG, "H5 API error body: $body")
+                throw Exception("H5 API returned ${res.code}")
+            }
             res
         }.getOrElse { e ->
             Log.d(TAG, "H5 API failed: ${e.message}, trying mobile API")
             runCatching {
                 val res = app.get(mobileUrl, headers = mobileHeaders)
                 Log.d(TAG, "Mobile API response code: ${res.code}")
+                if (res.code != 200) {
+                    val body = res.text.take(500)
+                    Log.d(TAG, "Mobile API error body: $body")
+                }
                 res
             }.getOrElse { e2 ->
                 Log.e(TAG, "Both APIs failed. H5: ${e.message}, Mobile: ${e2.message}")
