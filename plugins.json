@@ -261,10 +261,10 @@
     },
     {
         "iconUrl": "https://www.loklok.tv/favicon.ico",
-        "fileHash": "sha256-fbe7280a23e8760085615f3334d5522db188c019493527962e4f1a914788a372",
+        "fileHash": "sha256-47bf767e733ff5248be2660930842d2ca1437caeb743e20319f02e9fb1c84a30",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 39966,
+        "fileSize": 40226,
         "status": 1,
         "language": "en",
         "authors": [
