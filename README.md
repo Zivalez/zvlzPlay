@@ -75,7 +75,6 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Idlix | Movie, TV Series, Asian Drama, Anime | ✅ Active |
 | LayarKaca | Movie, TV Series, Asian Drama, Anime Movie | ✅ Active |
 | Pencurimovie | Movie | ✅ Active |
-| Funmovieslix | Movie, TV Series, Asian Drama | ✅ Active |
 | Moviebox | Movie, TV Series, Anime, Asian Drama | ✅ Active |
 | Dramacool | Asian Drama, Variety Show | ✅ Active |
 | Samehadaku | Anime | ✅ Active |
@@ -109,7 +108,7 @@ CloudStream requires extensions first. Follow the steps in [How to Install](#how
 ### Which providers are best for Drama and Movies?
 - **Idlix** : usually fairly complete
 - **Dramacool** : focused on Asian Drama and Variety Shows
-- **LayarKaca**, **Funmovieslix**, **Pencurimovie**, **Moviebox** : other alternatives
+- **LayarKaca**, **Pencurimovie**, **Moviebox** : other alternatives
 
 ### Is Donghua available?
 - Yes. Try **Kuramanime** or **Winbu**.
