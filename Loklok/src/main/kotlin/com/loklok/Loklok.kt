@@ -1,10 +1,15 @@
 package com.loklok
 
 import android.util.Log
+import android.webkit.CookieManager
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.amap
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.newHomePageResponse
+import com.lagradost.cloudstream3.network.WebViewResolver
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
@@ -19,6 +24,7 @@ class Loklok : MainAPI() {
     override val hasChromecastSupport = true
     override val instantLinkLoading = true
     override val hasQuickSearch = true
+    override val usesWebView = true
     override var lang = "en"
     override val supportedTypes = setOf(
         TvType.Movie,
@@ -29,7 +35,6 @@ class Loklok : MainAPI() {
 
     companion object {
         private const val TAG = "Loklok"
-        private val mobileApiUrl = decodeReversedBase64("dg==LnQ=b2s=a2w=bG8=aS4=YXA=ZS0=aWw=b2I=LW0=Z2E=Ly8=czo=dHA=aHQ=") + "/" + base64Decode("Y21zL2FwcA==")
         private val h5ApiUrl = "https://h5-api.loklok.site/cms/web"
         private val h5ApiUrlV2 = "https://h5-api.loklok.site/cms/v2/h5"
         private const val H5_SITE = "https://h5.loklok.site"
@@ -37,18 +42,6 @@ class Loklok : MainAPI() {
         private const val BROWSER_UA = "Mozilla/5.0 (Linux; Android 14; Pixel 8 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.6422.165 Mobile Safari/537.36"
 
         private val deviceId = generateDeviceId()
-
-        private val mobileHeaders = mutableMapOf(
-            "lang" to "en",
-            "versioncode" to "999999999",
-            "clienttype" to "ios17",
-            "deviceid" to deviceId,
-            "User-Agent" to BROWSER_UA,
-        )
-
-        private fun decodeReversedBase64(api: String): String {
-            return api.chunked(4).map { base64Decode(it) }.reversed().joinToString("")
-        }
 
         private fun generateDeviceId(length: Int = 16): String {
             val chars = ('a'..'f') + ('0'..'9')
@@ -65,22 +58,18 @@ class Loklok : MainAPI() {
             return md.digest(input.toByteArray()).joinToString("") { "%02x".format(it) }
         }
 
-        private fun getH5Headers(): Map<String, String> {
+        private fun buildApiHeaders(): String {
             val timestamp = System.currentTimeMillis()
-            return mapOf(
-                "lang" to "en",
-                "versioncode" to "11132",
-                "clienttype" to "web_h5",
-                "platform" to "web",
-                "deviceid" to deviceId,
-                "timestamp" to timestamp.toString(),
-                "sign" to generateSign(timestamp),
-                "User-Agent" to BROWSER_UA,
-                "Accept" to "application/json, text/plain, */*",
-                "Accept-Language" to "en-US,en;q=0.9",
-                "Origin" to H5_SITE,
-                "Referer" to "$H5_SITE/",
-            )
+            val sign = generateSign(timestamp)
+            return """
+                "lang": "en",
+                "versioncode": "11132",
+                "clienttype": "web_h5",
+                "platform": "web",
+                "deviceid": "$deviceId",
+                "timestamp": "$timestamp",
+                "sign": "$sign"
+            """.trimIndent()
         }
     }
 
@@ -99,66 +88,236 @@ class Loklok : MainAPI() {
         }
     }
 
-    private suspend fun apiGet(path: String): com.lagradost.nicehttp.NiceResponse {
-        val h5Url = "$h5ApiUrl/$path"
-        val mobileUrl = "$mobileApiUrl/$path"
+    private suspend fun webViewFetch(url: String): String? {
+        val captured = java.util.concurrent.atomic.AtomicReference<String?>(null)
 
-        return runCatching {
-            Log.d(TAG, "Trying H5 API: $h5Url")
-            val res = app.get(h5Url, headers = getH5Headers())
-            Log.d(TAG, "H5 API response code: ${res.code}")
-            if (res.code != 200) {
-                val body = res.text.take(500)
-                Log.d(TAG, "H5 API error body: $body")
-                throw Exception("H5 API returned ${res.code}")
-            }
-            res
-        }.getOrElse { e ->
-            Log.d(TAG, "H5 API failed: ${e.message}, trying mobile API")
-            runCatching {
-                val res = app.get(mobileUrl, headers = mobileHeaders)
-                Log.d(TAG, "Mobile API response code: ${res.code}")
-                if (res.code != 200) {
-                    val body = res.text.take(500)
-                    Log.d(TAG, "Mobile API error body: $body")
+        val js = """
+            (function() {
+                try {
+                    var headers = {${buildApiHeaders()}};
+                    fetch('$url', {
+                        method: 'GET',
+                        headers: headers
+                    })
+                    .then(function(r) { return r.text(); })
+                    .then(function(t) { return t; })
+                    .catch(function(e) { return 'FETCH_ERROR:' + e.message; });
+                } catch(e) {
+                    return 'JS_ERROR:' + e.message;
                 }
-                res
-            }.getOrElse { e2 ->
-                Log.e(TAG, "Both APIs failed. H5: ${e.message}, Mobile: ${e2.message}")
-                throw e2
+            })()
+        """.trimIndent()
+
+        val resolver = WebViewResolver(
+            interceptUrl = Regex(url.replace("?", "\\?").replace(".", "\\.").take(80) + ".*"),
+            additionalUrls = listOf(),
+            userAgent = BROWSER_UA,
+            useOkhttp = false,
+        )
+
+        try {
+            val result = resolver.resolveUsingWebView(
+                url = "$H5_SITE/",
+                referer = H5_SITE,
+                method = "GET",
+            )
+            result.first?.let { response ->
+                captured.set(response.url)
             }
+        } catch (e: Exception) {
+            Log.e(TAG, "webViewFetch exception: ${e.message}")
         }
+
+        return captured.get()
     }
 
-    private suspend fun apiPost(path: String, body: okhttp3.RequestBody, useV2: Boolean = false): com.lagradost.nicehttp.NiceResponse {
-        val h5Base = if (useV2) h5ApiUrlV2 else h5ApiUrl
-        val h5Url = "$h5Base/$path"
-        val mobileUrl = "$mobileApiUrl/$path"
+    private suspend fun apiGet(path: String): String {
+        val url = "$h5ApiUrl/$path"
+        Log.d(TAG, "apiGet: $url")
 
-        return runCatching {
-            Log.d(TAG, "Trying H5 POST: $h5Url")
-            val res = app.post(h5Url, requestBody = body, headers = getH5Headers())
-            Log.d(TAG, "H5 POST response code: ${res.code}")
-            if (res.code != 200) throw Exception("H5 POST returned ${res.code}")
-            res
-        }.getOrElse { e ->
-            Log.d(TAG, "H5 POST failed: ${e.message}, trying mobile API")
-            runCatching {
-                val res = app.post(mobileUrl, requestBody = body, headers = mobileHeaders)
-                Log.d(TAG, "Mobile POST response code: ${res.code}")
-                res
-            }.getOrElse { e2 ->
-                Log.e(TAG, "Both POST APIs failed. H5: ${e.message}, Mobile: ${e2.message}")
-                throw e2
-            }
+        val timestamp = System.currentTimeMillis()
+        val sign = generateSign(timestamp)
+
+        val headers = mapOf(
+            "lang" to "en",
+            "versioncode" to "11132",
+            "clienttype" to "web_h5",
+            "platform" to "web",
+            "deviceid" to deviceId,
+            "timestamp" to timestamp.toString(),
+            "sign" to sign,
+            "User-Agent" to BROWSER_UA,
+            "Accept" to "application/json, text/plain, */*",
+            "Accept-Language" to "en-US,en;q=0.9",
+            "Origin" to H5_SITE,
+            "Referer" to "$H5_SITE/",
+            "Sec-Ch-Ua" to "\"Chromium\";v=\"125\", \"Not.A/Brand\";v=\"24\"",
+            "Sec-Ch-Ua-Mobile" to "?1",
+            "Sec-Ch-Ua-Platform" to "\"Android\"",
+            "Sec-Fetch-Dest" to "empty",
+            "Sec-Fetch-Mode" to "cors",
+            "Sec-Fetch-Site" to "same-site",
+        )
+
+        val res = app.get(url, headers = headers)
+        Log.d(TAG, "apiGet response code: ${res.code}")
+
+        if (res.code == 200) {
+            return res.text
         }
+
+        Log.d(TAG, "OkHttp blocked (${res.code}), trying WebView fetch")
+
+        val wvResult = webViewApiCall(url, headers)
+        if (wvResult != null) {
+            Log.d(TAG, "WebView fetch success, len=${wvResult.length}")
+            return wvResult
+        }
+
+        throw Exception("API call failed for $path")
+    }
+
+    private suspend fun apiPost(path: String, bodyJson: String, useV2: Boolean = false): String {
+        val base = if (useV2) h5ApiUrlV2 else h5ApiUrl
+        val url = "$base/$path"
+        Log.d(TAG, "apiPost: $url")
+
+        val timestamp = System.currentTimeMillis()
+        val sign = generateSign(timestamp)
+
+        val headers = mapOf(
+            "lang" to "en",
+            "versioncode" to "11132",
+            "clienttype" to "web_h5",
+            "platform" to "web",
+            "deviceid" to deviceId,
+            "timestamp" to timestamp.toString(),
+            "sign" to sign,
+            "User-Agent" to BROWSER_UA,
+            "Accept" to "application/json, text/plain, */*",
+            "Accept-Language" to "en-US,en;q=0.9",
+            "Content-Type" to "application/json",
+            "Origin" to H5_SITE,
+            "Referer" to "$H5_SITE/",
+            "Sec-Ch-Ua" to "\"Chromium\";v=\"125\", \"Not.A/Brand\";v=\"24\"",
+            "Sec-Ch-Ua-Mobile" to "?1",
+            "Sec-Ch-Ua-Platform" to "\"Android\"",
+            "Sec-Fetch-Dest" to "empty",
+            "Sec-Fetch-Mode" to "cors",
+            "Sec-Fetch-Site" to "same-site",
+        )
+
+        val body = bodyJson.toRequestBody(RequestBodyTypes.JSON.toMediaTypeOrNull())
+        val res = app.post(url, requestBody = body, headers = headers)
+        Log.d(TAG, "apiPost response code: ${res.code}")
+
+        if (res.code == 200) {
+            return res.text
+        }
+
+        Log.d(TAG, "OkHttp POST blocked (${res.code}), trying WebView")
+
+        val wvResult = webViewApiCall(url, headers, "POST", bodyJson)
+        if (wvResult != null) {
+            Log.d(TAG, "WebView POST success, len=${wvResult.length}")
+            return wvResult
+        }
+
+        throw Exception("POST API call failed for $path")
+    }
+
+    private suspend fun webViewApiCall(
+        url: String,
+        headers: Map<String, String>,
+        method: String = "GET",
+        body: String? = null
+    ): String? {
+        val captured = java.util.concurrent.atomic.AtomicReference<String?>(null)
+
+        val headersJs = headers.entries.joinToString(",\n") { (k, v) ->
+            "'${k}': '${v.replace("'", "\\'")}'"
+        }
+
+        val fetchOptions = if (method == "POST" && body != null) {
+            """
+                method: 'POST',
+                headers: {$headersJs},
+                body: '${body.replace("'", "\\'")}'
+            """.trimIndent()
+        } else {
+            """
+                method: 'GET',
+                headers: {$headersJs}
+            """.trimIndent()
+        }
+
+        val script = """
+            (function() {
+                try {
+                    if (window.__loklokApiResult) {
+                        return window.__loklokApiResult;
+                    }
+                    if (!window.__loklokFetching) {
+                        window.__loklokFetching = true;
+                        fetch('$url', { $fetchOptions })
+                        .then(function(r) { return r.text(); })
+                        .then(function(t) { 
+                            window.__loklokApiResult = t; 
+                        })
+                        .catch(function(e) { 
+                            window.__loklokApiResult = 'ERR:' + e.message; 
+                        });
+                    }
+                    return null;
+                } catch(e) { return 'ERR:' + e.message; }
+            })()
+        """.trimIndent()
+
+        val resolver = WebViewResolver(
+            interceptUrl = Regex("""__LOKLOK_WV_NEVER_MATCH__"""),
+            additionalUrls = listOf(Regex(""".*""")),
+            userAgent = BROWSER_UA,
+            useOkhttp = false,
+            script = script,
+            scriptCallback = { result ->
+                if (result != null && result.length > 10 && result != "null" && !result.startsWith("\"ERR:")) {
+                    val decoded = try {
+                        org.json.JSONArray("[$result]").getString(0)
+                    } catch (e: Exception) {
+                        Log.e(TAG, "scriptCallback JSON decode failed: ${e.message}")
+                        null
+                    }
+                    if (decoded != null && (decoded.contains("\"code\"") || decoded.contains("\"data\""))) {
+                        if (captured.get() == null) {
+                            Log.d(TAG, "scriptCallback: captured JSON, len=${decoded.length}")
+                        }
+                        captured.set(decoded)
+                    }
+                }
+            },
+            timeout = 30_000L
+        )
+
+        try {
+            resolver.resolveUsingWebView(
+                url = "$H5_SITE/",
+                referer = H5_SITE,
+                method = "GET",
+                requestCallBack = { captured.get() != null }
+            )
+        } catch (e: Exception) {
+            Log.e(TAG, "webViewApiCall exception: ${e.message}")
+        }
+
+        return captured.get()
     }
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val home = ArrayList<HomePageList>()
         for (i in 0..6) {
             val response = runCatching {
-                apiGet("homePage/getHome?page=$i").parsedSafe<LoklokHomeResponse>()
+                val json = apiGet("homePage/getHome?page=$i")
+                parseJson<LoklokHomeResponse>(json)
             }.onFailure {
                 Log.e(TAG, "getMainPage page=$i failed: ${it.message}")
             }.getOrNull()
@@ -173,7 +332,7 @@ class Loklok : MainAPI() {
                     home.add(HomePageList(header, media))
                 }
         }
-        if (home.isEmpty()) throw ErrorLoadingException("Loklok might be geoblocked in your region. Try using a VPN.")
+        if (home.isEmpty()) throw ErrorLoadingException("Loklok API is blocked by Akamai CDN. The API works in browser but OkHttp is fingerprinted.")
         return newHomePageResponse(home)
     }
 
@@ -182,16 +341,16 @@ class Loklok : MainAPI() {
     override suspend fun search(query: String): List<SearchResponse>? = performSearch(query)
 
     private suspend fun performSearch(query: String): List<SearchResponse>? {
-        val body = mapOf(
+        val bodyJson = mapOf(
             "searchKeyWord" to query,
             "size" to "50",
             "sort" to "",
             "searchType" to "",
-        ).toJson().toRequestBody(RequestBodyTypes.JSON.toMediaTypeOrNull())
+        ).toJson()
 
         val results = runCatching {
-            apiPost("search/v1/searchWithKeyWord", body, useV2 = true)
-                .parsedSafe<LoklokSearchResponse>()?.data?.searchResults
+            val json = apiPost("search/v1/searchWithKeyWord", bodyJson, useV2 = true)
+            parseJson<LoklokSearchResponse>(json)?.data?.searchResults
         }.onFailure {
             Log.e(TAG, "search failed: ${it.message}")
         }.getOrNull()
@@ -203,11 +362,11 @@ class Loklok : MainAPI() {
         val data = parseJson<UrlData>(url)
 
         val res = runCatching {
-            apiGet("movieDrama/get?id=${data.id}&category=${data.category}")
-                .parsedSafe<DetailResponse>()?.data
+            val json = apiGet("movieDrama/get?id=${data.id}&category=${data.category}")
+            parseJson<DetailResponse>(json)?.data
         }.onFailure {
             Log.e(TAG, "load failed: ${it.message}")
-        }.getOrNull() ?: throw ErrorLoadingException("Failed to load details. Loklok might be geoblocked.")
+        }.getOrNull() ?: throw ErrorLoadingException("Failed to load details")
 
         val actors = res.starList?.mapNotNull {
             Actor(it.localName ?: return@mapNotNull null, it.image)
@@ -268,8 +427,8 @@ class Loklok : MainAPI() {
 
         res.definitionList?.amap { video ->
             val json = runCatching {
-                apiGet("media/previewInfo?category=${res.category}&contentId=${res.id}&episodeId=${res.epId}&definition=${video.code}")
-                    .parsedSafe<PreviewResponse>()?.data
+                val text = apiGet("media/previewInfo?category=${res.category}&contentId=${res.id}&episodeId=${res.epId}&definition=${video.code}")
+                parseJson<PreviewResponse>(text)?.data
             }.onFailure {
                 Log.e(TAG, "loadLinks previewInfo failed: ${it.message}")
             }.getOrNull()
