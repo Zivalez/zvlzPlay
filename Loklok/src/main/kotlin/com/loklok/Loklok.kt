@@ -3,6 +3,7 @@ package com.loklok
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.amap
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
+import com.lagradost.cloudstream3.newHomePageResponse
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
@@ -109,7 +110,7 @@ class Loklok : MainAPI() {
                 }
         }
         if (home.isEmpty()) throw ErrorLoadingException("Loklok might be geoblocked in your region. Try using a VPN.")
-        return HomePageResponse(home)
+        return newHomePageResponse(home)
     }
 
     override suspend fun quickSearch(query: String): List<SearchResponse>? = performSearch(query)
@@ -167,16 +168,17 @@ class Loklok : MainAPI() {
             val subtitles = ep.subtitlingList?.map {
                 SubtitleRef(it.languageAbbr, it.language, it.subtitlingUrl)
             }
-            Episode(
-                data = EpisodeData(
+            newEpisode(
+                EpisodeData(
                     data.id.toString(),
                     data.category,
                     ep.id,
                     definitions,
                     subtitles
-                ).toJson(),
-                episode = ep.seriesNo
-            )
+                ).toJson()
+            ) {
+                this.episode = ep.seriesNo
+            }
         } ?: throw ErrorLoadingException("No episodes found")
 
         val recommendations = res.likeList?.mapNotNull { it.toSearchResponse() }
@@ -198,7 +200,7 @@ class Loklok : MainAPI() {
             this.year = res.year
             this.plot = res.introduction
             this.tags = res.tagNameList
-            this.rating = res.score.toRatingInt()
+            this.score = Score.from10(res.score)
             addActors(actors)
             this.recommendations = recommendations
         }
