@@ -88,48 +88,7 @@ class Loklok : MainAPI() {
         }
     }
 
-    private suspend fun webViewFetch(url: String): String? {
-        val captured = java.util.concurrent.atomic.AtomicReference<String?>(null)
 
-        val js = """
-            (function() {
-                try {
-                    var headers = {${buildApiHeaders()}};
-                    fetch('$url', {
-                        method: 'GET',
-                        headers: headers
-                    })
-                    .then(function(r) { return r.text(); })
-                    .then(function(t) { return t; })
-                    .catch(function(e) { return 'FETCH_ERROR:' + e.message; });
-                } catch(e) {
-                    return 'JS_ERROR:' + e.message;
-                }
-            })()
-        """.trimIndent()
-
-        val resolver = WebViewResolver(
-            interceptUrl = Regex(url.replace("?", "\\?").replace(".", "\\.").take(80) + ".*"),
-            additionalUrls = listOf(),
-            userAgent = BROWSER_UA,
-            useOkhttp = false,
-        )
-
-        try {
-            val result = resolver.resolveUsingWebView(
-                url = "$H5_SITE/",
-                referer = H5_SITE,
-                method = "GET",
-            )
-            result.first?.let { response ->
-                captured.set(response.url)
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "webViewFetch exception: ${e.message}")
-        }
-
-        return captured.get()
-    }
 
     private suspend fun apiGet(path: String): String {
         val url = "$h5ApiUrl/$path"
