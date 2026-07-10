@@ -47,8 +47,11 @@ CloudStream does not include content by default. Think of it as a media player a
 
 ## App Download
 
-Download CloudStream here:\
-https://github.com/recloudstream/cloudstream/releases
+<p>
+  <a href="https://github.com/recloudstream/cloudstream/releases/download/v4.8.0/4.8.0.apk" target="_blank">
+    <img src="https://img.shields.io/badge/Download_CloudStream-v4.8.0-E53935?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
+  </a>
+</p>
 
 
 ## How to Install zvlzPlay Extensions
