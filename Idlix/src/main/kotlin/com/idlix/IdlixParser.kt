@@ -1,5 +1,7 @@
 package com.idlix
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 data class ApiResponse(
     val data: List<ApiItem> = emptyList(),
     val pagination: Pagination? = null,
@@ -158,26 +160,33 @@ data class LoadData(
     val episodeNum: Int? = null
 )
 
-data class PlayInfoResponse(
-    val kind: String? = null,
-    val claim: String? = null,
-    val redeemUrl: String? = null,
-    val videoId: String? = null,
-    val title: String? = null,
-    val durationSec: Int? = null
+data class Res(
+    @JsonProperty("gateToken") val gateToken: String,
+    @JsonProperty("serverNow") val serverNow: Long,
+    @JsonProperty("unlockAt") val unlockAt: Long
 )
 
-data class RedeemResponse(
-    val code: String? = null,
-    val url: String? = null,
-    val expiresAt: Long? = null,
-    val videoId: String? = null,
-    val subtitles: List<SubtitleInfo>? = null
+data class RedeemRes(
+    @JsonProperty("kind") val kind: String?,
+    @JsonProperty("claim") val claim: String?,
+    @JsonProperty("redeemUrl") val redeemUrl: String?,
+    @JsonProperty("videoId") val videoId: String?,
+    @JsonProperty("title") val title: String?,
+    @JsonProperty("durationSec") val durationSec: Long?,
+    @JsonProperty("viewerTier") val viewerTier: String?,
+    @JsonProperty("maxHeight") val maxHeight: Long?
 )
 
-data class SubtitleInfo(
-    val lang: String? = null,
-    val url: String? = null,
-    val path: String? = null,
-    val label: String? = null
+data class Iframe(
+    @JsonProperty("code") val code: String?,
+    @JsonProperty("url") val url: String?,
+    @JsonProperty("expiresAt") val expiresAt: Long?,
+    @JsonProperty("subtitles") val subtitles: List<Subtitle>? = emptyList(),
+    @JsonProperty("videoId") val videoId: String?
+)
+
+data class Subtitle(
+    @JsonProperty("lang") val lang: String,
+    @JsonProperty("label") val label: String,
+    @JsonProperty("path") val path: String
 )

@@ -74,3 +74,44 @@ class Jeniusplay : ExtractorApi() {
         @JsonProperty("label") val label: String?,
     )
 }
+
+class Majorplay : ExtractorApi() {
+    override var name = "Majorplay"
+    override var mainUrl = "https://*.majorplay.net"
+    override val requiresReferer = true
+
+    override suspend fun getUrl(
+        url: String,
+        referer: String?,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ) {
+        val document = app.get(url, referer = mainUrl).document
+        val m3uLink = document.select("source").attr("src")
+
+        generateM3u8(
+            name,
+            m3uLink,
+            mainUrl,
+        ).forEach(callback)
+
+        val script = document.selectFirst("script:containsData(subtitles)")
+        if (script != null) {
+            val scriptData = script.data()
+            if (scriptData != null) {
+                val regex = Regex("""\\\"label\\\":\\\"([^\\\"]*?)\\\"[^}]*?\\\"path\\\":\\\"([^\\\"]*?)\\\"""")
+                regex.findAll(scriptData).forEach { match ->
+                    val label = match.groupValues[1]
+                    var path = match.groupValues[2]
+                    if (!path.startsWith("http")) {
+                        path = mainUrl.trimEnd('/') + "/" + path.trimStart('/')
+                    }
+                    subtitleCallback.invoke(
+                        newSubtitleFile(label, path)
+                    )
+                }
+            }
+        }
+    }
+}
+

@@ -19,12 +19,11 @@ class Idlix : MainAPI() {
         private const val USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
 
-    override var mainUrl = base64Decode("aHR0cHM6Ly96MS5pZGxpeGt1LmNvbQ==")
+    override var mainUrl = base64Decode("aHR0cHM6Ly96Mi5pZGxpeGt1LmNvbQ==")
     override var name = "Idlix"
     override val hasMainPage = true
     override var lang = "id"
     override val hasDownloadSupport = true
-    override val usesWebView = false
     override val supportedTypes = setOf(
         TvType.Movie,
         TvType.TvSeries,
@@ -35,21 +34,11 @@ class Idlix : MainAPI() {
     override val mainPage = mainPageOf(
         "$mainUrl/api/movies?page=%d&limit=36&sort=createdAt" to "Movie Terbaru",
         "$mainUrl/api/series?page=%d&limit=36&sort=createdAt" to "TV Series Terbaru",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=netflix" to "Netflix",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=hbo" to "HBO",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=disney-plus" to "Disney+",
         "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=prime-video" to "Amazon Prime",
         "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=apple-tv-plus" to "Apple TV+",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=animation&country=JP&language=ja" to "Anime",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=science-fiction" to "Science Fiction",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=action" to "Action",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=comedy" to "Comedy",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=drama" to "Drama",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=romance" to "Romance",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=animation" to "Animation",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=horror" to "Horror",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=thriller" to "Thriller",
-        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&genre=mystery" to "Mystery",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=disney-plus" to "Disney+",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=hbo" to "HBO",
+        "$mainUrl/api/browse?page=%d&limit=36&sort=latest&network=netflix" to "Netflix",
     )
 
     override suspend fun getMainPage(
@@ -298,86 +287,63 @@ class Idlix : MainAPI() {
             "episode" -> "episode"
             else      -> return false
         }
-        return loadPentosLinks(kind, parsed.id, subtitleCallback, callback)
-    }
 
-    private suspend fun loadPentosLinks(
-        kind: String,
-        contentId: String,
-        subtitleCallback: (SubtitleFile) -> Unit,
-        callback: (ExtractorLink) -> Unit
-    ): Boolean {
-        Log.d(TAG, "loadPentosLinks($kind): contentId=$contentId")
-
-        val playInfoUrl = "$mainUrl/api/watch/play-info/$kind/$contentId"
-
-        val playInfo = app.get(
+        val playInfoUrl = "$mainUrl/api/watch/play-info/$kind/${parsed.id}"
+        val playInfoRes = app.get(
             playInfoUrl,
             headers = mapOf(
-                "accept" to "application/json",
-                "referer" to mainUrl,
-                "user-agent" to USER_AGENT,
+                "Referer" to "$mainUrl/",
+                "Origin" to mainUrl,
+                "Accept" to "*/*",
+                "Content-Type" to "application/json",
             )
-        ).parsedSafe<PlayInfoResponse>()
+        ).parsedSafe<Res>() ?: return false
 
-        if (playInfo == null) {
-            Log.e(TAG, "loadPentosLinks($kind): play-info parse failed: $playInfoUrl")
-            return false
+        val delayTime = maxOf(0L, playInfoRes.unlockAt - playInfoRes.serverNow)
+        if (delayTime > 0) {
+            kotlinx.coroutines.delay(delayTime)
         }
 
-        if (playInfo.kind != "pentos" || playInfo.claim.isNullOrEmpty()) {
-            Log.e(TAG, "loadPentosLinks($kind): invalid play-info kind=${playInfo.kind} hasClaim=${!playInfo.claim.isNullOrEmpty()}")
-            return false
-        }
-
-        val redeemUrl = playInfo.redeemUrl ?: "https://e2e.majorplay.net/api/play"
-        val redeemBody = """{"claim":"${playInfo.claim}"}""".toRequestBody("text/plain".toMediaType())
-
+        val claimBody = """{"gateToken":"${playInfoRes.gateToken}"}""".toRequestBody("application/json".toMediaType())
         val redeemRes = app.post(
+            "$mainUrl/api/watch/session/claim",
+            requestBody = claimBody,
+            headers = mapOf(
+                "Referer" to "$mainUrl/",
+                "Origin" to mainUrl,
+                "Accept" to "*/*",
+                "Content-Type" to "application/json",
+            )
+        ).parsedSafe<RedeemRes>() ?: return false
+
+        val redeemUrl = redeemRes.redeemUrl ?: return false
+        val redeemBody = """{"claim":"${redeemRes.claim}"}""".toRequestBody("application/json".toMediaType())
+        val iframeRes = app.post(
             redeemUrl,
             requestBody = redeemBody,
             headers = mapOf(
-                "content-type" to "text/plain",
-                "origin" to mainUrl,
-                "referer" to "$mainUrl/",
-                "user-agent" to USER_AGENT,
+                "Referer" to "$mainUrl/",
+                "Origin" to mainUrl,
+                "Accept" to "*/*",
+                "Content-Type" to "application/json",
             )
-        ).parsedSafe<RedeemResponse>()
+        ).parsedSafe<Iframe>() ?: return false
 
-        if (redeemRes == null) {
-            Log.e(TAG, "loadPentosLinks($kind): redeem parse failed at $redeemUrl")
-            return false
+        val streamUrl = iframeRes.url
+        if (!streamUrl.isNullOrBlank()) {
+            M3u8Helper.generateM3u8(
+                name,
+                streamUrl,
+                mainUrl,
+            ).forEach(callback)
         }
 
-        if (redeemRes.code != "ok" || redeemRes.url.isNullOrEmpty()) {
-            Log.e(TAG, "loadPentosLinks($kind): redeem error code=${redeemRes.code} url=${redeemRes.url}")
-            return false
-        }
-
-        Log.d(TAG, "loadPentosLinks($kind): success url=${redeemRes.url}")
-
-        callback.invoke(
-            newExtractorLink(
-                name,
-                name,
-                redeemRes.url,
-                ExtractorLinkType.M3U8
-            ) {
-                this.referer = "$mainUrl/"
-                this.quality = Qualities.Unknown.value
-                this.headers = mapOf(
-                    "Origin" to mainUrl,
-                    "User-Agent" to USER_AGENT,
+        iframeRes.subtitles?.forEach { sub ->
+            if (sub.path.isNotBlank()) {
+                subtitleCallback.invoke(
+                    newSubtitleFile(sub.label, sub.path)
                 )
             }
-        )
-
-        redeemRes.subtitles?.forEach { sub ->
-            val subUrl = sub.path ?: sub.url ?: return@forEach
-            if (subUrl.isEmpty()) return@forEach
-            subtitleCallback.invoke(
-                SubtitleFile(sub.label ?: sub.lang ?: "Unknown", subUrl)
-            )
         }
 
         return true
