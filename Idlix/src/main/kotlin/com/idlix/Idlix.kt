@@ -298,94 +298,37 @@ class Idlix : MainAPI() {
         )
 
         val playInfoUrl = "$mainUrl/api/watch/play-info/$kind/${parsed.id}"
-        val playInfoBody = """{"targetId":"${parsed.id}","targetType":"$kind"}""".toRequestBody("application/json".toMediaType())
-        var playInfoRes = app.get(
+        val playInfoResponse = app.get(
             playInfoUrl,
             headers = headers
-        ).parsedSafe<Res>()
+        )
+        val cookies = playInfoResponse.cookies
+        val finalPlayInfo = playInfoResponse.parsedSafe<Res>() ?: return false
 
-        if (playInfoRes == null) {
-            playInfoRes = app.post(
-                playInfoUrl,
-                requestBody = playInfoBody,
-                headers = headers
-            ).parsedSafe<Res>()
-        }
-
-        if (playInfoRes == null) {
-            playInfoRes = app.post(
-                "$mainUrl/api/gate",
-                requestBody = playInfoBody,
-                headers = headers
-            ).parsedSafe<Res>()
-        }
-
-        val finalPlayInfo = playInfoRes ?: return false
-
-        val delayTime = maxOf(0L, finalPlayInfo.unlockAt - finalPlayInfo.serverNow) + 1500L
-        if (delayTime > 0) {
-            kotlinx.coroutines.delay(delayTime)
+        val waitSeconds = ((finalPlayInfo.unlockAt - finalPlayInfo.serverNow).coerceAtLeast(0L) / 1000)
+        for (i in 0 until waitSeconds) {
+            com.lagradost.api.Log.d(name, "Waiting: ${i}s / ${waitSeconds}s")
+            kotlinx.coroutines.delay(1000L)
         }
 
         val claimBody = """{"gateToken":"${finalPlayInfo.gateToken}"}""".toRequestBody("application/json".toMediaType())
-        var claimData: RedeemRes? = null
-        for (i in 0 until 6) {
-            var res = app.post(
-                "$mainUrl/api/watch/session/claim",
-                requestBody = claimBody,
-                headers = headers
-            ).parsedSafe<RedeemRes>()
+        val claimData = app.post(
+            "$mainUrl/api/watch/session/claim",
+            requestBody = claimBody,
+            headers = headers,
+            cookies = cookies
+        ).parsedSafe<RedeemRes>() ?: return false
 
-            if (res == null || res.claim.isNullOrBlank()) {
-                res = app.post(
-                    "$mainUrl/api/session/claim",
-                    requestBody = claimBody,
-                    headers = headers
-                ).parsedSafe<RedeemRes>()
-            }
-
-            if (res != null && !res.claim.isNullOrBlank()) {
-                claimData = res
-                break
-            }
-
-            if (res?.kind == "pending") {
-                val remaining = res.remainingMs ?: 1500L
-                kotlinx.coroutines.delay(maxOf(1000L, remaining + 500L))
-            } else {
-                kotlinx.coroutines.delay(1000L)
-            }
-        }
-
-        val finalClaimData = claimData ?: return false
-        val rawRedeemUrl = finalClaimData.redeemUrl ?: "$mainUrl/api/watch/session/redeem"
-        val redeemUrl = if (rawRedeemUrl.startsWith("http")) rawRedeemUrl else if (rawRedeemUrl.startsWith("//")) "https:$rawRedeemUrl" else "$mainUrl/${rawRedeemUrl.trimStart('/')}"
-        val claimToken = finalClaimData.claim ?: return false
+        val redeemUrl = claimData.redeemUrl ?: "$mainUrl/api/watch/session/redeem"
+        val claimToken = claimData.claim ?: return false
 
         val redeemBody = """{"claim":"$claimToken"}""".toRequestBody("application/json".toMediaType())
-        var iframeRes = app.post(
+        val finalIframe = app.post(
             redeemUrl,
             requestBody = redeemBody,
-            headers = headers
-        ).parsedSafe<Iframe>()
-
-        if (iframeRes == null) {
-            iframeRes = app.post(
-                "$mainUrl/api/watch/session/redeem",
-                requestBody = redeemBody,
-                headers = headers
-            ).parsedSafe<Iframe>()
-        }
-
-        if (iframeRes == null) {
-            iframeRes = app.post(
-                "$mainUrl/api/session/redeem",
-                requestBody = redeemBody,
-                headers = headers
-            ).parsedSafe<Iframe>()
-        }
-
-        val finalIframe = iframeRes ?: return false
+            headers = headers,
+            cookies = cookies
+        ).parsedSafe<Iframe>() ?: return false
 
         val rawStreamUrl = finalIframe.url ?: finalIframe.streamUrl ?: finalIframe.file ?: finalIframe.src
         val streamUrl = if (rawStreamUrl.isNullOrBlank()) null else if (rawStreamUrl.startsWith("http")) rawStreamUrl else if (rawStreamUrl.startsWith("//")) "https:$rawStreamUrl" else "$mainUrl/${rawStreamUrl.trimStart('/')}"
