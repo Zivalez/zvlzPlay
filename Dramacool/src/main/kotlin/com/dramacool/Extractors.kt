@@ -117,7 +117,7 @@ class VidBasic : ExtractorApi() {
             useOkhttp = false,
             script = script,
             scriptCallback = { result ->
-                val value = result?.trim()?.trim('"')?.replace("\\/", "/")
+                val value = result.trim().trim('"').replace("\\/", "/")
                 if (!value.isNullOrBlank() && value.startsWith("http")) direct.compareAndSet(null, value)
             },
             timeout = 30_000L
@@ -232,7 +232,7 @@ open class XStreamHls : ExtractorApi() {
             useOkhttp = false,
             script = script,
             scriptCallback = { result ->
-                val value = result?.trim()?.trim('"')?.replace("\\/", "/")
+                val value = result.trim().trim('"').replace("\\/", "/")
                 if (!value.isNullOrBlank() && value.startsWith("http")) direct.compareAndSet(null, value)
             },
             timeout = 30_000L
@@ -407,7 +407,7 @@ class WatchAdsOnTape : ExtractorApi() {
             useOkhttp = false,
             script = script,
             scriptCallback = { result ->
-                val value = result?.trim()?.trim('"')?.replace("\\/", "/")
+                val value = result.trim().trim('"').replace("\\/", "/")
                 if (!value.isNullOrBlank() && value.startsWith("http")) direct.compareAndSet(null, value)
             },
             timeout = 20_000L
@@ -530,7 +530,7 @@ class UpnShare : ExtractorApi() {
             useOkhttp = false,
             script = script,
             scriptCallback = { result ->
-                val value = result?.trim()?.trim('"')?.replace("\\/", "/")
+                val value = result.trim().trim('"').replace("\\/", "/")
                 if (!value.isNullOrBlank() && value.startsWith("http")) direct.compareAndSet(null, value)
             },
             timeout = 30_000L

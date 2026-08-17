@@ -109,7 +109,7 @@ class Gomunime : MainAPI() {
         val a = selectFirst("a[href]") ?: return null
         val href = fixUrlNull(a.attr("href")) ?: return null
         val title = selectFirst("div.tt h3, div.tt h2, h3")?.text()?.trim()
-            ?: a.attr("title")?.trim()?.takeIf { it.isNotBlank() }
+            ?: a.attr("title").trim().takeIf { it.isNotBlank() }
             ?: return null
         val posterUrl = selectFirst("img.ts-post-image")?.let { img ->
             fixUrlNull(img.attr("data-original").takeIf { it.isNotBlank() } ?: img.attr("src"))

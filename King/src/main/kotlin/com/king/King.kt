@@ -73,7 +73,7 @@ class King : MainAPI() {
             val a = el.selectFirst("a.group") ?: return@mapNotNull null
             val hrefRaw = a.attr("href").trim()
             val href = if (hrefRaw.startsWith("http")) hrefRaw else "$mainUrl/${hrefRaw.trimStart('/') }"
-            val title = a.attr("title") ?: a.selectFirst("span.video-card-title")?.text() ?: ""
+            val title = a.attr("title").ifBlank { a.selectFirst("span.video-card-title")?.text() ?: "" }
             val poster = a.selectFirst("img")?.attr("data-src") ?: a.selectFirst("img")?.attr("src")
             newMovieSearchResponse(title, href, TvType.Movie, false) { this.posterUrl = poster }
         }
@@ -124,7 +124,7 @@ class King : MainAPI() {
         var year: Int? = null
         val publishedMeta = doc.selectFirst("meta[property=article:published_time]")?.attr("content")
         if (publishedMeta != null) {
-            year = publishedMeta.substringBefore("T").substringBefore("-")?.toIntOrNull()
+            year = publishedMeta.substringBefore("T").substringBefore("-").toIntOrNull()
         }
         if (year == null) {
             val dataTanggal = doc.selectFirst("[data-tanggal]")?.attr("data-tanggal")?.toLongOrNull()

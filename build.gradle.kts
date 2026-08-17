@@ -43,8 +43,7 @@ subprojects {
 
         defaultConfig {
             minSdk = 21
-            compileSdkVersion(35)
-            targetSdk = 35
+            compileSdk = 35
         }
 
         compileOptions {
@@ -58,7 +57,8 @@ subprojects {
                 freeCompilerArgs.addAll(
                     "-Xno-call-assertions",
                     "-Xno-param-assertions",
-                    "-Xno-receiver-assertions"
+                    "-Xno-receiver-assertions",
+                    "-Xannotation-default-target=param-property"
                 )
             }
         }

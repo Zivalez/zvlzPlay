@@ -319,11 +319,11 @@ class Kuramanime : MainAPI() {
             script = script,
             scriptCallback = { result ->
                 callbackInvocations.incrementAndGet()
-                val rLen = result?.length ?: 0
+                val rLen = result.length
                 if (rLen in 1..4999 && result != "null" && result != "\"null\"" && capturedHtml.get() == null) {
                     Log.d(TAG, "scriptCallback partial (len=$rLen): ${result.take(200)}")
                 }
-                if (result != null && result.length > 1000 && result != "null" && !result.startsWith("\"ERR:")) {
+                if (result.length > 1000 && result != "null" && !result.startsWith("\"ERR:")) {
                     val decoded = try {
                         org.json.JSONArray("[$result]").getString(0)
                     } catch (e: Exception) {

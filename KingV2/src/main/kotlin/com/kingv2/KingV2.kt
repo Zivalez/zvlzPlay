@@ -92,7 +92,7 @@ class KingV2 : MainAPI() {
             val a = el.selectFirst("a.thumb, a.infos") ?: return@mapNotNull null
             val hrefRaw = a.attr("href").trim()
             val href = if (hrefRaw.startsWith("http")) hrefRaw else "$mainUrl/${hrefRaw.trimStart('/') }"
-            val title = a.attr("title") ?: a.selectFirst("span.title")?.text() ?: ""
+            val title = a.attr("title").ifBlank { a.selectFirst("span.title")?.text() ?: "" }
             val poster = a.selectFirst("img")?.attr("data-src") ?: a.selectFirst("img")?.attr("src")
             newMovieSearchResponse(title, href, TvType.Movie, false) { this.posterUrl = poster }
         }
