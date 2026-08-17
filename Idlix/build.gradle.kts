@@ -38,6 +38,6 @@ cloudstream {
     description = "Nonton Film & Series Streaming Idlix Subtitle Indonesia"
     authors = listOf("Hexated", "Phisher98", "Zivalez")
     status = 1
-    tvTypes = listOf("Movies", "TvSeries", "AsianDrama", "Anime")
+    tvTypes = listOf("Movie", "TVSeries", "AsianDrama", "Anime")
     iconUrl = "https://cloudstream.zvlz.my.id/icon/idlix.png"
 }
