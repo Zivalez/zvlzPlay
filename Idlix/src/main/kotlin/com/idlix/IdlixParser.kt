@@ -16,7 +16,7 @@ data class ApiItem(
     val backdropPath: String? = null,
     val releaseDate: String? = null,
     val firstAirDate: String? = null,
-    val voteAverage: String? = null,
+    val voteAverage: Any? = null,
     val viewCount: Any? = null,
     val quality: String? = null,
     val country: String? = null,
@@ -28,6 +28,7 @@ data class ApiItem(
     val commentCount: Int? = null,
     val originalLanguage: String? = null,
     val popularity: Any? = null,
+    val popularityScore: Any? = null,
     val genres: List<APIGenre>? = null,
     val hasVideo: Boolean? = null,
     val isPublished: Boolean? = null
@@ -71,6 +72,7 @@ data class DetailResponse(
     val runtime: Int? = null,
     val voteAverage: Any? = null,
     val popularity: Any? = null,
+    val popularityScore: Any? = null,
     val originalLanguage: String? = null,
     val country: String? = null,
     val status: String? = null,
@@ -81,6 +83,7 @@ data class DetailResponse(
     val cast: List<Cast>? = null,
     val seasons: List<Season>? = null,
     val firstSeason: Season? = null,
+    val defaultSeason: Season? = null,
     val viewCount: Any? = null,
     val isPublished: Boolean? = null
 )
@@ -103,6 +106,7 @@ data class Season(
     val seasonNumber: Int? = null,
     val name: String? = null,
     val posterPath: String? = null,
+    val episodeCount: Int? = null,
     val episodes: List<ApiEpisode>? = null
 )
 
@@ -122,28 +126,29 @@ data class SeasonWrapper(
 )
 
 data class SearchApiResponse(
-    val results: List<SearchApiResult>,
-    val total: Long,
+    val results: List<SearchApiResult> = emptyList(),
+    val total: Long? = null,
 )
 
 data class SearchApiResult(
-    val id: String,
-    val contentType: String,
-    val title: String,
-    val originalTitle: String,
-    val overview: String,
-    val genres: List<String>,
-    val originalLanguage: String,
-    val voteAverage: Double,
-    val viewCount: Long,
-    val popularity: Double,
-    val posterPath: String,
-    val backdropPath: String,
-    val slug: String,
-    val firstAirDate: String?,
-    val numberOfSeasons: Long?,
-    val releaseDate: String?,
-    val quality: String?,
+    val id: String? = null,
+    val contentType: String? = null,
+    val title: String? = null,
+    val originalTitle: String? = null,
+    val overview: String? = null,
+    val genres: List<String>? = null,
+    val originalLanguage: String? = null,
+    val voteAverage: Any? = null,
+    val viewCount: Any? = null,
+    val popularity: Any? = null,
+    val popularityScore: Any? = null,
+    val posterPath: String? = null,
+    val backdropPath: String? = null,
+    val slug: String? = null,
+    val firstAirDate: String? = null,
+    val numberOfSeasons: Long? = null,
+    val releaseDate: String? = null,
+    val quality: String? = null,
 )
 
 data class ChallengeResponse(
@@ -167,14 +172,17 @@ data class Res(
 )
 
 data class RedeemRes(
-    @JsonProperty("kind") val kind: String?,
-    @JsonProperty("claim") val claim: String?,
-    @JsonProperty("redeemUrl") val redeemUrl: String?,
-    @JsonProperty("videoId") val videoId: String?,
-    @JsonProperty("title") val title: String?,
-    @JsonProperty("durationSec") val durationSec: Long?,
-    @JsonProperty("viewerTier") val viewerTier: String?,
-    @JsonProperty("maxHeight") val maxHeight: Long?
+    @JsonProperty("kind") val kind: String? = null,
+    @JsonProperty("claim") val claim: String? = null,
+    @JsonProperty("redeemUrl") val redeemUrl: String? = null,
+    @JsonProperty("videoId") val videoId: String? = null,
+    @JsonProperty("title") val title: String? = null,
+    @JsonProperty("durationSec") val durationSec: Long? = null,
+    @JsonProperty("viewerTier") val viewerTier: String? = null,
+    @JsonProperty("maxHeight") val maxHeight: Long? = null,
+    @JsonProperty("serverNow") val serverNow: Long? = null,
+    @JsonProperty("unlockAt") val unlockAt: Long? = null,
+    @JsonProperty("remainingMs") val remainingMs: Long? = null
 )
 
 data class Iframe(

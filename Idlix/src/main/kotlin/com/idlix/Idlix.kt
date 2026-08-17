@@ -50,8 +50,8 @@ class Idlix : MainAPI() {
 
         val res = app.get(requestUrl, timeout = 10000L).parsedSafe<ApiResponse>()
             ?: return newHomePageResponse(request.name, emptyList())
-        val home = res.data.map { item ->
-            val title = item.title ?: "UnKnown"
+        val home = res.data.mapNotNull { item ->
+            val title = item.title ?: return@mapNotNull null
             val poster = item.posterPath?.let { "https://image.tmdb.org/t/p/w342$it" }
             if (item.contentType == "movie") {
                 val movieUrl = "$mainUrl/api/movies/${item.slug}"
@@ -59,14 +59,14 @@ class Idlix : MainAPI() {
                     this.posterUrl = poster
                     this.year = item.releaseDate?.substringBefore("-")?.toIntOrNull()
                     this.quality = getSearchQuality(item.quality)
-                    this.score = Score.from10(item.voteAverage)
+                    this.score = Score.from10(item.voteAverage?.toString())
                 }
             } else {
                 val seriesUrl = "$mainUrl/api/series/${item.slug}"
                 newTvSeriesSearchResponse(title, seriesUrl, TvType.TvSeries) {
                     this.posterUrl = poster
                     this.year = item.releaseDate?.substringBefore("-")?.toIntOrNull()
-                    this.score = Score.from10(item.voteAverage)
+                    this.score = Score.from10(item.voteAverage?.toString())
                     this.quality = getSearchQuality(item.quality)
                 }
             }
@@ -82,8 +82,8 @@ class Idlix : MainAPI() {
         val res = app.get(url).parsedSafe<SearchApiResponse>() ?: return null
         val items = res.results
         val results = items.mapNotNull { item ->
-            val title = item.title
-            val poster = "https://image.tmdb.org/t/p/w342${item.posterPath}"
+            val title = item.title ?: return@mapNotNull null
+            val poster = item.posterPath?.let { "https://image.tmdb.org/t/p/w342$it" }
             val year = (item.releaseDate ?: item.firstAirDate)?.substringBefore("-")?.toIntOrNull()
 
             val link = when (item.contentType) {
@@ -92,13 +92,13 @@ class Idlix : MainAPI() {
                 else -> return@mapNotNull null
             }
 
-            val rating = item.voteAverage
+            val rating = item.voteAverage?.toString()
 
             if (item.contentType == "movie") {
                 newMovieSearchResponse(title, link, TvType.Movie) {
                     this.posterUrl = poster
                     this.year = year
-                    this.quality = getQualityFromString(item.quality)
+                    this.quality = getSearchQuality(item.quality)
                     this.score = Score.from10(rating)
                 }
             } else {
@@ -175,20 +175,21 @@ class Idlix : MainAPI() {
 
         return if (data.seasons != null) {
             val episodes = mutableListOf<Episode>()
+            val primarySeason = data.defaultSeason ?: data.firstSeason
 
-            data.firstSeason?.episodes?.forEach { ep ->
+            primarySeason?.episodes?.forEach { ep ->
                 episodes.add(
                     newEpisode(
                         LoadData(
                             id = ep.id ?: return@forEach,
                             type = "episode",
                             seriesSlug = data.slug,
-                            seasonNum = data.firstSeason.seasonNumber,
+                            seasonNum = primarySeason.seasonNumber,
                             episodeNum = ep.episodeNumber
                         ).toJson()
                     ) {
                         this.name = ep.name
-                        this.season = data.firstSeason.seasonNumber
+                        this.season = primarySeason.seasonNumber
                         this.episode = ep.episodeNumber
                         this.description = ep.overview
                         this.runTime = ep.runtime
@@ -201,7 +202,7 @@ class Idlix : MainAPI() {
 
             data.seasons.forEach { season ->
                 val seasonNum = season.seasonNumber ?: return@forEach
-                if (seasonNum == data.firstSeason?.seasonNumber) return@forEach
+                if (seasonNum == primarySeason?.seasonNumber) return@forEach
                 val seasonUrl = "$mainUrl/api/series/${data.slug}/season/$seasonNum"
 
                 val seasonData = try {
@@ -288,54 +289,118 @@ class Idlix : MainAPI() {
             else      -> return false
         }
 
+        val headers = mapOf(
+            "Referer" to "$mainUrl/",
+            "Origin" to mainUrl,
+            "User-Agent" to USER_AGENT,
+            "Accept" to "*/*",
+            "Content-Type" to "application/json",
+        )
+
         val playInfoUrl = "$mainUrl/api/watch/play-info/$kind/${parsed.id}"
         val playInfoRes = app.get(
             playInfoUrl,
-            headers = mapOf(
-                "Referer" to "$mainUrl/",
-                "Origin" to mainUrl,
-                "Accept" to "*/*",
-                "Content-Type" to "application/json",
-            )
+            headers = headers
         ).parsedSafe<Res>() ?: return false
 
-        val delayTime = maxOf(0L, playInfoRes.unlockAt - playInfoRes.serverNow)
+        val delayTime = maxOf(0L, playInfoRes.unlockAt - playInfoRes.serverNow) + 1500L
         if (delayTime > 0) {
             kotlinx.coroutines.delay(delayTime)
         }
 
         val claimBody = """{"gateToken":"${playInfoRes.gateToken}"}""".toRequestBody("application/json".toMediaType())
-        val redeemRes = app.post(
-            "$mainUrl/api/watch/session/claim",
-            requestBody = claimBody,
-            headers = mapOf(
-                "Referer" to "$mainUrl/",
-                "Origin" to mainUrl,
-                "Accept" to "*/*",
-                "Content-Type" to "application/json",
-            )
-        ).parsedSafe<RedeemRes>() ?: return false
+        var claimData: RedeemRes? = null
+        for (i in 0 until 5) {
+            val res = app.post(
+                "$mainUrl/api/watch/session/claim",
+                requestBody = claimBody,
+                headers = headers
+            ).parsedSafe<RedeemRes>()
 
-        val redeemUrl = redeemRes.redeemUrl ?: return false
-        val redeemBody = """{"claim":"${redeemRes.claim}"}""".toRequestBody("application/json".toMediaType())
+            if (res?.redeemUrl != null && !res.claim.isNullOrBlank()) {
+                claimData = res
+                break
+            }
+
+            if (res?.kind == "pending") {
+                val remaining = res.remainingMs ?: 1500L
+                kotlinx.coroutines.delay(maxOf(1000L, remaining + 500L))
+            } else {
+                kotlinx.coroutines.delay(1000L)
+            }
+        }
+
+        val finalClaimData = claimData ?: return false
+        val redeemUrl = finalClaimData.redeemUrl ?: return false
+        val claimToken = finalClaimData.claim ?: return false
+
+        val redeemBody = """{"claim":"$claimToken"}""".toRequestBody("application/json".toMediaType())
         val iframeRes = app.post(
             redeemUrl,
             requestBody = redeemBody,
-            headers = mapOf(
-                "Referer" to "$mainUrl/",
-                "Origin" to mainUrl,
-                "Accept" to "*/*",
-                "Content-Type" to "application/json",
-            )
+            headers = headers
         ).parsedSafe<Iframe>() ?: return false
 
         val streamUrl = iframeRes.url
         if (!streamUrl.isNullOrBlank()) {
-            M3u8Helper.generateM3u8(
-                name,
-                streamUrl,
-                mainUrl,
-            ).forEach(callback)
+            try {
+                val playlistRes = app.get(streamUrl, referer = "$mainUrl/").text
+                if (playlistRes.contains("#EXTM3U")) {
+                    val parentUrl = streamUrl.substringBeforeLast("/") + "/"
+                    val lines = playlistRes.lines()
+                    var foundStreams = false
+                    for (i in lines.indices) {
+                        val line = lines[i].trim()
+                        if (line.startsWith("#EXT-X-STREAM-INF:")) {
+                            val qualityName = Regex("""NAME="([^"]+)"""").find(line)?.groupValues?.get(1)
+                                ?: Regex("""RESOLUTION=(\d+x\d+)""").find(line)?.groupValues?.get(1)
+                                ?: "Auto"
+                            val qualityVal = getSearchQuality(qualityName)?.value ?: Qualities.Unknown.value
+                            val nextLine = lines.getOrNull(i + 1)?.trim()
+                            if (!nextLine.isNullOrBlank() && !nextLine.startsWith("#")) {
+                                val directUrl = if (nextLine.startsWith("http")) nextLine else parentUrl + nextLine
+                                callback.invoke(
+                                    newExtractorLink(
+                                        name,
+                                        "$name - $qualityName",
+                                        directUrl,
+                                        ExtractorLinkType.M3U8
+                                    ) {
+                                        this.referer = "$mainUrl/"
+                                        this.quality = qualityVal
+                                    }
+                                )
+                                foundStreams = true
+                            }
+                        }
+                    }
+                    if (!foundStreams) {
+                        callback.invoke(
+                            newExtractorLink(
+                                name,
+                                "$name - Auto",
+                                streamUrl,
+                                ExtractorLinkType.M3U8
+                            ) {
+                                this.referer = "$mainUrl/"
+                                this.quality = Qualities.Unknown.value
+                            }
+                        )
+                    }
+                } else {
+                    M3u8Helper.generateM3u8(
+                        name,
+                        streamUrl,
+                        "$mainUrl/",
+                    ).forEach(callback)
+                }
+            } catch (_: Exception) {
+                M3u8Helper.generateM3u8(
+                    name,
+                    streamUrl,
+                    "$mainUrl/",
+                ).forEach(callback)
+            }
         }
 
         iframeRes.subtitles?.forEach { sub ->
