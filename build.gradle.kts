@@ -40,10 +40,10 @@ subprojects {
 
     android {
         namespace = "com.winbu"
+        compileSdkVersion(35)
 
         defaultConfig {
             minSdk = 21
-            compileSdk = 35
         }
 
         compileOptions {

@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "com.kingv2"
+    compileSdkVersion(35)
 
     defaultConfig {
         minSdk = 21
-        compileSdk = 35
     }
 }
 

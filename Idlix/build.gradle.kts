@@ -6,10 +6,10 @@ plugins {
 
 android {
     namespace = "com.idlix"
+    compileSdkVersion(35)
     
      defaultConfig {
         minSdk = 21
-        compileSdk = 35
     }
 }
 
@@ -38,6 +38,6 @@ cloudstream {
     description = "Nonton Film & Series Streaming Idlix Subtitle Indonesia"
     authors = listOf("Hexated", "Phisher98", "Zivalez")
     status = 1
-    tvTypes = listOf("Movie", "TvSeries", "AsianDrama", "Anime")
+    tvTypes = listOf("Movies", "TvSeries", "AsianDrama", "Anime")
     iconUrl = "https://cloudstream.zvlz.my.id/icon/idlix.png"
 }
