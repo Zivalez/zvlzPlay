@@ -355,7 +355,7 @@ class Idlix : MainAPI() {
                             val qualityName = Regex("""NAME="([^"]+)"""").find(line)?.groupValues?.get(1)
                                 ?: Regex("""RESOLUTION=(\d+x\d+)""").find(line)?.groupValues?.get(1)
                                 ?: "Auto"
-                            val qualityVal = getSearchQuality(qualityName)?.value ?: Qualities.Unknown.value
+                            val qualityVal = getQualityFromName(qualityName)
                             val nextLine = lines.getOrNull(i + 1)?.trim()
                             if (!nextLine.isNullOrBlank() && !nextLine.startsWith("#")) {
                                 val directUrl = if (nextLine.startsWith("http")) nextLine else parentUrl + nextLine
