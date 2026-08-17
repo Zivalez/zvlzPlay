@@ -47,12 +47,9 @@ Tapi CloudStream ga langsung bawa konten dari awal. Anggap aja dia cuma media pl
 
 ## Download Aplikasi
 
-<p align="center">
-  <a href="https://github.com/recloudstream/cloudstream/releases/download/v4.8.0/4.8.0.apk" target="_blank">
-    <img src="https://img.shields.io/badge/Download_CloudStream-v4.8.0-E53935?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
-  </a>
-  <a href="https://github.com/recloudstream/cloudstream/releases" target="_blank">
-    <img src="https://img.shields.io/badge/Rilis_Resmi-terbaru-24292e?style=for-the-badge&logo=github&logoColor=white" alt="Rilis Resmi" />
+<p>
+  <a href="https://github.com/recloudstream/cloudstream/releases/latest" target="_blank">
+    <img src="https://img.shields.io/badge/Download_CloudStream-terbaru-E53935?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
   </a>
 </p>
 

@@ -331,7 +331,8 @@ class Idlix : MainAPI() {
         }
 
         val finalClaimData = claimData ?: return false
-        val redeemUrl = finalClaimData.redeemUrl ?: return false
+        val rawRedeemUrl = finalClaimData.redeemUrl ?: "$mainUrl/api/watch/session/redeem"
+        val redeemUrl = if (rawRedeemUrl.startsWith("http")) rawRedeemUrl else if (rawRedeemUrl.startsWith("//")) "https:$rawRedeemUrl" else "$mainUrl/${rawRedeemUrl.trimStart('/')}"
         val claimToken = finalClaimData.claim ?: return false
 
         val redeemBody = """{"claim":"$claimToken"}""".toRequestBody("application/json".toMediaType())
@@ -341,7 +342,8 @@ class Idlix : MainAPI() {
             headers = headers
         ).parsedSafe<Iframe>() ?: return false
 
-        val streamUrl = iframeRes.url
+        val rawStreamUrl = iframeRes.url
+        val streamUrl = if (rawStreamUrl.isNullOrBlank()) null else if (rawStreamUrl.startsWith("http")) rawStreamUrl else if (rawStreamUrl.startsWith("//")) "https:$rawStreamUrl" else "$mainUrl/${rawStreamUrl.trimStart('/')}"
         if (!streamUrl.isNullOrBlank()) {
             try {
                 val playlistRes = app.get(streamUrl, referer = "$mainUrl/").text
@@ -405,8 +407,9 @@ class Idlix : MainAPI() {
 
         iframeRes.subtitles?.forEach { sub ->
             if (sub.path.isNotBlank()) {
+                val subUrl = if (sub.path.startsWith("http")) sub.path else if (sub.path.startsWith("//")) "https:${sub.path}" else "$mainUrl/${sub.path.trimStart('/')}"
                 subtitleCallback.invoke(
-                    newSubtitleFile(sub.label, sub.path)
+                    newSubtitleFile(sub.label, subUrl)
                 )
             }
         }
