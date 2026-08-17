@@ -344,7 +344,7 @@ class Idlix : MainAPI() {
                 ).parsedSafe<RedeemRes>()
             }
 
-            if (res?.redeemUrl != null && !res.claim.isNullOrBlank()) {
+            if (res != null && !res.claim.isNullOrBlank()) {
                 claimData = res
                 break
             }
@@ -363,13 +363,31 @@ class Idlix : MainAPI() {
         val claimToken = finalClaimData.claim ?: return false
 
         val redeemBody = """{"claim":"$claimToken"}""".toRequestBody("application/json".toMediaType())
-        val iframeRes = app.post(
+        var iframeRes = app.post(
             redeemUrl,
             requestBody = redeemBody,
             headers = headers
-        ).parsedSafe<Iframe>() ?: return false
+        ).parsedSafe<Iframe>()
 
-        val rawStreamUrl = iframeRes.url
+        if (iframeRes == null) {
+            iframeRes = app.post(
+                "$mainUrl/api/watch/session/redeem",
+                requestBody = redeemBody,
+                headers = headers
+            ).parsedSafe<Iframe>()
+        }
+
+        if (iframeRes == null) {
+            iframeRes = app.post(
+                "$mainUrl/api/session/redeem",
+                requestBody = redeemBody,
+                headers = headers
+            ).parsedSafe<Iframe>()
+        }
+
+        val finalIframe = iframeRes ?: return false
+
+        val rawStreamUrl = finalIframe.url ?: finalIframe.streamUrl ?: finalIframe.file ?: finalIframe.src
         val streamUrl = if (rawStreamUrl.isNullOrBlank()) null else if (rawStreamUrl.startsWith("http")) rawStreamUrl else if (rawStreamUrl.startsWith("//")) "https:$rawStreamUrl" else "$mainUrl/${rawStreamUrl.trimStart('/')}"
         if (!streamUrl.isNullOrBlank()) {
             try {
@@ -432,7 +450,7 @@ class Idlix : MainAPI() {
             }
         }
 
-        iframeRes.subtitles?.forEach { sub ->
+        finalIframe.subtitles?.forEach { sub ->
             if (sub.path.isNotBlank()) {
                 val subUrl = if (sub.path.startsWith("http")) sub.path else if (sub.path.startsWith("//")) "https:${sub.path}" else "$mainUrl/${sub.path.trimStart('/')}"
                 subtitleCallback.invoke(

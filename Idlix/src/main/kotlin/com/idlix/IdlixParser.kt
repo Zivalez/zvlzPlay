@@ -186,11 +186,14 @@ data class RedeemRes(
 )
 
 data class Iframe(
-    @JsonProperty("code") val code: String?,
-    @JsonProperty("url") val url: String?,
-    @JsonProperty("expiresAt") val expiresAt: Long?,
+    @JsonProperty("code") val code: String? = null,
+    @JsonProperty("url") val url: String? = null,
+    @JsonProperty("streamUrl") val streamUrl: String? = null,
+    @JsonProperty("file") val file: String? = null,
+    @JsonProperty("src") val src: String? = null,
+    @JsonProperty("expiresAt") val expiresAt: Long? = null,
     @JsonProperty("subtitles") val subtitles: List<Subtitle>? = emptyList(),
-    @JsonProperty("videoId") val videoId: String?
+    @JsonProperty("videoId") val videoId: String? = null
 )
 
 data class Subtitle(
