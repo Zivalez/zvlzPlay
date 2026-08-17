@@ -390,64 +390,16 @@ class Idlix : MainAPI() {
         val rawStreamUrl = finalIframe.url ?: finalIframe.streamUrl ?: finalIframe.file ?: finalIframe.src
         val streamUrl = if (rawStreamUrl.isNullOrBlank()) null else if (rawStreamUrl.startsWith("http")) rawStreamUrl else if (rawStreamUrl.startsWith("//")) "https:$rawStreamUrl" else "$mainUrl/${rawStreamUrl.trimStart('/')}"
         if (!streamUrl.isNullOrBlank()) {
-            try {
-                val playlistRes = app.get(streamUrl, referer = "$mainUrl/").text
-                if (playlistRes.contains("#EXTM3U")) {
-                    val parentUrl = streamUrl.substringBeforeLast("/") + "/"
-                    val lines = playlistRes.lines()
-                    var foundStreams = false
-                    for (i in lines.indices) {
-                        val line = lines[i].trim()
-                        if (line.startsWith("#EXT-X-STREAM-INF:")) {
-                            val qualityName = Regex("""NAME="([^"]+)"""").find(line)?.groupValues?.get(1)
-                                ?: Regex("""RESOLUTION=(\d+x\d+)""").find(line)?.groupValues?.get(1)
-                                ?: "Auto"
-                            val qualityVal = getQualityFromName(qualityName)
-                            val nextLine = lines.getOrNull(i + 1)?.trim()
-                            if (!nextLine.isNullOrBlank() && !nextLine.startsWith("#")) {
-                                val directUrl = if (nextLine.startsWith("http")) nextLine else parentUrl + nextLine
-                                callback.invoke(
-                                    newExtractorLink(
-                                        name,
-                                        "$name - $qualityName",
-                                        directUrl,
-                                        ExtractorLinkType.M3U8
-                                    ) {
-                                        this.referer = "$mainUrl/"
-                                        this.quality = qualityVal
-                                    }
-                                )
-                                foundStreams = true
-                            }
-                        }
-                    }
-                    if (!foundStreams) {
-                        callback.invoke(
-                            newExtractorLink(
-                                name,
-                                "$name - Auto",
-                                streamUrl,
-                                ExtractorLinkType.M3U8
-                            ) {
-                                this.referer = "$mainUrl/"
-                                this.quality = Qualities.Unknown.value
-                            }
-                        )
-                    }
-                } else {
-                    M3u8Helper.generateM3u8(
-                        name,
-                        streamUrl,
-                        "$mainUrl/",
-                    ).forEach(callback)
-                }
-            } catch (_: Exception) {
-                M3u8Helper.generateM3u8(
+            callback.invoke(
+                newExtractorLink(
+                    name,
                     name,
                     streamUrl,
-                    "$mainUrl/",
-                ).forEach(callback)
-            }
+                    ExtractorLinkType.M3U8
+                ) {
+                    this.referer = "$mainUrl/"
+                }
+            )
         }
 
         finalIframe.subtitles?.forEach { sub ->
