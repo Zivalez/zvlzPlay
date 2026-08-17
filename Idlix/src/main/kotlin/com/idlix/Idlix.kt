@@ -298,24 +298,51 @@ class Idlix : MainAPI() {
         )
 
         val playInfoUrl = "$mainUrl/api/watch/play-info/$kind/${parsed.id}"
-        val playInfoRes = app.get(
+        val playInfoBody = """{"targetId":"${parsed.id}","targetType":"$kind"}""".toRequestBody("application/json".toMediaType())
+        var playInfoRes = app.get(
             playInfoUrl,
             headers = headers
-        ).parsedSafe<Res>() ?: return false
+        ).parsedSafe<Res>()
 
-        val delayTime = maxOf(0L, playInfoRes.unlockAt - playInfoRes.serverNow) + 1500L
+        if (playInfoRes == null) {
+            playInfoRes = app.post(
+                playInfoUrl,
+                requestBody = playInfoBody,
+                headers = headers
+            ).parsedSafe<Res>()
+        }
+
+        if (playInfoRes == null) {
+            playInfoRes = app.post(
+                "$mainUrl/api/gate",
+                requestBody = playInfoBody,
+                headers = headers
+            ).parsedSafe<Res>()
+        }
+
+        val finalPlayInfo = playInfoRes ?: return false
+
+        val delayTime = maxOf(0L, finalPlayInfo.unlockAt - finalPlayInfo.serverNow) + 1500L
         if (delayTime > 0) {
             kotlinx.coroutines.delay(delayTime)
         }
 
-        val claimBody = """{"gateToken":"${playInfoRes.gateToken}"}""".toRequestBody("application/json".toMediaType())
+        val claimBody = """{"gateToken":"${finalPlayInfo.gateToken}"}""".toRequestBody("application/json".toMediaType())
         var claimData: RedeemRes? = null
-        for (i in 0 until 5) {
-            val res = app.post(
+        for (i in 0 until 6) {
+            var res = app.post(
                 "$mainUrl/api/watch/session/claim",
                 requestBody = claimBody,
                 headers = headers
             ).parsedSafe<RedeemRes>()
+
+            if (res == null || res.claim.isNullOrBlank()) {
+                res = app.post(
+                    "$mainUrl/api/session/claim",
+                    requestBody = claimBody,
+                    headers = headers
+                ).parsedSafe<RedeemRes>()
+            }
 
             if (res?.redeemUrl != null && !res.claim.isNullOrBlank()) {
                 claimData = res
