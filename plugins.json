@@ -27,7 +27,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 42085,
-        "status": 1,
+        "status": 0,
         "language": "en",
         "authors": [
             "Zivalez"
@@ -49,7 +49,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 19618,
-        "status": 1,
+        "status": 0,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -71,7 +71,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 12810,
-        "status": 1,
+        "status": 0,
         "language": "id",
         "authors": [
             "zvlz"
@@ -136,7 +136,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 20979,
-        "status": 3,
+        "status": 0,
         "authors": [
             "Zivalez"
         ],
@@ -156,7 +156,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 18140,
-        "status": 1,
+        "status": 0,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -176,7 +176,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 27231,
-        "status": 1,
+        "status": 0,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -241,7 +241,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 42384,
-        "status": 1,
+        "status": 0,
         "language": "id",
         "authors": [
             "Hexated",
@@ -265,7 +265,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 43218,
-        "status": 1,
+        "status": 0,
         "language": "en",
         "authors": [
             "Zivalez"
@@ -399,7 +399,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 17309,
-        "status": 1,
+        "status": 0,
         "authors": [
             "CranberrySoup",
             "Zivalez"
@@ -420,7 +420,7 @@
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 23073,
-        "status": 1,
+        "status": 0,
         "language": "id",
         "authors": [
             "Zivalez"
