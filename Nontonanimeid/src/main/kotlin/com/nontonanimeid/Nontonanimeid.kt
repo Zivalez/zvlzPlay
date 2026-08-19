@@ -316,6 +316,10 @@ class Nontonanimeid : MainAPI() {
 
                 val extracted = loadExtractor(fixedIframe, data, subtitleCallback) { link ->
                     runBlocking {
+                        // Fallback: parse quality from serverLabel if extractor returned Unknown
+                        val labelQuality = Regex("""(\d{3,4})[pP]?""").find(serverLabel)?.groupValues?.get(1)?.toIntOrNull()
+                        val finalQuality = if (link.quality == Qualities.Unknown.value) labelQuality ?: link.quality else link.quality
+                        
                         callback(
                             newExtractorLink(
                                 link.source,
@@ -324,7 +328,7 @@ class Nontonanimeid : MainAPI() {
                                 link.type
                             ) {
                                 this.referer = link.referer
-                                this.quality = link.quality
+                                this.quality = finalQuality
                                 this.headers = link.headers
                                 this.extractorData = link.extractorData
                             }
