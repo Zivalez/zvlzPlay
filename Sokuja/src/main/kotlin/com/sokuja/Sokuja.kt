@@ -110,7 +110,6 @@ class Sokuja : MainAPI() {
         val document = app.get(url).document
 
         val animeSlug = url.trimEnd('/').substringAfterLast('/')
-        val episodePrefix = "/$animeSlug-episode-"
 
         val title = document.selectFirst("h1")?.text()?.trim()
             ?: document.selectFirst("meta[property=og:title]")?.attr("content")?.trim()
@@ -132,12 +131,15 @@ class Sokuja : MainAPI() {
             it.attr("href").substringAfter("/genre/").trimEnd('/').takeIf { v -> v.isNotEmpty() }
         }.distinct()
 
-        val plot = document.selectFirst("meta[property=og:description]")?.attr("content")
+        val plot = document.selectFirst("div.prose")?.text()
+            ?: document.selectFirst("meta[property=og:description]")?.attr("content")
             ?: document.selectFirst("meta[name=description]")?.attr("content")
 
         val episodes = document.select("a[href*=-episode-]").mapNotNull { a ->
             val href = a.attr("href")
-            if (!href.startsWith(episodePrefix) || href.contains("/anime/")) return@mapNotNull null
+            if (href.contains("/anime/")) return@mapNotNull null
+            val hrefSlug = href.trimEnd('/').substringAfterLast('/').replace(Regex("-episode-\\d+"), "")
+            if (hrefSlug != animeSlug) return@mapNotNull null
             val name = a.selectFirst("span")?.text()?.trim() ?: return@mapNotNull null
             val epNum = Regex("episode\\s*([\\d.]+)").find(name)?.groupValues?.getOrNull(1)
                 ?.toDoubleOrNull()?.roundToInt()
