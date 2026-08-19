@@ -146,7 +146,7 @@ class Sokuja : MainAPI() {
                 this.name = name
                 this.episode = epNum
             }
-        }.distinctBy { it.url }.sortedBy { it.episode ?: 0 }
+        }.distinctBy { it.data }.sortedBy { it.episode ?: 0 }
 
         return newAnimeLoadResponse(title, url, type, comingSoonIfNone = false) {
             engName = title
@@ -154,7 +154,7 @@ class Sokuja : MainAPI() {
             this.year = year
             addEpisodes(DubStatus.Subbed, episodes)
             showStatus = status
-            plot = plot
+            this.plot = plot
             this.tags = tags
         }
     }
