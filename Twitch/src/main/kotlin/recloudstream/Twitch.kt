@@ -194,9 +194,9 @@ class Twitch : MainAPI() {
         val playlistUrl = "https://usher.ttvnw.net/api/channel/hls/$channel.m3u8?sig=$sig&token=$encodedToken&player=twitchweb&p=${(100000..999999).random()}&type=any&allow_source=true&allow_audio_only=true"
 
         M3u8Helper.generateM3u8(
-            name = this.name,
-            streamUrl = playlistUrl,
-            referer = "https://www.twitch.tv/"
+            this.name,
+            playlistUrl,
+            "https://www.twitch.tv/"
         ).forEach(callback)
 
         return true
@@ -255,9 +255,9 @@ class Twitch : MainAPI() {
             val playlistUrl = "https://usher.ttvnw.net/api/channel/hls/$channel.m3u8?sig=$sig&token=$encodedToken&player=twitchweb&p=${(100000..999999).random()}&type=any&allow_source=true&allow_audio_only=true"
 
             M3u8Helper.generateM3u8(
-                name = this.name,
-                streamUrl = playlistUrl,
-                referer = "https://www.twitch.tv/"
+                this.name,
+                playlistUrl,
+                "https://www.twitch.tv/"
             ).forEach(callback)
         }
     }
