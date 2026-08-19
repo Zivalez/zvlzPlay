@@ -14,7 +14,7 @@ TV Series, Live TV, Live Streamer, dll.<br>
 </p>
 
 <p align="center">
-<a href="README.md">English</a> | <a href="#">Bahasa Indonesia</a>
+<a href="README.md">English</a> | Bahasa Indonesia
 </p>
 
 ## Apa itu CloudStream?
