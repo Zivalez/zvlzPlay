@@ -3,6 +3,7 @@ package com.nontonanimeid
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.amap
 import com.lagradost.cloudstream3.utils.*
+import kotlinx.coroutines.runBlocking
 import org.jsoup.nodes.Element
 
 class Nontonanimeid : MainAPI() {
@@ -314,19 +315,21 @@ class Nontonanimeid : MainAPI() {
                 val fixedIframe = if (iframeSrc.startsWith("//")) "https:$iframeSrc" else iframeSrc
 
                 val extracted = loadExtractor(fixedIframe, data, subtitleCallback) { link ->
-                    callback(
-                        newExtractorLink(
-                            this.name,
-                            "$name [$serverLabel]",
-                            link.url,
-                            link.type
-                        ) {
-                            this.referer = link.referer
-                            this.quality = link.quality
-                            this.headers = link.headers
-                            this.extractorData = link.extractorData
-                        }
-                    )
+                    runBlocking {
+                        callback(
+                            newExtractorLink(
+                                link.source,
+                                "$name [$serverLabel]",
+                                link.url,
+                                link.type
+                            ) {
+                                this.referer = link.referer
+                                this.quality = link.quality
+                                this.headers = link.headers
+                                this.extractorData = link.extractorData
+                            }
+                        )
+                    }
                 }
 
                 if (!extracted) {
