@@ -394,6 +394,28 @@
         "name": "Samehadaku"
     },
     {
+        "iconUrl": "https://cloudstream.zvlz.my.id/icon/sokuja.png",
+        "fileHash": "sha256-deb5fd8169131e667f90ebd14845f932b18157c710e44bd638e1e5992b49996e",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
+        "fileSize": 21913,
+        "status": 3,
+        "language": "id",
+        "authors": [
+            "Zivalez"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "version": 1,
+        "internalName": "Sokuja",
+        "description": "Anime Subtitle Indonesia",
+        "url": "https://cloudstream.zvlz.my.id/builds/Sokuja.cs3",
+        "name": "Sokuja"
+    },
+    {
         "iconUrl": "https://www.google.com/s2/favicons?domain=twitch.tv&sz=%size%",
         "fileHash": "sha256-6a66847714e28fe2971b7c523884fb6fcc9f2c1a2627ae45504bc7d4116ca5bf",
         "apiVersion": 1,
