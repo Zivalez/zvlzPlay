@@ -7,7 +7,7 @@ import kotlinx.coroutines.runBlocking
 import org.jsoup.nodes.Element
 
 class Nontonanimeid : MainAPI() {
-    override var mainUrl = "https://s11.nontonanimeid.boats"
+    override var mainUrl = "https://s13.nontonanimeid.boats"
     override var name = "NontonAnimeID"
     override val hasMainPage = true
     override var lang = "id"
