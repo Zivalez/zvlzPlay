@@ -4,13 +4,12 @@ import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.amap
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.ExtractorLinkType
-import com.lagradost.cloudstream3.utils.Qualities
 import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
 import kotlinx.coroutines.runBlocking
 import org.jsoup.nodes.Document
 
-suspend fun loadGomunimeLinks(
+suspend fun Gomunime.loadGomunimeLinks(
     data: String,
     subtitleCallback: (SubtitleFile) -> Unit,
     callback: (ExtractorLink) -> Unit
@@ -19,7 +18,7 @@ suspend fun loadGomunimeLinks(
 
     val iframes = document.select("iframe").mapNotNull {
         val src = it.attr("src").ifBlank { it.attr("data-src") }.trim()
-        if (src.isBlank()) null else fixUrl(src)
+        if (src.isBlank()) null else fixIframeUrl(src)
     }.distinct()
 
     val options = document.select("select.mirror option, div.server option, ul.servers li a")
@@ -27,7 +26,7 @@ suspend fun loadGomunimeLinks(
             val name = option.text().trim()
             val value = option.attr("value").ifBlank { option.attr("href") }.ifBlank { option.attr("data-video") }.trim()
             if (name.isBlank() || value.isBlank()) return@mapNotNull null
-            val iframeUrl = decodeIframeUrl(value) ?: if (value.startsWith("http") || value.startsWith("//")) fixUrl(value) else null
+            val iframeUrl = decodeIframeUrl(value) ?: if (value.startsWith("http") || value.startsWith("//")) fixIframeUrl(value) else null
             if (iframeUrl != null) Gomunime.ServerOption(name = name, url = iframeUrl) else null
         }
 
@@ -45,7 +44,7 @@ private suspend fun loadServerSource(
     subtitleCallback: (SubtitleFile) -> Unit,
     callback: (ExtractorLink) -> Unit
 ) {
-    val fixedUrl = if (server.url.startsWith("//")) "https:${server.url}" else server.url
+    val fixedUrl = fixIframeUrl(server.url)
 
     loadExtractor(fixedUrl, referer, subtitleCallback) { link ->
         runBlocking {
@@ -64,6 +63,10 @@ private suspend fun loadServerSource(
             )
         }
     }
+}
+
+private fun fixIframeUrl(url: String): String {
+    return if (url.startsWith("//")) "https:$url" else url
 }
 
 private fun decodeIframeUrl(encoded: String): String? {
