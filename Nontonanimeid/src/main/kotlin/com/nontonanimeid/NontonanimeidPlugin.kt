@@ -8,5 +8,7 @@ import android.content.Context
 class NontonanimeidPlugin : Plugin() {
     override fun load(context: Context) {
         registerMainAPI(Nontonanimeid())
+        registerExtractorAPI(KotakAnimeid())
+        registerExtractorAPI(KotakAnimeidS1())
     }
 }
