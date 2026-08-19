@@ -86,6 +86,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Nontonanimeid | Anime | ✅ Active |
 | Kuronime | Anime | ✅ Active |
 | Kuramanime | Anime, Donghua | ✅ Active |
+| Sokuja | Anime | ✅ Active |
 
 ### No Longer Maintained
 
