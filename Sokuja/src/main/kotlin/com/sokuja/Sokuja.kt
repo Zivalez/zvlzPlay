@@ -169,7 +169,7 @@ class Sokuja : MainAPI() {
     ): Boolean {
         val document = app.get(data).document
         val text = document.outerHtml()
-        val episodeId = Regex("\"episodeId\"\\s*:\\s*(\\d+)").find(text)?.groupValues?.getOrNull(1)
+        val episodeId = Regex("\\?\"episodeId\\?\"\\s*:\\s*(\\d+)").find(text)?.groupValues?.getOrNull(1)
             ?: return false
 
         val mirrors = app.get(
