@@ -145,30 +145,41 @@ class Otakudesu : MainAPI() {
 
         try {
             val scriptData = document.select("script:containsData(action:)").lastOrNull()?.data()
-            val token = scriptData?.substringAfter("{action:\"")?.substringBefore("\"}").toString()
-            val nonce = app.post(
-                "$mainUrl/wp-admin/admin-ajax.php",
-                data = mapOf("action" to token)
-            ).parsed<ResponseData>().data
-            val action = scriptData?.substringAfter(",action:\"")?.substringBefore("\"}").toString()
+            val token = scriptData?.substringAfter("{action:\"")?.substringBefore("\"}")?.takeIf { it.isNotBlank() }
+            if (token != null) {
+                val nonce = app.post(
+                    "$mainUrl/wp-admin/admin-ajax.php",
+                    data = mapOf("action" to token)
+                ).parsedSafe<ResponseData>()?.data
 
-            document.select("div.mirrorstream > ul > li").mapNotNull {
-                tryParseJson<ResponseSources>(base64Decode(it.select("a").attr("data-content")))
-            }.amap { res ->
-                val iframeSrc = Jsoup.parse(
-                    base64Decode(
-                        app.post(
+                val action = scriptData.substringAfter(",action:\"").substringBefore("\"}").takeIf { it.isNotBlank() }
+
+                if (nonce != null && action != null) {
+                    document.select("div.mirrorstream > ul > li").mapNotNull {
+                        tryParseJson<ResponseSources>(base64Decode(it.select("a").attr("data-content")))
+                    }.amap { res ->
+                        val responseData = app.post(
                             "$mainUrl/wp-admin/admin-ajax.php",
                             data = mapOf("id" to res.id, "i" to res.i, "q" to res.q, "nonce" to nonce, "action" to action)
-                        ).parsed<ResponseData>().data
-                    )
-                ).select("iframe").attr("src")
-                if (iframeSrc.isNotBlank()) {
-                    loadCustomExtractor(iframeSrc, data, subtitleCallback, callback, getQuality(res.q))
+                        ).parsedSafe<ResponseData>()?.data
+
+                        if (!responseData.isNullOrBlank()) {
+                            val iframeSrc = Jsoup.parse(base64Decode(responseData)).select("iframe").attr("src")
+                            if (iframeSrc.isNotBlank()) {
+                                loadCustomExtractor(iframeSrc, data, subtitleCallback, callback, getQuality(res.q))
+                            }
+                        }
+                    }
                 }
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch (_: Exception) {
+        }
+
+        document.select("div.responsive-embed iframe, div.embed-holder iframe, div.player-embed iframe, iframe").forEach { ifr ->
+            val src = ifr.attr("src").ifBlank { ifr.attr("data-src") }
+            if (src.isNotBlank() && !src.contains("google.com") && !src.contains("youtube.com")) {
+                loadCustomExtractor(fixedIframe(src), data, subtitleCallback, callback)
+            }
         }
 
         document.select("div.download li").flatMap { ele ->

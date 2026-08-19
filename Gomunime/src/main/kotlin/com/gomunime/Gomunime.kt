@@ -23,19 +23,19 @@ class Gomunime : MainAPI() {
     )
 
     override val mainPage = mainPageOf(
-        "$mainUrl/anime/page/%d/?status=&type=&order=update" to "Terbaru",
-        "$mainUrl/anime/page/%d/?status=ongoing&type=&order=update" to "Ongoing",
-        "$mainUrl/anime/page/%d/?status=completed&type=&order=update" to "Completed",
-        "$mainUrl/anime/page/%d/?status=&type=&order=popular" to "Popular",
-        "$mainUrl/genres/action/page/%d/" to "Action",
-        "$mainUrl/genres/fantasy/page/%d/" to "Fantasy",
-        "$mainUrl/genres/isekai/page/%d/" to "Isekai",
-        "$mainUrl/genres/reincarnation/page/%d/" to "Reincarnation",
+        "$mainUrl/status/ongoing?page=%d" to "Ongoing",
+        "$mainUrl/status/completed?page=%d" to "Completed",
+        "$mainUrl/type/movie?page=%d" to "Movie",
+        "$mainUrl/koleksi/anime-skor-mal-tertinggi?page=%d" to "Top Rated",
+        "$mainUrl/genre/action?page=%d" to "Action",
+        "$mainUrl/genre/fantasy?page=%d" to "Fantasy",
+        "$mainUrl/genre/isekai?page=%d" to "Isekai",
     )
 
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
-        val document = app.get(request.data.format(page)).document
-        val home = document.select("article.bs").mapNotNull { it.toSearchResult() }
+        val url = if (page == 1) request.data.replace("?page=%d", "") else request.data.format(page)
+        val document = app.get(url).document
+        val home = document.select("a.card-netflix, article.bs").mapNotNull { it.toSearchResult() }
         return newHomePageResponse(request.name, home)
     }
 
@@ -43,41 +43,31 @@ class Gomunime : MainAPI() {
 
     override suspend fun search(query: String): List<SearchResponse>? {
         val document = app.get("$mainUrl/?s=$query").document
-        return document.select("article.bs").mapNotNull { it.toSearchResult() }
+        return document.select("a.card-netflix, article.bs").mapNotNull { it.toSearchResult() }
     }
 
     override suspend fun load(url: String): LoadResponse? {
         val document = app.get(url).document
-        val title = document.selectFirst("h1.entry-title")?.text()?.trim() ?: return null
+        val title = document.selectFirst("h1")?.text()?.trim() ?: return null
 
-        val poster = document.selectFirst("div.single-info .thumb img")
-            ?.attr("src")
+        val poster = document.selectFirst("img[alt*=\"$title\" i], div.aspect-poster img, div.single-info .thumb img")
+            ?.let { it.attr("src").ifBlank { it.attr("data-src") } }
             ?.takeIf { it.isNotBlank() }
 
         val bodyText = document.body().text().replace(Regex("\\s+"), " ").trim()
-        val statusText = Regex("""Status:\s*([A-Za-z]+)""").find(bodyText)?.groupValues?.getOrNull(1) ?: ""
-        val typeText = Regex("""Type:\s*([A-Za-z]+)""").find(bodyText)?.groupValues?.getOrNull(1) ?: "TV"
-        val releaseText = Regex("""Released on:\s*([A-Za-z]+\s+\d{1,2},\s+\d{4})""")
-            .find(bodyText)?.groupValues?.getOrNull(1)
-        val year = releaseText?.let {
-            runCatching {
-                SimpleDateFormat("MMMM d, yyyy", Locale.US).parse(it)?.let { date ->
-                    SimpleDateFormat("yyyy", Locale.US).format(date).toIntOrNull()
-                }
-            }.getOrNull()
+        val statusText = when {
+            bodyText.contains("Ongoing", true) -> "Ongoing"
+            bodyText.contains("Completed", true) || bodyText.contains("Tamat", true) -> "Completed"
+            else -> "Completed"
         }
+        val typeText = when {
+            url.contains("movie", true) || bodyText.contains("Movie", true) -> "Movie"
+            else -> "TV"
+        }
+        val year = Regex("""\b(19\d\d|20\d\d)\b""").find(bodyText)?.groupValues?.getOrNull(1)?.toIntOrNull()
 
-        val description = document.selectFirst("div.desc.mindes")?.text()?.trim()
-            ?: document.selectFirst("div.entry-content")?.text()?.trim()
-
-        val tags = Regex("""bergenre\s+([^.]*)\.""", RegexOption.IGNORE_CASE)
-            .find(bodyText)
-            ?.groupValues
-            ?.getOrNull(1)
-            ?.split(",")
-            ?.map { it.trim() }
-            ?.filter { it.isNotBlank() }
-            ?: emptyList()
+        val description = document.selectFirst("p.text-ink-200, div.prose, p.leading-relaxed, div.desc, div.entry-content")?.text()?.trim()
+        val tags = document.select("a[href*=\"/genre/\"]").map { it.text().trim() }.filter { it.isNotBlank() }.distinct()
 
         val episodes = extractEpisodeLinks(url, document)
         val tracker = APIHolder.getTracker(listOf(title), TrackerType.getTypes(getType(typeText)), year, true)
@@ -106,35 +96,25 @@ class Gomunime : MainAPI() {
     }
 
     private fun Element.toSearchResult(): AnimeSearchResponse? {
-        val a = selectFirst("a[href]") ?: return null
+        val a = if (tagName() == "a") this else selectFirst("a[href]") ?: return null
         val href = fixUrlNull(a.attr("href")) ?: return null
-        val title = selectFirst("div.tt h3, div.tt h2, h3")?.text()?.trim()
-            ?: a.attr("title").trim().takeIf { it.isNotBlank() }
+        val img = a.selectFirst("img")
+        val title = img?.attr("alt")?.trim()?.takeIf { it.isNotBlank() }
+            ?: selectFirst("h1, h2, h3, h4, div.tt, span.title")?.text()?.trim()?.takeIf { it.isNotBlank() }
+            ?: a.text().trim().takeIf { it.isNotBlank() }
             ?: return null
-        val posterUrl = selectFirst("img.ts-post-image")?.let { img ->
-            fixUrlNull(img.attr("data-original").takeIf { it.isNotBlank() } ?: img.attr("src"))
-        }
-        val type = getType(selectFirst("div.typez")?.text()?.trim() ?: "TV")
-        val epNum = selectFirst("span.epx")?.text()?.replace(Regex("\\D"), "")?.toIntOrNull()
+        val posterUrl = img?.let { fixUrlNull(it.attr("src").ifBlank { it.attr("data-src") }) }
+        val isMovie = href.contains("movie", true)
 
-        return when (type) {
-            TvType.AnimeMovie -> newAnimeSearchResponse(title, href, TvType.AnimeMovie) {
-                this.posterUrl = posterUrl
-                addSub(epNum)
-            }
-            else -> newAnimeSearchResponse(title, href, TvType.Anime) {
-                this.posterUrl = posterUrl
-                addSub(epNum)
-            }
+        return newAnimeSearchResponse(title, href, if (isMovie) TvType.AnimeMovie else TvType.Anime) {
+            this.posterUrl = posterUrl
         }
     }
 
     private fun extractEpisodeLinks(url: String, document: org.jsoup.nodes.Document): List<Episode> {
-        val slug = runCatching {
-            URI(url).path.trim('/').substringAfter("anime/")
-        }.getOrNull()?.takeIf { it.isNotBlank() } ?: return emptyList()
+        val slug = URI(url).path.trim('/').substringAfterLast('/')
 
-        return document.select("a[href*=\"$slug-episode-\"]")
+        val list = document.select("a[href*=\"-episode-\"]")
             .mapNotNull { a ->
                 val href = fixUrlNull(a.attr("href")) ?: return@mapNotNull null
                 val epNum = Regex("""episode-(\d+)""", RegexOption.IGNORE_CASE)
@@ -146,8 +126,21 @@ class Gomunime : MainAPI() {
                     this.name = "Episode ${epNum ?: ""}".trim()
                 }
             }
-            .distinctBy { "${it.name}-${it.episode}" }
+            .distinctBy { it.data }
             .sortedBy { it.episode ?: Int.MAX_VALUE }
+
+        if (list.isNotEmpty()) return list
+
+        if (url.contains("movie", true)) {
+            return listOf(
+                newEpisode(url) {
+                    this.name = "Movie"
+                    this.episode = 1
+                }
+            )
+        }
+
+        return emptyList()
     }
 
     private fun getType(text: String): TvType = when {

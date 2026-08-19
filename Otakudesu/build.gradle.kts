@@ -5,7 +5,7 @@ dependencies {
     implementation("org.json:json:20240303")
 }
 
-version = 3
+version = 4
 
 cloudstream {
     language = "id"

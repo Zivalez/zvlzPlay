@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element
 import java.net.URLEncoder
 
 class Dramacool : MainAPI() {
-    override var mainUrl = "https://asianctv.net"
+    override var mainUrl = "https://asianc.to"
     override var name = "Dramacool"
     override val hasMainPage = true
     override var lang = "en"

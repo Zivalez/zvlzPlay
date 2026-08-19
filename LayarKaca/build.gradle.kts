@@ -16,7 +16,7 @@ dependencies {
     implementation("org.json:json:20240303")
 
 }
-version = 6
+version = 7
 
 cloudstream {
     // metadata

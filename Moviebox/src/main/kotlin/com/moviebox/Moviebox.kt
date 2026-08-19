@@ -62,9 +62,9 @@ class Moviebox : MainAPI() {
         if(!request.data.contains(",")) {
             val url = "$mainAPIUrl/wefeed-h5api-bff/ranking-list/content?id=${request.data}&page=$page&perPage=12"
 
-            val index = app.get(url).parsedSafe<Media>()?.data?.subjectList?.map {
+            val index = app.get(url).parsedSafe<Media>()?.data?.subjectList?.mapNotNull {
                 it.toSearchResponse(this)
-            } ?: throw ErrorLoadingException("No Data Found")
+            } ?: emptyList()
 
             home.addAll(index)
         } else {
@@ -77,13 +77,12 @@ class Moviebox : MainAPI() {
             ).toJson().toRequestBody(RequestBodyTypes.JSON.toMediaTypeOrNull())
 
             val index = app.post("$mainAPIUrl/wefeed-h5api-bff/subject/filter", requestBody = body)
-                .parsedSafe<Media>()?.data?.items?.map {
+                .parsedSafe<Media>()?.data?.items?.mapNotNull {
                     it.toSearchResponse(this)
-                } ?: throw ErrorLoadingException("No Data Found")
+                } ?: emptyList()
 
             home.addAll(index)
         }
-
 
         return newHomePageResponse(request.name, home)
     }
@@ -91,15 +90,16 @@ class Moviebox : MainAPI() {
     override suspend fun quickSearch(query: String): List<SearchResponse> = search(query)
 
     override suspend fun search(query: String): List<SearchResponse> {
-        return app.post(
-            "$secondAPIUrl/wefeed-h5-bff/web/subject/search", requestBody = mapOf(
-                "keyword" to query,
-                "page" to "1",
-                "perPage" to "0",
-                "subjectType" to "0",
-            ).toJson().toRequestBody(RequestBodyTypes.JSON.toMediaTypeOrNull())
-        ).parsedSafe<Media>()?.data?.items?.map { it.toSearchResponse(this) }
-            ?: throw ErrorLoadingException()
+        return runCatching {
+            app.post(
+                "$secondAPIUrl/wefeed-h5-bff/web/subject/search", requestBody = mapOf(
+                    "keyword" to query,
+                    "page" to "1",
+                    "perPage" to "0",
+                    "subjectType" to "0",
+                ).toJson().toRequestBody(RequestBodyTypes.JSON.toMediaTypeOrNull())
+            ).parsedSafe<Media>()?.data?.items?.mapNotNull { it.toSearchResponse(this) }
+        }.getOrNull() ?: emptyList()
     }
 
     override suspend fun load(url: String): LoadResponse {

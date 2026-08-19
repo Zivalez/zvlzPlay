@@ -8,7 +8,7 @@ import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.loadExtractor
 
 class KingV2 : MainAPI() {
-    override var mainUrl = "https://185.169.252.47"
+    override var mainUrl = "https://kingbokep.net"
     override var name = "KingV2"
     override var lang = "id"
     override val hasMainPage = true

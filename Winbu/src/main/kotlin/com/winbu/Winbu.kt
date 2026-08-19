@@ -65,36 +65,44 @@ class Winbu : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
-        val homeDoc = app.get(mainUrl, headers = commonHeaders).document
-        val ajaxScript = homeDoc.select("script:not([src])").firstOrNull { it.data().contains("ajaxSearch") }
+        val homeDoc = runCatching { app.get(mainUrl, headers = commonHeaders).document }.getOrNull()
+        val ajaxScript = homeDoc?.select("script:not([src])")?.firstOrNull { it.data().contains("ajaxSearch") }
         val nonce = Regex(""""nonce"\s*:\s*"([^"]+)"""").find(ajaxScript?.data() ?: "")
             ?.groupValues?.getOrNull(1) ?: ""
 
-        val responseText = app.get(
-            "$mainUrl/wp-json/eastheme/search/",
-            params = mapOf("keyword" to query, "nonce" to nonce),
-            headers = commonHeaders,
-        ).text
+        if (nonce.isNotBlank()) {
+            val responseText = runCatching {
+                app.get(
+                    "$mainUrl/wp-json/eastheme/search/",
+                    params = mapOf("keyword" to query, "nonce" to nonce),
+                    headers = commonHeaders,
+                ).text
+            }.getOrNull() ?: ""
 
-        if (!responseText.trimStart().startsWith("{")) return emptyList()
+            if (responseText.trimStart().startsWith("{")) {
+                val apiResults = runCatching {
+                    val jsonObj = JSONObject(responseText)
+                    if (!jsonObj.has("error")) {
+                        jsonObj.keys().asSequence().mapNotNull { key ->
+                            val item = runCatching { jsonObj.getJSONObject(key) }.getOrNull() ?: return@mapNotNull null
+                            val title = item.optString("title").takeIf { it.isNotEmpty() } ?: return@mapNotNull null
+                            val itemUrl = item.optString("url").takeIf { it.isNotEmpty() } ?: return@mapNotNull null
+                            val img = item.optString("img").takeIf { it.isNotEmpty() }
+                            if (itemUrl.contains("/film/")) {
+                                newMovieSearchResponse(title, itemUrl, TvType.Movie) { posterUrl = img }
+                            } else {
+                                newAnimeSearchResponse(title, itemUrl, TvType.Anime) { posterUrl = img }
+                            }
+                        }.toList()
+                    } else emptyList()
+                }.getOrDefault(emptyList())
 
-        return try {
-            val jsonObj = JSONObject(responseText)
-            if (jsonObj.has("error")) return emptyList()
-            jsonObj.keys().asSequence().mapNotNull { key ->
-                val item = runCatching { jsonObj.getJSONObject(key) }.getOrNull() ?: return@mapNotNull null
-                val title = item.optString("title").takeIf { it.isNotEmpty() } ?: return@mapNotNull null
-                val itemUrl = item.optString("url").takeIf { it.isNotEmpty() } ?: return@mapNotNull null
-                val img = item.optString("img").takeIf { it.isNotEmpty() }
-                if (itemUrl.contains("/film/")) {
-                    newMovieSearchResponse(title, itemUrl, TvType.Movie) { posterUrl = img }
-                } else {
-                    newAnimeSearchResponse(title, itemUrl, TvType.Anime) { posterUrl = img }
-                }
-            }.toList()
-        } catch (_: Exception) {
-            emptyList()
+                if (apiResults.isNotEmpty()) return apiResults
+            }
         }
+
+        val searchDoc = runCatching { app.get("$mainUrl/?s=$query", headers = commonHeaders).document }.getOrNull()
+        return searchDoc?.select("div.ml-item, div.item, article")?.mapNotNull { it.toSearchResult() } ?: emptyList()
     }
 
     override suspend fun load(url: String): LoadResponse? {

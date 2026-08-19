@@ -327,8 +327,9 @@ class Loklok : MainAPI() {
         val results = runCatching {
             val json = apiPost("search/v1/searchWithKeyWord", bodyJson, useV2 = true)
             parseJson<LoklokSearchResponse>(json)?.data?.searchResults
-        }.onFailure {
-            Log.e(TAG, "search failed: ${it.message}")
+        }.getOrNull() ?: runCatching {
+            val json = apiPost("search/searchWithKeyWord", bodyJson, useV2 = false)
+            parseJson<LoklokSearchResponse>(json)?.data?.searchResults
         }.getOrNull()
 
         return results?.mapNotNull { it.toSearchResponse() }

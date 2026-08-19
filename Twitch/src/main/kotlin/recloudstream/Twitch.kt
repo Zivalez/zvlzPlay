@@ -18,11 +18,13 @@ import com.lagradost.cloudstream3.newLiveStreamLoadResponse
 import com.lagradost.cloudstream3.utils.ExtractorApi
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import com.lagradost.cloudstream3.utils.ExtractorLinkType
-import com.lagradost.cloudstream3.utils.getQualityFromName
+import com.lagradost.cloudstream3.utils.M3u8Helper
 import com.lagradost.cloudstream3.utils.loadExtractor
 import com.lagradost.cloudstream3.utils.newExtractorLink
+import org.json.JSONObject
 import org.jsoup.nodes.Element
 import java.lang.RuntimeException
+import java.net.URLEncoder
 
 class Twitch : MainAPI() {
     override var mainUrl = "https://twitchtracker.com"
@@ -45,7 +47,7 @@ class Twitch : MainAPI() {
             gamesName -> newHomePageResponse(parseGames(), hasNext = false)
             else -> {
                 val doc = app.get(request.data, params = mapOf("page" to page.toString())).document
-                val channels = doc.select("table#channels tr").map { element ->
+                val channels = doc.select("table#channels tr").mapNotNull { element ->
                     element.toLiveSearchResponse()
                 }
                 newHomePageResponse(
@@ -62,13 +64,16 @@ class Twitch : MainAPI() {
         }
     }
 
-    private fun Element.toLiveSearchResponse(): LiveSearchResponse {
+    private fun Element.toLiveSearchResponse(): LiveSearchResponse? {
         val anchor = this.select("a")
-        val linkName = anchor.attr("href").substringAfterLast("/")
-        val name = anchor.firstOrNull { it.text().isNotBlank() }?.text()
-        val image = this.select("img").attr("src")
+        val href = anchor.attr("href").trim()
+        if (href.isBlank() || href == "#") return null
+        val linkName = href.substringAfterLast("/").trim()
+        if (linkName.isBlank()) return null
+        val name = anchor.firstOrNull { it.text().isNotBlank() }?.text()?.trim() ?: linkName
+        val image = this.select("img").attr("src").takeIf { it.isNotBlank() }
         return newLiveSearchResponse(
-            name ?: "",
+            name,
             linkName,
             TvType.Live,
             fix = false
@@ -82,7 +87,7 @@ class Twitch : MainAPI() {
             .mapNotNull { element ->
                 val game = element.select("div.ri-name > a")
                 val url = fixUrl(game.attr("href"))
-                val name = game.text()
+                val name = game.text().trim()
                 val searchResponses = parseGame(url).ifEmpty { return@mapNotNull null }
                 HomePageList(name, searchResponses, isHorizontalImages = isHorizontal)
             }
@@ -90,22 +95,19 @@ class Twitch : MainAPI() {
 
     private suspend fun parseGame(url: String): List<LiveSearchResponse> {
         val doc = app.get(url).document
-        return doc.select("td.cell-slot.sm").map { element ->
+        return doc.select("td.cell-slot.sm").mapNotNull { element ->
             element.toLiveSearchResponse()
         }
     }
 
     override suspend fun load(url: String): LoadResponse {
-        val realUrl = url.substringAfterLast("/")
+        val realUrl = url.substringAfterLast("/").trim()
         val doc = app.get("$mainUrl/$realUrl", referer = mainUrl).document
-        val name = doc.select("div#app-title").text()
-        if (name.isBlank()) {
-            throw RuntimeException("Could not load page, please try again.\n")
-        }
+        val name = doc.select("div#app-title").text().trim().ifBlank { realUrl }
         val rank = doc.select("div.rank-badge > span").last()?.text()?.toIntOrNull()
-        val image = doc.select("div#app-logo > img").attr("src")
+        val image = doc.select("div#app-logo > img").attr("src").takeIf { it.isNotBlank() }
         val poster = doc.select("div.embed-responsive > img").attr("src").ifEmpty { image }
-        val description = doc.select("div[style='word-wrap:break-word;font-size:12px;']").text()
+        val description = doc.select("div[style='word-wrap:break-word;font-size:12px;']").text().trim()
         val language = doc.select("a.label.label-soft").text().ifEmpty { null }
         val isLive = doc.select("div.live-indicator-container").isNotEmpty()
 
@@ -128,9 +130,20 @@ class Twitch : MainAPI() {
     }
 
     override suspend fun search(query: String): List<SearchResponse>? {
-        val document =
+        val document = runCatching {
             app.get("$mainUrl/search", params = mapOf("q" to query), referer = mainUrl).document
-        return document.select("table.tops tr").map { it.toLiveSearchResponse() }
+        }.getOrNull()
+        val results = document?.select("table.tops tr")?.mapNotNull { it.toLiveSearchResponse() }
+        if (!results.isNullOrEmpty()) return results
+
+        return listOf(
+            newLiveSearchResponse(
+                query,
+                query.lowercase().replace(" ", "_"),
+                TvType.Live,
+                fix = false
+            )
+        )
     }
 
     override suspend fun loadLinks(
@@ -139,7 +152,54 @@ class Twitch : MainAPI() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ): Boolean {
-        return loadExtractor(data, subtitleCallback, callback)
+        val channel = data.substringAfter("twitch.tv/").substringBefore("/").substringBefore("?").trim()
+        if (channel.isBlank()) return false
+
+        val gqlQuery = mapOf(
+            "query" to """
+            {
+                streamPlaybackAccessToken(
+                    channelName: "$channel",
+                    params: {
+                        platform: "web",
+                        playerBackend: "mediaplayer",
+                        playerType: "site"
+                    }
+                ) {
+                    value
+                    signature
+                }
+            }
+            """.trimIndent()
+        )
+
+        val tokenResponse = runCatching {
+            app.post(
+                "https://gql.twitch.tv/gql",
+                headers = mapOf(
+                    "Client-ID" to "kimne78kx3ncx6brgo4mv6wki5h1ko",
+                    "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                ),
+                json = gqlQuery
+            ).text
+        }.getOrNull() ?: return false
+
+        val json = runCatching { JSONObject(tokenResponse) }.getOrNull() ?: return false
+        val tokenData = json.optJSONObject("data")?.optJSONObject("streamPlaybackAccessToken") ?: return false
+        val sig = tokenData.optString("signature")
+        val token = tokenData.optString("value")
+        if (sig.isBlank() || token.isBlank()) return false
+
+        val encodedToken = URLEncoder.encode(token, "UTF-8")
+        val playlistUrl = "https://usher.ttvnw.net/api/channel/hls/$channel.m3u8?sig=$sig&token=$encodedToken&player=twitchweb&p=${(100000..999999).random()}&type=any&allow_source=true&allow_audio_only=true"
+
+        M3u8Helper.generateM3u8(
+            name = this.name,
+            streamUrl = playlistUrl,
+            referer = "https://www.twitch.tv/"
+        ).forEach(callback)
+
+        return true
     }
 
     class TwitchExtractor : ExtractorApi() {
@@ -147,33 +207,58 @@ class Twitch : MainAPI() {
         override val name = "Twitch"
         override val requiresReferer = false
 
-        data class ApiResponse(
-            val success: Boolean,
-            val urls: Map<String, String>?
-        )
-
         override suspend fun getUrl(
             url: String,
             referer: String?,
             subtitleCallback: (SubtitleFile) -> Unit,
             callback: (ExtractorLink) -> Unit
         ) {
-            val response =
-                app.get("https://pwn.sh/tools/streamapi.py?url=$url").parsed<ApiResponse>()
-            response.urls?.forEach { (name, url) ->
-                val quality = getQualityFromName(name.substringBefore("p"))
-                callback.invoke(
-                    newExtractorLink(
-                        this.name,
-                        "${this.name} ${name.replace("${quality}p", "")}",
-                        url
+            val channel = url.substringAfter("twitch.tv/").substringBefore("/").substringBefore("?").trim()
+            if (channel.isBlank()) return
+
+            val gqlQuery = mapOf(
+                "query" to """
+                {
+                    streamPlaybackAccessToken(
+                        channelName: "$channel",
+                        params: {
+                            platform: "web",
+                            playerBackend: "mediaplayer",
+                            playerType: "site"
+                        }
                     ) {
-                        this.type = ExtractorLinkType.M3U8
-                        this.quality = quality
-                        this.referer = ""
+                        value
+                        signature
                     }
-                )
-            }
+                }
+                """.trimIndent()
+            )
+
+            val tokenResponse = runCatching {
+                app.post(
+                    "https://gql.twitch.tv/gql",
+                    headers = mapOf(
+                        "Client-ID" to "kimne78kx3ncx6brgo4mv6wki5h1ko",
+                        "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                    ),
+                    json = gqlQuery
+                ).text
+            }.getOrNull() ?: return
+
+            val json = runCatching { JSONObject(tokenResponse) }.getOrNull() ?: return
+            val tokenData = json.optJSONObject("data")?.optJSONObject("streamPlaybackAccessToken") ?: return
+            val sig = tokenData.optString("signature")
+            val token = tokenData.optString("value")
+            if (sig.isBlank() || token.isBlank()) return
+
+            val encodedToken = URLEncoder.encode(token, "UTF-8")
+            val playlistUrl = "https://usher.ttvnw.net/api/channel/hls/$channel.m3u8?sig=$sig&token=$encodedToken&player=twitchweb&p=${(100000..999999).random()}&type=any&allow_source=true&allow_audio_only=true"
+
+            M3u8Helper.generateM3u8(
+                name = this.name,
+                streamUrl = playlistUrl,
+                referer = "https://www.twitch.tv/"
+            ).forEach(callback)
         }
     }
 }

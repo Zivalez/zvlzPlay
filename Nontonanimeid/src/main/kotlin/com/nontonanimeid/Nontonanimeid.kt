@@ -265,65 +265,103 @@ class Nontonanimeid : MainAPI() {
     ): Boolean {
         val document = app.get(data).document
 
-        val nonce = document.select("script[src]").mapNotNull { script ->
+        val nonce = document.select("script").mapNotNull { script ->
             val src = script.attr("src")
-            if (!src.startsWith("data:text/javascript;base64,")) return@mapNotNull null
-            val decoded = try {
-                base64Decode(src.removePrefix("data:text/javascript;base64,"))
-            } catch (_: Exception) { return@mapNotNull null }
-            if (!decoded.contains("kotakajax")) return@mapNotNull null
-            Regex(""""nonce"\s*:\s*"([^"]+)"""").find(decoded)?.groupValues?.get(1)
-        }.firstOrNull() ?: return false
+            val content = if (src.startsWith("data:text/javascript;base64,")) {
+                try {
+                    base64Decode(src.removePrefix("data:text/javascript;base64,"))
+                } catch (_: Exception) {
+                    null
+                }
+            } else {
+                script.data().takeIf { it.isNotBlank() } ?: script.html()
+            }
+            if (content != null && (content.contains("nonce") || content.contains("kotakajax") || content.contains("player_ajax"))) {
+                Regex(""""nonce"\s*:\s*"([^"]+)"""").find(content)?.groupValues?.get(1)
+                    ?: Regex("""nonce\s*:\s*["']([^"']+)["']""").find(content)?.groupValues?.get(1)
+            } else {
+                null
+            }
+        }.firstOrNull()
 
         val ajaxUrl = "$mainUrl/wp-admin/admin-ajax.php"
 
-        document.select("li.serverplayer").amap { li ->
-            val post = li.attr("data-post")
-            val type = li.attr("data-type").lowercase()
-            val nume = li.attr("data-nume")
-            val serverLabel = li.selectFirst("span")?.text()?.trim() ?: type
+        if (nonce != null) {
+            document.select("li.serverplayer").amap { li ->
+                val post = li.attr("data-post")
+                val type = li.attr("data-type").lowercase()
+                val nume = li.attr("data-nume")
+                val serverLabel = li.selectFirst("span")?.text()?.trim() ?: type
 
-            val ajaxResponse = app.post(
-                ajaxUrl,
-                data = mapOf(
-                    "action" to "player_ajax",
-                    "nonce" to nonce,
-                    "serverName" to type,
-                    "nume" to nume,
-                    "post" to post
-                ),
-                referer = data,
-                headers = mapOf("Origin" to mainUrl)
-            ).text
+                val ajaxResponse = runCatching {
+                    app.post(
+                        ajaxUrl,
+                        data = mapOf(
+                            "action" to "player_ajax",
+                            "nonce" to nonce,
+                            "serverName" to type,
+                            "nume" to nume,
+                            "post" to post
+                        ),
+                        referer = data,
+                        headers = mapOf("Origin" to mainUrl)
+                    ).text
+                }.getOrNull() ?: return@amap
 
-            val iframeSrc = Regex("""src=["']([^"']*kotakanimeid\.link[^"']*)["']""")
-                .find(ajaxResponse)?.groupValues?.get(1) ?: return@amap
+                val iframeSrc = Regex("""src=["']([^"']+)["']""")
+                    .find(ajaxResponse)?.groupValues?.get(1) ?: return@amap
 
-            val iframePage = app.get(iframeSrc, referer = data).text
+                val fixedIframe = if (iframeSrc.startsWith("//")) "https:$iframeSrc" else iframeSrc
 
-            val evalScript = iframePage.lines()
-                .firstOrNull { it.contains("eval(function(p,a,c,k") }
-                ?: return@amap
-
-            val unpacked = unpackJs(evalScript) ?: return@amap
-
-            val fileUrl = Regex(""""file"\s*:\s*"([^"]+)"""")
-                .find(unpacked)?.groupValues?.get(1) ?: return@amap
-
-            val isM3u8 = unpacked.contains("mpegurl", true) || fileUrl.contains("m3u8") ||
-                         unpacked.contains("isHLS=true")
-
-            callback(
-                newExtractorLink(
-                    this.name,
-                    "$name [$serverLabel]",
-                    fileUrl,
-                    if (isM3u8) ExtractorLinkType.M3U8 else ExtractorLinkType.VIDEO
-                ) {
-                    this.referer = iframeSrc
-                    this.quality = Qualities.Unknown.value
+                val extracted = loadExtractor(fixedIframe, data, subtitleCallback) { link ->
+                    callback(
+                        newExtractorLink(
+                            this.name,
+                            "$name [$serverLabel]",
+                            link.url,
+                            link.type
+                        ) {
+                            this.referer = link.referer
+                            this.quality = link.quality
+                            this.headers = link.headers
+                            this.extractorData = link.extractorData
+                        }
+                    )
                 }
-            )
+
+                if (!extracted) {
+                    val iframePage = runCatching { app.get(fixedIframe, referer = data).text }.getOrNull()
+                    if (iframePage != null) {
+                        val evalScript = iframePage.lines().firstOrNull { it.contains("eval(function(p,a,c,k") }
+                        val unpacked = evalScript?.let { unpackJs(it) } ?: iframePage
+                        val fileUrl = Regex(""""file"\s*:\s*"([^"]+)"""").find(unpacked)?.groupValues?.get(1)
+                            ?: Regex("""sources:\s*\[\{\s*file:\s*["']([^"']+)["']""").find(unpacked)?.groupValues?.get(1)
+
+                        if (!fileUrl.isNullOrBlank()) {
+                            val isM3u8 = unpacked.contains("mpegurl", true) || fileUrl.contains("m3u8") || unpacked.contains("isHLS=true")
+                            callback(
+                                newExtractorLink(
+                                    this.name,
+                                    "$name [$serverLabel]",
+                                    fileUrl,
+                                    if (isM3u8) ExtractorLinkType.M3U8 else ExtractorLinkType.VIDEO
+                                ) {
+                                    this.referer = fixedIframe
+                                    this.quality = Qualities.Unknown.value
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        document.select("div.player-embed iframe, div.embed-holder iframe, div.responsive-embed iframe, iframe").forEach { ifr ->
+            val src = ifr.attr("src").ifBlank { ifr.attr("data-src") }.trim()
+            if (src.isNotBlank() && !src.contains("google.com") && !src.contains("youtube.com")) {
+                val fixedSrc = if (src.startsWith("//")) "https:$src" else src
+                loadExtractor(fixedSrc, data, subtitleCallback, callback)
+            }
         }
 
         return true
