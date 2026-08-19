@@ -26,7 +26,7 @@ cloudstream {
     authors = listOf("Zivalez")
     description = "KingV2 provider for KingBokep (alternate host)"
     // status: 1 = stable, 0 = experimental
-    status = 1
+    status = 0
     tvTypes = listOf("NSFW")
     // Use site favicon as provider icon
     iconUrl = "https://185.169.252.47/wp-content/uploads/2025/06/favicon.ico"

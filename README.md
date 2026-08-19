@@ -73,29 +73,38 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Provider List
 
+### Active Providers
+
 | Provider | Content | Status |
 | --- | --- | --- |
 | Idlix | Movie, TV Series, Asian Drama, Anime | ✅ Active |
-| LayarKaca | Movie, TV Series, Asian Drama, Anime Movie | ✅ Active |
 | Pencurimovie | Movie | ✅ Active |
 | Moviebox | Movie, TV Series, Anime, Asian Drama | ✅ Active |
-| Dramacool | Asian Drama, Variety Show | ✅ Active |
 | Samehadaku | Anime | ✅ Active |
 | Otakudesu | Anime | ✅ Active |
 | Alqanime | Anime | ✅ Active |
 | Nontonanimeid | Anime | ✅ Active |
 | Kuronime | Anime | ✅ Active |
-| Gomunime | Anime | ✅ Active |
-| Winbu | Anime, Donghua | ✅ Active |
 | Kuramanime | Anime, Donghua | ✅ Active |
-| Zoronime | Anime | ❌ Down |
-| IPTV | Indonesian Live TV (RCTI, SCTV, Trans, ANTV, Metro, Kompas, etc.) | ✅ Active |
-| Twitch | Global Live Streamers | ✅ Active |
+
+### No Longer Maintained
+
+The following providers are no longer actively maintained. They may still work if the source websites are operational, but issues will not be fixed.
+
+| Provider | Content | Status |
+| --- | --- | --- |
+| LayarKaca | Movie, TV Series, Asian Drama, Anime Movie | ⚠️ No Longer Maintained |
+| Dramacool | Asian Drama, Variety Show | ⚠️ No Longer Maintained |
+| Gomunime | Anime | ⚠️ No Longer Maintained |
+| Winbu | Anime, Donghua | ⚠️ No Longer Maintained |
+| Zoronime | Anime | ⚠️ No Longer Maintained |
+| Twitch | Global Live Streamers | ⚠️ No Longer Maintained |
+| Loklok | Movie, TV Series | ⚠️ No Longer Maintained |
+| IPTV | Indonesian Live TV (RCTI, SCTV, Trans, ANTV, Metro, Kompas, etc.) | ⚠️ No Longer Maintained |
 
 Status legend:
 - ✅ **Active** : safe to use and should work normally
-- 🧪 **Beta** : usable, but may still have stability issues
-- ❌ **Down** : site or server is currently unavailable
+- ⚠️ **No Longer Maintained** : not actively maintained, may still work if source website is operational
 
 
 ## FAQ
@@ -106,21 +115,14 @@ CloudStream requires extensions first. Follow the steps in [How to Install](#how
 ### Which provider is best for Anime?
 - **Samehadaku** : fairly complete with fast streaming
 - **Kuramanime** : fast updates and stable
-- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime**, **Gomunime** : alternatives when other providers have issues
+- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime** : alternatives when other providers have issues
 
 ### Which providers are best for Drama and Movies?
 - **Idlix** : usually fairly complete
-- **Dramacool** : focused on Asian Drama and Variety Shows
-- **LayarKaca**, **Pencurimovie**, **Moviebox** : other alternatives
+- **Pencurimovie**, **Moviebox** : other alternatives
 
 ### Is Donghua available?
-- Yes. Try **Kuramanime** or **Winbu**.
-
-### Can I watch Indonesian live TV such as Indosiar, RCTI, SCTV, and others?
-Yes. Install the **IPTV** provider from the extension list. Popular Indonesian channels are available in the "Popular" row, while the rest are grouped by categories such as News, Sports, Kids, and more.
-
-### Can I watch Twitch streamers?
-Yes. Install the **Twitch** provider from the extension list, then choose the streamer you want to watch.
+- Yes. Try **Kuramanime**.
 
 ### Why does search return no results?
 - Make sure the providers are installed.

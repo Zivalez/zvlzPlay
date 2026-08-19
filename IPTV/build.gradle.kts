@@ -14,7 +14,7 @@ cloudstream {
      * 2: Slow
      * 3: Beta-only
      */
-    status = 3 // Will be 3 if unspecified
+    status = 0 // Will be 3 if unspecified
 
     tvTypes = listOf("Live")
     iconUrl = "https://www.google.com/s2/favicons?domain=iptv-org.github.io&sz=%size%"

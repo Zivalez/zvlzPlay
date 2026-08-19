@@ -4,7 +4,7 @@ cloudstream {
     language = "en"
     description = "Watch Movies, TV Series, Anime & Asian Drama with subtitles"
     authors = listOf("Zivalez")
-    status = 1
+    status = 0
     tvTypes = listOf(
         "Movie",
         "TvSeries",

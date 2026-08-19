@@ -8,7 +8,7 @@ cloudstream {
     language = "id"
     description = "Nonton Anime, Donghua, Film, dan TV Show Subtitle Indonesia"
     authors = listOf("Zivalez")
-    status = 1
+    status = 0
     tvTypes = listOf(
         "Anime",
         "AnimeMovie",

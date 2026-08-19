@@ -4,7 +4,7 @@ cloudstream {
     description = "Nonton Hentai Sub Indo"
     authors = listOf("zvlz")
     language = "id"
-    status = 1
+    status = 0
     tvTypes = listOf("NSFW")
     iconUrl = "https://hentaicop.com/wp-content/uploads/2025/05/hencopwhite-2.png"
 }

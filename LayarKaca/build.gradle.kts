@@ -23,7 +23,7 @@ cloudstream {
     language = "id"
     description = "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online"
     authors = listOf("Hexated", "Zivalez")
-    status = 1
+    status = 0
     tvTypes = listOf("Movie", "TvSeries", "AsianDrama", "AnimeMovie")
     iconUrl = "https://cloudstream.zvlz.my.id/icon/layarkaca.png"
 }

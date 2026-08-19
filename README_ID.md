@@ -74,29 +74,38 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Daftar Provider
 
+### Provider Aktif
+
 | Provider | Konten | Status |
 | --- | --- | --- |
 | Idlix | Movie, TV Series, Drama Asia, Anime | ✅ Aktif |
-| LayarKaca | Movie, TV Series, Drama Asia, Anime Movie | ✅ Aktif |
 | Pencurimovie | Movie | ✅ Aktif |
 | Moviebox | Movie, TV Series, Anime, Drama Asia | ✅ Aktif |
-| Dramacool | Drama Asia, Variety Show | ✅ Aktif |
 | Samehadaku | Anime | ✅ Aktif |
 | Otakudesu | Anime | ✅ Aktif |
 | Alqanime | Anime | ✅ Aktif |
 | Nontonanimeid | Anime | ✅ Aktif |
 | Kuronime | Anime | ✅ Aktif |
-| Gomunime | Anime | ✅ Aktif |
-| Winbu | Anime, Donghua | ✅ Aktif |
 | Kuramanime | Anime, Donghua | ✅ Aktif |
-| Zoronime | Anime | ❌ Mati |
-| IPTV | Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll) | ✅ Aktif |
-| Twitch | Live Streamer Global | ✅ Aktif |
+
+### Tidak Aktif Lagi
+
+Provider berikut sudah tidak di-update secara aktif. Fiturnya mungkin masih bisa jalan selama situs sumbernya aktif, tapi jika ada error atau masalah tidak akan diperbaiki lagi.
+
+| Provider | Konten | Status |
+| --- | --- | --- |
+| LayarKaca | Movie, TV Series, Drama Asia, Anime Movie | ⚠️ Tidak Diurus Lagi |
+| Dramacool | Drama Asia, Variety Show | ⚠️ Tidak Diurus Lagi |
+| Gomunime | Anime | ⚠️ Tidak Diurus Lagi |
+| Winbu | Anime, Donghua | ⚠️ Tidak Diurus Lagi |
+| Zoronime | Anime | ⚠️ Tidak Diurus Lagi |
+| Twitch | Live Streamer Global | ⚠️ Tidak Diurus Lagi |
+| Loklok | Movie, TV Series | ⚠️ Tidak Diurus Lagi |
+| IPTV | Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll) | ⚠️ Tidak Diurus Lagi |
 
 Keterangan status:
 - ✅ **Aktif** : aman dipake, harusnya jalan normal
-- 🧪 **Beta** : bisa dipake, tapi mungkin masih ada ngadat-ngadatnya
-- ❌ **Mati** : situs/server lg bermasalah, jadi sementara ga bisa dipake
+- ⚠️ **Tidak Diurus Lagi** : tidak dikembangkan secara aktif, masih bisa berfungsi jika situs sumbernya masih aktif
 
 
 ## FAQ
@@ -106,22 +115,15 @@ Karna CloudStream butuh ekstensi dulu. Ikuti langkah di bagian [Cara Install](#c
 
 ### Provider mana yang paling bagus untuk Anime?
 - **Samehadaku** : lumayan lengkap dan streamingnya kenceng
-- **Kuramanime** : update paling cepet dan stabil
-- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime**, **Gomunime** : bisa jadi cadangan kalo yang lain lagi rewel
+- **Kuramanime** : update cepet dan stabil
+- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime** : bisa jadi cadangan kalo yang lain lagi rewel
 
 ### Provider mana untuk Drama dan Movie?
 - **Idlix** : biasanya lumayan lengkap
-- **Dramacool** : fokus Drama Asia dan Variety Show
-- **LayarKaca**, **Pencurimovie**, **Moviebox** : alternatif lainnya
+- **Pencurimovie**, **Moviebox** : alternatif lainnya
 
 ### Ada Donghua?
-- Ada. Coba **Kuramanime** atau **Winbu**.
-
-### Bisa nonton TV live (Indosiar, RCTI, SCTV, dll)?
-Bisa. Install provider **IPTV** dari daftar ekstensi. Channel populer Indonesia ada di baris "Popular", sisanya dikelompokin per kategori kayak News, Sports, Kids, dan lainnya.
-
-### Bisa nonton streamer di Twitch?
-Bisa. Install provider **Twitch** dari daftar ekstensi, terus tinggal pilih streamer yang mau ditonton.
+- Ada. Coba **Kuramanime**.
 
 ### Kenapa search tidak menemukan hasil?
 - Pastiin provider udah terpasang.
