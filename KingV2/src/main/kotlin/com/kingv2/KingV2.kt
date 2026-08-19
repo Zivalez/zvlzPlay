@@ -55,7 +55,7 @@ class KingV2 : MainAPI() {
             var title = a.attr("title").ifBlank {
                 a.selectFirst("span.video-card-title")?.text()
                     ?: a.selectFirst("span.title")?.text()
-                    ?: a.attr("aria-label")
+                    ?: a.attr("aria-label").takeIf { it.isNotBlank() }
                     ?: a.selectFirst("img")?.attr("alt")
                     ?: ""
             }

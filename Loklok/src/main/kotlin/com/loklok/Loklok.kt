@@ -426,7 +426,7 @@ class Loklok : MainAPI() {
 
         res.subtitlingList?.map { sub ->
             subtitleCallback.invoke(
-                SubtitleFile(
+                newSubtitleFile(
                     getLanguageName(sub.languageAbbr ?: return@map),
                     sub.subtitlingUrl ?: return@map
                 )

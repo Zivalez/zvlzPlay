@@ -98,7 +98,7 @@ class Majorplay : ExtractorApi() {
         val script = document.selectFirst("script:containsData(subtitles)")
         if (script != null) {
             val scriptData = script.data()
-            if (scriptData != null) {
+            if (scriptData.isNotBlank()) {
                 val regex = Regex("""\\\"label\\\":\\\"([^\\\"]*?)\\\"[^}]*?\\\"path\\\":\\\"([^\\\"]*?)\\\"""")
                 regex.findAll(scriptData).forEach { match ->
                     val label = match.groupValues[1]

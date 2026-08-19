@@ -137,7 +137,7 @@ class LayarKacaProvider : MainAPI() {
 
         val rating = (document.selectFirst("div.content h2")?.text()
             ?: document.selectFirst("div.content h3")?.text())
-            ?.substringAfter("Rating: ")?.substringBefore(" /")?.toRatingInt()
+            ?.substringAfter("Rating: ")?.substringBefore(" /")?.trim()
 
         val actors = document.select("div.content blockquote p").last()?.select("a")?.map {
             Actor(it.text(), it.selectFirst("img")?.attr("src"))
@@ -175,7 +175,7 @@ class LayarKacaProvider : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                this.rating = rating
+                this.score = Score.from10(rating)
                 addActors(actors)
                 addTrailer(trailer)
             }
@@ -186,7 +186,7 @@ class LayarKacaProvider : MainAPI() {
                 this.year = year
                 this.plot = description
                 this.tags = tags
-                this.rating = rating
+                this.score = Score.from10(rating)
                 this.duration = duration
                 addActors(actors)
                 addTrailer(trailer)

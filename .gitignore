@@ -22,7 +22,6 @@ node_modules/
 playwright.config.ts
 
 # Lainnya
-build_log.txt
 .kotlin/
 
 # Tests
