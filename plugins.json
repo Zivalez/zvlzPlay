@@ -307,10 +307,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/nontonanimeid.png",
-        "fileHash": "sha256-276f3e8ff8ee0fa4689880d2fe607830b3b11e4710db8e0952553c27d2d2ef5f",
+        "fileHash": "sha256-2b40079f0ed16e59cff6a50cef76879c55d42f0720d17aa272bf6670738be01e",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 32580,
+        "fileSize": 32775,
         "status": 1,
         "language": "id",
         "authors": [
