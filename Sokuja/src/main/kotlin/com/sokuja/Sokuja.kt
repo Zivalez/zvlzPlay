@@ -34,9 +34,12 @@ class Sokuja : MainAPI() {
         }
     }
 
-    override val mainPage = mainPageOf(
-        "$mainUrl/?page=" to "Update Terbaru",
+    override val mainPage = listOf(
+        mainPage("$mainUrl/?page=", "Update Terbaru", horizontalImages = true),
+    ) + mainPageOf(
         "$mainUrl/anime/?status=ongoing&order=update&page=" to "Ongoing Anime",
+        "$mainUrl/anime/?status=ongoing&order=popular&page=" to "Terpopuler",
+        "$mainUrl/anime/?status=ongoing&order=score&page=" to "Skor Tertinggi",
         "$mainUrl/anime/?status=completed&order=update&page=" to "Completed Anime",
         "$mainUrl/anime/?type=movie&order=update&page=" to "Anime Movies",
         "$mainUrl/genre/isekai/?page=" to "Genre Isekai",
@@ -67,28 +70,52 @@ class Sokuja : MainAPI() {
         request: MainPageRequest
     ): HomePageResponse {
         val req = app.get(request.data + page)
-        val document = req.document
-        val home = document.select("a.group.block, a.group").mapNotNull { a ->
-            val href = a.attr("href")
-            if (!href.contains("subtitle-indonesia")) return@mapNotNull null
-            val title = a.selectFirst("img")?.attr("alt")?.trim()?.takeIf { it.isNotEmpty() }
-            if (title == null) return@mapNotNull null
-            val poster = cleanPoster(a.selectFirst("img")?.attr("src"))
-            val epNum = Regex("episode-(\\d+)").find(href)?.groupValues?.getOrNull(1)?.toIntOrNull()
-            val typeText = a.selectFirst("span.uppercase")?.text()?.trim()
-            val tvType = getType(typeText)
-            val animeUrl = if (href.contains("/anime/")) fixUrl(href)
-            else {
+        val home = if (request.horizontalImages) {
+            // Update Terbaru: kartu landscape episode di flight data (bukan DOM)
+            val pattern = Regex(
+                "\"href\\\\\":\\\\\"([^\"]*episode-\\d+[^\"]*subtitle-indonesia[^\"]*?)\\\\",\\\\\"className\\\\\":\\\\\"group block\\\\\"([\\s\\S]{0,1200}?)\\\"src\\\\\":\\\\\"([^\"]*)",\\\\\"alt\\\\\":\\\\\"([^\"]*)\\\\"([\\s\\S]{0,900}?)uppercase text-\\[#d1d5dc\\]\\\\\",\\\\\"children\\\\\":\\\\\"([^\"]*)\\\""
+            )
+            pattern.findAll(req.text).mapNotNull { m ->
+                val href = m.groupValues[1]
+                val src = m.groupValues[3].trimEnd('\\')
+                val alt = m.groupValues[4].trimEnd('\\').trim()
+                if (alt.isEmpty()) return@mapNotNull null
                 val slug = href.trimEnd('/').substringAfterLast('/')
                     .replace(Regex("-episode-\\d+"), "")
-                fixUrl("/anime/$slug/")
-            }
-            newAnimeSearchResponse(title, animeUrl, tvType) {
-                this.posterUrl = poster
-                addSub(epNum)
-            }
-        }.distinctBy { it.url }
-        return newHomePageResponse(request.name, home)
+                val epNum = Regex("episode-(\\d+)").find(href)?.groupValues?.getOrNull(1)?.toIntOrNull()
+                val typeText = m.groupValues[6].trimEnd('\\').trim()
+                newAnimeSearchResponse(alt, fixUrl("/anime/$slug/"), getType(typeText)) {
+                    this.posterUrl = cleanPoster(src)
+                    addSub(epNum)
+                }
+            }.distinctBy { it.url }
+        } else {
+            val document = req.document
+            document.select("a.group.block, a.group").mapNotNull { a ->
+                val href = a.attr("href")
+                if (!href.contains("subtitle-indonesia")) return@mapNotNull null
+                val title = a.selectFirst("img")?.attr("alt")?.trim()?.takeIf { it.isNotEmpty() }
+                if (title == null) return@mapNotNull null
+                val poster = cleanPoster(a.selectFirst("img")?.attr("src"))
+                val epNum = Regex("episode-(\\d+)").find(href)?.groupValues?.getOrNull(1)?.toIntOrNull()
+                val typeText = a.selectFirst("span.uppercase")?.text()?.trim()
+                val tvType = getType(typeText)
+                val rating = a.selectFirst("span.text-yellow-400")?.text()
+                    ?.let { Regex("(\\d+(?:\\.\\d+)?)").find(it)?.groupValues?.getOrNull(1) }
+                val animeUrl = if (href.contains("/anime/")) fixUrl(href)
+                else {
+                    val slug = href.trimEnd('/').substringAfterLast('/')
+                        .replace(Regex("-episode-\\d+"), "")
+                    fixUrl("/anime/$slug/")
+                }
+                newAnimeSearchResponse(title, animeUrl, tvType) {
+                    this.posterUrl = poster
+                    this.score = Score.from10(rating)
+                    addSub(epNum)
+                }
+            }.distinctBy { it.url }
+        }
+        return newHomePageResponse(request, home)
     }
 
     override suspend fun quickSearch(query: String): List<SearchResponse>? = search(query)
