@@ -39,6 +39,13 @@ class Sokuja : MainAPI() {
         "$mainUrl/anime/?status=ongoing&order=update&page=" to "Ongoing Anime",
         "$mainUrl/anime/?status=completed&order=update&page=" to "Completed Anime",
         "$mainUrl/anime/?type=movie&order=update&page=" to "Anime Movies",
+        "$mainUrl/genre/isekai/?page=" to "Genre Isekai",
+        "$mainUrl/genre/action/?page=" to "Genre Action",
+        "$mainUrl/genre/romance/?page=" to "Genre Romance",
+        "$mainUrl/genre/comedy/?page=" to "Genre Comedy",
+        "$mainUrl/genre/fantasy/?page=" to "Genre Fantasy",
+        "$mainUrl/genre/mystery/?page=" to "Genre Mystery",
+        "$mainUrl/genre/adventure/?page=" to "Genre Adventure",
     )
 
     private fun cleanPoster(src: String?): String? {
