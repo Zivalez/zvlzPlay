@@ -88,7 +88,7 @@ class Sokuja : MainAPI() {
                     this.posterUrl = cleanPoster(src)
                     addSub(epNum)
                 }
-            }.distinctBy { it.url }
+            }.distinctBy { it.url }.toList()
         } else {
             val document = req.document
             document.select("a.group.block, a.group").mapNotNull { a ->
