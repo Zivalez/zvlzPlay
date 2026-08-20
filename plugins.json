@@ -395,10 +395,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/sokuja.png",
-        "fileHash": "sha256-da7571bddb3ded3fb95d5596d6f049f60f3d004bdebbd5743f5a791b36ebbb2b",
+        "fileHash": "sha256-cbfc54c7810174e2de9918c91e864e0f39d0f328c03f97709aa34ba5ed0b0480",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 22100,
+        "fileSize": 23625,
         "status": 3,
         "language": "id",
         "authors": [
