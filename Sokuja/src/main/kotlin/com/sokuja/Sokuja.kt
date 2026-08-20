@@ -73,7 +73,7 @@ class Sokuja : MainAPI() {
         val home = if (request.horizontalImages) {
             // Update Terbaru: kartu landscape episode di flight data (bukan DOM)
             val pattern = Regex(
-                "\"href\\\\\":\\\\\"([^\"]*episode-\\d+[^\"]*subtitle-indonesia[^\"]*?)\\\\",\\\\\"className\\\\\":\\\\\"group block\\\\\"([\\s\\S]{0,1200}?)\\\"src\\\\\":\\\\\"([^\"]*)",\\\\\"alt\\\\\":\\\\\"([^\"]*)\\\\"([\\s\\S]{0,900}?)uppercase text-\\[#d1d5dc\\]\\\\\",\\\\\"children\\\\\":\\\\\"([^\"]*)\\\""
+                """\\"href\\":\\"([^"]*episode-\d+[^"]*subtitle-indonesia[^"]*?)\\",\\"className\\":\\"group block\\"([\s\S]{0,1200}?)\\"src\\":\\"([^"]*)",\\"alt\\":\\"([^"]*)\\"([\s\S]{0,900}?)uppercase text-\[#d1d5dc\]\\",\\"children\\":\\"([^"]*)"""
             )
             pattern.findAll(req.text).mapNotNull { m ->
                 val href = m.groupValues[1]
