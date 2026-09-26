@@ -11,6 +11,10 @@
 local.properties
 .vscode
 
+# Editor / AI tool settings
+.qoder/
+.claude/
+
 # Playwright
 node_modules/
 .playwright-mcp/
