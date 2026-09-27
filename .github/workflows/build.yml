@@ -41,7 +41,9 @@ jobs:
           distribution: 'temurin'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+        # v2 declares `using: node16`; GitHub now forces every action onto Node 24,
+        # which makes v2 fail before Gradle is even invoked. v4 is node24-native.
+        uses: android-actions/setup-android@v4
 
       - name: Build Plugins
         run: |
