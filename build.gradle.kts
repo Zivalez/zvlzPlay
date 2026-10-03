@@ -12,7 +12,14 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:8.7.3")
-        classpath("com.github.recloudstream:gradle:-SNAPSHOT")
+        // Pinned to a commit instead of -SNAPSHOT. The upstream repo hardcodes
+        // `version=local-SNAPSHOT` in its gradle.properties, so JitPack publishes the
+        // artifact under a directory named after the commit while the POM declares a
+        // different version. Gradle rejects that as "bad version" and -SNAPSHOT then
+        // surfaces as "Could not find com.github.recloudstream:gradle:-SNAPSHOT".
+        // 81b1d424d2 is the only commit whose POM is self-consistent and whose full
+        // transitive graph resolves (verified: 11 artifacts, 3622 classes).
+        classpath("com.github.recloudstream:gradle:81b1d424d2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.0")
     }
 }
