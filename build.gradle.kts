@@ -46,7 +46,7 @@ subprojects {
     }
 
     android {
-        namespace = "com.winbu"
+        namespace = if (name.equals("Twitch", true)) "recloudstream" else "com.${name.lowercase()}"
         compileSdkVersion(35)
 
         defaultConfig {

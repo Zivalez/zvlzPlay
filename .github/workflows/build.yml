@@ -50,8 +50,9 @@ jobs:
           cd $GITHUB_WORKSPACE/src
           chmod +x gradlew
           ./gradlew make makePluginsJson --parallel --build-cache --console=plain --stacktrace 2>&1 | tee $GITHUB_WORKSPACE/build_log.txt
-          cp **/build/*.cs3 $GITHUB_WORKSPACE/builds
-          cp build/plugins.json $GITHUB_WORKSPACE/builds
+          shopt -s globstar nullglob
+          cp **/build/*.cs3 $GITHUB_WORKSPACE/builds/
+          cp build/plugins.json $GITHUB_WORKSPACE/builds/
 
       - name: Upload build log
         if: always()

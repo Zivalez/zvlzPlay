@@ -77,7 +77,9 @@ class Samehadaku : MainAPI() {
         val title = this.selectFirst("h2.entry-title a")?.text()?.removeBloat() ?: a.attr("title")?.removeBloat() ?: return null
         val href = fixUrlNull(a.attr("href")) ?: return null
         val posterUrl = fixUrlNull(a.selectFirst("img")?.attr("src"))
-        val epNum = this.selectFirst("div.dtla author")?.text()?.toIntOrNull()
+        val epNum = this.selectFirst("div.dtla span:has(b)")?.ownText()?.trim()?.toIntOrNull()
+            ?: this.selectFirst("div.dtla span")?.text()?.let { Regex("(\\d+)").find(it)?.groupValues?.getOrNull(1)?.toIntOrNull() }
+            ?: this.selectFirst("div.dtla author")?.text()?.toIntOrNull()
 
         return newAnimeSearchResponse(title, href, TvType.Anime) {
             this.posterUrl = posterUrl
@@ -102,7 +104,7 @@ class Samehadaku : MainAPI() {
         val year = document.selectFirst("div.spe > span:contains(Rilis)")?.ownText()?.let {
             Regex("\\d,\\s(\\d*)").find(it)?.groupValues?.getOrNull(1)?.toIntOrNull()
         }
-        val status = getStatus(document.selectFirst("div.spe > span:contains(Status)")?.ownText() ?: return null)
+        val status = getStatus(document.selectFirst("div.spe > span:contains(Status)")?.ownText() ?: "Completed")
         val type = getType(document.selectFirst("div.spe > span:contains(Type)")?.ownText()?.trim()?.lowercase() ?: "tv")
         val rating = document.selectFirst("span.ratingValue")?.text()?.trim()?.toDoubleOrNull()
         val description = document.select("div.desc p").text().trim()

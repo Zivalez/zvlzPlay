@@ -31,6 +31,13 @@ class Idlix : MainAPI() {
         TvType.AsianDrama
     )
 
+    private val defaultHeaders = mapOf(
+        "Referer" to "$mainUrl/",
+        "Origin" to mainUrl,
+        "User-Agent" to USER_AGENT,
+        "Accept" to "*/*"
+    )
+
     override val mainPage = mainPageOf(
         "$mainUrl/api/movies?page=%d&limit=36&sort=createdAt" to "Movie Terbaru",
         "$mainUrl/api/series?page=%d&limit=36&sort=createdAt" to "TV Series Terbaru",
@@ -48,7 +55,7 @@ class Idlix : MainAPI() {
         val rawData = request.data
         val requestUrl = if (rawData.contains("%d")) rawData.format(page) else rawData
 
-        val res = app.get(requestUrl, timeout = 10000L).parsedSafe<ApiResponse>()
+        val res = app.get(requestUrl, headers = defaultHeaders, timeout = 10000L).parsedSafe<ApiResponse>()
             ?: return newHomePageResponse(request.name, emptyList())
         val home = res.data.mapNotNull { item ->
             val title = item.title ?: return@mapNotNull null
@@ -79,7 +86,7 @@ class Idlix : MainAPI() {
 
     override suspend fun search(query: String, page: Int): SearchResponseList? {
         val url = "$mainUrl/api/search?q=$query&page=$page&limit=8"
-        val res = app.get(url).parsedSafe<SearchApiResponse>() ?: return null
+        val res = app.get(url, headers = defaultHeaders).parsedSafe<SearchApiResponse>() ?: return null
         val items = res.results
         val results = items.mapNotNull { item ->
             val title = item.title ?: return@mapNotNull null
@@ -114,7 +121,7 @@ class Idlix : MainAPI() {
     }
 
     override suspend fun load(url: String): LoadResponse {
-        val response = app.get(url, timeout = 10000L)
+        val response = app.get(url, headers = defaultHeaders, timeout = 10000L)
         val data = response.parsedSafe<DetailResponse>()
             ?: throw ErrorLoadingException("Invalid JSON")
 
@@ -206,7 +213,7 @@ class Idlix : MainAPI() {
                 val seasonUrl = "$mainUrl/api/series/${data.slug}/season/$seasonNum"
 
                 val seasonData = try {
-                    val res = app.get(seasonUrl, referer = mainUrl)
+                    val res = app.get(seasonUrl, headers = defaultHeaders)
                     res.parsedSafe<SeasonWrapper>()?.season
                 } catch (_: Exception) {
                     null
