@@ -1,7 +1,7 @@
 [
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/alqanime.png",
-        "fileHash": "sha256-df96bc1e28ec5f30e357ee5092e63c6c4319d904cb515827eb59eef86cfe7d59",
+        "fileHash": "sha256-975bf282741e41340d748e0f58315a122080d8c9fb4300eea89e7d80f6b554a8",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 29299,
@@ -23,10 +23,10 @@
     },
     {
         "iconUrl": "https://asianctv.net/favicon.ico",
-        "fileHash": "sha256-14296eb6839b992051b376857d2c1aa9a6f30d2e253151642055cde4ce1c2534",
+        "fileHash": "sha256-6e1dd48e04a7b04cbbf8e0bd8ac4ceed52375f4f73d63abae4db3c4113cf4b29",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 42085,
+        "fileSize": 42059,
         "status": 0,
         "language": "en",
         "authors": [
@@ -45,10 +45,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/gomunime.png",
-        "fileHash": "sha256-f0f8f301ffd282eaa6b9a3268896e6a23e00f88fda6ed6a752a33c4d448af1df",
+        "fileHash": "sha256-a7f34dfefb83c780b3765444c860a7180354f417ef570576cbb888d14c85f480",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 19618,
+        "fileSize": 19629,
         "status": 0,
         "language": "id",
         "authors": [
@@ -67,10 +67,10 @@
     },
     {
         "iconUrl": "https://hentaicop.com/wp-content/uploads/2025/05/hencopwhite-2.png",
-        "fileHash": "sha256-7e80fc942d25a606ea743e6b3019c9e4edff36481061eb017f9560b677359fec",
+        "fileHash": "sha256-35eaf6ac6fe5efac06e1b965302d0b388e570f1359f44b4cd9c77b53d68066d4",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 12810,
+        "fileSize": 12771,
         "status": 0,
         "language": "id",
         "authors": [
@@ -87,10 +87,10 @@
     },
     {
         "iconUrl": "https://hentaihaven.com/wp-content/uploads/2022/02/cropped-cropped-hentaihavenico-192x1921-1-192x192.png",
-        "fileHash": "sha256-1f89584b649b58452a3ddba9697d4718e026abfd805e892726228ec4097d21c8",
+        "fileHash": "sha256-f9828441eec91e3a38e171e828413fe08359026493bf783efd2ded8e982d5f3b",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 17770,
+        "fileSize": 17782,
         "status": 1,
         "language": "en",
         "authors": [
@@ -107,10 +107,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/idlix.png",
-        "fileHash": "sha256-2c46abf0d7ddad274cbec33271558d007a750efce387d47985fc6269282184b7",
+        "fileHash": "sha256-99adb383dd3e26df38f1b15cdb147dd045f03ce0ad6c752b84ad24e77f8fea98",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 61319,
+        "fileSize": 62085,
         "status": 1,
         "language": "id",
         "authors": [
@@ -132,10 +132,10 @@
     },
     {
         "iconUrl": "https://www.google.com/s2/favicons?domain=iptv-org.github.io&sz=%size%",
-        "fileHash": "sha256-c93208e99ee18a42b2a30dd812eb33cce8de3bc9e00a5cfac787c6771c4d5438",
+        "fileHash": "sha256-b63cffb9e18ce6884e913495ec5e775f431132e1a93db13b743db62483e4f626",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 20979,
+        "fileSize": 20999,
         "status": 0,
         "authors": [
             "Zivalez"
@@ -148,14 +148,14 @@
         "description": "Tonton saluran TV Indonesia via IPTV",
         "url": "https://cloudstream.zvlz.my.id/builds/IPTV.cs3",
         "name": "IPTV",
-        "jarHash": "sha256-526dca9c489f55bb4d7340d538847be8b2c610a93083bab87e314bc268680b9b"
+        "jarHash": "sha256-4e63ed6484d830f4e9f145c446883d85349a9892a98ae840794765ff725f882e"
     },
     {
         "iconUrl": "https://cdn.kingbokep.video/favicon-32x32.png",
-        "fileHash": "sha256-360c4463c5284486291b8859aa9a94c60927ea886ed7e9d471957d3f78a4c93b",
+        "fileHash": "sha256-f156b9a71425fc07d4bba8063bc9b536e963ed4162be4ad43415b4ab850c1152",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 18140,
+        "fileSize": 18104,
         "status": 0,
         "language": "id",
         "authors": [
@@ -172,10 +172,10 @@
     },
     {
         "iconUrl": "https://185.169.252.47/wp-content/uploads/2025/06/favicon.ico",
-        "fileHash": "sha256-c2ce953ad283ea5f358cb7ea1897838bb6ebfc0c91917f3c524bad989131bdcd",
+        "fileHash": "sha256-3cb5642b4409331dd3bdffaec0d352c410aa41a17dad5a6d012ab6431492d2ff",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 27231,
+        "fileSize": 27461,
         "status": 0,
         "language": "id",
         "authors": [
@@ -192,10 +192,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuramanime.png",
-        "fileHash": "sha256-b4035a15ff758ed9fbcf0a67fcd9a51df23099b74ebb2df0db7cc4eb9ba86832",
+        "fileHash": "sha256-dd508b2121e65d6d818e4a046a06f5d59f21ef763ea34d8793ebed720f49798c",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 34115,
+        "fileSize": 34126,
         "status": 1,
         "language": "id",
         "authors": [
@@ -215,10 +215,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/kuronime.png",
-        "fileHash": "sha256-7b556dae679c3dde48967a4b356391426892d2800e4cf9008ee550d12249c3bd",
+        "fileHash": "sha256-54fadcc3cd9986cc0f78668afca5dc0fc953f5a68077cbedabdf08ba8f355f55",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 29668,
+        "fileSize": 29736,
         "status": 1,
         "language": "id",
         "authors": [
@@ -237,10 +237,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/layarkaca.png",
-        "fileHash": "sha256-567ac2587a5d8a39483c5d84674af4056442edd91d38665392d74482fb225b15",
+        "fileHash": "sha256-6fc679d39585d0502f7d446773eea2d4326acf0a1e408834498fdd5917af61f6",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 42384,
+        "fileSize": 42416,
         "status": 0,
         "language": "id",
         "authors": [
@@ -261,10 +261,10 @@
     },
     {
         "iconUrl": "https://www.loklok.tv/favicon.ico",
-        "fileHash": "sha256-3371650bdc0f244e70d9d6c169665d2f7626b9e6a6fd5630e17bde550f4408db",
+        "fileHash": "sha256-906fb60221230775ee34de22483f3c703a351bae9e74e7d8de4278395e565a4a",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 43218,
+        "fileSize": 43376,
         "status": 0,
         "language": "en",
         "authors": [
@@ -284,10 +284,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/moviebox.png",
-        "fileHash": "sha256-81b3f039118f691e280a741094bcd194adfe79ebe513742b9b278a9211c6302b",
+        "fileHash": "sha256-41749ef63eb2194b96683a327ec3a148684cbc1f54ecfbfbc7a8ba8dba4ed704",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 35885,
+        "fileSize": 36042,
         "status": 1,
         "language": "id",
         "authors": [
@@ -307,10 +307,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/nontonanimeid.png",
-        "fileHash": "sha256-2b40079f0ed16e59cff6a50cef76879c55d42f0720d17aa272bf6670738be01e",
+        "fileHash": "sha256-81aa9393694c84bc593d0ea73cdadfc5905cc065fbb84104e21d94bc6264b375",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 32775,
+        "fileSize": 32822,
         "status": 1,
         "language": "id",
         "authors": [
@@ -329,10 +329,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/otakudesu.png",
-        "fileHash": "sha256-8da812f2be23ddb9d9931dc174dc4341ec2792ea377615fcfa5d5435709cf537",
+        "fileHash": "sha256-636454ba949057f514991d8d50ded8a7eaa599d101ab0f006cac050d4092170a",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 33557,
+        "fileSize": 33551,
         "status": 1,
         "language": "id",
         "authors": [
@@ -351,10 +351,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/pencurimovie.png",
-        "fileHash": "sha256-5613a287ffbd9288149ae88a888c613bd858f7c545937182c987b720f300e9ec",
+        "fileHash": "sha256-447f511dc108ef1459a69651d470c54276d7ccfdaee2a1b99b2bd25452e7ee4f",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 14761,
+        "fileSize": 14763,
         "status": 1,
         "language": "id",
         "authors": [
@@ -372,10 +372,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/samehadaku.png",
-        "fileHash": "sha256-0e2eecf5fb2710b89b2fbc168af9b9ba5f35ccb072be54c4446bfc5aae12db6c",
+        "fileHash": "sha256-31bbcd6d8e9726c107f87acb083232fdd927514536bc4a12a14cc4df31fd6e68",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 21757,
+        "fileSize": 21866,
         "status": 1,
         "language": "id",
         "authors": [
@@ -395,10 +395,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/sokuja.png",
-        "fileHash": "sha256-cbfc54c7810174e2de9918c91e864e0f39d0f328c03f97709aa34ba5ed0b0480",
+        "fileHash": "sha256-6c878d77852018774d9795f5ce6a732dd518ad3806e670498eacc722ddb3ce4e",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 23625,
+        "fileSize": 23744,
         "status": 3,
         "language": "id",
         "authors": [
@@ -417,10 +417,10 @@
     },
     {
         "iconUrl": "https://www.google.com/s2/favicons?domain=twitch.tv&sz=%size%",
-        "fileHash": "sha256-6a66847714e28fe2971b7c523884fb6fcc9f2c1a2627ae45504bc7d4116ca5bf",
+        "fileHash": "sha256-6f6c5fdd02a89c0ec10595b76558234f61a6eb5965b2f5918be9b890cba440ca",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 17309,
+        "fileSize": 17272,
         "status": 0,
         "authors": [
             "CranberrySoup",
@@ -434,14 +434,14 @@
         "description": "Watch livestreams from Twitch",
         "url": "https://cloudstream.zvlz.my.id/builds/Twitch.cs3",
         "name": "Twitch",
-        "jarHash": "sha256-ba1c5ee677d157d4d5507cde2e46e539bee2abf9725af5108e8b8f86b144b18e"
+        "jarHash": "sha256-b9bb4daec56f26bf3a2dd5e3be08137458bb8d1718b49688013f147b53bc798b"
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.png",
-        "fileHash": "sha256-89794f9791e8b8901bd1fe3a25d0d518886df573e59155bc4d7e04d65a312e82",
+        "fileHash": "sha256-6c4c2ee5a80adc77781a034feb91b5c405497e3d2bd6a53c43d2743a7e144fec",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 23073,
+        "fileSize": 23072,
         "status": 0,
         "language": "id",
         "authors": [
@@ -460,10 +460,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/zoronime.png",
-        "fileHash": "sha256-cd5c7cd15793505510a424b4b0f916c88f5043e8a5b7c13f2bc3052ba3f34e8f",
+        "fileHash": "sha256-7079b0ef8d2d0b7bf5054a16d07e6fef6c59a30457f03bbca9635f9708578900",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 20068,
+        "fileSize": 20103,
         "status": 0,
         "language": "id",
         "authors": [
