@@ -6,11 +6,10 @@
 </p>
 
 <p align="center">
-A CloudStream plugin repository for streaming and downloading Anime, Drama, Movies,<br>
-TV Series, Live TV, Live Streamers, and more.<br>
+A CloudStream plugin repository for streaming and downloading Anime, Movies,<br>
+TV Series, Asian Drama, and Donghua.<br>
 (Contains NSFW content)<br><br>
-<a target="_blank" href="LICENCE"><img src="https://img.shields.io/github/license/Zivalez/zvlzPlay"/></a>
-<a target="_blank" href="https://github.com/Zivalez/zvlzPlay"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay"/></a>
+<a target="_blank" href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay/builds?label=last%20update"/></a>
 </p>
 
 <p align="center">
@@ -78,19 +77,19 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 | Provider | Content | Status |
 | --- | --- | --- |
 | Idlix | Movie, TV Series, Asian Drama, Anime | ✅ Active |
-| Pencurimovie | Movie | ✅ Active |
-| Moviebox | Movie, TV Series, Anime, Asian Drama | ✅ Active |
 | Samehadaku | Anime | ✅ Active |
 | Otakudesu | Anime | ✅ Active |
 | Alqanime | Anime | ✅ Active |
 | Nontonanimeid | Anime | ✅ Active |
-| Kuronime | Anime | ✅ Active |
 | Kuramanime | Anime, Donghua | ✅ Active |
 | Sokuja | Anime | ✅ Active |
+| Kuronime | Anime | ✅ Active |
 
 ### No Longer Maintained
 
-The following providers are no longer actively maintained. They may still work if the source websites are operational, but issues will not be fixed.
+The following providers are no longer actively maintained. I maintain too many
+providers on my own and I'm getting busy, so I can't keep up with all of them.
+They may still work if the source websites are operational, but issues will not be fixed.
 
 | Provider | Content | Status |
 | --- | --- | --- |
@@ -101,6 +100,8 @@ The following providers are no longer actively maintained. They may still work i
 | Zoronime | Anime | ⚠️ No Longer Maintained |
 | Twitch | Global Live Streamers | ⚠️ No Longer Maintained |
 | Loklok | Movie, TV Series | ⚠️ No Longer Maintained |
+| Moviebox | Movie, TV Series, Anime, Asian Drama | ⚠️ No Longer Maintained |
+| Pencurimovie | Movie | ⚠️ No Longer Maintained |
 | IPTV | Indonesian Live TV (RCTI, SCTV, Trans, ANTV, Metro, Kompas, etc.) | ⚠️ No Longer Maintained |
 
 Status legend:
@@ -116,11 +117,10 @@ CloudStream requires extensions first. Follow the steps in [How to Install](#how
 ### Which provider is best for Anime?
 - **Samehadaku** : fairly complete with fast streaming
 - **Kuramanime** : fast updates and stable
-- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Kuronime** : alternatives when other providers have issues
+- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Sokuja**, **Kuronime** : alternatives when other providers have issues
 
 ### Which providers are best for Drama and Movies?
 - **Idlix** : usually fairly complete
-- **Pencurimovie**, **Moviebox** : other alternatives
 
 ### Is Donghua available?
 - Yes. Try **Kuramanime**.
@@ -129,3 +129,9 @@ CloudStream requires extensions first. Follow the steps in [How to Install](#how
 - Make sure the providers are installed.
 - Check the search page filters and make sure the provider is enabled.
 - The more providers installed, the more likely search results will appear.
+
+### A provider shows no data / fails to load (Indonesia)?
+Some source sites are blocked by Indonesian ISPs via DNS (redirected to
+Internet Positif). Turn on **Private DNS** in Android settings
+(Settings → Network → Private DNS, e.g. `dns.google`) or use DNS-over-HTTPS
+so the app can resolve the real site addresses.
