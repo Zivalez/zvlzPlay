@@ -284,11 +284,11 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/moviebox.png",
-        "fileHash": "sha256-41749ef63eb2194b96683a327ec3a148684cbc1f54ecfbfbc7a8ba8dba4ed704",
+        "fileHash": "sha256-b07d5d75384c0d24a43722988d3fe4df884dc8327956fe268b77f690b26cbf21",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 36042,
-        "status": 1,
+        "status": 0,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -299,7 +299,7 @@
             "Anime",
             "AsianDrama"
         ],
-        "version": 3,
+        "version": 4,
         "internalName": "Moviebox",
         "description": "Movie Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Moviebox.cs3",
@@ -329,10 +329,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/otakudesu.png",
-        "fileHash": "sha256-636454ba949057f514991d8d50ded8a7eaa599d101ab0f006cac050d4092170a",
+        "fileHash": "sha256-2963d11d254f91d22ebf6437df07c1d510a163c27af5e29e317243d8101f1ae1",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 33551,
+        "fileSize": 35731,
         "status": 1,
         "language": "id",
         "authors": [
@@ -343,7 +343,7 @@
             "Anime",
             "OVA"
         ],
-        "version": 4,
+        "version": 5,
         "internalName": "Otakudesu",
         "description": "Streaming Anime Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Otakudesu.cs3",
@@ -351,11 +351,11 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/pencurimovie.png",
-        "fileHash": "sha256-447f511dc108ef1459a69651d470c54276d7ccfdaee2a1b99b2bd25452e7ee4f",
+        "fileHash": "sha256-3136ca432051c5d8992af07bcf05eacf72f97a72fd3782fd439368fac03f1cb5",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 14763,
-        "status": 1,
+        "status": 0,
         "language": "id",
         "authors": [
             "Phisher98",
@@ -364,7 +364,7 @@
         "tvTypes": [
             "Movie"
         ],
-        "version": 4,
+        "version": 5,
         "internalName": "Pencurimovie",
         "description": "Nonton Film & Serial Streaming Online",
         "url": "https://cloudstream.zvlz.my.id/builds/Pencurimovie.cs3",
