@@ -372,10 +372,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/samehadaku.png",
-        "fileHash": "sha256-9730626e7657f25235fe73fe5a2836366fc4f3175b02549b61f7e91da55ba33e",
+        "fileHash": "sha256-d2ee657d529952d1da3c642f4223a5eef1e5714389680f262373b02537faea5f",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 27784,
+        "fileSize": 27868,
         "status": 1,
         "language": "id",
         "authors": [
@@ -387,7 +387,7 @@
             "OVA",
             "Anime"
         ],
-        "version": 9,
+        "version": 10,
         "internalName": "Samehadaku",
         "description": "Nonton & Download Anime Streaming Sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Samehadaku.cs3",
