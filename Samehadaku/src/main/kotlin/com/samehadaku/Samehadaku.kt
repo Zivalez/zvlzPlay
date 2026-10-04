@@ -49,7 +49,6 @@ class Samehadaku : MainAPI() {
         "daftar-anime-2/page/%d/?type=Movie" to "Movie",
         "daftar-anime-2/page/%d/?status=Currently%20Airing" to "Ongoing",
         "daftar-anime-2/page/%d/?status=Finished%20Airing" to "Completed",
-        "daftar-batch/page/%d/" to "Batch",
     )
     
     
@@ -75,7 +74,13 @@ class Samehadaku : MainAPI() {
             if (request.name == "Terbaru") it.toLatestAnimeResult() ?: it.toSearchResult()
             else it.toSearchResult() ?: it.toLatestAnimeResult()
         }.distinctBy { it.url }
-        return newHomePageResponse(request.name, homeList)
+        // Poster Terbaru landscape 300x169 -> horizontal (King.kt:65 pattern).
+        // Sisanya poster portrait -> vertical default.
+        return if (request.name == "Terbaru") {
+            newHomePageResponse(listOf(HomePageList(request.name, homeList, isHorizontalImages = true)))
+        } else {
+            newHomePageResponse(request.name, homeList)
+        }
     }
 
     private fun Element.toSearchResult(): AnimeSearchResponse? {
