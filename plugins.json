@@ -395,10 +395,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/sokuja.png",
-        "fileHash": "sha256-6c878d77852018774d9795f5ce6a732dd518ad3806e670498eacc722ddb3ce4e",
+        "fileHash": "sha256-7ef7fcbf6d69c9ca63a2c8718943deb9bf6f1e4dfc24cdeb88780c09d6a813ba",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 23744,
+        "fileSize": 26575,
         "status": 3,
         "language": "id",
         "authors": [
@@ -409,7 +409,7 @@
             "Anime",
             "OVA"
         ],
-        "version": 1,
+        "version": 2,
         "internalName": "Sokuja",
         "description": "Anime Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Sokuja.cs3",
