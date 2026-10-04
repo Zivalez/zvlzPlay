@@ -54,7 +54,9 @@ class Samehadaku : MainAPI() {
     
     
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
-        val url = "$mainUrl/${request.data.format(page)}"
+        // Ganti %d manual: request.data berisi %20 (Currently%20Airing) yang
+        // dibaca String.format sebagai format-specifier -> MissingFormatArgumentException.
+        val url = "$mainUrl/${request.data.replace("%d", page.toString())}"
         val document = app.get(url, headers = headers).document
         // Site 2026: "Terbaru" = li[itemtype*=CreativeWork] (16 home / 14 archive).
         // Genre/Movie archive kini render widget home (Top10+Latest), tanpa article.
@@ -274,11 +276,19 @@ class Samehadaku : MainAPI() {
             } catch (_: Exception) { }
         }
 
-        // 2. Fallback download: div#downloadb li > strong[quality] + a (gofile/filedon/acefile)
+        // 2. Fallback download: div#downloadb li > strong[quality] + a (acefile/dll).
         // Struktur valid 13 item: 360p/480p/720p/1080p/4K + x265.
+        // SKIP filedon.co: tidak ada extractor Filedon di app upstream
+        // (recloudstream/cloudstream/library/.../extractors/, 118 file, tanpa Filedon;
+        // hanya Otakudesu yang register custom Filedon sendiri), dan TCP 443-nya
+        // timeout di jaringan ID. Gofile tetap dipakai: extractor Gofile.kt ada
+        // di upstream, jalan di jaringan yang tidak memblokirnya.
         document.select("div#downloadb li").flatMap { el ->
             val quality = el.select("strong").text()
-            el.select("a").map { a -> Pair(fixUrl(a.attr("href")), quality) }
+            el.select("a").mapNotNull { a ->
+                val u = fixUrl(a.attr("href"))
+                if (u.contains("filedon.co")) null else Pair(u, quality)
+            }
         }.amap { (url, quality) ->
             loadFixedExtractor(url, quality, "$mainUrl/", subtitleCallback, callback)
         }
