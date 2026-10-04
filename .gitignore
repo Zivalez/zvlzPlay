@@ -28,7 +28,6 @@ playwright.config.ts
 # Lainnya
 build_log.txt
 .kotlin/
-logcat.md
 
 # Tests
 tests/

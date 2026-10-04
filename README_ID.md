@@ -48,7 +48,7 @@ Tapi CloudStream ga langsung bawa konten dari awal. Anggap aja dia cuma media pl
 
 <p>
   <a href="https://github.com/recloudstream/cloudstream/releases/latest" target="_blank">
-    <img src="https://img.shields.io/badge/Download_CloudStream-terbaru-E53935?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
+    <img src="https://img.shields.io/badge/Download_CloudStream-terbaru-0090FF?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
   </a>
 </p>
 

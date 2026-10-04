@@ -48,7 +48,7 @@ CloudStream does not include content by default. Think of it as a media player a
 
 <p>
   <a href="https://github.com/recloudstream/cloudstream/releases/latest" target="_blank">
-    <img src="https://img.shields.io/badge/Download_CloudStream-latest-E53935?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
+    <img src="https://img.shields.io/badge/Download_CloudStream-latest-0090FF?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
   </a>
 </p>
 
