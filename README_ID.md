@@ -75,18 +75,18 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ### Provider Aktif
 
-Terakhir dicek: **2026-11-17 01:42 WIB**
+Terakhir dicek: **2026-11-17 02:26 WIB**
 
 | Provider | Konten | Status | Live Check |
 | --- | --- | --- | --- |
-| Idlix | Movie, TV Series, Drama Asia, Anime | ✅ Aktif | ⏸️ Not checked yet |
+| Idlix | Movie, TV Series, Drama Asia, Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
 | Samehadaku | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
 | Otakudesu | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
 | Alqanime | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| Nontonanimeid | Anime | ✅ Aktif | ⏸️ Not checked yet |
-| Kuramanime | Anime, Donghua | ✅ Aktif | ⏸️ Not checked yet |
-| Sokuja | Anime | ✅ Aktif | ⏸️ Not checked yet |
-| Kuronime | Anime | ✅ Aktif | ⏸️ Not checked yet |
+| Nontonanimeid | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| Kuramanime | Anime, Donghua | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| Sokuja | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| Kuronime | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
 
 #### Live Check
 
