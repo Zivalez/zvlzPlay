@@ -75,7 +75,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ### Provider Aktif
 
-Terakhir diperbarui: **2026-11-17 01:42 WIB**
+Terakhir dicek: **2026-11-17 01:42 WIB**
 
 | Provider | Konten | Status | Live Check |
 | --- | --- | --- | --- |

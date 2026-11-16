@@ -74,7 +74,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ### Active Providers
 
-Last updated: **2026-11-17 01:42 WIB**
+Last checked: **2026-11-17 01:42 WIB**
 
 | Provider | Content | Status | Live Check |
 | --- | --- | --- | --- |
