@@ -75,6 +75,13 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 Terakhir dicek: **2026-11-17 02:26 WIB**
 
+#### Health Check
+
+Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, dan sumber link. Ini cek terjadwal, bukan pemantauan terus-menerus.
+- Status: <kbd>✓ Aktif</kbd> artinya masih diurus aktif, <kbd>✕ Tidak Diurus Lagi</kbd> artinya sudah tidak diurus aktif, masih bisa jalan kalau situs sumbernya aktif.
+- Health adalah persentase dari 4 cek yang lolos.
+- 🟢 artinya cek itu berhasil, 🔴 artinya gagal, 🔵 artinya provider itu belum di-cover checker.
+
 ### Provider Aktif
 
 | Provider | Health | Status | Check Matrix |
@@ -87,13 +94,6 @@ Terakhir dicek: **2026-11-17 02:26 WIB**
 | **Kuramanime** <br> <sub>Anime, Donghua</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 | **Sokuja** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 | **Kuronime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
-
-#### Health Check
-
-Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, dan sumber link. Ini cek terjadwal, bukan pemantauan terus-menerus.
-- Status: <kbd>✓ Aktif</kbd> artinya masih diurus aktif, <kbd>✕ Tidak Diurus Lagi</kbd> artinya sudah tidak diurus aktif, masih bisa jalan kalau situs sumbernya aktif.
-- Health adalah persentase dari 4 cek yang lolos.
-- 🟢 artinya cek itu berhasil, 🔴 artinya gagal, 🔵 artinya provider itu belum di-cover checker.
 
 ### Tidak Aktif Lagi
 
