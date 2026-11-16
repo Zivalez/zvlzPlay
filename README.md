@@ -72,7 +72,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Provider List
 
-Last checked: **2026-11-17 02:26 WIB**
+Last checked: **2026-11-17 04:17 WIB**
 
 #### Health Check
 
@@ -80,6 +80,8 @@ Checked automatically every 12 hours against the live sites: home feed, search, 
 - Status: <kbd>✓ Active</kbd> means actively maintained, <kbd>✕ No Longer Maintained</kbd> means not actively maintained, may still work if the source site is up.
 - Health is the share of the 4 checks that passed.
 - 🟢 means that check returned real data, 🔴 means it failed, 🔵 means the provider is not covered by the checker yet.
+
+If a check fails, the system automatically diagnoses the cause, repairs the provider, and re-checks until it passes. This applies to Active providers only; No Longer Maintained providers are checked but not repaired.
 
 ### Active Providers
 
@@ -102,16 +104,16 @@ They may still work if the source websites are operational, but issues will not 
 
 | Provider | Health | Status | Check Matrix |
 | :--- | :---: | :---: | :--- |
-| **LayarKaca** <br> <sub>Movie, TV Series, Asian Drama, Anime Movie</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Dramacool** <br> <sub>Asian Drama, Variety Show</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **LayarKaca** <br> <sub>Movie, TV Series, Asian Drama, Anime Movie</sub> | `▰▰▱▱` **50%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🔴 Detail &nbsp; 🔴 Links</sub> |
+| **Dramacool** <br> <sub>Asian Drama, Variety Show</sub> | `▱▱▱▱` **0%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🔴 Home &nbsp; 🔴 Search &nbsp; 🔴 Detail &nbsp; 🔴 Links</sub> |
 | **Gomunime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
-| **Winbu** <br> <sub>Anime, Donghua</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Zoronime** <br> <sub>Anime</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Twitch** <br> <sub>Global Live Streamers</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Loklok** <br> <sub>Movie, TV Series</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Moviebox** <br> <sub>Movie, TV Series, Anime, Asian Drama</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Pencurimovie** <br> <sub>Movie</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **IPTV** <br> <sub>Indonesian Live TV (RCTI, SCTV, Trans, ANTV, Metro, Kompas, etc.)</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Winbu** <br> <sub>Anime, Donghua</sub> | `▰▰▰▰` **100%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Zoronime** <br> <sub>Anime</sub> | `▱▱▱▱` **0%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🔴 Home &nbsp; 🔴 Search &nbsp; 🔴 Detail &nbsp; 🔴 Links</sub> |
+| **Twitch** <br> <sub>Global Live Streamers</sub> | `▰▰▰▰` **100%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Loklok** <br> <sub>Movie, TV Series</sub> | `▱▱▱▱` **0%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🔴 Home &nbsp; 🔴 Search &nbsp; 🔴 Detail &nbsp; 🔴 Links</sub> |
+| **Moviebox** <br> <sub>Movie, TV Series, Anime, Asian Drama</sub> | `▰▱▱▱` **25%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🟢 Home &nbsp; 🔴 Search &nbsp; 🔴 Detail &nbsp; 🔴 Links</sub> |
+| **Pencurimovie** <br> <sub>Movie</sub> | `▰▰▰▰` **100%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **IPTV** <br> <sub>Indonesian Live TV (RCTI, SCTV, Trans, ANTV, Metro, Kompas, etc.)</sub> | `▰▰▰▰` **100%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 
 
 

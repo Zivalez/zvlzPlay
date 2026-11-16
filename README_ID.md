@@ -73,7 +73,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Daftar Provider
 
-Terakhir dicek: **2026-11-17 02:26 WIB**
+Terakhir dicek: **2026-11-17 04:17 WIB**
 
 #### Health Check
 
@@ -81,6 +81,8 @@ Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, 
 - Status: <kbd>✓ Aktif</kbd> artinya masih diurus aktif, <kbd>✕ Tidak Diurus Lagi</kbd> artinya sudah tidak diurus aktif, masih bisa jalan kalau situs sumbernya aktif.
 - Health adalah persentase dari 4 cek yang lolos.
 - 🟢 artinya cek itu berhasil, 🔴 artinya gagal, 🔵 artinya provider itu belum di-cover checker.
+
+Kalau ada cek yang gagal, sistem otomatis mendiagnosis penyebabnya, memperbaiki providernya, lalu mengecek ulang sampai lolos. Ini hanya berlaku untuk provider Aktif; provider yang Tidak Diurus Lagi hanya dicek, tidak diperbaiki.
 
 ### Provider Aktif
 
@@ -104,16 +106,16 @@ error atau masalah tidak akan diperbaiki lagi.
 
 | Provider | Health | Status | Check Matrix |
 | :--- | :---: | :---: | :--- |
-| **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Dramacool** <br> <sub>Drama Asia, Variety Show</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | `▰▰▱▱` **50%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🔴 Detail &nbsp; 🔴 Links</sub> |
+| **Dramacool** <br> <sub>Drama Asia, Variety Show</sub> | `▱▱▱▱` **0%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔴 Home &nbsp; 🔴 Search &nbsp; 🔴 Detail &nbsp; 🔴 Links</sub> |
 | **Gomunime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
-| **Winbu** <br> <sub>Anime, Donghua</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Zoronime** <br> <sub>Anime</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Twitch** <br> <sub>Live Streamer Global</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Loklok** <br> <sub>Movie, TV Series</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Moviebox** <br> <sub>Movie, TV Series, Anime, Drama Asia</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **Pencurimovie** <br> <sub>Movie</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
-| **IPTV** <br> <sub>Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll)</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Winbu** <br> <sub>Anime, Donghua</sub> | `▰▰▰▰` **100%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Zoronime** <br> <sub>Anime</sub> | `▱▱▱▱` **0%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔴 Home &nbsp; 🔴 Search &nbsp; 🔴 Detail &nbsp; 🔴 Links</sub> |
+| **Twitch** <br> <sub>Live Streamer Global</sub> | `▰▰▰▰` **100%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Loklok** <br> <sub>Movie, TV Series</sub> | `▱▱▱▱` **0%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔴 Home &nbsp; 🔴 Search &nbsp; 🔴 Detail &nbsp; 🔴 Links</sub> |
+| **Moviebox** <br> <sub>Movie, TV Series, Anime, Drama Asia</sub> | `▰▱▱▱` **25%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🟢 Home &nbsp; 🔴 Search &nbsp; 🔴 Detail &nbsp; 🔴 Links</sub> |
+| **Pencurimovie** <br> <sub>Movie</sub> | `▰▰▰▰` **100%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **IPTV** <br> <sub>Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll)</sub> | `▰▰▰▰` **100%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 
 
 
