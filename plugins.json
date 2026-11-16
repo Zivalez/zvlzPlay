@@ -23,11 +23,11 @@
     },
     {
         "iconUrl": "https://asianctv.net/favicon.ico",
-        "fileHash": "sha256-6e1dd48e04a7b04cbbf8e0bd8ac4ceed52375f4f73d63abae4db3c4113cf4b29",
+        "fileHash": "sha256-9f2e261b40d5e050a2755ec25e3aec0403e1c15634ca7c93b423c1fcd182adb4",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 42059,
-        "status": 0,
+        "status": 3,
         "language": "en",
         "authors": [
             "Zivalez"
@@ -37,7 +37,7 @@
             "TvSeries",
             "Movie"
         ],
-        "version": 3,
+        "version": 4,
         "internalName": "Dramacool",
         "description": "Asian Drama, Movies and Shows English Sub",
         "url": "https://cloudstream.zvlz.my.id/builds/Dramacool.cs3",
@@ -45,11 +45,11 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/gomunime.png",
-        "fileHash": "sha256-a7f34dfefb83c780b3765444c860a7180354f417ef570576cbb888d14c85f480",
+        "fileHash": "sha256-acdfbb0bdf25de7bcdc6b76711f286708e29b66f94128e38f219b0018d0272f8",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 19629,
-        "status": 0,
+        "status": 3,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -59,7 +59,7 @@
             "AnimeMovie",
             "OVA"
         ],
-        "version": 2,
+        "version": 3,
         "internalName": "Gomunime",
         "description": "Streaming anime subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Gomunime.cs3",
@@ -132,18 +132,18 @@
     },
     {
         "iconUrl": "https://www.google.com/s2/favicons?domain=iptv-org.github.io&sz=%size%",
-        "fileHash": "sha256-b63cffb9e18ce6884e913495ec5e775f431132e1a93db13b743db62483e4f626",
+        "fileHash": "sha256-cbc3debd5a14b1892147367d679b0624723d768eb6ed1a1e2cecf989423b3ef5",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 20999,
-        "status": 0,
+        "status": 3,
         "authors": [
             "Zivalez"
         ],
         "tvTypes": [
             "Live"
         ],
-        "version": 2,
+        "version": 3,
         "internalName": "IPTV",
         "description": "Tonton saluran TV Indonesia via IPTV",
         "url": "https://cloudstream.zvlz.my.id/builds/IPTV.cs3",
@@ -237,11 +237,11 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/layarkaca.png",
-        "fileHash": "sha256-6fc679d39585d0502f7d446773eea2d4326acf0a1e408834498fdd5917af61f6",
+        "fileHash": "sha256-6cfa70e3778c8d7fe2c035389b4493247f217b4b100cc908483a304dda62079f",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 42416,
-        "status": 0,
+        "status": 3,
         "language": "id",
         "authors": [
             "Hexated",
@@ -253,7 +253,7 @@
             "AsianDrama",
             "AnimeMovie"
         ],
-        "version": 7,
+        "version": 8,
         "internalName": "LayarKaca",
         "description": "Nonton Film Streaming Movie Layarkaca21 Lk21 Dunia21 Bioskop Cinema 21 Box Office Subtitle Indonesia Gratis Online",
         "url": "https://cloudstream.zvlz.my.id/builds/LayarKaca.cs3",
@@ -261,11 +261,11 @@
     },
     {
         "iconUrl": "https://www.loklok.tv/favicon.ico",
-        "fileHash": "sha256-906fb60221230775ee34de22483f3c703a351bae9e74e7d8de4278395e565a4a",
+        "fileHash": "sha256-11e423052c98ea0d53e37385959e1eb75681744d11f2e908330a5122e272b987",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 43376,
-        "status": 0,
+        "status": 3,
         "language": "en",
         "authors": [
             "Zivalez"
@@ -276,7 +276,7 @@
             "Anime",
             "AsianDrama"
         ],
-        "version": 2,
+        "version": 3,
         "internalName": "Loklok",
         "description": "Watch Movies, TV Series, Anime & Asian Drama with subtitles",
         "url": "https://cloudstream.zvlz.my.id/builds/Loklok.cs3",
@@ -284,11 +284,11 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/moviebox.png",
-        "fileHash": "sha256-b07d5d75384c0d24a43722988d3fe4df884dc8327956fe268b77f690b26cbf21",
+        "fileHash": "sha256-7b0828fbf0cf93682d68799dd8a13b9d1ba076f7dadfd6a6b736876ed5acf641",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 36042,
-        "status": 0,
+        "status": 3,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -299,7 +299,7 @@
             "Anime",
             "AsianDrama"
         ],
-        "version": 4,
+        "version": 5,
         "internalName": "Moviebox",
         "description": "Movie Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Moviebox.cs3",
@@ -351,11 +351,11 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/pencurimovie.png",
-        "fileHash": "sha256-3136ca432051c5d8992af07bcf05eacf72f97a72fd3782fd439368fac03f1cb5",
+        "fileHash": "sha256-87117c059e7c4f0c1321a42c0a365f2af5d77fc473834dc48a600fd144d3a6c3",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 14763,
-        "status": 0,
+        "status": 3,
         "language": "id",
         "authors": [
             "Phisher98",
@@ -364,7 +364,7 @@
         "tvTypes": [
             "Movie"
         ],
-        "version": 5,
+        "version": 6,
         "internalName": "Pencurimovie",
         "description": "Nonton Film & Serial Streaming Online",
         "url": "https://cloudstream.zvlz.my.id/builds/Pencurimovie.cs3",
@@ -417,11 +417,11 @@
     },
     {
         "iconUrl": "https://www.google.com/s2/favicons?domain=twitch.tv&sz=%size%",
-        "fileHash": "sha256-6f6c5fdd02a89c0ec10595b76558234f61a6eb5965b2f5918be9b890cba440ca",
+        "fileHash": "sha256-5330067c75cde7aabfdcabd2d4058f9c5010ae1a96c8f427d16d870cfbc43bd3",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 17272,
-        "status": 0,
+        "status": 3,
         "authors": [
             "CranberrySoup",
             "Zivalez"
@@ -429,7 +429,7 @@
         "tvTypes": [
             "Live"
         ],
-        "version": 5,
+        "version": 6,
         "internalName": "Twitch",
         "description": "Watch livestreams from Twitch",
         "url": "https://cloudstream.zvlz.my.id/builds/Twitch.cs3",
@@ -438,11 +438,11 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.png",
-        "fileHash": "sha256-6c4c2ee5a80adc77781a034feb91b5c405497e3d2bd6a53c43d2743a7e144fec",
+        "fileHash": "sha256-d3ea83ee163a548296f6cc23018d107b6ed1d595ebf9ba357389e71759b60175",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 23072,
-        "status": 0,
+        "status": 3,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -452,7 +452,7 @@
             "AnimeMovie",
             "OVA"
         ],
-        "version": 10,
+        "version": 11,
         "internalName": "Winbu",
         "description": "Nonton Anime, Donghua, Film, dan TV Show Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Winbu.cs3",
@@ -460,11 +460,11 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/zoronime.png",
-        "fileHash": "sha256-7079b0ef8d2d0b7bf5054a16d07e6fef6c59a30457f03bbca9635f9708578900",
+        "fileHash": "sha256-b5d16fb5d9eae23327b88098978d4eb9d04b644d990f047f804cf558ebbb919e",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
         "fileSize": 20103,
-        "status": 0,
+        "status": 3,
         "language": "id",
         "authors": [
             "Zivalez"
@@ -474,7 +474,7 @@
             "AnimeMovie",
             "OVA"
         ],
-        "version": 1,
+        "version": 2,
         "internalName": "Zoronime",
         "description": "Streaming anime sub Indo",
         "url": "https://cloudstream.zvlz.my.id/builds/Zoronime.cs3",
