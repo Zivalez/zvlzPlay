@@ -87,9 +87,12 @@ Last checked: **2026-11-17 02:26 WIB**
 | **Sokuja** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 | **Kuronime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 
-#### Live Check
+#### Health Check
 
-Checked automatically every 12 hours: home feed, search, detail/episodes, and link sources. Health is the share of the 4 checks that passed. <br> 🟢 means that check returned real data <br> 🔴 means it failed <br> 🔵 means the provider is not covered by the checker yet.
+Checked automatically every 12 hours against the live sites: home feed, search, detail/episodes, and link sources. This is a scheduled check, not continuous monitoring.
+- Status: <kbd>✓ Active</kbd> means actively maintained, <kbd>✕ No Longer Maintained</kbd> means not actively maintained, may still work if the source site is up.
+- Health is the share of the 4 checks that passed.
+- 🟢 means that check returned real data, 🔴 means it failed, 🔵 means the provider is not covered by the checker yet.
 
 ### No Longer Maintained
 
@@ -110,9 +113,7 @@ They may still work if the source websites are operational, but issues will not 
 | **Pencurimovie** <br> <sub>Movie</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
 | **IPTV** <br> <sub>Indonesian Live TV (RCTI, SCTV, Trans, ANTV, Metro, Kompas, etc.)</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
 
-Status legend:
-- ✅ **Active** : safe to use and should work normally
-- ⚠️ **No Longer Maintained** : not actively maintained, may still work if source website is operational
+
 
 
 ## FAQ

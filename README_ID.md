@@ -88,9 +88,12 @@ Terakhir dicek: **2026-11-17 02:26 WIB**
 | **Sokuja** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 | **Kuronime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 
-#### Live Check
+#### Health Check
 
-Dicek otomatis tiap 12 jam: home feed, search, detail/episode, dan sumber link. Health adalah persentase dari 4 cek yang lolos. <br> 🟢 artinya cek itu berhasil <br> 🔴 artinya gagal <br> 🔵 artinya provider itu belum di-cover checker.
+Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, dan sumber link. Ini cek terjadwal, bukan pemantauan terus-menerus.
+- Status: <kbd>✓ Aktif</kbd> artinya masih diurus aktif, <kbd>✕ Tidak Diurus Lagi</kbd> artinya sudah tidak diurus aktif, masih bisa jalan kalau situs sumbernya aktif.
+- Health adalah persentase dari 4 cek yang lolos.
+- 🟢 artinya cek itu berhasil, 🔴 artinya gagal, 🔵 artinya provider itu belum di-cover checker.
 
 ### Tidak Aktif Lagi
 
@@ -112,9 +115,7 @@ error atau masalah tidak akan diperbaiki lagi.
 | **Pencurimovie** <br> <sub>Movie</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
 | **IPTV** <br> <sub>Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll)</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
 
-Keterangan status:
-- ✅ **Aktif** : aman dipake, harusnya jalan normal
-- ⚠️ **Tidak Diurus Lagi** : tidak dikembangkan secara aktif, masih bisa berfungsi jika situs sumbernya masih aktif
+
 
 
 ## FAQ
