@@ -73,9 +73,9 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Daftar Provider
 
-### Provider Aktif
-
 Terakhir dicek: **2026-11-17 02:26 WIB**
+
+### Provider Aktif
 
 | Provider | Health | Status | Check Matrix |
 | :--- | :---: | :---: | :--- |
