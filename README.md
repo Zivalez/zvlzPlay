@@ -76,7 +76,7 @@ Last checked: **2026-11-17 06:28 WIB**
 
 **Health Check**
 
-Checked automatically every 12 hours against the live sites: home feed, search, detail/episodes, and link sources. This is a scheduled check, not continuous monitoring.
+Checked automatically every 12 hours against the live sites: home feed, search, detail/episodes, and link sources. This is a scheduled check, not continuous monitoring. Like the in-app CloudStream provider test, the links check tests a single title: if that title's links are dead, the provider is marked as failed, even if other titles might still play.
 - **Health:** Share of the 4 checks that passed.
 - **Status:** 🟢 means that check returned real data, 🔴 means it failed, 🔵 means the provider is not covered by the checker yet.
 

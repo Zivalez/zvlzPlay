@@ -77,7 +77,7 @@ Terakhir dicek: **2026-11-17 06:28 WIB**
 
 **Health Check**
 
-Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, dan sumber link. Ini cek terjadwal, bukan pemantauan terus-menerus.
+Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, dan sumber link. Ini cek terjadwal, bukan pemantauan terus-menerus. Seperti tes provider di aplikasi CloudStream, cek links hanya menguji satu judul: kalau link judul itu mati, provider dinyatakan gagal, walaupun judul lain mungkin masih bisa diputar.
 - **Health:** Persentase dari 4 cek yang lolos.
 - **Status:** 🟢 artinya cek itu berhasil, 🔴 artinya gagal, 🔵 artinya provider itu belum di-cover checker.
 
