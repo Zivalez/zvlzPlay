@@ -77,20 +77,20 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 Terakhir dicek: **2026-11-17 02:26 WIB**
 
-| Provider | Konten | Status | Live Check |
-| --- | --- | --- | --- |
-| Idlix | Movie, TV Series, Drama Asia, Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| Samehadaku | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| Otakudesu | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| Alqanime | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| Nontonanimeid | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| Kuramanime | Anime, Donghua | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| Sokuja | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| Kuronime | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| Provider | Health | Status | Live Check |
+| :--- | :---: | :---: | :--- |
+| **Idlix** <br> <sub>Movie, TV Series, Drama Asia, Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| **Samehadaku** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| **Otakudesu** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| **Alqanime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| **Nontonanimeid** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| **Kuramanime** <br> <sub>Anime, Donghua</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| **Sokuja** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| **Kuronime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
 
 #### Live Check
 
-Dicek otomatis tiap 12 jam: home feed, search, detail/episode, dan sumber link. ✅ artinya cek itu berhasil, ❌ artinya gagal, ⏸️ artinya provider itu belum di-cover checker.
+Dicek otomatis tiap 12 jam: home feed, search, detail/episode, dan sumber link. Health adalah persentase dari 4 cek yang lolos. ✅ artinya cek itu berhasil, ❌ artinya gagal, ⏸️ artinya provider itu belum di-cover checker.
 
 ### Tidak Aktif Lagi
 
@@ -99,18 +99,18 @@ pegang sendirian dan aku udah mulai sibuk, jadi nggak kekejar semuanya.
 Fiturnya mungkin masih bisa jalan selama situs sumbernya aktif, tapi jika ada
 error atau masalah tidak akan diperbaiki lagi.
 
-| Provider | Konten | Status | Live Check |
-| --- | --- | --- | --- |
-| LayarKaca | Movie, TV Series, Drama Asia, Anime Movie | ⚠️ Tidak Diurus Lagi | ⏸️ Not checked yet |
-| Dramacool | Drama Asia, Variety Show | ⚠️ Tidak Diurus Lagi | ⏸️ Not checked yet |
-| Gomunime | Anime | ⚠️ Tidak Diurus Lagi | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| Winbu | Anime, Donghua | ⚠️ Tidak Diurus Lagi |
-| Zoronime | Anime | ⚠️ Tidak Diurus Lagi |
-| Twitch | Live Streamer Global | ⚠️ Tidak Diurus Lagi |
-| Loklok | Movie, TV Series | ⚠️ Tidak Diurus Lagi |
-| Moviebox | Movie, TV Series, Anime, Drama Asia | ⚠️ Tidak Diurus Lagi |
-| Pencurimovie | Movie | ⚠️ Tidak Diurus Lagi |
-| IPTV | Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll) | ⚠️ Tidak Diurus Lagi |
+| Provider | Health | Status | Live Check |
+| :--- | :---: | :---: | :--- |
+| **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
+| **Dramacool** <br> <sub>Drama Asia, Variety Show</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
+| **Gomunime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Tidak Diurus Lagi</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| **Winbu** <br> <sub>Anime, Donghua</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
+| **Zoronime** <br> <sub>Anime</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
+| **Twitch** <br> <sub>Live Streamer Global</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
+| **Loklok** <br> <sub>Movie, TV Series</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
+| **Moviebox** <br> <sub>Movie, TV Series, Anime, Drama Asia</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
+| **Pencurimovie** <br> <sub>Movie</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
+| **IPTV** <br> <sub>Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll)</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
 
 Keterangan status:
 - ✅ **Aktif** : aman dipake, harusnya jalan normal
