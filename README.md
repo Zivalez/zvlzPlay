@@ -74,16 +74,22 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ### Active Providers
 
-| Provider | Content | Status |
-| --- | --- | --- |
-| Idlix | Movie, TV Series, Asian Drama, Anime | ✅ Active |
-| Samehadaku | Anime | ✅ Active |
-| Otakudesu | Anime | ✅ Active |
-| Alqanime | Anime | ✅ Active |
-| Nontonanimeid | Anime | ✅ Active |
-| Kuramanime | Anime, Donghua | ✅ Active |
-| Sokuja | Anime | ✅ Active |
-| Kuronime | Anime | ✅ Active |
+| Provider | Content | Status | Live Check |
+| --- | --- | --- | --- |
+| Idlix | Movie, TV Series, Asian Drama, Anime | ✅ Active | ⏸️ Not checked yet |
+| Samehadaku | Anime | ✅ Active | ✅ Home 14/30 · Search 20 · Detail 100 · Links 13 |
+| Otakudesu | Anime | ✅ Active | ✅ Home 25/25 · Search 1 · Detail 293 · Links 35 |
+| Alqanime | Anime | ✅ Active | ✅ Home 10/20 · Search 12 · Detail 7 · Links 90 |
+| Nontonanimeid | Anime | ✅ Active | ⏸️ Not checked yet |
+| Kuramanime | Anime, Donghua | ✅ Active | ⏸️ Not checked yet |
+| Sokuja | Anime | ✅ Active | ⏸️ Not checked yet |
+| Kuronime | Anime | ✅ Active | ⏸️ Not checked yet |
+
+#### Live Check
+
+Last check: **2026-11-17 01:42 WIB** — overall status **✅ OK (4/4 checked providers, 0 failures)**.
+
+Checked automatically every 12 hours: home feed, search, detail/episodes, and link sources. ✅ means that check returned real data, ❌ means it failed (count 0 or blocked), ⏸️ means the provider is not covered by the checker yet. Counts are the real numbers from that run, nothing is made up. The links check only verifies that loadLinks has structural sources (iframes/anchors/options), it does not prove every video plays.
 
 ### No Longer Maintained
 
@@ -91,11 +97,11 @@ The following providers are no longer actively maintained. I maintain too many
 providers on my own and I'm getting busy, so I can't keep up with all of them.
 They may still work if the source websites are operational, but issues will not be fixed.
 
-| Provider | Content | Status |
-| --- | --- | --- |
-| LayarKaca | Movie, TV Series, Asian Drama, Anime Movie | ⚠️ No Longer Maintained |
-| Dramacool | Asian Drama, Variety Show | ⚠️ No Longer Maintained |
-| Gomunime | Anime | ⚠️ No Longer Maintained |
+| Provider | Content | Status | Live Check |
+| --- | --- | --- | --- |
+| LayarKaca | Movie, TV Series, Asian Drama, Anime Movie | ⚠️ No Longer Maintained | ⏸️ Not checked yet |
+| Dramacool | Asian Drama, Variety Show | ⚠️ No Longer Maintained | ⏸️ Not checked yet |
+| Gomunime | Anime | ⚠️ No Longer Maintained | ✅ Home 24/24 · Search 7 · Detail 293 · Links 4 |
 | Winbu | Anime, Donghua | ⚠️ No Longer Maintained |
 | Zoronime | Anime | ⚠️ No Longer Maintained |
 | Twitch | Global Live Streamers | ⚠️ No Longer Maintained |
