@@ -90,9 +90,7 @@ Terakhir dicek: **2026-11-17 01:42 WIB**
 
 #### Live Check
 
-Terakhir dicek: **2026-11-17 01:42 WIB** — status keseluruhan **✅ OK (4/4 provider yang dicek, 0 gagal)**.
-
-Dicek otomatis tiap 12 jam: home feed, search, detail/episode, dan sumber link. ✅ artinya cek itu berhasil dan datanya asli, ❌ artinya gagal (jumlah 0 atau diblokir), ⏸️ artinya provider itu belum di-cover checker. Jumlah dari run ini: Samehadaku Home 14/30, Search 20, Detail 100, Links 13; Otakudesu Home 25/25, Search 1, Detail 293, Links 35; Alqanime Home 10/20, Search 12, Detail 7, Links 90; Gomunime Home 24/24, Search 7, Detail 293, Links 4. Tidak ada angka yang dibuat-buat. Cek links hanya memastikan loadLinks punya sumber struktural (iframe/anchor/option), bukan bukti semua video pasti bisa diputar.
+Dicek otomatis tiap 12 jam: home feed, search, detail/episode, dan sumber link. ✅ artinya cek itu berhasil, ❌ artinya gagal, ⏸️ artinya provider itu belum di-cover checker.
 
 ### Tidak Aktif Lagi
 
