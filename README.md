@@ -76,7 +76,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 Last checked: **2026-11-17 02:26 WIB**
 
-| Provider | Health | Status | Endpoint Matrix |
+| Provider | Health | Status | Check Matrix |
 | :--- | :---: | :---: | :--- |
 | **Idlix** <br> <sub>Movie, TV Series, Asian Drama, Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 | **Samehadaku** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
@@ -100,7 +100,7 @@ The following providers are no longer actively maintained. I maintain too many
 providers on my own and I'm getting busy, so I can't keep up with all of them.
 They may still work if the source websites are operational, but issues will not be fixed.
 
-| Provider | Health | Status | Endpoint Matrix |
+| Provider | Health | Status | Check Matrix |
 | :--- | :---: | :---: | :--- |
 | **LayarKaca** <br> <sub>Movie, TV Series, Asian Drama, Anime Movie</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
 | **Dramacool** <br> <sub>Asian Drama, Variety Show</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |

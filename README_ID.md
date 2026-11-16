@@ -77,7 +77,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 Terakhir dicek: **2026-11-17 02:26 WIB**
 
-| Provider | Health | Status | Endpoint Matrix |
+| Provider | Health | Status | Check Matrix |
 | :--- | :---: | :---: | :--- |
 | **Idlix** <br> <sub>Movie, TV Series, Drama Asia, Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 | **Samehadaku** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
@@ -102,7 +102,7 @@ pegang sendirian dan aku udah mulai sibuk, jadi nggak kekejar semuanya.
 Fiturnya mungkin masih bisa jalan selama situs sumbernya aktif, tapi jika ada
 error atau masalah tidak akan diperbaiki lagi.
 
-| Provider | Health | Status | Endpoint Matrix |
+| Provider | Health | Status | Check Matrix |
 | :--- | :---: | :---: | :--- |
 | **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
 | **Dramacool** <br> <sub>Drama Asia, Variety Show</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
