@@ -107,10 +107,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/idlix.png",
-        "fileHash": "sha256-99adb383dd3e26df38f1b15cdb147dd045f03ce0ad6c752b84ad24e77f8fea98",
+        "fileHash": "sha256-932f89c79d59d4b72f6a3354273c21e3afa06182d7f66871b7c4f6e173b06a77",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 62085,
+        "fileSize": 62091,
         "status": 1,
         "language": "id",
         "authors": [
@@ -438,10 +438,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/winbu.png",
-        "fileHash": "sha256-d3ea83ee163a548296f6cc23018d107b6ed1d595ebf9ba357389e71759b60175",
+        "fileHash": "sha256-1215d053ab1d593d1dc9a19b9f418b527e4effa2404172d8394492f450adccc1",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 23072,
+        "fileSize": 23073,
         "status": 3,
         "language": "id",
         "authors": [
