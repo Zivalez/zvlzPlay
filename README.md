@@ -76,20 +76,20 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 Last checked: **2026-11-17 02:26 WIB**
 
-| Provider | Health | Status | Live Check |
+| Provider | Health | Status | Endpoint Matrix |
 | :--- | :---: | :---: | :--- |
-| **Idlix** <br> <sub>Movie, TV Series, Asian Drama, Anime</sub> | `▰▰▰▰` **100%** | <kbd>Active</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Samehadaku** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Active</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Otakudesu** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Active</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Alqanime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Active</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Nontonanimeid** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Active</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Kuramanime** <br> <sub>Anime, Donghua</sub> | `▰▰▰▰` **100%** | <kbd>Active</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Sokuja** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Active</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Kuronime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Active</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| **Idlix** <br> <sub>Movie, TV Series, Asian Drama, Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Samehadaku** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Otakudesu** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Alqanime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Nontonanimeid** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Kuramanime** <br> <sub>Anime, Donghua</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Sokuja** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Kuronime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Active</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 
 #### Live Check
 
-Checked automatically every 12 hours: home feed, search, detail/episodes, and link sources. Health is the share of the 4 checks that passed. ✅ means that check returned real data, ❌ means it failed, ⏸️ means the provider is not covered by the checker yet.
+Checked automatically every 12 hours: home feed, search, detail/episodes, and link sources. Health is the share of the 4 checks that passed. <br> 🟢 means that check returned real data <br> 🔴 means it failed <br> 🔵 means the provider is not covered by the checker yet.
 
 ### No Longer Maintained
 
@@ -97,18 +97,18 @@ The following providers are no longer actively maintained. I maintain too many
 providers on my own and I'm getting busy, so I can't keep up with all of them.
 They may still work if the source websites are operational, but issues will not be fixed.
 
-| Provider | Health | Status | Live Check |
+| Provider | Health | Status | Endpoint Matrix |
 | :--- | :---: | :---: | :--- |
-| **LayarKaca** <br> <sub>Movie, TV Series, Asian Drama, Anime Movie</sub> | — | <kbd>No Longer Maintained</kbd> | ⏸️ Not checked yet |
-| **Dramacool** <br> <sub>Asian Drama, Variety Show</sub> | — | <kbd>No Longer Maintained</kbd> | ⏸️ Not checked yet |
-| **Gomunime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>No Longer Maintained</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Winbu** <br> <sub>Anime, Donghua</sub> | — | <kbd>No Longer Maintained</kbd> | ⏸️ Not checked yet |
-| **Zoronime** <br> <sub>Anime</sub> | — | <kbd>No Longer Maintained</kbd> | ⏸️ Not checked yet |
-| **Twitch** <br> <sub>Global Live Streamers</sub> | — | <kbd>No Longer Maintained</kbd> | ⏸️ Not checked yet |
-| **Loklok** <br> <sub>Movie, TV Series</sub> | — | <kbd>No Longer Maintained</kbd> | ⏸️ Not checked yet |
-| **Moviebox** <br> <sub>Movie, TV Series, Anime, Asian Drama</sub> | — | <kbd>No Longer Maintained</kbd> | ⏸️ Not checked yet |
-| **Pencurimovie** <br> <sub>Movie</sub> | — | <kbd>No Longer Maintained</kbd> | ⏸️ Not checked yet |
-| **IPTV** <br> <sub>Indonesian Live TV (RCTI, SCTV, Trans, ANTV, Metro, Kompas, etc.)</sub> | — | <kbd>No Longer Maintained</kbd> | ⏸️ Not checked yet |
+| **LayarKaca** <br> <sub>Movie, TV Series, Asian Drama, Anime Movie</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Dramacool** <br> <sub>Asian Drama, Variety Show</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Gomunime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✕ No Longer Maintained</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Winbu** <br> <sub>Anime, Donghua</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Zoronime** <br> <sub>Anime</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Twitch** <br> <sub>Global Live Streamers</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Loklok** <br> <sub>Movie, TV Series</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Moviebox** <br> <sub>Movie, TV Series, Anime, Asian Drama</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Pencurimovie** <br> <sub>Movie</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **IPTV** <br> <sub>Indonesian Live TV (RCTI, SCTV, Trans, ANTV, Metro, Kompas, etc.)</sub> | — | <kbd>✕ No Longer Maintained</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
 
 Status legend:
 - ✅ **Active** : safe to use and should work normally

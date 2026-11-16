@@ -77,20 +77,20 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 Terakhir dicek: **2026-11-17 02:26 WIB**
 
-| Provider | Health | Status | Live Check |
+| Provider | Health | Status | Endpoint Matrix |
 | :--- | :---: | :---: | :--- |
-| **Idlix** <br> <sub>Movie, TV Series, Drama Asia, Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Samehadaku** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Otakudesu** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Alqanime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Nontonanimeid** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Kuramanime** <br> <sub>Anime, Donghua</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Sokuja** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Kuronime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Aktif</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| **Idlix** <br> <sub>Movie, TV Series, Drama Asia, Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Samehadaku** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Otakudesu** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Alqanime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Nontonanimeid** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Kuramanime** <br> <sub>Anime, Donghua</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Sokuja** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Kuronime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✓ Aktif</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
 
 #### Live Check
 
-Dicek otomatis tiap 12 jam: home feed, search, detail/episode, dan sumber link. Health adalah persentase dari 4 cek yang lolos. ✅ artinya cek itu berhasil, ❌ artinya gagal, ⏸️ artinya provider itu belum di-cover checker.
+Dicek otomatis tiap 12 jam: home feed, search, detail/episode, dan sumber link. Health adalah persentase dari 4 cek yang lolos. <br> 🟢 artinya cek itu berhasil <br> 🔴 artinya gagal <br> 🔵 artinya provider itu belum di-cover checker.
 
 ### Tidak Aktif Lagi
 
@@ -99,18 +99,18 @@ pegang sendirian dan aku udah mulai sibuk, jadi nggak kekejar semuanya.
 Fiturnya mungkin masih bisa jalan selama situs sumbernya aktif, tapi jika ada
 error atau masalah tidak akan diperbaiki lagi.
 
-| Provider | Health | Status | Live Check |
+| Provider | Health | Status | Endpoint Matrix |
 | :--- | :---: | :---: | :--- |
-| **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
-| **Dramacool** <br> <sub>Drama Asia, Variety Show</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
-| **Gomunime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>Tidak Diurus Lagi</kbd> | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
-| **Winbu** <br> <sub>Anime, Donghua</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
-| **Zoronime** <br> <sub>Anime</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
-| **Twitch** <br> <sub>Live Streamer Global</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
-| **Loklok** <br> <sub>Movie, TV Series</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
-| **Moviebox** <br> <sub>Movie, TV Series, Anime, Drama Asia</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
-| **Pencurimovie** <br> <sub>Movie</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
-| **IPTV** <br> <sub>Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll)</sub> | — | <kbd>Tidak Diurus Lagi</kbd> | ⏸️ Not checked yet |
+| **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Dramacool** <br> <sub>Drama Asia, Variety Show</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Gomunime** <br> <sub>Anime</sub> | `▰▰▰▰` **100%** | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🟢 Home &nbsp; 🟢 Search &nbsp; 🟢 Detail &nbsp; 🟢 Links</sub> |
+| **Winbu** <br> <sub>Anime, Donghua</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Zoronime** <br> <sub>Anime</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Twitch** <br> <sub>Live Streamer Global</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Loklok** <br> <sub>Movie, TV Series</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Moviebox** <br> <sub>Movie, TV Series, Anime, Drama Asia</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **Pencurimovie** <br> <sub>Movie</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
+| **IPTV** <br> <sub>Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll)</sub> | — | <kbd>✕ Tidak Diurus Lagi</kbd> | <sub>🔵 Home &nbsp; 🔵 Search &nbsp; 🔵 Detail &nbsp; 🔵 Links</sub> |
 
 Keterangan status:
 - ✅ **Aktif** : aman dipake, harusnya jalan normal
