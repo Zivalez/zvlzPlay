@@ -74,12 +74,14 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ### Active Providers
 
+Last updated: **2026-11-17 01:42 WIB**
+
 | Provider | Content | Status | Live Check |
 | --- | --- | --- | --- |
 | Idlix | Movie, TV Series, Asian Drama, Anime | ✅ Active | ⏸️ Not checked yet |
-| Samehadaku | Anime | ✅ Active | ✅ Home 14/30 · Search 20 · Detail 100 · Links 13 |
-| Otakudesu | Anime | ✅ Active | ✅ Home 25/25 · Search 1 · Detail 293 · Links 35 |
-| Alqanime | Anime | ✅ Active | ✅ Home 10/20 · Search 12 · Detail 7 · Links 90 |
+| Samehadaku | Anime | ✅ Active | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| Otakudesu | Anime | ✅ Active | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| Alqanime | Anime | ✅ Active | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
 | Nontonanimeid | Anime | ✅ Active | ⏸️ Not checked yet |
 | Kuramanime | Anime, Donghua | ✅ Active | ⏸️ Not checked yet |
 | Sokuja | Anime | ✅ Active | ⏸️ Not checked yet |
@@ -89,7 +91,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 Last check: **2026-11-17 01:42 WIB** — overall status **✅ OK (4/4 checked providers, 0 failures)**.
 
-Checked automatically every 12 hours: home feed, search, detail/episodes, and link sources. ✅ means that check returned real data, ❌ means it failed (count 0 or blocked), ⏸️ means the provider is not covered by the checker yet. Counts are the real numbers from that run, nothing is made up. The links check only verifies that loadLinks has structural sources (iframes/anchors/options), it does not prove every video plays.
+Checked automatically every 12 hours: home feed, search, detail/episodes, and link sources. ✅ means that check returned real data, ❌ means it failed (count 0 or blocked), ⏸️ means the provider is not covered by the checker yet. Counts from this run: Samehadaku Home 14/30, Search 20, Detail 100, Links 13; Otakudesu Home 25/25, Search 1, Detail 293, Links 35; Alqanime Home 10/20, Search 12, Detail 7, Links 90; Gomunime Home 24/24, Search 7, Detail 293, Links 4. Nothing is made up. The links check only verifies that loadLinks has structural sources (iframes/anchors/options), it does not prove every video plays.
 
 ### No Longer Maintained
 
@@ -101,7 +103,7 @@ They may still work if the source websites are operational, but issues will not 
 | --- | --- | --- | --- |
 | LayarKaca | Movie, TV Series, Asian Drama, Anime Movie | ⚠️ No Longer Maintained | ⏸️ Not checked yet |
 | Dramacool | Asian Drama, Variety Show | ⚠️ No Longer Maintained | ⏸️ Not checked yet |
-| Gomunime | Anime | ⚠️ No Longer Maintained | ✅ Home 24/24 · Search 7 · Detail 293 · Links 4 |
+| Gomunime | Anime | ⚠️ No Longer Maintained | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
 | Winbu | Anime, Donghua | ⚠️ No Longer Maintained |
 | Zoronime | Anime | ⚠️ No Longer Maintained |
 | Twitch | Global Live Streamers | ⚠️ No Longer Maintained |

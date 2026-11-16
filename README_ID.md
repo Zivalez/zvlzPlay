@@ -75,16 +75,24 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ### Provider Aktif
 
-| Provider | Konten | Status |
-| --- | --- | --- |
-| Idlix | Movie, TV Series, Drama Asia, Anime | ✅ Aktif |
-| Samehadaku | Anime | ✅ Aktif |
-| Otakudesu | Anime | ✅ Aktif |
-| Alqanime | Anime | ✅ Aktif |
-| Nontonanimeid | Anime | ✅ Aktif |
-| Kuramanime | Anime, Donghua | ✅ Aktif |
-| Sokuja | Anime | ✅ Aktif |
-| Kuronime | Anime | ✅ Aktif |
+Terakhir diperbarui: **2026-11-17 01:42 WIB**
+
+| Provider | Konten | Status | Live Check |
+| --- | --- | --- | --- |
+| Idlix | Movie, TV Series, Drama Asia, Anime | ✅ Aktif | ⏸️ Not checked yet |
+| Samehadaku | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| Otakudesu | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| Alqanime | Anime | ✅ Aktif | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
+| Nontonanimeid | Anime | ✅ Aktif | ⏸️ Not checked yet |
+| Kuramanime | Anime, Donghua | ✅ Aktif | ⏸️ Not checked yet |
+| Sokuja | Anime | ✅ Aktif | ⏸️ Not checked yet |
+| Kuronime | Anime | ✅ Aktif | ⏸️ Not checked yet |
+
+#### Live Check
+
+Terakhir dicek: **2026-11-17 01:42 WIB** — status keseluruhan **✅ OK (4/4 provider yang dicek, 0 gagal)**.
+
+Dicek otomatis tiap 12 jam: home feed, search, detail/episode, dan sumber link. ✅ artinya cek itu berhasil dan datanya asli, ❌ artinya gagal (jumlah 0 atau diblokir), ⏸️ artinya provider itu belum di-cover checker. Jumlah dari run ini: Samehadaku Home 14/30, Search 20, Detail 100, Links 13; Otakudesu Home 25/25, Search 1, Detail 293, Links 35; Alqanime Home 10/20, Search 12, Detail 7, Links 90; Gomunime Home 24/24, Search 7, Detail 293, Links 4. Tidak ada angka yang dibuat-buat. Cek links hanya memastikan loadLinks punya sumber struktural (iframe/anchor/option), bukan bukti semua video pasti bisa diputar.
 
 ### Tidak Aktif Lagi
 
@@ -93,11 +101,11 @@ pegang sendirian dan aku udah mulai sibuk, jadi nggak kekejar semuanya.
 Fiturnya mungkin masih bisa jalan selama situs sumbernya aktif, tapi jika ada
 error atau masalah tidak akan diperbaiki lagi.
 
-| Provider | Konten | Status |
-| --- | --- | --- |
-| LayarKaca | Movie, TV Series, Drama Asia, Anime Movie | ⚠️ Tidak Diurus Lagi |
-| Dramacool | Drama Asia, Variety Show | ⚠️ Tidak Diurus Lagi |
-| Gomunime | Anime | ⚠️ Tidak Diurus Lagi |
+| Provider | Konten | Status | Live Check |
+| --- | --- | --- | --- |
+| LayarKaca | Movie, TV Series, Drama Asia, Anime Movie | ⚠️ Tidak Diurus Lagi | ⏸️ Not checked yet |
+| Dramacool | Drama Asia, Variety Show | ⚠️ Tidak Diurus Lagi | ⏸️ Not checked yet |
+| Gomunime | Anime | ⚠️ Tidak Diurus Lagi | ✅ Home · ✅ Search · ✅ Detail · ✅ Links |
 | Winbu | Anime, Donghua | ⚠️ Tidak Diurus Lagi |
 | Zoronime | Anime | ⚠️ Tidak Diurus Lagi |
 | Twitch | Live Streamer Global | ⚠️ Tidak Diurus Lagi |
