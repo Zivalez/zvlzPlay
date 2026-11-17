@@ -107,10 +107,10 @@
     },
     {
         "iconUrl": "https://cloudstream.zvlz.my.id/icon/idlix.png",
-        "fileHash": "sha256-2668b2cbb40367d88d654a48b6e32f390ac739aee705a6f6a91919ade2bd7787",
+        "fileHash": "sha256-60cdc79dfb36549baad30e53ffcbe9184b1f81588241057db1f957cd04d98b01",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/Zivalez/zvlzPlay",
-        "fileSize": 62510,
+        "fileSize": 62798,
         "status": 1,
         "language": "id",
         "authors": [
@@ -124,7 +124,7 @@
             "AsianDrama",
             "Anime"
         ],
-        "version": 17,
+        "version": 18,
         "internalName": "Idlix",
         "description": "Nonton Film & Series Streaming Idlix Subtitle Indonesia",
         "url": "https://cloudstream.zvlz.my.id/builds/Idlix.cs3",
