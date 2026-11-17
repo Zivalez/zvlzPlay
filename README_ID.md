@@ -73,7 +73,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Daftar Provider
 
-Terakhir dicek: **2026-11-17 07:00 WIB**
+Terakhir dicek: **2026-11-17 10:55 WIB**
 
 **Health Check**
 
