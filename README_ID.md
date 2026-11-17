@@ -73,7 +73,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Daftar Provider
 
-**Health Check** · Terakhir dicek: **2026-11-17 17:45 WIB**
+**Health Check** · Terakhir dicek: **2026-11-18 01:25 WIB**
 
 Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, dan sumber link. Ini cek terjadwal, bukan pemantauan terus-menerus.
 
@@ -104,7 +104,7 @@ Seperti tes provider di aplikasi CloudStream, cek links hanya menguji satu judul
 
 | Provider | Health | Status Check |
 | :--- | :---: | :--- |
-| **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | `▰▰▱▱`<br> **50%** | <sub>🟢 Home <br> 🟢 Search <br> 🔴 Detail <br> 🔴 Links</sub> |
+| **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | `▰▰▰▱`<br> **75%** | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🔴 Links</sub> |
 | **Dramacool** <br> <sub>Drama Asia, Variety Show</sub> | `▱▱▱▱`<br> **0%** | <sub>🔴 Home <br> 🔴 Search <br> 🔴 Detail <br> 🔴 Links</sub> |
 | **Gomunime** <br> <sub>Anime</sub> | `▰▰▰▰`<br> **100%** | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> |
 | **Winbu** <br> <sub>Anime, Donghua</sub> | `▰▰▰▰`<br> **100%** | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> |
