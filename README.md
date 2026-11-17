@@ -72,7 +72,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Provider List
 
-Last checked: **2026-11-17 10:55 WIB**
+Last checked: **2026-11-17 13:25 WIB**
 
 **Health Check**
 
