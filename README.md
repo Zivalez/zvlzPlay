@@ -72,7 +72,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Provider List
 
-**Health Check** · Last checked: **2026-11-17 15:24 WIB**
+**Health Check** · Last checked: **2026-11-17 17:45 WIB**
 
 Checked automatically every 12 hours against the live sites: home feed, search, detail/episodes, and link sources. This is a scheduled check, not continuous monitoring.
 
