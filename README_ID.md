@@ -73,7 +73,7 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Daftar Provider
 
-**Health Check** · Terakhir dicek: **2026-11-19 01:26 WIB**
+**Health Check** · Terakhir dicek: **2026-11-19 02:43 WIB**
 
 Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, dan sumber link. Ini cek terjadwal, bukan pemantauan terus-menerus.
 
@@ -88,7 +88,7 @@ Seperti tes provider di aplikasi CloudStream, cek links hanya menguji satu judul
 
 | Provider | Health | Status Check |
 | :--- | :---: | :--- |
-| **Idlix** <br> <sub>Movie, TV Series, Drama Asia, Anime</sub> | `▰▰▰▱`<br> **75%** | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🔴 Links</sub> |
+| **Idlix** <br> <sub>Movie, TV Series, Drama Asia, Anime</sub> | `▰▰▰▰`<br> **100%** | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> |
 | **Samehadaku** <br> <sub>Anime</sub> | `▰▰▰▰`<br> **100%** | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> |
 | **Otakudesu** <br> <sub>Anime</sub> | `▰▰▰▰`<br> **100%** | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> |
 | **Alqanime** <br> <sub>Anime</sub> | `▰▰▰▰`<br> **100%** | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> |
