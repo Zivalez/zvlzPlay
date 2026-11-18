@@ -73,7 +73,9 @@ https://cloudstream.zvlz.my.id/builds/repo.json
 
 ## Daftar Provider
 
-**Health Check** · Terakhir dicek: **2026-11-18 01:25 WIB**
+Terakhir dicek: **2026-11-18 13:25 WIB**
+
+**Health Check**
 
 Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, dan sumber link. Ini cek terjadwal, bukan pemantauan terus-menerus.
 
