@@ -1,74 +1,169 @@
-<h1 align="center">CloudStream x zvlzPlay</h1>
+<div align="center">
+
+
+
+<br>
+
+
 
 <p align="center">
+
 <a href="https://github.com/recloudstream/cloudstream"><picture><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="100" height="100"></picture></a>
+
 <a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="100" height="100"></picture></a>
+
 </p>
 
-<p align="center">
-Kumpulan plugin CloudStream buat nonton dan download Anime, Movie,<br>
-TV Series, Drama Asia, dan Donghua.<br>
-(Mengandung konten NSFW)<br><br>
-<a target="_blank" href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay/builds?label=last%20update"/></a>
-</p>
-
-<p align="center">
-<a href="README.md">English</a> | Bahasa Indonesia
-</p>
-
-## Apa itu CloudStream?
-
-**CloudStream** itu aplikasi open-source buat nonton film, anime, drama, sama TV series. Gratis, tanpa iklan.
-
-Tapi CloudStream ga langsung bawa konten dari awal. Anggap aja dia cuma media player + mesin pencari. Biar bisa dipake nonton, kamu perlu pasang **ekstensi** yang ngambil data video dari berbagai situs streaming.
 
 
-## Apa itu zvlzPlay?
+# CloudStream × zvlzPlay
 
-**zvlzPlay** itu sebuah ekstensi, kumpulan provider CloudStream yang isinya berbagai situs streaming, kebanyakan Indonesia tapi ada juga yang internasional.
 
-> **CloudStream** = aplikasinya (wadah)\
-> **zvlzPlay** = ekstensi buat nyari sumber tontonan
+
+*Repositori ekstensi untuk Anime, Movie, TV Series, Drama Asia, dan Donghua.*
+
+
+
+<br>
+
+
+
+<a href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay/builds?label=last%20update&style=flat-square&labelColor=161b22&color=30363d" alt="Last update"/></a>
+
+<a href="https://github.com/Zivalez/zvlzPlay/stargazers"><img src="https://img.shields.io/github/stars/Zivalez/zvlzPlay?style=flat-square&labelColor=161b22&color=30363d" alt="Stars"/></a>
+
+<img src="https://img.shields.io/badge/platform-Android-30363d?style=flat-square&labelColor=161b22" alt="Android"/>
+
+<img src="https://img.shields.io/badge/content-NSFW-30363d?style=flat-square&labelColor=161b22" alt="NSFW"/>
+
+
+
+<br>
+
+
+
+[Instalasi](#install) &nbsp;·&nbsp; [Provider](#providers) &nbsp;·&nbsp; [Yang mana](#which-one) &nbsp;·&nbsp; [FAQ](#faq)
+
+
+
+[English](README.md) &nbsp;/&nbsp; Bahasa Indonesia
+
+
+
+<br>
+
+
+
+</div>
+
+
+
+---
+
+
+
+## Tentang
+
+
+
+**CloudStream** itu aplikasi Android open-source buat nonton film, anime, drama, sama TV series. Gratis, tanpa iklan. Aplikasinya sendiri tidak bawa konten apa-apa. Anggap aja dia media player plus mesin pencari, yang jalan sepenuhnya dari ekstensi.
+
+
+
+**zvlzPlay** itu salah satu repositori ekstensi. Isinya provider dari situs streaming Indonesia dan internasional, jadi kamu cukup tambah sekali terus pilih yang kamu butuhkan.
+
+
+
+> [!NOTE]
+
+> CloudStream itu aplikasinya, wadahnya.\
+
+> zvlzPlay itu kumpulan ekstensi yang nyari sumber streaming.
+
+
+
+<br>
+
 
 
 ## Fitur
 
-- Tanpa iklan
-- Tanpa tracking/analytics
-- Bookmark
-- Dukungan HP dan TV
-- Chromecast
+
+
+- Tanpa iklan, tanpa tracking atau analytics
+
+- Dukungan HP dan TV, plus Chromecast
+
 - Skip opening
-- Bisa pilih dan gonta-ganti provider sesuka hati
-- Resolusi tergantung provider, banyak yang 1080p ke atas
-- Universal search, makin banyak provider yang dipasang, makin rame hasilnya
 
+- Sampai 1080p atau lebih tinggi, tergantung provider
 
-## Download Aplikasi
+- Bookmark
 
-<p>
-  <a href="https://github.com/recloudstream/cloudstream/releases/latest" target="_blank">
-    <img src="https://img.shields.io/badge/Download_CloudStream-terbaru-0090FF?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
-  </a>
-</p>
+- Universal search di semua provider yang terpasang
+
+- Bisa gonta-ganti provider kapan pun
 
 
 
-## Cara Install dan Pasang Ekstensi zvlzPlay
+<br>
 
-1. Install CloudStream dulu.\
-   Kalo habis install tampilannya kosong, itu normal karna blm ada ekstensi.
-2. Buka **Settings**.
-3. Masuk ke **Extensions**.
-4. Pilih **Add Repository**.
-5. Masukkan URL berikut sebagai Repository URL:
-```
-https://cloudstream.zvlz.my.id/builds/repo.json
-```
-6. Nama repository bebas, boleh dikosongin atau isi aja `zvlzPlay`.
-7. Kalo repository udah masuk, buka **zvlzPlay** lalu install provider yang mau dipake.
-8. Balik ke **Home Screen**, terus pilih provider dari pojok kanan bawah.
-9. Kelar.
+
+
+<a id="install"></a>
+
+
+
+## Instalasi
+
+
+
+<a href="https://github.com/recloudstream/cloudstream/releases/latest" target="_blank">
+
+&#x20; <img src="https://img.shields.io/badge/Download_CloudStream-terbaru-30363d?style=for-the-badge&logo=android&logoColor=white&labelColor=161b22" alt="Download APK" />
+
+</a>
+
+
+
+1. Install **CloudStream**.\
+
+&#x20;  Kalau habis install tampilannya kosong, itu normal, soalnya belum ada ekstensi yang terpasang.
+
+2. Buka **Settings**, masuk ke **Extensions**, terus pilih **Add Repository**.
+
+3. Masukkan ini sebagai Repository URL:
+
+
+
+&#x20;  ```
+
+&#x20;  https://cloudstream.zvlz.my.id/builds/repo.json
+
+&#x20;  ```
+
+
+
+4. Namanya boleh dikosongin atau diisi apa aja, contohnya `zvlzPlay`.
+
+5. Buka **zvlzPlay** terus install provider yang kamu mau.
+
+6. Balik ke **Home Screen** terus pilih provider dari pojok kanan bawah.
+
+
+
+> [!TIP]
+
+> Kalau provider gagal loading di Indonesia, mungkin ISP kamu ngeblok lewat DNS. Lihat [solusinya di FAQ](#faq-dns).
+
+
+
+<br>
+
+
+
+<a id="providers"></a>
+
 
 
 ## Daftar Provider
@@ -121,29 +216,119 @@ Seperti tes provider di aplikasi CloudStream, cek links menguji judul asli: kala
 | **IPTV** <br> <sub>Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll)</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
 
 
+<br>
+
+
+<a id="which-one"></a>
+
+
+
+## Provider mana yang harus saya gunakan
+
+
+
+| Mencari | Rekomendasi |
+
+| :--- | :--- |
+
+| **Anime** | **Samehadaku**, cukup lengkap dan streamingnya kencang.<br>**Kuramanime**, update cepat dan stabil. |
+
+| **Drama dan Movie** | **Idlix**, biasanya cukup lengkap. |
+
+| **Donghua** | **Kuramanime** |
+
+
+
+Kalau provider lain lagi bermasalah, **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Sokuja**, dan **Kuronime** itu alternatif yang bagus buat anime.
+
+
+
+<br>
+
+
+
+<a id="faq"></a>
+
+
+
 ## FAQ
 
+
+
 ### Kenapa setelah install aplikasinya kosong?
-Karna CloudStream butuh ekstensi dulu. Ikuti langkah di bagian [Cara Install](#cara-install-dan-pasang-ekstensi-zvlzplay) buat nambahin repository.
 
-### Provider mana yang paling bagus untuk Anime?
-- **Samehadaku** : lumayan lengkap dan streamingnya kenceng
-- **Kuramanime** : update cepet dan stabil
-- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Sokuja**, **Kuronime** : bisa jadi cadangan kalo yang lain lagi rewel
 
-### Provider mana untuk Drama dan Movie?
-- **Idlix** : biasanya lumayan lengkap
+
+CloudStream butuh ekstensi dulu. Ikuti langkah di [Instalasi](#install) buat nambahin repositori ini.
+
+
 
 ### Ada Donghua?
-- Ada. Coba **Kuramanime**.
+
+
+
+Ada. Coba **Kuramanime**.
+
+
 
 ### Kenapa search tidak menemukan hasil?
-- Pastiin provider udah terpasang.
-- Cek filter di halaman search, jangan sampai providernya blm aktif.
-- Makin banyak provider yang dipasang, makin banyak juga kemungkinan hasilnya muncul.
 
-### Provider tidak ada datanya / gagal loading (Indonesia)?
-Beberapa situs sumber diblokir ISP Indonesia lewat DNS (dialihkan ke
-Internet Positif). Nyalakan **Private DNS** di pengaturan Android
-(Settings → Network → Private DNS, misal `dns.google`) atau pakai
-DNS-over-HTTPS biar aplikasinya bisa resolve alamat asli situsnya.
+
+
+- Pastiin provider sudah terpasang.
+
+- Cek filter di halaman search, jangan sampai providernya belum aktif.
+
+- Makin banyak provider yang dipasang, makin besar kemungkinan hasil search muncul.
+
+
+
+<a id="faq-dns"></a>
+
+
+
+### Provider tidak ada datanya atau gagal loading (Indonesia)?
+
+
+
+Beberapa situs sumber diblokir ISP Indonesia lewat DNS, lalu dialihkan ke Internet Positif. Nyalakan **Private DNS** di pengaturan Android biar aplikasi bisa resolve alamat asli situsnya.
+
+
+
+Buka **Settings → Network → Private DNS** terus masukkan, contohnya:
+
+
+
+```
+
+dns.google
+
+```
+
+
+
+DNS-over-HTTPS juga bisa.
+
+
+
+<br>
+
+
+
+---
+
+
+
+<div align="center">
+
+
+
+Kalau zvlzPlay berguna buat kamu, ⭐ di [repository](https://github.com/Zivalez/zvlzPlay) selalu dihargai.
+
+
+
+<sub>Dibuat untuk <a href="https://github.com/recloudstream/cloudstream">CloudStream</a> &nbsp;·&nbsp; <a href="https://github.com/Zivalez/zvlzPlay">zvlzPlay</a></sub>
+
+
+
+</div>

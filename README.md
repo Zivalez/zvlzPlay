@@ -1,76 +1,172 @@
-<h1 align="center">CloudStream x zvlzPlay</h1>
+<div align="center">
+
+
+
+<br>
+
+
 
 <p align="center">
+
 <a href="https://github.com/recloudstream/cloudstream"><picture><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="100" height="100"></picture></a>
+
 <a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="100" height="100"></picture></a>
+
 </p>
 
-<p align="center">
-A CloudStream plugin repository for streaming and downloading Anime, Movies,<br>
-TV Series, Asian Drama, and Donghua.<br>
-(Contains NSFW content)<br><br>
-<a target="_blank" href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay/builds?label=last%20update"/></a>
-</p>
-
-<p align="center">
-English | <a href="README_ID.md">Bahasa Indonesia</a>
-</p>
-
-## What is CloudStream?
-
-**CloudStream** is an open-source Android app for watching movies, anime, drama, and TV series for free with no ads.
-
-CloudStream does not include content by default. Think of it as a media player and search engine. To start watching, you need to install **extensions** that fetch video data from various streaming websites.
 
 
-## What is zvlzPlay?
+# CloudStream × zvlzPlay
 
-**zvlzPlay** is a CloudStream extension repository containing multiple providers from Indonesian and international streaming sites.
 
-> **CloudStream** = the app/container\
-> **zvlzPlay** = extensions for finding streaming sources
+
+*A quiet extension repository for Anime, Movies, TV Series, Asian Drama, and Donghua.*
+
+
+
+<br>
+
+
+
+<a href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay/builds?label=last%20update&style=flat-square&labelColor=161b22&color=30363d" alt="Last update"/></a>
+
+<a href="https://github.com/Zivalez/zvlzPlay/stargazers"><img src="https://img.shields.io/github/stars/Zivalez/zvlzPlay?style=flat-square&labelColor=161b22&color=30363d" alt="Stars"/></a>
+
+<img src="https://img.shields.io/badge/platform-Android-30363d?style=flat-square&labelColor=161b22" alt="Android"/>
+
+<img src="https://img.shields.io/badge/content-NSFW-30363d?style=flat-square&labelColor=161b22" alt="NSFW"/>
+
+
+
+<br>
+
+
+
+[Install](#install) &nbsp;·&nbsp; [Providers](#providers) &nbsp;·&nbsp; [Which one](#which-one) &nbsp;·&nbsp; [FAQ](#faq)
+
+
+
+English &nbsp;/&nbsp; [Bahasa Indonesia](README_ID.md)
+
+
+
+<br>
+
+
+
+</div>
+
+
+
+---
+
+
+
+## About
+
+
+
+**CloudStream** is an open-source Android app for watching movies, anime, drama, and TV series for free, with no ads. It ships with no content of its own. Think of it as a media player and search engine, powered entirely by extensions.
+
+
+
+**zvlzPlay** is one such extension repository. It bundles providers from Indonesian and international streaming sites, so you add it once and choose only the ones you need.
+
+
+
+> [!NOTE]
+
+> CloudStream is the app, the container.\
+
+> zvlzPlay is the set of extensions that find the streaming sources.
+
+
+
+<br>
+
 
 
 ## Features
 
-- Ad-free
-- No tracking or analytics
-- Bookmarks
-- Phone and TV support
-- Chromecast
+
+
+- No ads, no tracking or analytics
+
+- Phone and TV support, with Chromecast
+
 - Skip opening
-- Switch between providers as needed
-- Resolution depends on each provider, many support 1080p or higher
-- Universal search, the more providers installed, the more complete the results
+
+- Up to 1080p or higher, depending on the provider
+
+- Bookmarks
+
+- Universal search across every installed provider
+
+- Switch between providers whenever you need
 
 
-## App Download
 
-<p>
-  <a href="https://github.com/recloudstream/cloudstream/releases/latest" target="_blank">
-    <img src="https://img.shields.io/badge/Download_CloudStream-latest-0090FF?style=for-the-badge&logo=android&logoColor=white" alt="Download APK" />
-  </a>
-</p>
+<br>
 
 
-## How to Install zvlzPlay Extensions
 
-1. Install CloudStream first.\
-   If the app looks empty after installation, that is normal because no extensions are installed yet.
-2. Open **Settings**.
-3. Go to **Extensions**.
-4. Select **Add Repository**.
-5. Enter the following URL as the Repository URL:
-```
-https://cloudstream.zvlz.my.id/builds/repo.json
-```
-6. The repository name can be left empty or filled with anything you like, for example `zvlzPlay`.
-7. After the repository is added, open **zvlzPlay** and install the providers you want to use.
-8. Go back to the **Home Screen**, then select a provider from the bottom-right corner.
-9. Done.
+<a id="install"></a>
 
 
-## Provider List
+
+## Install
+
+
+
+<a href="https://github.com/recloudstream/cloudstream/releases/latest" target="_blank">
+
+&#x20; <img src="https://img.shields.io/badge/Download_CloudStream-latest-30363d?style=for-the-badge&logo=android&logoColor=white&labelColor=161b22" alt="Download APK" />
+
+</a>
+
+
+
+1. Install **CloudStream**.\
+
+&#x20;  An empty app afterwards is normal, since no extensions are installed yet.
+
+2. Open **Settings**, go to **Extensions**, then select **Add Repository**.
+
+3. Enter this as the Repository URL:
+
+
+
+&#x20;  ```
+
+&#x20;  https://cloudstream.zvlz.my.id/builds/repo.json
+
+&#x20;  ```
+
+
+
+4. The name can be left empty or set to anything, for example `zvlzPlay`.
+
+5. Open **zvlzPlay** and install the providers you want.
+
+6. Return to the **Home Screen** and pick a provider from the bottom-right corner.
+
+
+
+> [!TIP]
+
+> If a provider fails to load in Indonesia, your ISP may be blocking it through DNS. See the [fix in the FAQ](#faq-dns).
+
+
+
+<br>
+
+
+
+<a id="providers"></a>
+
+
+
+## Providers
 
 > [!NOTE]
 > **Health Check** · Last checked: **2026-11-19 06:38 WIB**
@@ -120,29 +216,120 @@ Like the in-app CloudStream provider test, the links check tests real titles: if
 | **IPTV** <br> <sub>Indonesian Live TV (RCTI, SCTV, Trans, ANTV, Metro, Kompas, etc.)</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
 
 
+<br>
+
+
+<a id="which-one"></a>
+
+
+
+## Which provider should I use
+
+
+
+| Looking for | Recommended |
+
+| :--- | :--- |
+
+| **Anime** | **Samehadaku**, fairly complete with fast streaming.<br>**Kuramanime**, fast updates and stable. |
+
+| **Drama and Movies** | **Idlix**, usually fairly complete. |
+
+| **Donghua** | **Kuramanime** |
+
+
+
+When other providers have issues, **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Sokuja**, and **Kuronime** are good alternatives for anime.
+
+
+
+<br>
+
+
+
+<a id="faq"></a>
+
+
+
 ## FAQ
 
+
+
 ### Why is the app empty after installation?
-CloudStream requires extensions first. Follow the steps in [How to Install](#how-to-install-zvlzplay-extensions) to add this repository.
 
-### Which provider is best for Anime?
-- **Samehadaku** : fairly complete with fast streaming
-- **Kuramanime** : fast updates and stable
-- **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Sokuja**, **Kuronime** : alternatives when other providers have issues
 
-### Which providers are best for Drama and Movies?
-- **Idlix** : usually fairly complete
+
+CloudStream needs extensions first. Follow the steps in [Install](#install) to add this repository.
+
+
 
 ### Is Donghua available?
-- Yes. Try **Kuramanime**.
+
+
+
+Yes. Try **Kuramanime**.
+
+
 
 ### Why does search return no results?
+
+
+
 - Make sure the providers are installed.
+
 - Check the search page filters and make sure the provider is enabled.
+
 - The more providers installed, the more likely search results will appear.
 
-### A provider shows no data / fails to load (Indonesia)?
-Some source sites are blocked by Indonesian ISPs via DNS (redirected to
-Internet Positif). Turn on **Private DNS** in Android settings
-(Settings → Network → Private DNS, e.g. `dns.google`) or use DNS-over-HTTPS
-so the app can resolve the real site addresses.
+
+
+<a id="faq-dns"></a>
+
+
+
+### A provider shows no data or fails to load (Indonesia)?
+
+
+
+Some source sites are blocked by Indonesian ISPs through DNS, and redirected to Internet Positif. Turn on **Private DNS** in Android settings so the app can resolve the real site addresses.
+
+
+
+Go to **Settings → Network → Private DNS** and enter, for example:
+
+
+
+```
+
+dns.google
+
+```
+
+
+
+DNS-over-HTTPS works as well.
+
+
+
+<br>
+
+
+
+---
+
+
+
+<div align="center">
+
+
+
+If zvlzPlay is useful to you, a ⭐ on the [repository](https://github.com/Zivalez/zvlzPlay) is always appreciated.
+
+
+
+<sub>Built for <a href="https://github.com/recloudstream/cloudstream">CloudStream</a> &nbsp;·&nbsp; <a href="https://github.com/Zivalez/zvlzPlay">zvlzPlay</a></sub>
+
+
+
+</div>
+
