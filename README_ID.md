@@ -1,170 +1,86 @@
 <div align="center">
 
-
-
 <br>
 
-
-
 <p align="center">
-
 <a href="https://github.com/recloudstream/cloudstream"><picture><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="100" height="100"></picture></a>
-
 <a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="100" height="100"></picture></a>
-
 </p>
-
-
 
 # CloudStream × zvlzPlay
 
-
-
-*Repositori ekstensi untuk Anime, Movie, TV Series, Drama Asia, dan Donghua.*
-
-
+*Repositori ekstensi yang tenang untuk Anime, Movie, TV Series, Drama Asia, dan Donghua.*
 
 <br>
-
-
 
 <a href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay/builds?label=last%20update&style=flat-square&labelColor=161b22&color=30363d" alt="Last update"/></a>
-
 <a href="https://github.com/Zivalez/zvlzPlay/stargazers"><img src="https://img.shields.io/github/stars/Zivalez/zvlzPlay?style=flat-square&labelColor=161b22&color=30363d" alt="Stars"/></a>
-
 <img src="https://img.shields.io/badge/platform-Android-30363d?style=flat-square&labelColor=161b22" alt="Android"/>
-
 <img src="https://img.shields.io/badge/content-NSFW-30363d?style=flat-square&labelColor=161b22" alt="NSFW"/>
 
-
-
 <br>
-
-
 
 [Instalasi](#install) &nbsp;·&nbsp; [Provider](#providers) &nbsp;·&nbsp; [Yang mana](#which-one) &nbsp;·&nbsp; [FAQ](#faq)
 
-
-
-[English](README.md) &nbsp;/&nbsp; Bahasa Indonesia
-
-
+Bahasa Indonesia &nbsp;/&nbsp; [English](README.md)
 
 <br>
-
-
 
 </div>
 
-
-
 ---
-
-
 
 ## Tentang
 
+**CloudStream** adalah aplikasi Android open-source untuk menonton film, anime, drama, dan serial TV secara gratis, tanpa iklan. Aplikasi ini tidak membawa konten sendiri. Anggap saja sebagai pemutar media dan mesin pencari, yang sepenuhnya digerakkan oleh ekstensi.
 
-
-**CloudStream** itu aplikasi Android open-source buat nonton film, anime, drama, sama TV series. Gratis, tanpa iklan. Aplikasinya sendiri tidak bawa konten apa-apa. Anggap aja dia media player plus mesin pencari, yang jalan sepenuhnya dari ekstensi.
-
-
-
-**zvlzPlay** itu salah satu repositori ekstensi. Isinya provider dari situs streaming Indonesia dan internasional, jadi kamu cukup tambah sekali terus pilih yang kamu butuhkan.
-
-
+**zvlzPlay** adalah salah satu repositori ekstensi tersebut. Repositori ini mengumpulkan provider dari situs streaming Indonesia dan internasional, jadi Anda cukup menambahkannya sekali lalu memilih provider yang dibutuhkan.
 
 > [!NOTE]
-
-> CloudStream itu aplikasinya, wadahnya.\
-
-> zvlzPlay itu kumpulan ekstensi yang nyari sumber streaming.
-
-
+> CloudStream adalah aplikasinya, wadahnya.\
+> zvlzPlay adalah kumpulan ekstensi yang mencari sumber streaming.
 
 <br>
-
-
 
 ## Fitur
 
-
-
-- Tanpa iklan, tanpa tracking atau analytics
-
-- Dukungan HP dan TV, plus Chromecast
-
-- Skip opening
-
-- Sampai 1080p atau lebih tinggi, tergantung provider
-
+- Tanpa iklan, tanpa pelacakan atau analitik
+- Dukungan ponsel dan TV, dengan Chromecast
+- Lewati pembuka (skip opening)
+- Hingga 1080p atau lebih tinggi, tergantung provider
 - Bookmark
-
-- Universal search di semua provider yang terpasang
-
-- Bisa gonta-ganti provider kapan pun
-
-
+- Pencarian universal di semua provider yang terpasang
+- Berpindah antar provider kapan pun dibutuhkan
 
 <br>
-
-
 
 <a id="install"></a>
 
-
-
 ## Instalasi
 
-
-
 <a href="https://github.com/recloudstream/cloudstream/releases/latest" target="_blank">
-
-&#x20; <img src="https://img.shields.io/badge/Download_CloudStream-terbaru-30363d?style=for-the-badge&logo=android&logoColor=white&labelColor=161b22" alt="Download APK" />
-
+  <img src="https://img.shields.io/badge/Download_CloudStream-latest-30363d?style=for-the-badge&logo=android&logoColor=white&labelColor=161b22" alt="Download APK" />
 </a>
 
+1. Instal **CloudStream**.\
+   Aplikasi yang kosong setelahnya itu normal, karena belum ada ekstensi yang terpasang.
+2. Buka **Pengaturan**, masuk ke **Ekstensi**, lalu pilih **Tambah Repositori**.
+3. Masukkan ini sebagai URL Repositori:
 
+   ```
+   https://cloudstream.zvlz.my.id/builds/repo.json
+   ```
 
-1. Install **CloudStream**.\
-
-&#x20;  Kalau habis install tampilannya kosong, itu normal, soalnya belum ada ekstensi yang terpasang.
-
-2. Buka **Settings**, masuk ke **Extensions**, terus pilih **Add Repository**.
-
-3. Masukkan ini sebagai Repository URL:
-
-
-
-&#x20;  ```
-
-&#x20;  https://cloudstream.zvlz.my.id/builds/repo.json
-
-&#x20;  ```
-
-
-
-4. Namanya boleh dikosongin atau diisi apa aja, contohnya `zvlzPlay`.
-
-5. Buka **zvlzPlay** terus install provider yang kamu mau.
-
-6. Balik ke **Home Screen** terus pilih provider dari pojok kanan bawah.
-
-
+4. Namanya boleh dikosongkan atau diisi apa saja, misalnya `zvlzPlay`.
+5. Buka **zvlzPlay** dan instal provider yang Anda inginkan.
+6. Kembali ke **Layar Utama** dan pilih provider dari pojok kanan bawah.
 
 > [!TIP]
-
-> Kalau provider gagal loading di Indonesia, mungkin ISP kamu ngeblok lewat DNS. Lihat [solusinya di FAQ](#faq-dns).
-
-
+> Jika provider gagal dimuat di Indonesia, ISP Anda mungkin memblokirnya lewat DNS. Lihat [perbaikan di FAQ](#faq-dns).
 
 <br>
 
-
-
 <a id="providers"></a>
-
-
 
 ## Daftar Provider
 
@@ -173,20 +89,18 @@
 >
 > Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, dan sumber link. Ini cek terjadwal, bukan pemantauan terus-menerus.
 
-Setiap cek dijalankan 5 kali dengan judul yang berbeda, diambil acak dari katalog provider. Cek dinyatakan lolos kalau setidaknya satu percobaan berhasil. Ini cek terjadwal tiap 12 jam, bukan pemantauan terus-menerus.
+Seperti tes provider di aplikasi CloudStream, cek links hanya menguji satu judul. Kalau link judul itu mati, provider dinyatakan gagal, walaupun judul lain mungkin masih bisa diputar.
 
-- **Status Check:** 🟢 cek berhasil dan mengembalikan data. 🟡 cek lolos, tapi tidak semua judul yang dites berhasil. 🔴 cek gagal. 🔵 provider belum di-cover checker.
-- **Health:** Persentase dari 4 cek yang lolos.
-- **Condition:** Detail untuk cek yang tidak sepenuhnya bersih, ditampilkan sebagai lolos/dites (contoh `Links 4/5`). Tanda strip berarti tidak ada yang perlu dilaporkan.
-
-Seperti tes provider di aplikasi CloudStream, cek links menguji judul asli: kalau link kelima judul itu mati semua, provider dinyatakan gagal, walaupun judul lain mungkin masih bisa diputar.
+- **Status Check:** 🟢 cek berhasil mengembalikan data asli. 🟡 cek lolos, tetapi tidak semua judul yang disampel berhasil. 🔴 cek gagal. 🔵 provider belum di-cover checker.
+- **Health:** persentase dari 4 cek yang lolos.
+- **Condition:** detail untuk cek yang tidak sepenuhnya bersih, ditampilkan sebagai lolos/disampel (misalnya `Links 4/5`). Tanda strip berarti tidak ada yang perlu dilaporkan.
 
 > [!NOTE]
 > *Auto-repair:* Cek yang gagal otomatis didiagnosis, diperbaiki, dan dicek ulang, hanya untuk provider **Aktif**. Provider yang **Tidak Diurus Lagi** hanya dicek, tidak pernah diperbaiki.
 
 ### Provider Aktif
 
-| Provider | Status Check | Health | Condition |
+| Provider | Status Check | Health | Kondisi |
 | :--- | :--- | :---: | :---: |
 | **Idlix** <br> <sub>Movie, TV Series, Drama Asia, Anime</sub> | <sub>🟢 Home <br> 🟡 Search <br> 🟢 Detail <br> 🟡 Links</sub> | `▰▰▰▰`<br> **100%** | Search 4/5 <br> Links 4/5 |
 | **Samehadaku** <br> <sub>Anime</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
@@ -197,12 +111,12 @@ Seperti tes provider di aplikasi CloudStream, cek links menguji judul asli: kala
 | **Sokuja** <br> <sub>Anime</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟡 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | Detail 2/5 |
 | **Kuronime** <br> <sub>Anime</sub> | <sub>🟢 Home <br> 🟡 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | Search 4/5 |
 
-### Tidak Aktif Lagi
+### Tidak Diurus Lagi
 
 > [!WARNING]
-> Provider berikut sudah tidak diurus aktif. Aku mengurus terlalu banyak provider sendirian dan makin sibuk, jadi tidak bisa mengikuti semuanya. Provider ini masih bisa jalan kalau situs sumbernya aktif, tapi **masalah tidak akan diperbaiki**.
+> Provider berikut sudah tidak diurus aktif. Maintainer mengurus terlalu banyak provider sendirian dan makin sibuk, jadi tidak bisa mengikuti semuanya. Provider ini masih bisa jalan kalau situs sumbernya aktif, tapi **masalah tidak akan diperbaiki**.
 
-| Provider | Status Check | Health | Condition |
+| Provider | Status Check | Health | Kondisi |
 | :--- | :--- | :---: | :---: |
 | **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟡 Detail <br> 🟡 Links</sub> | `▰▰▰▰`<br> **100%** | Detail 4/5 <br> Links 3/4 |
 | **Dramacool** <br> <sub>Drama Asia, Variety Show</sub> | <sub>🔴 Home <br> 🔴 Search <br> 🔵 Detail <br> 🔵 Links</sub> | `▱▱▱▱`<br> **0%** | Home 0/10 <br> Search 0/4 |
@@ -218,117 +132,60 @@ Seperti tes provider di aplikasi CloudStream, cek links menguji judul asli: kala
 
 <br>
 
-
 <a id="which-one"></a>
-
-
 
 ## Provider mana yang harus saya gunakan
 
-
-
-| Mencari | Rekomendasi |
-
+| Mencari | Disarankan |
 | :--- | :--- |
-
-| **Anime** | **Samehadaku**, cukup lengkap dan streamingnya kencang.<br>**Kuramanime**, update cepat dan stabil. |
-
-| **Drama dan Movie** | **Idlix**, biasanya cukup lengkap. |
-
+| **Anime** | **Samehadaku**, cukup lengkap dengan streaming cepat.<br>**Kuramanime**, update cepat dan stabil. |
+| **Drama dan Film** | **Idlix**, biasanya cukup lengkap. |
 | **Donghua** | **Kuramanime** |
 
-
-
-Kalau provider lain lagi bermasalah, **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Sokuja**, dan **Kuronime** itu alternatif yang bagus buat anime.
-
-
+Ketika provider lain bermasalah, **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Sokuja**, dan **Kuronime** adalah alternatif yang bagus untuk anime.
 
 <br>
-
-
 
 <a id="faq"></a>
 
-
-
 ## FAQ
 
+### Kenapa aplikasinya kosong setelah instalasi?
 
+CloudStream butuh ekstensi dulu. Ikuti langkah di [Instalasi](#install) untuk menambah repositori ini.
 
-### Kenapa setelah install aplikasinya kosong?
+### Apakah Donghua tersedia?
 
+Ya. Coba **Kuramanime**.
 
+### Kenapa pencarian tidak mengembalikan hasil?
 
-CloudStream butuh ekstensi dulu. Ikuti langkah di [Instalasi](#install) buat nambahin repositori ini.
-
-
-
-### Ada Donghua?
-
-
-
-Ada. Coba **Kuramanime**.
-
-
-
-### Kenapa search tidak menemukan hasil?
-
-
-
-- Pastiin provider sudah terpasang.
-
-- Cek filter di halaman search, jangan sampai providernya belum aktif.
-
-- Makin banyak provider yang dipasang, makin besar kemungkinan hasil search muncul.
-
-
+- Pastikan provider sudah terpasang.
+- Periksa filter halaman pencarian dan pastikan provider diaktifkan.
+- Semakin banyak provider terpasang, semakin besar kemungkinan hasil pencarian muncul.
 
 <a id="faq-dns"></a>
 
+### Provider tidak menunjukkan data atau gagal dimuat (Indonesia)?
 
+Beberapa situs sumber diblokir ISP Indonesia lewat DNS, dan dialihkan ke Internet Positif. Nyalakan **Private DNS** di pengaturan Android agar aplikasi bisa menyelesaikan alamat situs yang sebenarnya.
 
-### Provider tidak ada datanya atau gagal loading (Indonesia)?
-
-
-
-Beberapa situs sumber diblokir ISP Indonesia lewat DNS, lalu dialihkan ke Internet Positif. Nyalakan **Private DNS** di pengaturan Android biar aplikasi bisa resolve alamat asli situsnya.
-
-
-
-Buka **Settings → Network → Private DNS** terus masukkan, contohnya:
-
-
+Buka **Pengaturan → Jaringan → Private DNS** dan masukkan, misalnya:
 
 ```
-
 dns.google
-
 ```
 
-
-
-DNS-over-HTTPS juga bisa.
-
-
+DNS-over-HTTPS juga bisa dipakai.
 
 <br>
 
-
-
 ---
-
-
 
 <div align="center">
 
+Jika zvlzPlay bermanfaat untuk Anda, ⭐ di [repositori](https://github.com/Zivalez/zvlzPlay) selalu dihargai.
 
-
-Kalau zvlzPlay berguna buat kamu, ⭐ di [repository](https://github.com/Zivalez/zvlzPlay) selalu dihargai.
-
-
-
-<sub>Dibuat untuk <a href="https://github.com/recloudstream/cloudstream">CloudStream</a> &nbsp;·&nbsp; <a href="https://github.com/Zivalez/zvlzPlay">zvlzPlay</a></sub>
-
-
+<sub>Built for <a href="https://github.com/recloudstream/cloudstream">CloudStream</a> &nbsp;·&nbsp; <a href="https://github.com/Zivalez/zvlzPlay">zvlzPlay</a></sub>
 
 </div>

@@ -1,170 +1,86 @@
 <div align="center">
 
-
-
 <br>
 
-
-
 <p align="center">
-
 <a href="https://github.com/recloudstream/cloudstream"><picture><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="100" height="100"></picture></a>
-
 <a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="100" height="100"></picture></a>
-
 </p>
-
-
 
 # CloudStream × zvlzPlay
 
-
-
 *A quiet extension repository for Anime, Movies, TV Series, Asian Drama, and Donghua.*
 
-
-
 <br>
-
-
 
 <a href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay/builds?label=last%20update&style=flat-square&labelColor=161b22&color=30363d" alt="Last update"/></a>
-
 <a href="https://github.com/Zivalez/zvlzPlay/stargazers"><img src="https://img.shields.io/github/stars/Zivalez/zvlzPlay?style=flat-square&labelColor=161b22&color=30363d" alt="Stars"/></a>
-
 <img src="https://img.shields.io/badge/platform-Android-30363d?style=flat-square&labelColor=161b22" alt="Android"/>
-
 <img src="https://img.shields.io/badge/content-NSFW-30363d?style=flat-square&labelColor=161b22" alt="NSFW"/>
 
-
-
 <br>
-
-
 
 [Install](#install) &nbsp;·&nbsp; [Providers](#providers) &nbsp;·&nbsp; [Which one](#which-one) &nbsp;·&nbsp; [FAQ](#faq)
 
-
-
 English &nbsp;/&nbsp; [Bahasa Indonesia](README_ID.md)
 
-
-
 <br>
-
-
 
 </div>
 
-
-
 ---
-
-
 
 ## About
 
-
-
 **CloudStream** is an open-source Android app for watching movies, anime, drama, and TV series for free, with no ads. It ships with no content of its own. Think of it as a media player and search engine, powered entirely by extensions.
-
-
 
 **zvlzPlay** is one such extension repository. It bundles providers from Indonesian and international streaming sites, so you add it once and choose only the ones you need.
 
-
-
 > [!NOTE]
-
 > CloudStream is the app, the container.\
-
 > zvlzPlay is the set of extensions that find the streaming sources.
 
-
-
 <br>
-
-
 
 ## Features
 
-
-
 - No ads, no tracking or analytics
-
 - Phone and TV support, with Chromecast
-
 - Skip opening
-
 - Up to 1080p or higher, depending on the provider
-
 - Bookmarks
-
 - Universal search across every installed provider
-
 - Switch between providers whenever you need
 
-
-
 <br>
-
-
 
 <a id="install"></a>
 
-
-
 ## Install
 
-
-
 <a href="https://github.com/recloudstream/cloudstream/releases/latest" target="_blank">
-
-&#x20; <img src="https://img.shields.io/badge/Download_CloudStream-latest-30363d?style=for-the-badge&logo=android&logoColor=white&labelColor=161b22" alt="Download APK" />
-
+  <img src="https://img.shields.io/badge/Download_CloudStream-latest-30363d?style=for-the-badge&logo=android&logoColor=white&labelColor=161b22" alt="Download APK" />
 </a>
 
-
-
 1. Install **CloudStream**.\
-
-&#x20;  An empty app afterwards is normal, since no extensions are installed yet.
-
+   An empty app afterwards is normal, since no extensions are installed yet.
 2. Open **Settings**, go to **Extensions**, then select **Add Repository**.
-
 3. Enter this as the Repository URL:
 
-
-
-&#x20;  ```
-
-&#x20;  https://cloudstream.zvlz.my.id/builds/repo.json
-
-&#x20;  ```
-
-
+   ```
+   https://cloudstream.zvlz.my.id/builds/repo.json
+   ```
 
 4. The name can be left empty or set to anything, for example `zvlzPlay`.
-
 5. Open **zvlzPlay** and install the providers you want.
-
 6. Return to the **Home Screen** and pick a provider from the bottom-right corner.
 
-
-
 > [!TIP]
-
 > If a provider fails to load in Indonesia, your ISP may be blocking it through DNS. See the [fix in the FAQ](#faq-dns).
-
-
 
 <br>
 
-
-
 <a id="providers"></a>
-
-
 
 ## Providers
 
@@ -173,13 +89,11 @@ English &nbsp;/&nbsp; [Bahasa Indonesia](README_ID.md)
 >
 > Checked automatically every 12 hours against the live sites: home feed, search, detail/episodes, and link sources. This is a scheduled check, not continuous monitoring.
 
-Each check is run 5 times with different titles, sampled randomly from the provider's catalog. A check passes if at least one attempt succeeds. This is a scheduled check every 12 hours, not continuous monitoring.
+Like the in-app CloudStream provider test, the links check tests a single title. If that title's links are dead, the provider is marked as failed, even if other titles might still play.
 
 - **Status Check:** 🟢 the check returned real data. 🟡 the check passed, but not every sampled title did. 🔴 the check failed. 🔵 the provider is not covered by the checker yet.
 - **Health:** share of the 4 checks that passed.
 - **Condition:** details for any check that is not fully clean, shown as passed/sampled (for example `Links 4/5`). A dash means there is nothing to report.
-
-Like the in-app CloudStream provider test, the links check tests real titles: if all 5 titles' links are dead, the provider is marked as failed, even if other titles might still play.
 
 > [!NOTE]
 > *Auto-repair:* Failed checks are automatically diagnosed, repaired, and re-checked for **Active** providers only. **No Longer Maintained** providers are checked, but never repaired.
@@ -218,118 +132,60 @@ Like the in-app CloudStream provider test, the links check tests real titles: if
 
 <br>
 
-
 <a id="which-one"></a>
-
-
 
 ## Which provider should I use
 
-
-
 | Looking for | Recommended |
-
 | :--- | :--- |
-
 | **Anime** | **Samehadaku**, fairly complete with fast streaming.<br>**Kuramanime**, fast updates and stable. |
-
 | **Drama and Movies** | **Idlix**, usually fairly complete. |
-
 | **Donghua** | **Kuramanime** |
-
-
 
 When other providers have issues, **Otakudesu**, **Alqanime**, **Nontonanimeid**, **Sokuja**, and **Kuronime** are good alternatives for anime.
 
-
-
 <br>
-
-
 
 <a id="faq"></a>
 
-
-
 ## FAQ
-
-
 
 ### Why is the app empty after installation?
 
-
-
 CloudStream needs extensions first. Follow the steps in [Install](#install) to add this repository.
-
-
 
 ### Is Donghua available?
 
-
-
 Yes. Try **Kuramanime**.
-
-
 
 ### Why does search return no results?
 
-
-
 - Make sure the providers are installed.
-
 - Check the search page filters and make sure the provider is enabled.
-
 - The more providers installed, the more likely search results will appear.
-
-
 
 <a id="faq-dns"></a>
 
-
-
 ### A provider shows no data or fails to load (Indonesia)?
-
-
 
 Some source sites are blocked by Indonesian ISPs through DNS, and redirected to Internet Positif. Turn on **Private DNS** in Android settings so the app can resolve the real site addresses.
 
-
-
 Go to **Settings → Network → Private DNS** and enter, for example:
 
-
-
 ```
-
 dns.google
-
 ```
-
-
 
 DNS-over-HTTPS works as well.
 
-
-
 <br>
-
-
 
 ---
 
-
-
 <div align="center">
-
-
 
 If zvlzPlay is useful to you, a ⭐ on the [repository](https://github.com/Zivalez/zvlzPlay) is always appreciated.
 
-
-
 <sub>Built for <a href="https://github.com/recloudstream/cloudstream">CloudStream</a> &nbsp;·&nbsp; <a href="https://github.com/Zivalez/zvlzPlay">zvlzPlay</a></sub>
 
-
-
 </div>
-
