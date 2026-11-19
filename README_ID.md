@@ -87,13 +87,13 @@ Bahasa Indonesia &nbsp;/&nbsp; [English](README.md)
 > [!NOTE]
 > **Health Check** · Terakhir dicek: **2026-11-19 06:38 WIB**
 >
-> Dicek otomatis tiap 12 jam ke situs aslinya: home feed, search, detail/episode, dan sumber link. Ini cek terjadwal, bukan pemantauan terus-menerus.
+> Setiap cek dijalankan 5 kali dengan judul yang berbeda, diambil acak dari katalog provider. Cek dinyatakan lolos kalau setidaknya satu percobaan berhasil. Ini cek terjadwal tiap 12 jam, bukan pemantauan terus-menerus.
 
-Seperti tes provider di aplikasi CloudStream, cek links hanya menguji satu judul. Kalau link judul itu mati, provider dinyatakan gagal, walaupun judul lain mungkin masih bisa diputar.
+Seperti tes provider di aplikasi CloudStream, cek links menguji judul asli: kalau link kelima judul itu mati semua, provider dinyatakan gagal, walaupun judul lain mungkin masih bisa diputar.
 
-- **Status Check:** 🟢 cek berhasil mengembalikan data asli. 🟡 cek lolos, tetapi tidak semua judul yang disampel berhasil. 🔴 cek gagal. 🔵 provider belum di-cover checker.
-- **Health:** persentase dari 4 cek yang lolos.
-- **Condition:** detail untuk cek yang tidak sepenuhnya bersih, ditampilkan sebagai lolos/disampel (misalnya `Links 4/5`). Tanda strip berarti tidak ada yang perlu dilaporkan.
+- **Status Check:** 🟢 artinya kelima percobaan lolos, 🟡 artinya sebagian percobaan gagal tapi setidaknya satu lolos, 🔴 artinya kelima percobaan gagal, 🔵 artinya provider itu belum di-cover checker.
+- **Health:** persentase dari 4 cek yang lolos (cek kuning tetap dihitung lolos).
+- **Condition:** jumlah percobaan yang lolos dari 5 percobaan, hanya ditampilkan untuk cek yang tidak sempurna. "Links 4/5" artinya 4 dari 5 judul lolos.
 
 > [!NOTE]
 > *Auto-repair:* Cek yang gagal otomatis didiagnosis, diperbaiki, dan dicek ulang, hanya untuk provider **Aktif**. Provider yang **Tidak Diurus Lagi** hanya dicek, tidak pernah diperbaiki.

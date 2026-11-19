@@ -87,13 +87,13 @@ English &nbsp;/&nbsp; [Bahasa Indonesia](README_ID.md)
 > [!NOTE]
 > **Health Check** · Last checked: **2026-11-19 06:38 WIB**
 >
-> Checked automatically every 12 hours against the live sites: home feed, search, detail/episodes, and link sources. This is a scheduled check, not continuous monitoring.
+> Each check is run 5 times with different titles, sampled randomly from the provider's catalog. A check passes if at least one attempt succeeds. This is a scheduled check every 12 hours, not continuous monitoring.
 
-Like the in-app CloudStream provider test, the links check tests a single title. If that title's links are dead, the provider is marked as failed, even if other titles might still play.
+Like the in-app CloudStream provider test, the links check tests real titles: if all 5 titles' links are dead, the provider is marked as failed, even if other titles might still play.
 
-- **Status Check:** 🟢 the check returned real data. 🟡 the check passed, but not every sampled title did. 🔴 the check failed. 🔵 the provider is not covered by the checker yet.
-- **Health:** share of the 4 checks that passed.
-- **Condition:** details for any check that is not fully clean, shown as passed/sampled (for example `Links 4/5`). A dash means there is nothing to report.
+- **Status Check:** 🟢 means all 5 attempts passed, 🟡 means some attempts failed but at least one passed, 🔴 means all 5 attempts failed, 🔵 means the provider is not covered by the checker yet.
+- **Health:** share of the 4 checks that passed (a yellow check still counts as passed).
+- **Condition:** how many of the 5 attempts passed, shown only for checks that were not perfect. "Links 4/5" means 4 out of 5 titles passed.
 
 > [!NOTE]
 > *Auto-repair:* Failed checks are automatically diagnosed, repaired, and re-checked for **Active** providers only. **No Longer Maintained** providers are checked, but never repaired.
