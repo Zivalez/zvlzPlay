@@ -13,7 +13,7 @@
 
 <br>
 
-<a href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay/builds?label=last%20update&style=flat-square&labelColor=aa472a&color=fdf0d7" alt="Last update"/></a>&ensp;
+<a href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/badge/last%20update-20%20Nov%202026%2015%3A28-aa472a?style=flat-square&labelColor=aa472a&color=fdf0d7" alt="Last update"/></a>&ensp;
 <a href="https://github.com/Zivalez/zvlzPlay/stargazers"><img src="https://img.shields.io/github/stars/Zivalez/zvlzPlay?style=flat-square&labelColor=aa472a&color=fdf0d7" alt="Stars"/></a>&ensp;
 <img src="https://img.shields.io/badge/platform-Android-fdf0d7?style=flat-square&labelColor=aa472a" alt="Android"/>&ensp;
 <img src="https://img.shields.io/badge/content-NSFW-fdf0d7?style=flat-square&labelColor=aa472a" alt="NSFW"/>
