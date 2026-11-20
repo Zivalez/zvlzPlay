@@ -4,7 +4,7 @@
 
 <p align="center">
 <a href="https://github.com/recloudstream/cloudstream"><picture><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="100" height="100"></picture></a>
-<a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://avatars.githubusercontent.com/u/142050504" alt="zvlzPlay" width="100" height="100"></picture></a>
+<a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/zvlzPlay128.png" alt="zvlzPlay" width="150" height="150"></picture></a>
 </p>
 
 # CloudStream × zvlzPlay
