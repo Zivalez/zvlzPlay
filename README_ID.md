@@ -60,18 +60,30 @@ Bahasa Indonesia &nbsp;/&nbsp; [English](README.md)
   <img src="https://img.shields.io/badge/Download_CloudStream-latest-fdf0d7?style=for-the-badge&logo=android&logoColor=white&labelColor=aa472a" alt="Download APK" />
 </a>
 
+### Tambah Cepat
+
+Ketik shortcode ini di CloudStream:
+
+```
+zvlzplay
+```
+
 1. Instal **CloudStream**.\
    Aplikasi yang kosong setelahnya itu normal, karena belum ada ekstensi yang terpasang.
 2. Buka **Pengaturan**, masuk ke **Ekstensi**, lalu pilih **Tambah Repositori**.
-3. Masukkan shortcode `zvlzplay` di kolom URL Repositori. Atau tempel URL lengkapnya:
-
-   ```
-   https://cloudstream.zvlz.my.id/builds/repo.json
-   ```
-
+3. Masukkan shortcode `zvlzplay`.
 4. Namanya boleh dikosongkan atau diisi apa saja, misalnya `zvlzPlay`.
 5. Buka **zvlzPlay** dan instal provider yang Anda inginkan.
 6. Kembali ke **Layar Utama** dan pilih provider dari pojok kanan bawah.
+
+<details>
+<summary>Lebih suka URL lengkapnya?</summary>
+
+```
+https://cloudstream.zvlz.my.id/builds/repo.json
+```
+
+</details>
 
 > [!TIP]
 > Jika provider gagal dimuat di Indonesia, ISP Anda mungkin memblokirnya lewat DNS. Lihat [perbaikan di FAQ](#faq-dns).

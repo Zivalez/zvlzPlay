@@ -60,18 +60,30 @@ English &nbsp;/&nbsp; [Bahasa Indonesia](README_ID.md)
   <img src="https://img.shields.io/badge/Download_CloudStream-latest-fdf0d7?style=for-the-badge&logo=android&logoColor=white&labelColor=aa472a" alt="Download APK" />
 </a>
 
+### Quick Add
+
+Type this shortcode into CloudStream:
+
+```
+zvlzplay
+```
+
 1. Install **CloudStream**.\
    An empty app afterwards is normal, since no extensions are installed yet.
 2. Open **Settings**, go to **Extensions**, then select **Add Repository**.
-3. Enter the shortcode `zvlzplay` in the Repository URL field. Or paste the full URL:
-
-   ```
-   https://cloudstream.zvlz.my.id/builds/repo.json
-   ```
-
+3. Enter the shortcode `zvlzplay`.
 4. The name can be left empty or set to anything, for example `zvlzPlay`.
 5. Open **zvlzPlay** and install the providers you want.
 6. Return to the **Home Screen** and pick a provider from the bottom-right corner.
+
+<details>
+<summary>Prefer the full URL?</summary>
+
+```
+https://cloudstream.zvlz.my.id/builds/repo.json
+```
+
+</details>
 
 > [!TIP]
 > If a provider fails to load in Indonesia, your ISP may be blocking it through DNS. See the [fix in the FAQ](#faq-dns).
