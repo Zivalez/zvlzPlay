@@ -60,12 +60,6 @@ English &nbsp;/&nbsp; [Bahasa Indonesia](README_ID.md)
   <img src="https://img.shields.io/badge/Download_CloudStream-latest-fdf0d7?style=for-the-badge&logo=android&logoColor=white&labelColor=aa472a" alt="Download APK" />
 </a>
 
-<a href="https://cs.repo/?https://cloudstream.zvlz.my.id/builds/repo.json">
-  <img src="https://img.shields.io/badge/Add_Repository-one--tap-fdf0d7?style=for-the-badge&logo=android&logoColor=white&labelColor=aa472a" alt="Add Repository" />
-</a>
-
-Tap **Add Repository** on your phone to add zvlzPlay in one tap. Or add it manually:
-
 1. Install **CloudStream**.\
    An empty app afterwards is normal, since no extensions are installed yet.
 2. Open **Settings**, go to **Extensions**, then select **Add Repository**.
