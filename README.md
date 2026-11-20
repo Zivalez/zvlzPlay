@@ -127,6 +127,16 @@ Like the in-app CloudStream provider test, the links check tests real titles: if
 | **Pencurimovie** <br> <sub>Movie</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
 | **IPTV** <br> <sub>Indonesian Live TV (RCTI, SCTV, Trans, ANTV, Metro, Kompas, etc.)</sub> | <sub>🟢 Home <br> 🟡 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | Search 4/5 |
 
+### NSFW Providers
+
+> [!NOTE]
+> These providers serve NSFW content. They are hidden by default and only appear when NSFW is enabled in CloudStream settings. They are not covered by the health checker.
+
+- **Hentaicop**
+- **Hentaihaven**
+- **King**
+- **KingV2**
+
 
 <br>
 

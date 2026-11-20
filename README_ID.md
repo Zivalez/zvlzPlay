@@ -127,6 +127,16 @@ Seperti tes provider di aplikasi CloudStream, cek links menguji judul asli: kala
 | **Pencurimovie** <br> <sub>Movie</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
 | **IPTV** <br> <sub>Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll)</sub> | <sub>🟢 Home <br> 🟡 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | Search 4/5 |
 
+### Provider NSFW
+
+> [!NOTE]
+> Provider berikut menyajikan konten NSFW. Provider ini tersembunyi secara default dan hanya muncul kalau NSFW diaktifkan di pengaturan CloudStream. Provider ini tidak di-cover health checker.
+
+- **Hentaicop**
+- **Hentaihaven**
+- **King**
+- **KingV2**
+
 
 <br>
 
