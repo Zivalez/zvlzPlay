@@ -69,7 +69,7 @@ Tap **Add Repository** on your phone to add zvlzPlay in one tap. Or add it manua
 1. Install **CloudStream**.\
    An empty app afterwards is normal, since no extensions are installed yet.
 2. Open **Settings**, go to **Extensions**, then select **Add Repository**.
-3. Enter this as the Repository URL:
+3. Enter the shortcode `zvlzplay` in the Repository URL field. Or paste the full URL:
 
    ```
    https://cloudstream.zvlz.my.id/builds/repo.json

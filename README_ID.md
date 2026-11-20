@@ -69,7 +69,7 @@ Ketuk **Add Repository** di HP untuk menambahkan zvlzPlay sekali ketuk. Atau tam
 1. Instal **CloudStream**.\
    Aplikasi yang kosong setelahnya itu normal, karena belum ada ekstensi yang terpasang.
 2. Buka **Pengaturan**, masuk ke **Ekstensi**, lalu pilih **Tambah Repositori**.
-3. Masukkan ini sebagai URL Repositori:
+3. Masukkan shortcode `zvlzplay` di kolom URL Repositori. Atau tempel URL lengkapnya:
 
    ```
    https://cloudstream.zvlz.my.id/builds/repo.json
