@@ -16,7 +16,7 @@
 <a href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/badge/last%20update-20%20Nov%202026%2015%3A28-aa472a?style=flat-square&labelColor=aa472a&color=fdf0d7" alt="Last update"/></a>&ensp;
 <a href="https://github.com/Zivalez/zvlzPlay/stargazers"><img src="https://img.shields.io/github/stars/Zivalez/zvlzPlay?style=flat-square&labelColor=aa472a&color=fdf0d7" alt="Stars"/></a>&ensp;
 <img src="https://img.shields.io/badge/platform-Android-fdf0d7?style=flat-square&labelColor=aa472a" alt="Android"/>&ensp;
-<img src="https://img.shields.io/badge/content-NSFW-fdf0d7?style=flat-square&labelColor=aa472a" alt="NSFW"/>
+<img src="https://img.shields.io/badge/content-NSFW%20opt--in-fdf0d7?style=flat-square&labelColor=aa472a" alt="NSFW"/>
 
 <br>
 
@@ -59,7 +59,7 @@ Bahasa Indonesia &nbsp;/&nbsp; [English](README.md)
 ## Instalasi
 
 <a href="https://github.com/recloudstream/cloudstream/releases/latest" target="_blank">
-  <img src="https://img.shields.io/badge/Download_CloudStream-latest-30363d?style=for-the-badge&logo=android&logoColor=white&labelColor=161b22" alt="Download APK" />
+  <img src="https://img.shields.io/badge/Download_CloudStream-latest-fdf0d7?style=for-the-badge&logo=android&logoColor=white&labelColor=aa472a" alt="Download APK" />
 </a>
 
 1. Instal **CloudStream**.\
