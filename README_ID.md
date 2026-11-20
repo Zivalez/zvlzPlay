@@ -3,8 +3,8 @@
 <br>
 
 <p align="center">
-<a href="https://github.com/recloudstream/cloudstream"><picture><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="125" height="125"></picture></a>
-<a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/zvlzPlay128.png" alt="zvlzPlay" width="125" height="125"></picture></a>
+<a href="https://github.com/recloudstream/cloudstream"><picture><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="240" height="240" style="vertical-align: middle;"></picture></a>
+<a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/zvlzPlay128.png" alt="zvlzPlay" width="80" height="80" style="vertical-align: middle;"></picture></a>
 </p>
 
 # CloudStream × zvlzPlay
@@ -13,10 +13,10 @@
 
 <br>
 
-<a href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay/builds?label=last%20update&style=flat-square&labelColor=161b22&color=30363d" alt="Last update"/></a>
-<a href="https://github.com/Zivalez/zvlzPlay/stargazers"><img src="https://img.shields.io/github/stars/Zivalez/zvlzPlay?style=flat-square&labelColor=161b22&color=30363d" alt="Stars"/></a>
-<img src="https://img.shields.io/badge/platform-Android-30363d?style=flat-square&labelColor=161b22" alt="Android"/>
-<img src="https://img.shields.io/badge/content-NSFW-30363d?style=flat-square&labelColor=161b22" alt="NSFW"/>
+<a href="https://github.com/Zivalez/zvlzPlay/tree/builds"><img src="https://img.shields.io/github/last-commit/Zivalez/zvlzPlay/builds?label=last%20update&style=flat-square&labelColor=aa472a&color=fdf0d7" alt="Last update"/></a>&ensp;
+<a href="https://github.com/Zivalez/zvlzPlay/stargazers"><img src="https://img.shields.io/github/stars/Zivalez/zvlzPlay?style=flat-square&labelColor=aa472a&color=fdf0d7" alt="Stars"/></a>&ensp;
+<img src="https://img.shields.io/badge/platform-Android-fdf0d7?style=flat-square&labelColor=aa472a" alt="Android"/>&ensp;
+<img src="https://img.shields.io/badge/content-NSFW-fdf0d7?style=flat-square&labelColor=aa472a" alt="NSFW"/>
 
 <br>
 
