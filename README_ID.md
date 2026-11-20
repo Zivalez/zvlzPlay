@@ -72,9 +72,8 @@ zvlzplay
    Aplikasi yang kosong setelahnya itu normal, karena belum ada ekstensi yang terpasang.
 2. Buka **Pengaturan**, masuk ke **Ekstensi**, lalu pilih **Tambah Repositori**.
 3. Masukkan shortcode `zvlzplay`.
-4. Namanya boleh dikosongkan atau diisi apa saja, misalnya `zvlzPlay`.
-5. Buka **zvlzPlay** dan instal provider yang Anda inginkan.
-6. Kembali ke **Layar Utama** dan pilih provider dari pojok kanan bawah.
+4. Buka **zvlzPlay** dan instal provider yang Anda inginkan.
+5. Kembali ke **Layar Utama** dan pilih provider dari pojok kanan bawah.
 
 <details>
 <summary>Lebih suka URL lengkapnya?</summary>
@@ -82,6 +81,8 @@ zvlzplay
 ```
 https://cloudstream.zvlz.my.id/builds/repo.json
 ```
+
+Kalau diminta nama, boleh dikosongkan atau diisi apa saja, misalnya `zvlzPlay`.
 
 </details>
 

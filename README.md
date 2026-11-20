@@ -72,9 +72,8 @@ zvlzplay
    An empty app afterwards is normal, since no extensions are installed yet.
 2. Open **Settings**, go to **Extensions**, then select **Add Repository**.
 3. Enter the shortcode `zvlzplay`.
-4. The name can be left empty or set to anything, for example `zvlzPlay`.
-5. Open **zvlzPlay** and install the providers you want.
-6. Return to the **Home Screen** and pick a provider from the bottom-right corner.
+4. Open **zvlzPlay** and install the providers you want.
+5. Return to the **Home Screen** and pick a provider from the bottom-right corner.
 
 <details>
 <summary>Prefer the full URL?</summary>
@@ -82,6 +81,8 @@ zvlzplay
 ```
 https://cloudstream.zvlz.my.id/builds/repo.json
 ```
+
+If asked for a name, you can leave it empty or set it to anything, for example `zvlzPlay`.
 
 </details>
 
