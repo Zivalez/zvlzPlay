@@ -130,7 +130,7 @@ Like the in-app CloudStream provider test, the links check tests real titles: if
 ### NSFW Providers
 
 > [!NOTE]
-> These providers serve NSFW content. They are hidden by default and only appear when NSFW is enabled in CloudStream settings. They are not covered by the health checker.
+> These providers serve NSFW content. Hidden by default, only visible if you enable NSFW in settings. Not health-checked, and if they break, they stay broken.
 
 - **Hentaicop**
 - **Hentaihaven**
