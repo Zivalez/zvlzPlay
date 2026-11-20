@@ -28,8 +28,6 @@ English &nbsp;/&nbsp; [Bahasa Indonesia](README_ID.md)
 
 </div>
 
----
-
 ## About
 
 **CloudStream** is an open-source Android app for watching movies, anime, drama, and TV series for free, with no ads. It ships with no content of its own. Think of it as a media player and search engine, powered entirely by extensions.
