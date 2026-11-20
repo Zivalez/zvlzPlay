@@ -132,10 +132,15 @@ Like the in-app CloudStream provider test, the links check tests real titles: if
 > [!NOTE]
 > These providers serve NSFW content. Hidden by default, only visible if you enable NSFW in settings. Not health-checked, and if they break, they stay broken.
 
+<details>
+<summary>Show 4 providers</summary>
+
 - **Hentaicop**
 - **Hentaihaven**
 - **King**
 - **KingV2**
+
+</details>
 
 
 <br>
