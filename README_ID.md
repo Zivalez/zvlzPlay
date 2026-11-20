@@ -60,6 +60,12 @@ Bahasa Indonesia &nbsp;/&nbsp; [English](README.md)
   <img src="https://img.shields.io/badge/Download_CloudStream-latest-fdf0d7?style=for-the-badge&logo=android&logoColor=white&labelColor=aa472a" alt="Download APK" />
 </a>
 
+<a href="cloudstreamrepo://cloudstream.zvlz.my.id/builds/repo.json">
+  <img src="https://img.shields.io/badge/Add_Repository-one--tap-fdf0d7?style=for-the-badge&logo=android&logoColor=white&labelColor=aa472a" alt="Add Repository" />
+</a>
+
+Ketuk **Add Repository** di HP untuk menambahkan zvlzPlay sekali ketuk. Atau tambahkan secara manual:
+
 1. Instal **CloudStream**.\
    Aplikasi yang kosong setelahnya itu normal, karena belum ada ekstensi yang terpasang.
 2. Buka **Pengaturan**, masuk ke **Ekstensi**, lalu pilih **Tambah Repositori**.
