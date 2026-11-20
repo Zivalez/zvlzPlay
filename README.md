@@ -130,7 +130,7 @@ Like the in-app CloudStream provider test, the links check tests real titles: if
 ### NSFW Providers
 
 > [!NOTE]
-> These providers serve NSFW content. Hidden by default, only visible if you enable NSFW in settings. Not health-checked, and if they break, they stay broken.
+> These providers serve NSFW content. They are hidden by default. They are not covered by the health checker, and if they break, they stay broken.
 
 <details>
 <summary>Show 4 providers</summary>

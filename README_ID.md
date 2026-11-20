@@ -130,7 +130,7 @@ Seperti tes provider di aplikasi CloudStream, cek links menguji judul asli: kala
 ### Provider NSFW
 
 > [!NOTE]
-> Provider berikut menyajikan konten NSFW. Tersembunyi secara default, cuma muncul kalau kamu aktifin NSFW di pengaturan. Nggak di-cover health checker, dan kalau rusak, nggak diperbaiki.
+> Provider berikut menyajikan konten NSFW. Tersembunyi secara default. Nggak di-cover health checker, dan kalau rusak, nggak diperbaiki.
 
 <details>
 <summary>Lihat 4 provider</summary>
