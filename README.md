@@ -3,8 +3,8 @@
 <br>
 
 <p align="center">
-<a href="https://github.com/recloudstream/cloudstream"><picture><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="240" height="240" style="vertical-align: middle;"></picture></a>
-<a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/zvlzPlay128.png" alt="zvlzPlay" width="80" height="80" style="vertical-align: middle;"></picture></a>
+<a href="https://github.com/recloudstream/cloudstream"><picture><img src="https://cloudstream.zvlz.my.id/cloudstream.png" alt="CloudStream" width="220" height="220" style="vertical-align: middle;"></picture></a>
+<a href="https://github.com/Zivalez/zvlzPlay"><picture><img src="https://raw.githubusercontent.com/Zivalez/zvlzPlay/builds/zvlzPlay128.png" alt="zvlzPlay" width="110" height="110" style="vertical-align: middle;"></picture></a>
 </p>
 
 # CloudStream × zvlzPlay
