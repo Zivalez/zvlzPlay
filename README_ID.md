@@ -96,7 +96,7 @@ Kalau diminta nama, boleh dikosongkan atau diisi apa saja, misalnya `zvlzPlay`.
 ## Daftar Provider
 
 > [!NOTE]
-> **Health Check** · Terakhir dicek: **2026-11-24 13:41 WIB**
+> **Health Check** · Terakhir dicek: **2026-11-24 14:22 WIB**
 >
 > Setiap cek dijalankan 5 kali dengan judul yang berbeda, diambil acak dari katalog provider. Cek dinyatakan lolos kalau setidaknya satu percobaan berhasil. Ini cek terjadwal tiap 12 jam, bukan pemantauan terus-menerus.
 
@@ -113,7 +113,7 @@ Seperti tes provider di aplikasi CloudStream, cek links menguji judul asli: kala
 
 | Provider | Status Check | Health | Kondisi |
 | :--- | :--- | :---: | :---: |
-| **Idlix** <br> <sub>Movie, TV Series, Drama Asia, Anime</sub> | <sub>🟢 Home <br> 🟡 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | Search 4/5 |
+| **Idlix** <br> <sub>Movie, TV Series, Drama Asia, Anime</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟡 Links</sub> | `▰▰▰▰`<br> **100%** | Links 4/5 |
 | **Samehadaku** <br> <sub>Anime</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
 | **Otakudesu** <br> <sub>Anime</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
 | **Alqanime** <br> <sub>Anime</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
@@ -129,7 +129,7 @@ Seperti tes provider di aplikasi CloudStream, cek links menguji judul asli: kala
 
 | Provider | Status Check | Health | Kondisi |
 | :--- | :--- | :---: | :---: |
-| **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟡 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | Detail 4/5 |
+| **LayarKaca** <br> <sub>Movie, TV Series, Drama Asia, Anime Movie</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟡 Detail <br> 🟡 Links</sub> | `▰▰▰▰`<br> **100%** | Detail 3/5 <br> Links 4/5 |
 | **Dramacool** <br> <sub>Drama Asia, Variety Show</sub> | <sub>🔴 Home <br> 🔴 Search <br> 🔵 Detail <br> 🔵 Links</sub> | `▱▱▱▱`<br> **0%** | Home 0/10 <br> Search 0/4 |
 | **Gomunime** <br> <sub>Anime</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
 | **Winbu** <br> <sub>Anime, Donghua</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
@@ -138,7 +138,7 @@ Seperti tes provider di aplikasi CloudStream, cek links menguji judul asli: kala
 | **Loklok** <br> <sub>Movie, TV Series</sub> | <sub>🔴 Home <br> 🔴 Search <br> 🔵 Detail <br> 🔵 Links</sub> | `▱▱▱▱`<br> **0%** | Home 0/5 <br> Search 0/4 |
 | **Moviebox** <br> <sub>Movie, TV Series, Anime, Drama Asia</sub> | <sub>🟢 Home <br> 🔴 Search <br> 🔴 Detail <br> 🔵 Links</sub> | `▰▱▱▱`<br> **25%** | Search 0/5 <br> Detail 0/5 |
 | **Pencurimovie** <br> <sub>Movie</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
-| **IPTV** <br> <sub>Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll)</sub> | <sub>🟢 Home <br> 🟢 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | — |
+| **IPTV** <br> <sub>Live TV Indonesia (RCTI, SCTV, Trans, ANTV, Metro, Kompas, dll)</sub> | <sub>🟢 Home <br> 🟡 Search <br> 🟢 Detail <br> 🟢 Links</sub> | `▰▰▰▰`<br> **100%** | Search 4/5 |
 
 ### Provider NSFW
 
